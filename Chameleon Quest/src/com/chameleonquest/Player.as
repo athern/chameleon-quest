@@ -14,7 +14,6 @@ package com.chameleonquest
 		protected static const JUMP_ACCELERATION:int = 40;
 		
 		protected var jumpPhase:int;
-		protected var verticallyStable:int = 0;
 		
         public function Player(X:int,Y:int):void // X,Y: Starting coordinates
         {
@@ -44,18 +43,8 @@ package com.chameleonquest
 				acceleration.y = GRAVITY;
 				jumpPhase = -1;
 			}
-			if (velocity.y == 0) 
-			{
-				verticallyStable++;
-			}
-			else 
-			{
-				verticallyStable = 0;
-			}
-			if (verticallyStable > 2 && jumpPhase == -1)
-			{
+			if (isTouching(FLOOR) && !FlxG.keys.UP) {
 				jumpPhase = 0;
-				verticallyStable = 0;
 			}
 			if (FlxG.keys.LEFT)
             {
@@ -68,9 +57,9 @@ package com.chameleonquest
                 velocity.x = RUN_SPEED;              
             }  
             super.update();
-            
              
         }
+		
     }
 
 }
