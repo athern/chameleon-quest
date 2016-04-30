@@ -12,7 +12,7 @@ package com.chameleonquest
 			super();
 			
 			currIdx = 0;
-			stages = [new PlayState()];
+			stages = [new Room1_1State()];
 		}
 		
 		override public function create():void
