@@ -12,7 +12,7 @@ package com.chameleonquest
 			super();
 			
 			currIdx = 0;
-			stages = [new Room1_1State()];
+			stages = [new Room1_1State(), new Room1_2State()];
 		}
 		
 		override public function create():void
@@ -30,13 +30,13 @@ package com.chameleonquest
 			
 			// Levels
 			var stage1:FlxText;
-			stage1 = new FlxText(30, 30, FlxG.width, "Test stage");
+			stage1 = new FlxText(30, 30, FlxG.width, "1-1");
 			stage1.setFormat(null, 12, 0x000000, "left");
 			this.add(stage1);
 			
 			var stage2:FlxText;
-			stage2 = new FlxText(30, 60, FlxG.width, "Tutorial stage");
-			stage2.setFormat(null, 12, 0xd3d3d3, "left");
+			stage2 = new FlxText(30, 60, FlxG.width, "1-2");
+			stage2.setFormat(null, 12, 0x000000, "left");
 			this.add(stage2);
 			
 			var stage3:FlxText;

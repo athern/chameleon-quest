@@ -25,9 +25,6 @@ package com.chameleonquest
 		{
 			super.update();
 			FlxG.collide(player, map);
-			if (player.x < 0) {
-				player.x = 0;
-			}
 		}
     }
 

@@ -12,6 +12,7 @@ package com.chameleonquest
 		protected static const GRAVITY:int =800;
 		protected static const JUMP_SPEED:int = 200;
 		protected static const JUMP_ACCELERATION:int = 40;
+		protected static const MAX_JUMP_HOLD:int = 15;
 		
 		protected var jumpPhase:int;
 		
@@ -37,7 +38,7 @@ package com.chameleonquest
 				jumpPhase = 1;
                 velocity.y = -JUMP_SPEED;
             }
-			else if (FlxG.keys.UP && jumpPhase > 0 && jumpPhase < 15) 
+			else if (FlxG.keys.UP && jumpPhase > 0 && jumpPhase < MAX_JUMP_HOLD) 
 			{
 				acceleration.y = 0;
 				jumpPhase++;
