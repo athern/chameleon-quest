@@ -18,15 +18,15 @@ package com.chameleonquest
 			
 			add(map.loadMap(new levelMap, levelTiles, 16, 16));
 			add(player = new Player(17, 17));
-			FlxG.camera.setBounds(0, 0, 16*40, 16*15);
+			FlxG.camera.setBounds(0, 0, 16*40, 16*15, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 			super.create();
 		}
 		
 		override public function update():void
 		{
-			FlxG.collide(player, map);
 			super.update();
+			FlxG.collide(player, map);
 		}
     }
 
