@@ -5,9 +5,9 @@ package com.chameleonquest
     public class PlayState extends FlxState
     {
 		
-		[Embed(source = "../../../assets/mapCSV_Group1_Map1.csv", mimeType = "application/octet-stream")]
+		[Embed(source = "../../../assets/1-1.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
-		[Embed(source = "../../../assets/tileset1.png")]
+		[Embed(source = "../../../assets/tile-16.png")]
 		public var levelTiles:Class;
 	
 		public var map:FlxTilemap = new FlxTilemap;
@@ -15,8 +15,11 @@ package com.chameleonquest
 		
         override public function create():void
 		{
+			
 			add(map.loadMap(new levelMap, levelTiles, 16, 16));
 			add(player = new Player(17, 17));
+			FlxG.camera.setBounds(0, 0, 16*40, 16*15);
+			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 			super.create();
 		}
 		
