@@ -24,6 +24,7 @@ package com.chameleonquest
 		override public function update():void
 		{
 			super.update();
+			
 			if (player.x < 0) {
 				FlxG.switchState(new Room1_1State());
 			}

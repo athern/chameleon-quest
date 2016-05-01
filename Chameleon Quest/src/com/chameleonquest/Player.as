@@ -34,12 +34,12 @@ package com.chameleonquest
 		override public function update():void
 		{
 			
-			if(FlxG.keys.UP && jumpPhase == 0)
+			if(FlxG.keys.UP && jumpPhase == 0 && !FlxG.paused)
             {
 				jumpPhase = 1;
                 velocity.y = -JUMP_SPEED;
             }
-			else if (FlxG.keys.UP && jumpPhase > 0 && jumpPhase < MAX_JUMP_HOLD) 
+			else if (FlxG.keys.UP && jumpPhase > 0 && jumpPhase < MAX_JUMP_HOLD && !FlxG.paused) 
 			{
 				acceleration.y = 0;
 				jumpPhase++;
@@ -56,6 +56,12 @@ package com.chameleonquest
 			else {
 				acceleration.y = GRAVITY;
 			}
+			
+			// check for Pause
+			if (FlxG.paused) {
+				return;
+			}
+			
 			if (FlxG.keys.LEFT)
             {
                 facing = LEFT; 
