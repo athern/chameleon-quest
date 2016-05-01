@@ -24,6 +24,11 @@ package com.chameleonquest
 		{
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
+			
+			setupPauseHUD();
+			
+			add(new HeartBar());
+			
 			super.create();
 		}
 		
@@ -63,21 +68,23 @@ package com.chameleonquest
 			FlxG.switchState(new MenuState());
 		}
 		
+		// Sets up the Pause Menu
+		private function setupPauseHUD():void {
+			// Pause HUD
+			pauseText = new FlxText(0, (FlxG.width / 2) - 80, FlxG.width, "Game Paused");
+			pauseText.setFormat(null, 18, 0x000000, "center");
+			pauseText.scrollFactor.x = 0;
+			pauseText.scrollFactor.y = 0;
+			
+			quitText = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"q\" to quit\nPress ESC to resume");
+			quitText.setFormat(null, 12, 0x000000, "center");
+			quitText.scrollFactor.x = 0;
+			quitText.scrollFactor.y = 0;
+		}
 		
 		private function togglePauseMenu():void {
 			if (FlxG.paused) {
-				var xPause:Number = player.x - FlxG.width / 2;
-				if (player.x <= FlxG.width / 2) {
-					xPause = 0;
-				} else if (player.x > map.width - FlxG.width / 2) {
-					xPause = map.width - FlxG.width;
-				}
-				pauseText = new FlxText(xPause, player.y - 70, FlxG.width, "Game Paused");
-				pauseText.setFormat(null, 18, 0x000000, "center");
 				this.add(pauseText);
-				
-				quitText = new FlxText(xPause, player.y - 40, FlxG.width, "Press \"q\" to quit\nPress ESC to resume");
-				quitText.setFormat(null, 12, 0x000000, "center");
 				this.add(quitText);
 			} else {
 				this.remove(pauseText);

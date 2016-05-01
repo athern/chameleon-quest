@@ -23,6 +23,7 @@ package com.chameleonquest
 				add(player = new Player(0, 208));
 			}
 			Main.lastRoom = 1;
+			
 			super.create();
 		}
 		
