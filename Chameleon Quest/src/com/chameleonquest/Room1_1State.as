@@ -15,6 +15,12 @@ package com.chameleonquest
 			ROOM_HEIGHT = 15;
 			add(map.loadMap(new levelMap, levelTiles, 16, 16));
 			
+			// add spikes
+			spikeBar.add(new Spikes(17 * 16, 16 * ROOM_HEIGHT - 8));
+			spikeBar.add(new Spikes(18 * 16, 16 * ROOM_HEIGHT - 8));
+			spikeBar.add(new Spikes(19 * 16, 16 * ROOM_HEIGHT - 8));
+			add(spikeBar);
+			
 			if (Main.lastRoom == 2) {
 				add(player = new Player(39 * 16, 208));
 				player.facing = FlxObject.LEFT;

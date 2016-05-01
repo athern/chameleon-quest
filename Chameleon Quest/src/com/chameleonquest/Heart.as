@@ -33,11 +33,6 @@ package com.chameleonquest
 			
 		}
 		
-		override public function update():void
-		{
-			super.update();
-		}
-		
 		public function hit():void {
 			if (currIdx > 0) {
 				currIdx--;

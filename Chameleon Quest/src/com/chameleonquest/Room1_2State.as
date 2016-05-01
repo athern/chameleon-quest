@@ -17,6 +17,12 @@ package com.chameleonquest
 			add(player = new Player(0, 449));
 			elems.add(new Platform(new Array(new FlxPoint(40, 160), new FlxPoint(19 * 16, 160)), 60));
 			add(elems);
+			
+			// add spikes
+			spikeBar.add(new Spikes(21 * 16, 16 * ROOM_HEIGHT - 24));
+			spikeBar.add(new Spikes(22 * 16, 16 * ROOM_HEIGHT - 24));
+			add(spikeBar);
+			
 			Main.lastRoom = 2;
 			super.create();
 		}

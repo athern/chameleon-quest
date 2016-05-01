@@ -15,6 +15,8 @@ package com.chameleonquest
 		public var player:Player;
 		
 		public var elems:FlxGroup = new FlxGroup;
+		// spikes
+		public var spikeBar:FlxGroup = new FlxGroup;
 		
 		// pause state
 		public var pauseText:FlxText;
@@ -28,7 +30,6 @@ package com.chameleonquest
 			setupPauseHUD();
 			
 			add(new HeartBar());
-			
 			super.create();
 		}
 		
@@ -39,6 +40,8 @@ package com.chameleonquest
 			FlxG.collide(player, map);
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
+			// spike collision
+			FlxG.collide(player, spikeBar, playerSpikeCollision);
 			
 			// handle pause
 			if (FlxG.keys.justPressed("ESCAPE")) {
@@ -61,6 +64,11 @@ package com.chameleonquest
 			}
 		}
 		
+		
+		// Spike and player collision
+		public function playerSpikeCollision(player:Player, spikeBar:FlxObject):void {
+			// hit - decrease health
+		}
 		
 		private function onFade():void
 		{
