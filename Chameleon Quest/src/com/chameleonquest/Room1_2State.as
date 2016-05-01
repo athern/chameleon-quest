@@ -8,7 +8,6 @@ package com.chameleonquest
 		[Embed(source = "../../../assets/mapCSV_1-2_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
-		
 		override public function create():void
 		{	
 			ID = 2;
@@ -16,6 +15,8 @@ package com.chameleonquest
 			ROOM_HEIGHT = 30;
 			add(map.loadMap(new levelMap, levelTiles, 16, 16));
 			add(player = new Player(0, 449));
+			elems.add(new Platform(new Array(new FlxPoint(40, 160), new FlxPoint(19 * 16, 160)), 60));
+			add(elems);
 			Main.lastRoom = 2;
 			super.create();
 		}

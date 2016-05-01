@@ -14,6 +14,8 @@ package com.chameleonquest
 		public var map:FlxTilemap = new FlxTilemap;
 		public var player:Player;
 		
+		public var elems:FlxGroup = new FlxGroup;
+		
         override public function create():void
 		{
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
@@ -23,8 +25,19 @@ package com.chameleonquest
 		
 		override public function update():void
 		{
+			
 			super.update();
 			FlxG.collide(player, map);
+			FlxG.collide(elems, map);
+			FlxG.collide(player, elems, playerElemCollision);
+		}
+		
+		public function playerElemCollision(player:Player, elem:FlxObject):void {
+			if (player.isTouching(FlxObject.FLOOR)) {
+				player.velocityModifiers.x = elem.velocity.x;
+				player.velocityModifiers.y = elem.velocity.y;
+				
+			}
 		}
     }
 

@@ -1162,16 +1162,26 @@ package org.flixel
 					Object1.y = Object1.y - overlap;
 					Object1.velocity.y = obj2v - obj1v*Object1.elasticity;
 					//This is special case code that handles cases like horizontal moving platforms you can ride
-					if(Object2.active && Object2.moves && (obj1delta > obj2delta))
+					if (Object2.active && Object2.moves && (obj1delta > obj2delta))
+					{
+						Object2.x = Math.round( Object2.x );
+						Object2.last.x = Math.round(Object2.last.x);
+						Object1.x = Math.round(Object1.x);
 						Object1.x += Object2.x - Object2.last.x;
+					}
 				}
 				else if(!obj2immovable)
 				{
 					Object2.y += overlap;
 					Object2.velocity.y = obj1v - obj2v*Object2.elasticity;
 					//This is special case code that handles cases like horizontal moving platforms you can ride
-					if(Object1.active && Object1.moves && (obj1delta < obj2delta))
+					if (Object1.active && Object1.moves && (obj1delta < obj2delta))
+					{
+						Object1.x = Math.round( Object1.x );
+						Object1.last.x = Math.round(Object1.last.x);
+						Object2.x = Math.round(Object2.x);
 						Object2.x += Object1.x - Object1.last.x;
+					}
 				}
 				return true;
 			}
