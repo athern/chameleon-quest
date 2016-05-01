@@ -18,6 +18,9 @@ package com.chameleonquest
 		// spikes
 		public var spikeBar:FlxGroup = new FlxGroup;
 		
+		// hearbar
+		public var heartbar:HeartBar = new HeartBar();
+		
 		// pause state
 		public var pauseText:FlxText;
 		public var quitText:FlxText;
@@ -29,7 +32,7 @@ package com.chameleonquest
 			
 			setupPauseHUD();
 			
-			add(new HeartBar());
+			add(heartbar);
 			super.create();
 		}
 		
@@ -50,9 +53,14 @@ package com.chameleonquest
 			}
 			// handle quit
 			if (FlxG.paused && FlxG.keys.justPressed("Q")) {
-				FlxG.fade(0xff000000, 0.5, onFade);
+				FlxG.fade(0xff000000, 0.5, onFadeExit);
 			}
 			
+			// check for game over
+			if (heartbar.isEmpty()) {
+				FlxG.flash(0x000000, 0.75);
+				FlxG.fade(0xff000000, 0.5, onFadeOver);
+			}
 
 		}
 		
@@ -60,20 +68,26 @@ package com.chameleonquest
 			if (player.isTouching(FlxObject.FLOOR)) {
 				player.velocityModifiers.x = elem.velocity.x;
 				player.velocityModifiers.y = elem.velocity.y;
-				
 			}
 		}
 		
 		
 		// Spike and player collision
 		public function playerSpikeCollision(player:Player, spikeBar:FlxObject):void {
-			// hit - decrease health
+			heartbar.hit();
 		}
 		
-		private function onFade():void
+		// Fade exit from pause
+		private function onFadeExit():void
 		{
 			FlxG.paused = !FlxG.paused;
 			FlxG.switchState(new MenuState());
+		}
+		
+		// Fade to game over
+		private function onFadeOver():void
+		{
+			FlxG.switchState(new GameOverState());
 		}
 		
 		// Sets up the Pause Menu

@@ -25,7 +25,7 @@ package com.chameleonquest
 		override public function update():void
 		{
 			// Start the play state
-			if (FlxG.keys.pressed("SPACE"))
+			if (FlxG.keys.justPressed("SPACE"))
 			{
 				FlxG.flash(0x000000, 0.75);
 				FlxG.fade(0xff000000, 0.5, onFade);
