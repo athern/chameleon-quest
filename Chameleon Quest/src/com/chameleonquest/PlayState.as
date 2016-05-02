@@ -1,5 +1,6 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.Projectiles.*;
 	import org.flixel.*;
 	
     public class PlayState extends FlxState
@@ -14,6 +15,9 @@ package com.chameleonquest
 		public var map:FlxTilemap = new FlxTilemap;
 		public var player:Player;
 		
+		private var projectiles:FlxGroup;
+		private var enemies:FlxGroup;
+		
 		public var elems:FlxGroup = new FlxGroup;
 		// spikes
 		public var spikeBar:FlxGroup = new FlxGroup;
@@ -27,6 +31,9 @@ package com.chameleonquest
 		
         override public function create():void
 		{
+			projectiles = new FlxGroup();
+			enemies = new FlxGroup();
+			
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 			
@@ -38,8 +45,23 @@ package com.chameleonquest
 		
 		override public function update():void
 		{
-			
 			super.update();
+			if (FlxG.keys.SPACE)
+			{
+				var attack:Projectile = this.player.getAmmo() as Projectile;
+				if (attack != null) 
+				{
+					// TODO: attack may already be in this FlxGroup, need to check
+					add(attack);
+					var attackX:Number = player.facing == FlxObject.LEFT ? this.player.x - attack.width : this.player.x + this.player.width;
+					var attackY:Number = this.player.y + this.player.height / 2 - attack.height / 2;
+					attack.shoot(attackX, attackY, player.facing == FlxObject.LEFT ? -200 : 200, 0);
+					projectiles.add(attack);
+				}
+			}
+			
+			FlxG.collide(projectiles, map);
+			FlxG.collide(projectiles, enemies);
 			FlxG.collide(player, map);
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
@@ -112,6 +134,17 @@ package com.chameleonquest
 				this.remove(pauseText);
 				this.remove(quitText);
 			}
+		}
+		
+		private function applyDamage(ProjectileObj:Projectile, Target:FlxObject):Boolean 
+		{
+			if (Target is FlxSprite)
+			{
+				Target.hurt(ProjectileObj.getDamage(Target as FlxSprite));
+					ProjectileObj.kill();
+			}
+			
+			return false;
 		}
     }
 

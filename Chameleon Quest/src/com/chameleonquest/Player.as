@@ -1,8 +1,8 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.Projectiles.Projectile;
+	import com.chameleonquest.Projectiles.Rock;
     import org.flixel.*;
-	
-	
 
     public class Player extends FlxSprite 
     {
@@ -11,11 +11,16 @@ package com.chameleonquest
 		protected static const RUN_SPEED:int = 120;
 		protected static const GRAVITY:int =800;
 		protected static const JUMP_SPEED:int = 200;
+		protected static const JUMP_ACCELERATION:int = 40;
+		protected static const SHOOT_DELAY:Number = .4;
+		
+		protected var jumpPhase:int;
+		protected var verticallyStable:int = 0;
+		protected var ammo:FlxGroup;
+		protected var cooldown:Number;
 		protected static const MAX_JUMP_HOLD:int = 15;
 		
 		public var velocityModifiers:FlxPoint = new FlxPoint(0, 0);
-		
-		protected var jumpPhase:int;
 		
         public function Player(X:int,Y:int):void // X,Y: Starting coordinates
         {
@@ -29,6 +34,11 @@ package com.chameleonquest
             acceleration.y = GRAVITY; // Always try to push chameleon in the direction of gravity
             maxVelocity.x = RUN_SPEED;
             maxVelocity.y = JUMP_SPEED * 3;
+			health = 3;
+			
+			ammo = new FlxGroup();
+			ammo.add(new Rock());
+			cooldown = SHOOT_DELAY;
         }
 		
 		override public function update():void
@@ -79,10 +89,26 @@ package com.chameleonquest
 			velocity.x += velocityModifiers.x;
 			velocityModifiers.x = 0;
 			velocityModifiers.y = 0;
+			
+			this.cooldown += FlxG.elapsed;	// ammo cooldown
+			
             super.update();
-             
         }
 		
+		// returns a Projectile if the chameleon has something to shoot and hasn't shot anything recently
+		public function getAmmo():Projectile
+		{
+			var attack:Projectile;
+			if (this.cooldown > SHOOT_DELAY && (attack = this.ammo.getFirstAvailable() as Projectile))
+			{
+				// only return a projectile if we've waited long enough from the last attack
+				// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
+				this.cooldown = 0;
+				return attack;
+			}
+			
+			return null;
+		}
     }
 
 }
