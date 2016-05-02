@@ -1,5 +1,6 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Projectiles.Projectile;
 	import com.chameleonquest.Projectiles.Rock;
     import org.flixel.*;
@@ -15,7 +16,7 @@ package com.chameleonquest
 		protected static const SHOOT_DELAY:Number = .4;
 		
 		protected var jumpPhase:int;
-		protected var verticallyStable:int = 0;
+		protected var invulnerability:int = 0;
 		protected var ammo:FlxGroup;
 		protected var cooldown:Number;
 		protected static const MAX_JUMP_HOLD:int = 15;
@@ -91,7 +92,7 @@ package com.chameleonquest
 			velocityModifiers.y = 0;
 			
 			this.cooldown += FlxG.elapsed;	// ammo cooldown
-			
+			invulnerability--;
             super.update();
         }
 		
@@ -108,6 +109,28 @@ package com.chameleonquest
 			}
 			
 			return null;
+		}
+		
+		//returns damage actually taken
+		public function reactToDamage(source:Enemy):int {
+			if (invulnerability > 0) {
+				return 0;
+			}
+			invulnerability = 5;
+			
+			if (source.x > x) {
+				velocity.x -= Math.random() * 200 + 100;
+			}
+			if (source.x < x) {
+				velocity.x += Math.random() * 200 + 100;
+			}
+			if (source.y > y) {
+				velocity.y -= Math.random() * 200 + 100;
+			}
+			if (source.y < y) {
+				velocity.y += Math.random() * 200 + 100;
+			}
+			return source.power;
 		}
     }
 

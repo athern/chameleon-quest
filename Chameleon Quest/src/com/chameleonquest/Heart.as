@@ -24,11 +24,11 @@ package com.chameleonquest
 			addAnimation("FULL", [1]);
 			addAnimation("EMPTY", [2]);
 			
-			state = ["EMPTY", "FULL"];
+			state = ["EMPTY", "HALF", "FULL"];
 			scrollFactor.x = 0;
 			scrollFactor.y = 0;
 			
-			currIdx = 1;
+			currIdx = 2;
 			play(state[currIdx]);
 			
 		}

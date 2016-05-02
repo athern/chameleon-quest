@@ -5,7 +5,7 @@ package com.chameleonquest.Enemies
 	 * ...
 	 * @author Nicole Atherly
 	 */
-	public class Snake extends FlxSprite
+	public class Snake extends Enemy
 	{
 		[Embed(source = "../../../../assets/spritesheet_enemies.png")]public var greenSnake:Class;
 		
@@ -30,6 +30,7 @@ package com.chameleonquest.Enemies
 			drag.x = RUN_SPEED * 16;
 			drag.y = RUN_SPEED * 16;
 			health = 1;
+			power = 2;
 		}
 		
 		public override function update():void

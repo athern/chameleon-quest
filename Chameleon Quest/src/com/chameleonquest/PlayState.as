@@ -1,6 +1,7 @@
 package com.chameleonquest 
 {
-	import com.chameleonquest.Projectiles.*;
+	import com.chameleonquest.Enemies.Enemy;
+	import com.chameleonquest.Projectiles.Projectile;
 	import org.flixel.*;
 	
     public class PlayState extends FlxState
@@ -15,14 +16,13 @@ package com.chameleonquest
 		public var map:FlxTilemap = new FlxTilemap;
 		public var player:Player;
 		
-		private var projectiles:FlxGroup;
-		protected var enemies:FlxGroup;
+		private var projectiles:FlxGroup = new FlxGroup;
+		protected var enemies:FlxGroup = new FlxGroup;
 		
 		public var elems:FlxGroup = new FlxGroup;
-		// spikes
-		public var spikeBar:FlxGroup = new FlxGroup;
+
 		
-		// hearbar
+		// heart bar
 		public var heartbar:HeartBar = new HeartBar();
 		
 		// pause state
@@ -31,14 +31,11 @@ package com.chameleonquest
 		
         override public function create():void
 		{
-			projectiles = new FlxGroup();
-			if (enemies == null)
-			{
-				enemies = new FlxGroup();
-			}
-			
+			add(map);
+			add(elems);
+			add(player);
 			add(enemies);
-			
+			add(projectiles);
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 			
@@ -73,7 +70,6 @@ package com.chameleonquest
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
 			// spike collision
-			FlxG.collide(player, spikeBar, playerSpikeCollision);
 			
 			// handle pause
 			if (FlxG.keys.justPressed("ESCAPE")) {
@@ -98,12 +94,6 @@ package com.chameleonquest
 				player.velocityModifiers.x = elem.velocity.x;
 				player.velocityModifiers.y = elem.velocity.y;
 			}
-		}
-		
-		
-		// Spike and player collision
-		public function playerSpikeCollision(player:Player, spikeBar:FlxObject):void {
-			heartbar.hit();
 		}
 		
 		// Fade exit from pause
@@ -144,9 +134,10 @@ package com.chameleonquest
 		}
 		
 		
-		private function hurtPlayer(player:Player, enemy:FlxSprite):void 
+		private function hurtPlayer(player:Player, enemy:Enemy):void
 		{
-			heartbar.hit();
+			
+			heartbar.hit(player.reactToDamage(enemy));
 		}
 		
 		private function inflictProjectileDamage(bullet:Projectile, target:FlxSprite):void 

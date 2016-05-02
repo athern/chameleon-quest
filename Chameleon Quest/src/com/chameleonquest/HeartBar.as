@@ -20,11 +20,16 @@ package com.chameleonquest
 		}
 		
 		// Decreases the hearts. Returns true if there is still live hearts.
-		public function hit():void {
-			if (currIdx >= 0) {
-				hearts[currIdx].hit();
-				currIdx--;
+		public function hit(damage:int):Boolean {
+			for (var i:int = 0; i < damage; i++) {
+				if (currIdx >= 0) {
+					hearts[currIdx].hit();
+					if (hearts[currIdx].isEmpty()) {
+						currIdx--;
+					}
+				}
 			}
+			return !isEmpty();
 		}
 		
 		public function isEmpty():Boolean {

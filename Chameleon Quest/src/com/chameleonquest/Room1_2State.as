@@ -1,6 +1,7 @@
 package com.chameleonquest 
 {
 	import org.flixel.*;
+	import com.chameleonquest.Enemies.*;
 	
 	public class Room1_2State extends PlayState
 	{
@@ -10,18 +11,15 @@ package com.chameleonquest
 		
 		override public function create():void
 		{	
-			ID = 2;
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
-			add(map.loadMap(new levelMap, levelTiles, 16, 16));
-			add(player = new Player(0, 449));
+			map.loadMap(new levelMap, levelTiles, 16, 16);
+			player = new Player(0, 449);
 			elems.add(new Platform(new Array(new FlxPoint(40, 160), new FlxPoint(19 * 16, 160)), 60));
-			add(elems);
 			
 			// add spikes
-			spikeBar.add(new Spikes(21 * 16, 16 * ROOM_HEIGHT - 24));
-			spikeBar.add(new Spikes(22 * 16, 16 * ROOM_HEIGHT - 24));
-			add(spikeBar);
+			enemies.add(new Spikes(21 * 16, 16 * ROOM_HEIGHT - 24));
+			enemies.add(new Spikes(22 * 16, 16 * ROOM_HEIGHT - 24));
 			
 			Main.lastRoom = 2;
 			super.create();

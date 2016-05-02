@@ -13,25 +13,21 @@ package com.chameleonquest
 		{	
 			ROOM_WIDTH = 40;
 			ROOM_HEIGHT = 15;
-			add(map.loadMap(new levelMap, levelTiles, 16, 16));
+			map.loadMap(new levelMap, levelTiles, 16, 16);
 			
 			// add spikes
-			spikeBar.add(new Spikes(17 * 16, 16 * ROOM_HEIGHT - 8));
-			spikeBar.add(new Spikes(18 * 16, 16 * ROOM_HEIGHT - 8));
-			spikeBar.add(new Spikes(19 * 16, 16 * ROOM_HEIGHT - 8));
-			add(spikeBar);
+			enemies.add(new Spikes(17 * 16, 16 * ROOM_HEIGHT - 8));
+			enemies.add(new Spikes(18 * 16, 16 * ROOM_HEIGHT - 8));
+			enemies.add(new Spikes(19 * 16, 16 * ROOM_HEIGHT - 8));
 			
 			if (Main.lastRoom == 2) {
-				add(player = new Player(39 * 16, 208));
+				player = new Player(39 * 16, 208);
 				player.facing = FlxObject.LEFT;
 			}
 			else {
-				add(player = new Player(0, 208));
+				player = new Player(0, 208);
 			}
-			
-			enemies = new FlxGroup();
-			var snake:Snake = new Snake(16*8, 16* (ROOM_HEIGHT - 4));
-			enemies.add(snake);
+			enemies.add(new Snake(16*8, 16* (ROOM_HEIGHT-4)));
 			
 			Main.lastRoom = 1;
 			

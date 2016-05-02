@@ -33,7 +33,18 @@ package com.chameleonquest
 		
 		private function onFade():void
 		{
-			FlxG.switchState(new StageState());
+			if (Main.lastRoom == 1)
+			{
+				FlxG.switchState(new Room1_1State());
+			}
+			else if (Main.lastRoom == 2)
+			{
+				FlxG.switchState(new Room1_2State());
+			}
+			else
+			{
+				FlxG.switchState(new MenuState());
+			}
 		}
 	}
 
