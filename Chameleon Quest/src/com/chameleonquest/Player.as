@@ -116,7 +116,7 @@ package com.chameleonquest
 			if (invulnerability > 0) {
 				return 0;
 			}
-			invulnerability = 5;
+			invulnerability = 15;
 			
 			if (source.x > x) {
 				velocity.x -= Math.random() * 200 + 100;
