@@ -1,13 +1,13 @@
 package com.chameleonquest 
 {
 	import org.flixel.*;
+	import com.chameleonquest.Enemies.*;
 	
 	public class Room1_1State extends PlayState
 	{
 		
 		[Embed(source = "../../../assets/mapCSV_1-1_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
-		
 		
 		override public function create():void
 		{	
@@ -28,6 +28,11 @@ package com.chameleonquest
 			else {
 				add(player = new Player(0, 208));
 			}
+			
+			enemies = new FlxGroup();
+			var snake:Snake = new Snake(16*8, 16* (ROOM_HEIGHT - 4));
+			enemies.add(snake);
+			
 			Main.lastRoom = 1;
 			
 			super.create();
@@ -36,6 +41,7 @@ package com.chameleonquest
 		override public function update():void
 		{
 			super.update();
+			
 			if (player.x < 0) {
 				player.x = 0;
 			}

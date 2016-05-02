@@ -16,7 +16,7 @@ package com.chameleonquest
 		public var player:Player;
 		
 		private var projectiles:FlxGroup;
-		private var enemies:FlxGroup;
+		protected var enemies:FlxGroup;
 		
 		public var elems:FlxGroup = new FlxGroup;
 		// spikes
@@ -32,7 +32,12 @@ package com.chameleonquest
         override public function create():void
 		{
 			projectiles = new FlxGroup();
-			enemies = new FlxGroup();
+			if (enemies == null)
+			{
+				enemies = new FlxGroup();
+			}
+			
+			add(enemies);
 			
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
@@ -61,7 +66,9 @@ package com.chameleonquest
 			}
 			
 			FlxG.collide(projectiles, map);
-			FlxG.collide(projectiles, enemies);
+			FlxG.collide(projectiles, enemies, inflictProjectileDamage);
+			FlxG.collide(enemies, map);
+			FlxG.collide(player, enemies, hurtPlayer);
 			FlxG.collide(player, map);
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
@@ -136,15 +143,15 @@ package com.chameleonquest
 			}
 		}
 		
-		private function applyDamage(ProjectileObj:Projectile, Target:FlxObject):Boolean 
+		
+		private function hurtPlayer(player:Player, enemy:FlxSprite):void 
 		{
-			if (Target is FlxSprite)
-			{
-				Target.hurt(ProjectileObj.getDamage(Target as FlxSprite));
-					ProjectileObj.kill();
-			}
-			
-			return false;
+			heartbar.hit();
+		}
+		
+		private function inflictProjectileDamage(bullet:Projectile, target:FlxSprite):void 
+		{
+			target.hurt(bullet.getDamage(target));
 		}
     }
 
