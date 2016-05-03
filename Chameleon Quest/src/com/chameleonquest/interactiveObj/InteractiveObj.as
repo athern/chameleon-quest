@@ -15,6 +15,10 @@ package com.chameleonquest.interactiveObj
 			// placeholder for override
 		}
 		
+		override public function update():void {
+			super.update();
+		}
+		
 	}
 
 }
