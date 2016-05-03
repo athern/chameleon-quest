@@ -12,8 +12,8 @@ package com.chameleonquest
 		protected static const RUN_SPEED:int = 120;
 		protected static const GRAVITY:int =800;
 		protected static const JUMP_SPEED:int = 200;
-		protected static const JUMP_ACCELERATION:int = 40;
 		protected static const SHOOT_DELAY:Number = .4;
+		protected static const RUN_ACCELERATION:int = 1000;
 		
 		protected var jumpPhase:int;
 		protected var invulnerability:int = 0;
@@ -78,19 +78,26 @@ package com.chameleonquest
 			
 			if (FlxG.keys.LEFT)
             {
-                facing = LEFT; 
-                velocity.x = -RUN_SPEED;
+                facing = LEFT;
+				acceleration.x = -RUN_ACCELERATION;
             }
             else if (FlxG.keys.RIGHT)
             {
                 facing = RIGHT;
-                velocity.x = RUN_SPEED;              
+				acceleration.x = RUN_ACCELERATION;            
             }
-			else {
-				velocity.x = 0;
+			else
+			{
+				if(velocityModifiers.y != 0) {
+					velocity.y = velocityModifiers.y;
+				}
+				if(velocityModifiers.x != 0) {
+					velocity.x = velocityModifiers.x;
+				}
+				acceleration.x = 0;
 			}
-			velocity.y += velocityModifiers.y;
-			velocity.x += velocityModifiers.x;
+			
+			
 			velocityModifiers.x = 0;
 			velocityModifiers.y = 0;
 			
@@ -124,19 +131,19 @@ package com.chameleonquest
 			if (invulnerability > 0) {
 				return 0;
 			}
-			invulnerability = 15;
+			invulnerability = 30;
 			
 			if (source.x > x) {
-				velocity.x -= Math.random() * 200 + 100;
+				velocity.x -= Math.random() * 100 + 200;
 			}
 			if (source.x < x) {
-				velocity.x += Math.random() * 200 + 100;
+				velocity.x += Math.random() * 100 + 200;
 			}
 			if (source.y > y) {
-				velocity.y -= Math.random() * 200 + 100;
+				velocity.y -= Math.random() * 100 + 200;
 			}
 			if (source.y < y) {
-				velocity.y += Math.random() * 200 + 100;
+				velocity.y += Math.random() * 100 + 200;
 			}
 			return source.power;
 		}
