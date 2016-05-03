@@ -82,6 +82,7 @@ package com.chameleonquest
 			FlxG.collide(player, enemies, hurtPlayer);
 			FlxG.collide(player, map);
 			FlxG.overlap(player.tongue, bgElems, null, pickupRock);
+			FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
 			FlxG.collide(enemies, map);
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
@@ -159,10 +160,9 @@ package com.chameleonquest
 		}
 		
 		
-		private function hurtPlayer(player:Player, enemy:Enemy):void
+		private function hurtPlayer(playerPart:FlxSprite, enemy:Enemy):void
 		{
-			
-			heartbar.hit(player.reactToDamage(enemy));
+			heartbar.hit(this.player.reactToDamage(enemy));
 		}
 		
 		private function inflictProjectileDamage(bullet:Projectile, target:FlxSprite):void 

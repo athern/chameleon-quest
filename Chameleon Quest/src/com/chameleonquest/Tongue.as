@@ -45,6 +45,11 @@ package com.chameleonquest
 					this.facing = player.facing;
 				}
 				
+				if ((this.facing == LEFT && this.isTouching(LEFT)) || (this.facing == RIGHT && this.isTouching(RIGHT)))
+				{
+					this.extending = false;
+				}
+				
 				if (this.extending)
 				{
 					this.extending = (this.facing == LEFT && this.x > (player.x - this.width)) || (this.facing == RIGHT && this.x < (player.x + player.width));
