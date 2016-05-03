@@ -14,7 +14,7 @@ package com.chameleonquest
 		
 		public var ROOM_WIDTH:int;
 		public var ROOM_HEIGHT:int;
-	
+		
 		public var map:FlxTilemap = new FlxTilemap;
 		public var player:Player;
 		
@@ -78,7 +78,6 @@ package com.chameleonquest
 			FlxG.collide(enemies, map);
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
-			
 			// For Interactive game object collision
 			FlxG.collide(projectiles, intrELems, projectileHitCollision);
 			
@@ -163,7 +162,7 @@ package com.chameleonquest
 			}
 		}
 		
-		// for button collision
+		// for interactive game object with projectile collision
 		private function projectileHitCollision(bullet:Projectile, target:InteractiveObj):void {
 			target.hit();
 		}
