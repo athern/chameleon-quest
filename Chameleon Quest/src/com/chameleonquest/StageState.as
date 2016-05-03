@@ -12,7 +12,7 @@ package com.chameleonquest
 			super();
 			
 			currIdx = 0;
-			stages = [new Room1_1State(), new Room1_2State()];
+			stages = [new Room1_1State(), new Room1_2State(), new Room3_1State];
 		}
 		
 		override public function create():void
@@ -40,8 +40,8 @@ package com.chameleonquest
 			this.add(stage2);
 			
 			var stage3:FlxText;
-			stage3 = new FlxText(30, 90, FlxG.width, "Water stage 1");
-			stage3.setFormat(null, 12, 0xd3d3d3, "left");
+			stage3 = new FlxText(30, 90, FlxG.width, "3-1");
+			stage3.setFormat(null, 12, 0x000000, "left");
 			this.add(stage3);
 		}
 		

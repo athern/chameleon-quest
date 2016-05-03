@@ -34,7 +34,7 @@ package com.chameleonquest
 			enemies.add(new Snake(16 * 8, 16 * (ROOM_HEIGHT - 4)));
 			
 			// TODO: remove when button sample is not needed anymore
-			intrELems.add(new Button(48, 214));
+			intrELems.add(new Button(64, 214));
 			
 			Main.lastRoom = 1;
 			
