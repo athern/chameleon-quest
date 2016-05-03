@@ -9,17 +9,28 @@ package com.chameleonquest
     {
 		[Embed(source = "../../../assets/greenchameleon.png")]public var greenChameleon:Class;
 		
+		protected static const NORMAL:uint = 0x00;
+		protected static const WATER:uint = 0x01;
+		protected static const FIRE:uint = 0x02;
+		protected static const EARTH:uint = 0x03;
+		protected static const WIND:uint = 0x04;
+		protected static const ELECTRICITY:uint = 0x05;
+		
 		protected static const RUN_SPEED:int = 120;
 		protected static const GRAVITY:int =800;
 		protected static const JUMP_SPEED:int = 200;
 		protected static const JUMP_ACCELERATION:int = 40;
 		protected static const SHOOT_DELAY:Number = .4;
 		
+		public var tongue:Tongue;
 		protected var jumpPhase:int;
 		protected var invulnerability:int = 0;
 		protected var ammo:FlxGroup;
+		protected var hasRock:Boolean;
 		protected var cooldown:Number;
 		protected static const MAX_JUMP_HOLD:int = 15;
+		
+		private var type:uint;
 		
 		private var mapBounds:FlxRect;
 		
@@ -43,6 +54,9 @@ package com.chameleonquest
 			ammo = new FlxGroup();
 			ammo.add(new Rock(this.mapBounds));
 			cooldown = SHOOT_DELAY;
+			
+			this.tongue = new Tongue(this);
+			this.type = NORMAL;
         }
 		
 		override public function update():void
@@ -99,6 +113,11 @@ package com.chameleonquest
             super.update();
         }
 		
+		public function assignRock():void
+		{
+			this.hasRock = true;
+		}
+		
 		public function getAmmo():FlxGroup
 		{
 			return this.ammo;
@@ -108,11 +127,14 @@ package com.chameleonquest
 		public function getNextAttack():Projectile
 		{
 			var attack:Projectile;
-			if (this.cooldown > SHOOT_DELAY && (attack = this.ammo.getFirstAvailable() as Projectile))
+			if (this.cooldown > SHOOT_DELAY && 
+				(this.type != NORMAL || this.hasRock) && 
+				(attack = this.ammo.getFirstAvailable() as Projectile))
 			{
 				// only return a projectile if we've waited long enough from the last attack
 				// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
 				this.cooldown = 0;
+				this.hasRock = false;
 				return attack;
 			}
 			

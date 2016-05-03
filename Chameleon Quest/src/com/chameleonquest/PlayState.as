@@ -39,6 +39,7 @@ package com.chameleonquest
 			add(elems);
 			add(bgElems);
 			add(intrELems);
+			add(player.tongue);
 			add(player);
 			add(enemies);
 			add(projectiles);
@@ -59,12 +60,17 @@ package com.chameleonquest
 			super.update();
 			if (FlxG.keys.SPACE)
 			{
+				// TODO: prevent tongue from coming out repeatedly on space (add cooldown in tongue?)
 				var attack:Projectile = this.player.getNextAttack() as Projectile;
 				if (attack != null) 
 				{
 					var attackX:Number = player.facing == FlxObject.LEFT ? this.player.x - attack.width : this.player.x + this.player.width;
 					var attackY:Number = this.player.y + this.player.height / 2 - attack.height / 2;
 					attack.shoot(attackX, attackY, player.facing == FlxObject.LEFT ? -200 : 200, 0);
+				}
+				else
+				{
+					player.tongue.shoot();
 				}
 			}
 			
@@ -75,6 +81,7 @@ package com.chameleonquest
 			FlxG.collide(enemies, map);
 			FlxG.collide(player, enemies, hurtPlayer);
 			FlxG.collide(player, map);
+			FlxG.overlap(player.tongue, bgElems, null, pickupRock);
 			FlxG.collide(enemies, map);
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
@@ -97,6 +104,14 @@ package com.chameleonquest
 				FlxG.fade(0xff000000, 0.5, onFadeOver);
 			}
 
+		}
+		
+		private function pickupRock(tongue:Tongue, elem:FlxSprite):void 
+		{
+			if (elem is Pile)
+			{
+				tongue.pickupRock();
+			}
 		}
 		
 		public function playerElemCollision(player:Player, elem:FlxObject):void {

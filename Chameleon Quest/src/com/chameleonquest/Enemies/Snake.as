@@ -1,10 +1,7 @@
 package com.chameleonquest.Enemies 
 {
 	import org.flixel.FlxSprite;
-	/**
-	 * ...
-	 * @author Nicole Atherly
-	 */
+
 	public class Snake extends Enemy
 	{
 		[Embed(source = "../../../../assets/spritesheet_enemies.png")]public var greenSnake:Class;

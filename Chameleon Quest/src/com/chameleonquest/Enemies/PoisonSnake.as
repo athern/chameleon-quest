@@ -5,10 +5,7 @@ package com.chameleonquest.Enemies
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxRect;
-	/**
-	 * ...
-	 * @author Nicole Atherly
-	 */
+
 	public class PoisonSnake extends Snake
 	{
 		[Embed(source = "../../../../assets/spritesheet_enemies.png")]public var purpleSnake:Class;

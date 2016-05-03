@@ -3,11 +3,7 @@ package com.chameleonquest.Projectiles
 	import org.flixel.FlxObject;
 	import org.flixel.FlxRect;
 	import org.flixel.FlxSprite;
-	
-	/**
-	 * ...
-	 * @author Nicole Atherly
-	 */
+
 	public class Rock extends Projectile
 	{
 		[Embed(source = "../../../../assets/rock.png")]public var greenChameleon:Class;

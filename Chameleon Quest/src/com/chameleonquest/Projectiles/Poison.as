@@ -2,10 +2,7 @@ package com.chameleonquest.Projectiles
 {
 	import org.flixel.FlxRect;
 	import org.flixel.FlxSprite;
-	/**
-	 * ...
-	 * @author Nicole Atherly
-	 */
+
 	public class Poison extends Projectile
 	{
 		
