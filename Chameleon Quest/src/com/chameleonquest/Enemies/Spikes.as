@@ -6,9 +6,9 @@ package com.chameleonquest.Enemies
 	{
 		[Embed(source = "../../../../assets/spike.png")]public var spikeImg:Class;
 		
-		public function Spikes(X:int, Y:int) 
+		public function Spikes(Xindex:int, Yindex:int) 
 		{
-			super(X, Y);
+			super(16*Xindex, 16*Yindex+8);
 			loadGraphic(spikeImg, true, true, 128, 64);
 			scale.x = 0.125;
 			scale.y = 0.125;
@@ -18,6 +18,16 @@ package com.chameleonquest.Enemies
 			offset.y = 28;
 			power = 2;
 			immovable = true;
+		}
+		
+		public static function addSpikeRow(leftX:int, Y:int, count:int, group:FlxGroup):void
+		{
+			while (count > 0)
+			{
+				count--;
+				group.add(new Spikes(leftX + count, Y));
+				
+			}
 		}
 		
 	}
