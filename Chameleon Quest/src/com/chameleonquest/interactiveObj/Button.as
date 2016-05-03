@@ -11,9 +11,9 @@ package com.chameleonquest.interactiveObj
 		private var timer:int;
 		private var count:int = 0;
 		
-		public function Button(X:int, Y:int, t:int=-1) 
+		public function Button(Xindex:int, Yindex:int, t:int=-1) 
 		{
-			super(X, Y);
+			super(Xindex*16, Yindex*16);
 			loadGraphic(buttonImg, true, true, 128, 128);
 			scale.x = 0.125;
 			scale.y = 0.125;

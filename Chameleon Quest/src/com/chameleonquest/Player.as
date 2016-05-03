@@ -36,9 +36,9 @@ package com.chameleonquest
 		
 		public var velocityModifiers:FlxPoint = new FlxPoint(0, 0);
 		
-        public function Player(X:int,Y:int,MapBounds:FlxRect):void // X,Y: Starting coordinates
+        public function Player(Xindex:int,Yfloorindex:int,MapBounds:FlxRect):void // X,Y: Starting coordinates
         {
-            super(X, Y);
+            super(Xindex*16, Yfloorindex*16-16);
             loadGraphic(greenChameleon, true, true, 38, 16);
 			width = 20;  
 			offset.x = 9;

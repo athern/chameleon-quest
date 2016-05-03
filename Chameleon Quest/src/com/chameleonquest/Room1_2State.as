@@ -14,17 +14,15 @@ package com.chameleonquest
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(0, 449, this.map.getBounds());
+			player = new Player(0, ROOM_HEIGHT - 1, this.map.getBounds());
 			projectiles.add(player.getAmmo());
 			elems.add(new Platform(new Array(new FlxPoint(40, 160), new FlxPoint(19 * 16, 160)), 60));
 			
-			// add spikes
-			enemies.add(new Spikes(21 * 16, 16 * ROOM_HEIGHT - 24));
-			enemies.add(new Spikes(22 * 16, 16 * ROOM_HEIGHT - 24));
+			Spikes.addSpikeRow(21, ROOM_HEIGHT - 2, 2, enemies);
 			
 			// add rock pile
-			bgElems.add(new Pile(9 * 16, (ROOM_HEIGHT - 4) * 16 ));
-			bgElems.add(new Pile((ROOM_WIDTH - 3) * 16, (ROOM_HEIGHT - 9) * 16 ));
+			bgElems.add(new Pile(9, (ROOM_HEIGHT - 3)));
+			bgElems.add(new Pile(ROOM_WIDTH - 3, ROOM_HEIGHT - 8));
 			
 			// add enemies
 			enemies.add(new Snake(16 * 14, 16 * (ROOM_HEIGHT - 6)));

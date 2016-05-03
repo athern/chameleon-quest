@@ -7,9 +7,9 @@ package com.chameleonquest.interactiveObj
 		[Embed(source = "../../../../assets/WoodBlock.png")]
 		protected var img:Class;
 		
-		public function WoodBlock(X:int, Y:int) 
+		public function WoodBlock(Xindex:int, Yfloorindex:int) 
 		{
-			super(X, Y);
+			super(Xindex*16, Yfloorindex*16-48);
 			loadGraphic(img);
 		}
 		

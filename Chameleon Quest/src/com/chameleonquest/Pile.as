@@ -7,9 +7,9 @@ package com.chameleonquest
 		
 		[Embed(source = "../../../assets/pile.png")]public var pileImg:Class;
 		
-		public function Pile(X:int, Y:int) 
+		public function Pile(Xindex:int, Yfloorindex:int) 
 		{
-			super(X, Y);
+			super(Xindex*16, Yfloorindex*16-16);
 			loadGraphic(pileImg, true, true, 32, 32);
 			scale.x = 0.5;
 			scale.y = 0.5;
