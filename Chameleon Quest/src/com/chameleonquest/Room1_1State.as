@@ -41,7 +41,7 @@ package com.chameleonquest
 			enemyProjectiles.add(poisonSnake.getAmmo());
 			
 			// TODO: remove when button sample is not needed anymore
-			intrELems.add(new Button(64, 214));
+			intrELems.add(new Button(64, 214, 100));
 			
 			Main.lastRoom = 1;
 			
