@@ -1,13 +1,13 @@
-package com.chameleonquest 
+package com.chameleonquest.Rooms 
 {
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
-
+	import com.chameleonquest.*;
 
 	public class Room3_1State extends PlayState
 	{
 		
-		[Embed(source = "../../../assets/mapCSV_3-1_Map.csv", mimeType = "application/octet-stream")]
+		[Embed(source = "../../../../assets/mapCSV_3-1_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
 		override public function create():void

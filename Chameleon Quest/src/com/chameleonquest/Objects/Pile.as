@@ -1,11 +1,11 @@
-package com.chameleonquest 
+package com.chameleonquest.Objects 
 {
 	import org.flixel.*;
 
 	public class Pile extends FlxSprite
 	{
 		
-		[Embed(source = "../../../assets/pile.png")]public var pileImg:Class;
+		[Embed(source = "../../../../assets/pile.png")]public var pileImg:Class;
 		
 		public function Pile(Xindex:int, Yfloorindex:int) 
 		{

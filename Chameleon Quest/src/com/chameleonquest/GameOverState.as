@@ -1,5 +1,7 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.Rooms.Room1_1State;
+	import com.chameleonquest.Rooms.Room1_2State;
 	import org.flixel.*;
 
 	public class GameOverState extends FlxState

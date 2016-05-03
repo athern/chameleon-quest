@@ -1,11 +1,11 @@
-package com.chameleonquest 
+package com.chameleonquest.Objects 
 {
 	import org.flixel.*;
 	
 	public class Platform extends FlxSprite
 	{
 		
-		[Embed(source = "../../../assets/Platform.png")]
+		[Embed(source = "../../../../assets/Platform.png")]
 		public var img:Class;
 		
 		public function Platform(p:Array, s:int) 

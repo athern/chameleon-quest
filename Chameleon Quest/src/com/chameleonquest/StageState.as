@@ -1,5 +1,6 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.Rooms.*;
 	import org.flixel.*;
 	
 	public class StageState extends FlxState
@@ -12,7 +13,12 @@ package com.chameleonquest
 			super();
 			
 			currIdx = 0;
-			stages = [new Room1_1State(), new Room1_2State(), new Room3_1State];
+			stages = [
+			new Room1_1State(), 
+			new Room1_2State(),
+			new Room1_5State(),
+			new Room3_1State
+			];
 		}
 		
 		override public function create():void
@@ -40,9 +46,14 @@ package com.chameleonquest
 			this.add(stage2);
 			
 			var stage3:FlxText;
-			stage3 = new FlxText(30, 90, FlxG.width, "3-1");
+			stage3 = new FlxText(30, 90, FlxG.width, "1-5");
 			stage3.setFormat(null, 12, 0x000000, "left");
 			this.add(stage3);
+			
+			var stage4:FlxText;
+			stage4 = new FlxText(30, 120, FlxG.width, "3-1");
+			stage4.setFormat(null, 12, 0x000000, "left");
+			this.add(stage4);
 		}
 		
 		override public function update():void
