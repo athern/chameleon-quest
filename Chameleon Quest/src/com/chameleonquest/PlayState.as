@@ -18,7 +18,8 @@ package com.chameleonquest
 		public var map:FlxTilemap = new FlxTilemap;
 		public var player:Player;
 		
-		private var projectiles:FlxGroup = new FlxGroup;
+		protected var projectiles:FlxGroup = new FlxGroup;
+		protected var enemyProjectiles:FlxGroup = new FlxGroup;
 		protected var enemies:FlxGroup = new FlxGroup;
 		
 		public var elems:FlxGroup = new FlxGroup;
@@ -41,6 +42,7 @@ package com.chameleonquest
 			add(player);
 			add(enemies);
 			add(projectiles);
+			add(enemyProjectiles);
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 			
@@ -57,20 +59,19 @@ package com.chameleonquest
 			super.update();
 			if (FlxG.keys.SPACE)
 			{
-				var attack:Projectile = this.player.getAmmo() as Projectile;
+				var attack:Projectile = this.player.getNextAttack() as Projectile;
 				if (attack != null) 
 				{
-					// TODO: attack may already be in this FlxGroup, need to check
-					add(attack);
 					var attackX:Number = player.facing == FlxObject.LEFT ? this.player.x - attack.width : this.player.x + this.player.width;
 					var attackY:Number = this.player.y + this.player.height / 2 - attack.height / 2;
 					attack.shoot(attackX, attackY, player.facing == FlxObject.LEFT ? -200 : 200, 0);
-					projectiles.add(attack);
 				}
 			}
 			
 			FlxG.collide(projectiles, map);
 			FlxG.collide(projectiles, enemies, inflictProjectileDamage);
+			FlxG.collide(enemyProjectiles, map);
+			FlxG.collide(enemyProjectiles, player, inflictProjectileDamage);
 			FlxG.collide(enemies, map);
 			FlxG.collide(player, enemies, hurtPlayer);
 			FlxG.collide(player, map);
@@ -152,7 +153,14 @@ package com.chameleonquest
 		
 		private function inflictProjectileDamage(bullet:Projectile, target:FlxSprite):void 
 		{
-			target.hurt(bullet.getDamage(target));
+			if (target == player)
+			{
+				heartbar.hit(bullet.getDamage(player));
+			}
+			else
+			{
+				target.hurt(bullet.getDamage(target));
+			}
 		}
 		
 		// for button collision

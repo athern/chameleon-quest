@@ -25,13 +25,20 @@ package com.chameleonquest
 			bgElems.add(new Pile(5 * 16, ROOM_HEIGHT * 16 - 32));
 			
 			if (Main.lastRoom == 2) {
-				player = new Player(39 * 16, 208);
+				player = new Player(39 * 16, 208, this.map.getBounds());
 				player.facing = FlxObject.LEFT;
 			}
 			else {
-				player = new Player(0, 208);
+				player = new Player(0, 208, this.map.getBounds());
 			}
+			projectiles.add(player.getAmmo());
+			
 			enemies.add(new Snake(16 * 8, 16 * (ROOM_HEIGHT - 4)));
+			
+			var poisonSnake:PoisonSnake = new PoisonSnake(16 * 27, 16 * (ROOM_HEIGHT - 2), map.getBounds());
+			poisonSnake.facing = FlxObject.LEFT;
+			enemies.add(poisonSnake);
+			enemyProjectiles.add(poisonSnake.getAmmo());
 			
 			// TODO: remove when button sample is not needed anymore
 			intrELems.add(new Button(48, 214));

@@ -21,9 +21,11 @@ package com.chameleonquest
 		protected var cooldown:Number;
 		protected static const MAX_JUMP_HOLD:int = 15;
 		
+		private var mapBounds:FlxRect;
+		
 		public var velocityModifiers:FlxPoint = new FlxPoint(0, 0);
 		
-        public function Player(X:int,Y:int):void // X,Y: Starting coordinates
+        public function Player(X:int,Y:int,MapBounds:FlxRect):void // X,Y: Starting coordinates
         {
             super(X, Y);
             loadGraphic(greenChameleon, true, true, 38, 16);
@@ -36,9 +38,10 @@ package com.chameleonquest
             maxVelocity.x = RUN_SPEED;
             maxVelocity.y = JUMP_SPEED * 3;
 			health = 3;
+			this.mapBounds = MapBounds;
 			
 			ammo = new FlxGroup();
-			ammo.add(new Rock());
+			ammo.add(new Rock(this.mapBounds));
 			cooldown = SHOOT_DELAY;
         }
 		
@@ -96,8 +99,13 @@ package com.chameleonquest
             super.update();
         }
 		
+		public function getAmmo():FlxGroup
+		{
+			return this.ammo;
+		}
+		
 		// returns a Projectile if the chameleon has something to shoot and hasn't shot anything recently
-		public function getAmmo():Projectile
+		public function getNextAttack():Projectile
 		{
 			var attack:Projectile;
 			if (this.cooldown > SHOOT_DELAY && (attack = this.ammo.getFirstAvailable() as Projectile))

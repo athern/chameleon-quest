@@ -18,6 +18,17 @@ package com.chameleonquest.Enemies
 			
 			this.scale.x = 0.3;
 			this.scale.y = 0.3;
+			this.loadSprites();
+			acceleration.y = GRAVITY;
+			maxVelocity.x = RUN_SPEED;
+			drag.x = RUN_SPEED * 16;
+			drag.y = RUN_SPEED * 16;
+			health = 1;
+			power = 2;
+		}
+		
+		public function loadSprites():void
+		{
 			loadGraphic(greenSnake, true, true, 128, 138);
 			addAnimation("idle", [16], 1, false);
 			addAnimation("death", [24], 1, false);
@@ -25,12 +36,6 @@ package com.chameleonquest.Enemies
 			offset.x = 45;
 			height = 15;
 			offset.y = 68;
-			acceleration.y = GRAVITY;
-			maxVelocity.x = RUN_SPEED;
-			drag.x = RUN_SPEED * 16;
-			drag.y = RUN_SPEED * 16;
-			health = 1;
-			power = 2;
 		}
 		
 		public override function update():void
