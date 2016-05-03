@@ -1,5 +1,6 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.interactiveObj.Button;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	
@@ -30,7 +31,10 @@ package com.chameleonquest
 			else {
 				player = new Player(0, 208);
 			}
-			enemies.add(new Snake(16*8, 16* (ROOM_HEIGHT-4)));
+			enemies.add(new Snake(16 * 8, 16 * (ROOM_HEIGHT - 4)));
+			
+			// TODO: remove when button sample is not needed anymore
+			intrELems.add(new Button(48, 214));
 			
 			Main.lastRoom = 1;
 			

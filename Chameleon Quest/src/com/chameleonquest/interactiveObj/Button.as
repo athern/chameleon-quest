@@ -1,11 +1,11 @@
-package com.chameleonquest 
+package com.chameleonquest.interactiveObj 
 {
 	import org.flixel.*;
 	
-	public class Button extends FlxSprite
+	public class Button extends InteractiveObj
 	{
 		
-		[Embed(source = "../../../assets/button.png")]public var buttonImg:Class;
+		[Embed(source = "../../../../assets/button.png")]public var buttonImg:Class;
 		
 		private var isHit:Boolean;
 		
@@ -20,7 +20,6 @@ package com.chameleonquest
 			height = 6;
 			offset.y = 62;
 			
-			immovable = true;
 			
 			addAnimation("DOWN", [0]);
 			addAnimation("UP", [1]);
@@ -31,7 +30,7 @@ package com.chameleonquest
 		}
 		
 		// hit the button
-		public function hit():void {
+		override public function hit():void {
 			if (!isHit) {
 				isHit = true;
 				height = 4;

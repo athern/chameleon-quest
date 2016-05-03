@@ -2,6 +2,8 @@ package com.chameleonquest
 {
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Projectiles.Projectile;
+	import com.chameleonquest.interactiveObj.Button;
+	import com.chameleonquest.interactiveObj.InteractiveObj;
 	import org.flixel.*;
 	
     public class PlayState extends FlxState
@@ -21,6 +23,7 @@ package com.chameleonquest
 		
 		public var elems:FlxGroup = new FlxGroup;
 		public var bgElems:FlxGroup = new FlxGroup;
+		public var intrELems:FlxGroup = new FlxGroup;
 		
 		// heart bar
 		public var heartbar:HeartBar = new HeartBar();
@@ -28,15 +31,13 @@ package com.chameleonquest
 		// pause state
 		public var pauseText:FlxText;
 		public var quitText:FlxText;
-		
-		// TODO: remove when sample is not needed anymore
-		public var button:Button = new Button(64, 214);
-		
+				
         override public function create():void
 		{
 			add(map);
 			add(elems);
 			add(bgElems);
+			add(intrELems);
 			add(player);
 			add(enemies);
 			add(projectiles);
@@ -46,9 +47,6 @@ package com.chameleonquest
 			setupPauseHUD();
 			
 			add(heartbar);
-			
-			// TODO: remove when sample is not needed anymore
-			add(button);
 						
 			super.create();
 			
@@ -76,12 +74,12 @@ package com.chameleonquest
 			FlxG.collide(enemies, map);
 			FlxG.collide(player, enemies, hurtPlayer);
 			FlxG.collide(player, map);
+			FlxG.collide(enemies, map);
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
 			
-			// For Button collision
-			FlxG.collide(player, button, buttonHitCollision);
-			FlxG.collide(projectiles, button, buttonHitCollision);
+			// For Interactive game object collision
+			FlxG.collide(projectiles, intrELems, projectileHitCollision);
 			
 			// handle pause
 			if (FlxG.keys.justPressed("ESCAPE")) {
@@ -158,8 +156,8 @@ package com.chameleonquest
 		}
 		
 		// for button collision
-		private function buttonHitCollision(hitter:FlxSprite, button:Button):void {
-			button.hit();
+		private function projectileHitCollision(bullet:Projectile, target:InteractiveObj):void {
+			target.hit();
 		}
     }
 

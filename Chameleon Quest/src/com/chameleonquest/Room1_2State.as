@@ -25,6 +25,10 @@ package com.chameleonquest
 			bgElems.add(new Pile(9 * 16, (ROOM_HEIGHT - 4) * 16 ));
 			bgElems.add(new Pile((ROOM_WIDTH - 3) * 16, (ROOM_HEIGHT - 9) * 16 ));
 			
+			// add enemies
+			enemies.add(new Snake(16 * 14, 16 * (ROOM_HEIGHT - 6)));
+			
+			
 			Main.lastRoom = 2;
 			super.create();
 		}
