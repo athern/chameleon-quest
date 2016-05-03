@@ -29,6 +29,8 @@ package com.chameleonquest
 		public var pauseText:FlxText;
 		public var quitText:FlxText;
 		
+		public var button:Button = new Button(64, 214);
+		
         override public function create():void
 		{
 			add(map);
@@ -42,7 +44,10 @@ package com.chameleonquest
 			setupPauseHUD();
 			
 			add(heartbar);
+			add(button);
+
 			super.create();
+			
 		}
 		
 		override public function update():void
@@ -69,7 +74,10 @@ package com.chameleonquest
 			FlxG.collide(player, map);
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
-			// spike collision
+			
+			// For Button collision
+			FlxG.collide(player, button, playerButtonCollision);
+			FlxG.collide(projectiles, button, playerButtonCollision);
 			
 			// handle pause
 			if (FlxG.keys.justPressed("ESCAPE")) {
@@ -143,6 +151,11 @@ package com.chameleonquest
 		private function inflictProjectileDamage(bullet:Projectile, target:FlxSprite):void 
 		{
 			target.hurt(bullet.getDamage(target));
+		}
+		
+		// for button collision
+		private function playerButtonCollision(hitter:FlxSprite, button:Button) {
+			button.hit();
 		}
     }
 
