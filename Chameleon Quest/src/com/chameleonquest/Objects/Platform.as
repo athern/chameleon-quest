@@ -11,7 +11,10 @@ package com.chameleonquest.Objects
 		public function Platform(p:Array, s:int) 
 		{
 			super(p[0].x, p[0].y, img);
-			followPath(new FlxPath(p), s, PATH_YOYO);
+			if (p.length > 1)
+			{
+				followPath(new FlxPath(p), s, PATH_YOYO);
+			}
 			immovable = true;
 		}
 		

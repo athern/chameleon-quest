@@ -16,7 +16,8 @@ package com.chameleonquest.Rooms
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			player = new Player(0, 14, this.map.getBounds());
-			bgElems.add(new Pile(5, 15));
+			bgElems.add(new Pile(6, 15));
+			elems.add(new PlatformOnChain(16 * 12, 16 * 15));
 			
 			super.create();
 		}
