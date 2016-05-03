@@ -21,6 +21,10 @@ package com.chameleonquest
 			enemies.add(new Spikes(21 * 16, 16 * ROOM_HEIGHT - 24));
 			enemies.add(new Spikes(22 * 16, 16 * ROOM_HEIGHT - 24));
 			
+			// add rock pile
+			bgElems.add(new Pile(9 * 16, (ROOM_HEIGHT - 4) * 16 ));
+			bgElems.add(new Pile((ROOM_WIDTH - 3) * 16, (ROOM_HEIGHT - 9) * 16 ));
+			
 			Main.lastRoom = 2;
 			super.create();
 		}

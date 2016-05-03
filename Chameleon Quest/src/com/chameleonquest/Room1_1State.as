@@ -20,6 +20,9 @@ package com.chameleonquest
 			enemies.add(new Spikes(18 * 16, 16 * ROOM_HEIGHT - 8));
 			enemies.add(new Spikes(19 * 16, 16 * ROOM_HEIGHT - 8));
 			
+			// add rock pile
+			bgElems.add(new Pile(5 * 16, ROOM_HEIGHT * 16 - 32));
+			
 			if (Main.lastRoom == 2) {
 				player = new Player(39 * 16, 208);
 				player.facing = FlxObject.LEFT;
