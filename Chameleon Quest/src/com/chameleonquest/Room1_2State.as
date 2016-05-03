@@ -29,6 +29,7 @@ package com.chameleonquest
 			// add enemies
 			enemies.add(new Snake(16 * 14, 16 * (ROOM_HEIGHT - 6)));
 			enemies.add(new Snake(16 * 16, 16 * (ROOM_HEIGHT - 15)));
+			enemies.add(new Bird(16 * 6, 16 * 20, 16 * (ROOM_HEIGHT - 22)));
 			
 			
 			Main.lastRoom = 2;

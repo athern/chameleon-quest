@@ -40,6 +40,8 @@ package com.chameleonquest
 			enemies.add(poisonSnake);
 			enemyProjectiles.add(poisonSnake.getAmmo());
 			
+			enemies.add(new Bird(16 * 20, 16 * 30, 16 * (ROOM_HEIGHT - 8)));
+			
 			// TODO: remove when button sample is not needed anymore
 			intrELems.add(new Button(64, 214, 100));
 			

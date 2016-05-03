@@ -53,6 +53,8 @@ package com.chameleonquest
 			
 			ammo = new FlxGroup();
 			ammo.add(new Rock(this.mapBounds));
+			ammo.add(new Rock(this.mapBounds));
+			ammo.add(new Rock(this.mapBounds));
 			cooldown = SHOOT_DELAY;
 			
 			this.tongue = new Tongue(this);
