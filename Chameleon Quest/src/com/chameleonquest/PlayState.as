@@ -14,7 +14,7 @@ package com.chameleonquest
 		
 		public var ROOM_WIDTH:int;
 		public var ROOM_HEIGHT:int;
-	
+		
 		public var map:FlxTilemap = new FlxTilemap;
 		public var player:Player;
 		
