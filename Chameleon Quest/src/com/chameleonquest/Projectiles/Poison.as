@@ -2,15 +2,15 @@ package com.chameleonquest.Projectiles
 {
 	import org.flixel.FlxRect;
 	import org.flixel.FlxSprite;
+	import org.flixel.*;
 
 	public class Poison extends Projectile
 	{
 		
-		public function Poison(MapBounds:FlxRect) 
+		public function Poison() 
 		{
 			super();
 			this.exists = false;
-			this.mapBounds = MapBounds;
 		}
 		
 		override public function getDamage(Target:FlxSprite):int

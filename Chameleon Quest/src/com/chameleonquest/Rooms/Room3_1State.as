@@ -15,21 +15,10 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 25;
 			ROOM_HEIGHT = 22;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(0, (ROOM_HEIGHT - 7) * 16, map.getBounds());
-			
+			player = new Player(0, ROOM_HEIGHT - 6);
 			// add spikes
-			enemies.add(new Spikes(4 * 16, 16 * ROOM_HEIGHT - 24));
-			enemies.add(new Spikes(5 * 16, 16 * ROOM_HEIGHT - 24));
-			enemies.add(new Spikes(13 * 16, 16 * ROOM_HEIGHT - 8));
-			enemies.add(new Spikes(14 * 16, 16 * ROOM_HEIGHT - 8));
-			enemies.add(new Spikes(15 * 16, 16 * ROOM_HEIGHT - 8));
-			enemies.add(new Spikes(16 * 16, 16 * ROOM_HEIGHT - 8));
-			enemies.add(new Spikes(17 * 16, 16 * ROOM_HEIGHT - 8));
-			enemies.add(new Spikes(18 * 16, 16 * ROOM_HEIGHT - 8));
-			enemies.add(new Spikes(19 * 16, 16 * ROOM_HEIGHT - 8));
-			enemies.add(new Spikes(20 * 16, 16 * ROOM_HEIGHT - 8));
-			enemies.add(new Spikes(21 * 16, 16 * ROOM_HEIGHT - 8));
-			enemies.add(new Spikes(22 * 16, 16 * ROOM_HEIGHT - 8));
+			Spikes.addSpikeRow(4, ROOM_HEIGHT - 2, 2, enemies);
+			Spikes.addSpikeRow(13, ROOM_HEIGHT - 1, 10, enemies);
 			
 			super.create();
 		}

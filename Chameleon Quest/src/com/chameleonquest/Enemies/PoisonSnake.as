@@ -1,5 +1,6 @@
 package com.chameleonquest.Enemies 
 {
+	import com.chameleonquest.PlayState;
 	import com.chameleonquest.Projectiles.Poison;
 	import com.chameleonquest.Projectiles.Projectile;
 	import org.flixel.FlxG;
@@ -14,20 +15,13 @@ package com.chameleonquest.Enemies
 		protected static const RUN_SPEED:int = 60;
 		protected static const SHOOT_DELAY:Number = 2;
 		
-		protected var ammo:FlxGroup;
-		
 		private var cooldown:Number;
 		
-		public function PoisonSnake(X:Number, Y:Number, MapBounds:FlxRect) 
+		public function PoisonSnake(X:Number, Y:Number) 
 		{
 			super(X, Y);
 			health = 2;
 			power = 2;
-			
-			ammo = new FlxGroup;
-			ammo.add(new Poison(MapBounds));
-			ammo.add(new Poison(MapBounds));
-			ammo.add(new Poison(MapBounds));
 			
 			cooldown = SHOOT_DELAY;
 			this.facing = RIGHT;
@@ -46,6 +40,7 @@ package com.chameleonquest.Enemies
 		
 		public override function update():void
 		{
+			
 			if (this.health == 0)
 			{
 				play("death");
@@ -55,24 +50,28 @@ package com.chameleonquest.Enemies
 			{
 				play("idle");
 			}
-			
+			var currentState : PlayState = FlxG.state as PlayState;
+			if (currentState.player.x > x)
+			{
+				facing = LEFT;
+			}
+			else
+			{
+				facing = RIGHT;
+			}
 			var attack:Projectile;
-			if (cooldown > SHOOT_DELAY && (attack = this.ammo.getFirstAvailable() as Projectile)) 
+			if (cooldown > SHOOT_DELAY && (attack = new Poison())) 
 			{
 				var attackX:Number = this.facing == RIGHT ? this.x - attack.width : this.x + this.width;
 				var attackY:Number = this.y + this.height / 2 - attack.height / 2;
 				attack.shoot(attackX, attackY, this.facing == RIGHT ? -200 : 200, 0);
+				currentState.enemyProjectiles.add(attack);
 				cooldown = 0;
 			}
 			
 			cooldown += FlxG.elapsed;	// ammo cooldown
 			
 			super.update();
-		}
-		
-		public function getAmmo():FlxGroup
-		{
-			return this.ammo;
 		}
 	}
 

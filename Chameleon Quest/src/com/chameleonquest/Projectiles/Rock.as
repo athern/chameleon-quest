@@ -8,12 +8,11 @@ package com.chameleonquest.Projectiles
 	{
 		[Embed(source = "../../../../assets/rock.png")]public var greenChameleon:Class;
 		
-		public function Rock(MapBounds:FlxRect) 
+		public function Rock() 
 		{
 			super();
             loadGraphic(greenChameleon, false, true);
 			this.exists = false;
-			this.mapBounds = MapBounds;
 		}
 		
 		override public function getDamage(Target:FlxSprite):int

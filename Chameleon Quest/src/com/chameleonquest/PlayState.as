@@ -19,9 +19,9 @@ package com.chameleonquest
 		public var map:FlxTilemap = new FlxTilemap;
 		public var player:Player;
 		
-		protected var projectiles:FlxGroup = new FlxGroup;
-		protected var enemyProjectiles:FlxGroup = new FlxGroup;
-		protected var enemies:FlxGroup = new FlxGroup;
+		public var projectiles:FlxGroup = new FlxGroup;
+		public var enemyProjectiles:FlxGroup = new FlxGroup;
+		public var enemies:FlxGroup = new FlxGroup;
 		
 		public var elems:FlxGroup = new FlxGroup;
 		public var bgElems:FlxGroup = new FlxGroup;
@@ -58,6 +58,20 @@ package com.chameleonquest
 		
 		override public function update():void
 		{
+			// handle pause
+			if (FlxG.keys.justPressed("ESCAPE")) {
+				FlxG.paused = !FlxG.paused;
+				togglePauseMenu();
+			}
+			// handle quit
+			if (FlxG.paused)
+			{
+				if(FlxG.keys.justPressed("Q")) {
+					FlxG.fade(0xff000000, 0.5, onFadeExit);
+				}
+			}
+			else
+			{
 			super.update();
 			if (FlxG.keys.SPACE)
 			{
@@ -68,6 +82,7 @@ package com.chameleonquest
 					var attackX:Number = player.facing == FlxObject.LEFT ? this.player.x - attack.width : this.player.x + this.player.width;
 					var attackY:Number = this.player.y + this.player.height / 2 - attack.height / 2;
 					attack.shoot(attackX, attackY, player.facing == FlxObject.LEFT ? -200 : 200, 0);
+					projectiles.add(attack);
 				}
 				else
 				{
@@ -90,20 +105,13 @@ package com.chameleonquest
 			// For Interactive game object collision
 			FlxG.collide(projectiles, intrELems, projectileHitCollision);
 			
-			// handle pause
-			if (FlxG.keys.justPressed("ESCAPE")) {
-				FlxG.paused = !FlxG.paused;
-				togglePauseMenu();
-			}
-			// handle quit
-			if (FlxG.paused && FlxG.keys.justPressed("Q")) {
-				FlxG.fade(0xff000000, 0.5, onFadeExit);
-			}
+			
 			
 			// check for game over
 			if (heartbar.isEmpty()) {
 				FlxG.flash(0x000000, 0.75);
 				FlxG.fade(0xff000000, 0.5, onFadeOver);
+			}
 			}
 
 		}

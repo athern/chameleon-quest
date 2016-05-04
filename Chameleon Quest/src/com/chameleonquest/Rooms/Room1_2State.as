@@ -17,8 +17,7 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(0, ROOM_HEIGHT - 1, this.map.getBounds());
-			projectiles.add(player.getAmmo());
+			player = new Player(0, ROOM_HEIGHT - 1);
 			elems.add(new Platform(new Array(new FlxPoint(40, 160), new FlxPoint(19 * 16, 160)), 60));
 			
 			Spikes.addSpikeRow(21, ROOM_HEIGHT - 2, 2, enemies);

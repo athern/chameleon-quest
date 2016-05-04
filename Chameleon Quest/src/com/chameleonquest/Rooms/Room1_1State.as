@@ -29,19 +29,18 @@ package com.chameleonquest.Rooms
 			bgElems.add(new Pile(5, ROOM_HEIGHT-1));
 			
 			if (Main.lastRoom == 2) {
-				player = new Player(ROOM_WIDTH-3, ROOM_HEIGHT-1, this.map.getBounds());
+				player = new Player(ROOM_WIDTH-3, ROOM_HEIGHT-1);
 				player.facing = FlxObject.LEFT;
 			}
 			else {
-				player = new Player(0, ROOM_HEIGHT-1, this.map.getBounds());
+				player = new Player(0, ROOM_HEIGHT-1);
 			}
-			projectiles.add(player.getAmmo());
 			
-			enemies.add(new Snake(16 * 8, 16 * (ROOM_HEIGHT - 4)));
+			enemies.add(new PoisonSnake(16 * 8, 16 * (ROOM_HEIGHT - 4)));
 			
-			//var poisonSnake:PoisonSnake = new PoisonSnake(16 * 27, 16 * (ROOM_HEIGHT - 2), map.getBounds());
-			//poisonSnake.facing = FlxObject.LEFT;
-			//enemies.add(poisonSnake);
+			var poisonSnake:PoisonSnake = new PoisonSnake(16 * 27, 16 * (ROOM_HEIGHT - 2));
+			poisonSnake.facing = FlxObject.LEFT;
+			enemies.add(poisonSnake);
 			//enemyProjectiles.add(poisonSnake.getAmmo());
 			
 			enemies.add(new Bird(16 * 20, 16 * 30, 16 * (ROOM_HEIGHT - 8)));
