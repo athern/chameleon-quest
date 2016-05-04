@@ -25,18 +25,15 @@ package com.chameleonquest
 		public var tongue:Tongue;
 		protected var jumpPhase:int;
 		protected var invulnerability:int = 0;
-		protected var ammo:FlxGroup;
 		protected var hasRock:Boolean;
 		protected var cooldown:Number;
 		protected static const MAX_JUMP_HOLD:int = 15;
 		
 		private var type:uint;
 		
-		private var mapBounds:FlxRect;
-		
 		public var velocityModifiers:FlxPoint = new FlxPoint(0, 0);
 		
-        public function Player(Xindex:int,Yfloorindex:int,MapBounds:FlxRect):void // X,Y: Starting coordinates
+        public function Player(Xindex:int,Yfloorindex:int):void // X,Y: Starting coordinates
         {
             super(Xindex*16, Yfloorindex*16-16);
             loadGraphic(greenChameleon, true, true, 38, 16);
@@ -49,12 +46,7 @@ package com.chameleonquest
             maxVelocity.x = RUN_SPEED;
             maxVelocity.y = JUMP_SPEED * 3;
 			health = 3;
-			this.mapBounds = MapBounds;
 			
-			ammo = new FlxGroup();
-			ammo.add(new Rock(this.mapBounds));
-			ammo.add(new Rock(this.mapBounds));
-			ammo.add(new Rock(this.mapBounds));
 			cooldown = SHOOT_DELAY;
 			
 			this.tongue = new Tongue(this);
@@ -69,7 +61,7 @@ package com.chameleonquest
 				jumpPhase = 1;
                 velocity.y = -JUMP_SPEED;
             }
-			else if (FlxG.keys.UP && jumpPhase > 0 && jumpPhase < MAX_JUMP_HOLD && !FlxG.paused) 
+			else if (FlxG.keys.UP && jumpPhase > 0 && jumpPhase < MAX_JUMP_HOLD) 
 			{
 				acceleration.y = 0;
 				jumpPhase++;
@@ -85,11 +77,6 @@ package com.chameleonquest
 			}
 			else {
 				acceleration.y = GRAVITY;
-			}
-			
-			// check for Pause
-			if (FlxG.paused) {
-				return;
 			}
 			
 			if (FlxG.keys.LEFT)
@@ -128,24 +115,20 @@ package com.chameleonquest
 			this.hasRock = true;
 		}
 		
-		public function getAmmo():FlxGroup
-		{
-			return this.ammo;
-		}
-		
 		// returns a Projectile if the chameleon has something to shoot and hasn't shot anything recently
 		public function getNextAttack():Projectile
 		{
-			var attack:Projectile;
 			if (this.cooldown > SHOOT_DELAY && 
-				(this.type != NORMAL || this.hasRock) && 
-				(attack = this.ammo.getFirstAvailable() as Projectile))
+				(this.type != NORMAL || this.hasRock))
 			{
 				// only return a projectile if we've waited long enough from the last attack
 				// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
 				this.cooldown = 0;
-				this.hasRock = false;
-				return attack;
+				if (this.hasRock)
+				{
+					this.hasRock = false;
+					return new Rock();
+				}
 			}
 			
 			return null;
