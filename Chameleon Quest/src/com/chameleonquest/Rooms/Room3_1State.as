@@ -12,13 +12,13 @@ package com.chameleonquest.Rooms
 		
 		override public function create():void
 		{
-			ROOM_WIDTH = 25;
-			ROOM_HEIGHT = 22;
+			ROOM_WIDTH = 30;
+			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(0, ROOM_HEIGHT - 6);
+			player = new Player(0, ROOM_HEIGHT - 9);
 			// add spikes
-			Spikes.addSpikeRow(4, ROOM_HEIGHT - 2, 2, enemies);
-			Spikes.addSpikeRow(13, ROOM_HEIGHT - 1, 10, enemies);
+			Spikes.addSpikeRow(5, ROOM_HEIGHT - 1, 2, enemies);
+			Spikes.addSpikeRow(15, ROOM_HEIGHT -3, 13, enemies);
 			
 			super.create();
 		}
@@ -30,9 +30,7 @@ package com.chameleonquest.Rooms
 			if (player.x < 0) {
 				player.x = 0;
 			}
-			if (player.x > map.width - 32) {
-				player.velocity.y = 0;
-			}
+			
 			if (player.x > map.width - 16) {
 				player.x = map.width - 16;
 			}

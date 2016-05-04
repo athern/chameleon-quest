@@ -1,0 +1,59 @@
+package com.chameleonquest.Rooms 
+{
+	import org.flixel.*;
+	import com.chameleonquest.Enemies.*;
+	import com.chameleonquest.*;
+	import com.chameleonquest.Objects.*;
+	
+	public class Room1_3State extends PlayState
+	{
+		
+		[Embed(source = "../../../../assets/mapCSV_1-3_Map.csv", mimeType = "application/octet-stream")]
+		public var levelMap:Class;
+		
+		override public function create():void
+		{
+			ROOM_WIDTH = 30;
+			ROOM_HEIGHT = 30;
+			map.loadMap(new levelMap, levelTiles, 16, 16);
+			if (Main.lastRoom == 4) {
+				player = new Player(ROOM_WIDTH-2, ROOM_HEIGHT -1);
+				player.facing = FlxObject.LEFT;
+			}
+			else {
+				player = new Player(0, 5);
+			}
+			
+			// add rock pile
+			bgElems.add(new Pile(5, 5));
+			bgElems.add(new Pile(6, ROOM_HEIGHT - 1));
+			
+			elems.add(new Platform(new Array(new FlxPoint(15 * 16, (ROOM_HEIGHT - 5) * 16), new FlxPoint(20 * 16, (ROOM_HEIGHT - 5) * 16)), 60));
+			
+			// add spikes
+			Spikes.addSpikeRow(18, 13, 4, enemies);
+			Spikes.addSpikeRow(12, ROOM_HEIGHT - 2, 13, enemies);
+			
+			// add enemies
+			enemies.add(new Bird(11* 16, 24* 16, (ROOM_HEIGHT - 8) * 16));
+			
+			Main.lastRoom = 3;
+			super.create();
+		}
+		
+		override public function update():void
+		{
+			super.update();
+			
+			if (player.x < 0) {
+				FlxG.switchState(new Room1_2State());
+			}
+			
+			if (player.x > map.width - 16) {
+				FlxG.switchState(new Room1_4State());
+			}
+		}
+		
+	}
+
+}

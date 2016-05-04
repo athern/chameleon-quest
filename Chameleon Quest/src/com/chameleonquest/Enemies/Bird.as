@@ -2,6 +2,8 @@ package com.chameleonquest.Enemies
 {
 	public class Bird extends Enemy
 	{
+		[Embed(source = "../../../../assets/bird.png")]public var bird:Class;
+		
 		protected static const FLY_SPEED:int = 50;
 		
 		private var minX:Number;
@@ -19,6 +21,12 @@ package com.chameleonquest.Enemies
 			
 			this.facing = LEFT;
 			velocity.x = -FLY_SPEED;
+			
+			loadGraphic(bird, true, true, 32, 21);
+			addAnimation("idle", [0, 1, 2], 4, true);
+			play("idle");
+			width = 32;
+			height = 21;
 		}
 		
 		public override function update():void

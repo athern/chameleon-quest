@@ -16,6 +16,8 @@ package com.chameleonquest
 			stages = [
 			new Room1_1State(), 
 			new Room1_2State(),
+			new Room1_3State(),
+			new Room1_4State(),
 			new Room1_5State(),
 			new Room1_6State(),
 			new Room3_1State
@@ -47,19 +49,29 @@ package com.chameleonquest
 			this.add(stage2);
 			
 			var stage3:FlxText;
-			stage3 = new FlxText(30, 90, FlxG.width, "1-5");
+			stage3 = new FlxText(30, 90, FlxG.width, "1-3");
 			stage3.setFormat(null, 12, 0x000000, "left");
-			this.add(stage3);	
+			this.add(stage3);
 			
 			var stage4:FlxText;
-			stage4 = new FlxText(30, 120, FlxG.width, "1-6");
+			stage4 = new FlxText(30, 120, FlxG.width, "1-4");
 			stage4.setFormat(null, 12, 0x000000, "left");
 			this.add(stage4);
 			
 			var stage5:FlxText;
-			stage5 = new FlxText(30, 150, FlxG.width, "3-1");
+			stage5 = new FlxText(30, 150, FlxG.width, "1-5");
 			stage5.setFormat(null, 12, 0x000000, "left");
-			this.add(stage5);
+			this.add(stage5);	
+			
+			var stage6:FlxText;
+			stage6 = new FlxText(30, 180, FlxG.width, "1-6");
+			stage6.setFormat(null, 12, 0x000000, "left");
+			this.add(stage6);
+			
+			var stage7:FlxText;
+			stage7 = new FlxText(30, 210, FlxG.width, "3-1");
+			stage7.setFormat(null, 12, 0x000000, "left");
+			this.add(stage7);
 		}
 		
 		override public function update():void

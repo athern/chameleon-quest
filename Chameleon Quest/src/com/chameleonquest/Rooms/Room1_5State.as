@@ -35,6 +35,8 @@ package com.chameleonquest.Rooms
 			
 			if (player.x < 0 && player.y > 20*16) {
 				FlxG.switchState(new Room1_6State());
+			} else if (player.x < 0 && player.y > 13 * 16) {
+				FlxG.switchState(new Room1_4State());
 			}
 		}
 		

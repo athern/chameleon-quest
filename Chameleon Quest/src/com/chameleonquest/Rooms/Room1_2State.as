@@ -17,7 +17,15 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(0, ROOM_HEIGHT - 1);
+			
+			if (Main.lastRoom == 3) {
+				player = new Player(ROOM_WIDTH-2, 3);
+				player.facing = FlxObject.LEFT;
+			}
+			else {
+				player = new Player(0, ROOM_HEIGHT-1);
+			}
+			
 			elems.add(new Platform(new Array(new FlxPoint(40, 160), new FlxPoint(19 * 16, 160)), 60));
 			
 			Spikes.addSpikeRow(21, ROOM_HEIGHT - 2, 2, enemies);
@@ -47,7 +55,7 @@ package com.chameleonquest.Rooms
 				player.velocity.y = 0;
 			}
 			if (player.x > map.width - 16) {
-				FlxG.switchState(new Room1_2State());
+				FlxG.switchState(new Room1_3State());
 			}
 		}
 		
