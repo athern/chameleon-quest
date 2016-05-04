@@ -11,9 +11,10 @@ package com.chameleonquest.interactiveObj
 		private var timer:int;
 		private var count:int = 0;
 		
-		public function Button(Xindex:int, Yindex:int, t:int=-1) 
+		public function Button(Xindex:int, Yindex:int, t:int=-1, r:int = 0) 
 		{
-			super(Xindex*16, Yindex*16);
+			
+			super(Xindex * 16, Yindex * 16);
 			loadGraphic(buttonImg, true, true, 128, 128);
 			scale.x = 0.125;
 			scale.y = 0.125;
@@ -22,6 +23,15 @@ package com.chameleonquest.interactiveObj
 			height = 6;
 			offset.y = 62;
 			timer = t;
+			angle = r;
+			if (r == 0)
+			{
+				y -= 10;
+			}
+			if (r == 180)
+			{
+				y += 6;
+			}
 			
 			addAnimation("DOWN", [0]);
 			addAnimation("UP", [1]);

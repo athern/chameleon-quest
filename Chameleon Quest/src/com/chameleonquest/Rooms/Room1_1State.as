@@ -18,11 +18,6 @@ package com.chameleonquest.Rooms
 			ROOM_HEIGHT = 15;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			
-			// add spikes
-			//enemies.add(new Spikes(17 * 16, 16 * ROOM_HEIGHT - 8));
-			//enemies.add(new Spikes(18 * 16, 16 * ROOM_HEIGHT - 8));
-			//enemies.add(new Spikes(19 * 16, 16 * ROOM_HEIGHT - 8));
-			
 			Spikes.addSpikeRow(17, ROOM_HEIGHT-1, 3, enemies);
 			Spikes.addSpikeRow(27, ROOM_HEIGHT-1, 4, enemies);
 			// add rock pile
@@ -41,12 +36,8 @@ package com.chameleonquest.Rooms
 			var poisonSnake:PoisonSnake = new PoisonSnake(16 * 27, 16 * (ROOM_HEIGHT - 2));
 			poisonSnake.facing = FlxObject.LEFT;
 			enemies.add(poisonSnake);
-			//enemyProjectiles.add(poisonSnake.getAmmo());
 			
 			enemies.add(new Bird(16 * 20, 16 * 30, 16 * (ROOM_HEIGHT - 8)));
-			
-			// TODO: remove when button sample is not needed anymore
-			intrELems.add(new Button(64, 214, 100));
 			
 			Main.lastRoom = 1;
 			

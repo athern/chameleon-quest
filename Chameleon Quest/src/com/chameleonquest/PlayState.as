@@ -104,6 +104,7 @@ package com.chameleonquest
 			FlxG.collide(player, elems, playerElemCollision);
 			// For Interactive game object collision
 			FlxG.collide(projectiles, intrELems, projectileHitCollision);
+			FlxG.collide(projectiles, elems);
 			
 			
 			

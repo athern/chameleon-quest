@@ -3,6 +3,7 @@ package com.chameleonquest.Rooms
 	import com.chameleonquest.*;
 	import org.flixel.*;
 	import com.chameleonquest.Objects.*;
+	import com.chameleonquest.interactiveObj.*;
 	
 	public class Room1_6State extends PlayState
 	{
@@ -19,8 +20,14 @@ package com.chameleonquest.Rooms
 			player = new Player(ROOM_WIDTH - 1, 14);
 			player.facing = FlxObject.LEFT;
 			bgElems.add(new Pile(16, 11));
-			elems.add(new Platform(new Array(new FlxPoint(90, 150), new FlxPoint(90, 570)), 100));
-			elems.add(new Platform(new Array(new FlxPoint(190, 560), new FlxPoint(190, 690)), 60));
+			bgElems.add(new Pile(8, 36));
+			bgElems.add(new Pile(17, 44));
+			intrELems.add(new Button(1, 1, 100, 180));
+			intrELems.add(new Button(1, 36, 100));
+			intrELems.add(new Button(14, 15, 100, 180));
+			intrELems.add(new Button(13, 35, 100, 270));
+			elems.add(new Platform(new Array(new FlxPoint(90, 150), new FlxPoint(90, 540)), 60));
+			elems.add(new Platform(new Array(new FlxPoint(186, 560), new FlxPoint(186, 660)), 60));
 			Main.lastRoom = 6;
 			super.create();
 		}

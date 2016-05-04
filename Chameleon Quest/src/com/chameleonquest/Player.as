@@ -56,7 +56,7 @@ package com.chameleonquest
 		override public function update():void
 		{
 			
-			if(FlxG.keys.UP && jumpPhase == 0 && !FlxG.paused)
+			if(FlxG.keys.UP && jumpPhase == 0)
             {
 				jumpPhase = 1;
                 velocity.y = -JUMP_SPEED;
@@ -76,6 +76,9 @@ package com.chameleonquest
 				acceleration.y = 0;
 			}
 			else {
+				if(velocityModifiers.y != 0) {
+					velocity.y = velocityModifiers.y;
+				}
 				acceleration.y = GRAVITY;
 			}
 			
@@ -91,9 +94,6 @@ package com.chameleonquest
             }
 			else
 			{
-				if(velocityModifiers.y != 0) {
-					velocity.y = velocityModifiers.y;
-				}
 				if(velocityModifiers.x != 0) {
 					velocity.x = velocityModifiers.x;
 				}
