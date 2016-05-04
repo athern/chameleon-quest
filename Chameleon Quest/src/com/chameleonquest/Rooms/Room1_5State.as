@@ -15,10 +15,17 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(0, 14);
+			if (Main.lastRoom == 6)
+			{
+				player = new Player(0, 29);
+			}
+			else
+			{
+				player = new Player(0, 14);
+			}
 			bgElems.add(new Pile(6, 15));
 			elems.add(new PlatformOnChain(16 * 12, 16 * 15));
-			
+			Main.lastRoom = 5;
 			super.create();
 		}
 		
@@ -26,8 +33,8 @@ package com.chameleonquest.Rooms
 		{
 			super.update();
 			
-			if (player.x < 0) {
-				player.x = 0;
+			if (player.x < 0 && player.y > 20*16) {
+				FlxG.switchState(new Room1_6State());
 			}
 		}
 		
