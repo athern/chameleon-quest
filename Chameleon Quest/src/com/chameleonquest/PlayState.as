@@ -36,6 +36,10 @@ package com.chameleonquest
 				
         override public function create():void
 		{
+			if (Main.lastRoom >= 1 && Main.lastRoom <= 6)
+			{
+				Background.buildBackground(this, 1);
+			}
 			add(map);
 			add(elems);
 			add(bgElems);
@@ -47,6 +51,7 @@ package com.chameleonquest
 			add(enemyProjectiles);
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
+			
 			
 			setupPauseHUD();
 			
