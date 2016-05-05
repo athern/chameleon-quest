@@ -1,5 +1,6 @@
 package com.chameleonquest.Rooms 
 {
+	import com.chameleonquest.interactiveObj.WaterWheel;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	import com.chameleonquest.*;
@@ -29,7 +30,6 @@ package com.chameleonquest.Rooms
 			
 			// add torch
 			bgElems.add(new Torch(2, (ROOM_HEIGHT - 11)));
-			bgElems.add(new WaterFountain(2, (ROOM_HEIGHT - 11)));
 			
 			super.create();
 		}
