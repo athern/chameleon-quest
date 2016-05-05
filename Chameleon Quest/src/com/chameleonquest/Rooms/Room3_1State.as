@@ -3,6 +3,7 @@ package com.chameleonquest.Rooms
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	import com.chameleonquest.*;
+	import com.chameleonquest.Objects.*;
 
 	public class Room3_1State extends PlayState
 	{
@@ -20,6 +21,15 @@ package com.chameleonquest.Rooms
 			// add spikes
 			Spikes.addSpikeRow(5, ROOM_HEIGHT - 1, 2, enemies);
 			Spikes.addSpikeRow(15, ROOM_HEIGHT -3, 13, enemies);
+			
+			// add rope platform
+			elems.add(new PlatformOnRope(16 * 5, 16 * 19));
+			elems.add(new PlatformOnRope(16 * 18, 16 * 19));
+			elems.add(new PlatformOnRope(16 * 23, 16 * 19));
+			
+			// add torch
+			bgElems.add(new Torch(2, (ROOM_HEIGHT - 11)));
+			bgElems.add(new WaterFountain(2, (ROOM_HEIGHT - 11)));
 			
 			super.create();
 		}

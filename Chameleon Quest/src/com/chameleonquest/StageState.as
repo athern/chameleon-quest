@@ -27,6 +27,10 @@ package com.chameleonquest
 		
 		override public function create():void
 		{
+			// add simple bg
+			add(new Background(0, 0, 1, false));
+			add(new Background(16, 0, 1, false));
+			
 			// Title
 			var levelTitle:FlxText;
 			levelTitle = new FlxText(0, 0, FlxG.width, "Level Select");
