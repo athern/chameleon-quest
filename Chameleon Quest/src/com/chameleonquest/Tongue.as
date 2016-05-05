@@ -35,6 +35,10 @@ package com.chameleonquest
 			{
 				if (this.facing != player.facing) 
 				{
+					if (this.hasRock)
+					{
+						player.assignRock();
+					}
 					if (grabbedObject != null)
 					{
 						grabbedObject = null;

@@ -179,7 +179,7 @@ package com.chameleonquest
 			}
 			else
 			{
-				target.health -= bullet.getDamage(target);
+				target.hurt(bullet.getDamage(target));
 			}
 		}
 		
