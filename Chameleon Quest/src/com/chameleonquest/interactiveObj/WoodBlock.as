@@ -16,6 +16,7 @@ package com.chameleonquest.interactiveObj
 			acceleration.y = GRAVITY;
 			width = 14;
 			offset.x = 1;
+			drag.x = 40 * 16
 		}
 	}
 
