@@ -37,6 +37,7 @@ package com.chameleonquest.interactiveObj
 			addAnimation("UP", [1]);
 			
 			isHit = false;
+			immovable = true;
 			
 			play("UP");
 		}
