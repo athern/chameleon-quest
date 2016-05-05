@@ -1,5 +1,6 @@
 package com.chameleonquest.interactiveObj 
 {
+	import com.chameleonquest.*;
 	import org.flixel.*;
 	public class WoodBlock extends InteractiveObj
 	{
@@ -12,7 +13,6 @@ package com.chameleonquest.interactiveObj
 			super(Xindex*16, Yfloorindex*16-48);
 			loadGraphic(img);
 		}
-		
 	}
 
 }

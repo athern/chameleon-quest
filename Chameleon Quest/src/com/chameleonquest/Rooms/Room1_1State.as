@@ -1,6 +1,7 @@
 package com.chameleonquest.Rooms 
 {
 	import com.chameleonquest.interactiveObj.Button;
+	import com.chameleonquest.interactiveObj.WoodBlock;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	import com.chameleonquest.*;
@@ -38,6 +39,8 @@ package com.chameleonquest.Rooms
 			enemies.add(poisonSnake);
 			
 			enemies.add(new Bird(16 * 20, 16 * 30, 16 * (ROOM_HEIGHT - 8)));
+			
+			intrELems.add(new WoodBlock(43, 14));
 			
 			Main.lastRoom = 1;
 			

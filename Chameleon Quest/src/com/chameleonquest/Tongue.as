@@ -1,5 +1,6 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.interactiveObj.InteractiveObj;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxSprite;
 	
@@ -13,6 +14,7 @@ package com.chameleonquest
 		private var player:Player;
 		private var extending:Boolean;
 		private var hasRock:Boolean;
+		public var grabbedObject:InteractiveObj;
 		
 		public function Tongue(player:Player)
 		{
@@ -60,12 +62,19 @@ package com.chameleonquest
 					{
 						player.assignRock();
 					}
-					
+					if (grabbedObject != null)
+					{
+						grabbedObject = null;
+					}
 					this.kill();
 				}
 				
 				this.velocity.x = player.velocity.x + (this.extending ? 1 : -1) * (player.facing == RIGHT ? SPEED : -SPEED)
 				this.velocity.y = player.velocity.y;
+				if (grabbedObject != null)
+				{
+					grabbedObject.x = x+16;
+				}
 				super.update();
 			}
 		}

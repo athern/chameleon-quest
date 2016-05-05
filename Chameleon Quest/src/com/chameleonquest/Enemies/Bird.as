@@ -23,7 +23,7 @@ package com.chameleonquest.Enemies
 			velocity.x = -FLY_SPEED;
 			
 			loadGraphic(bird, true, true, 32, 21);
-			addAnimation("idle", [0, 1, 2], 4, true);
+			addAnimation("idle", [0, 1, 2, 3], 4, true);
 			play("idle");
 			width = 32;
 			height = 21;

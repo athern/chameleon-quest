@@ -5,6 +5,7 @@ package com.chameleonquest
 	import com.chameleonquest.Projectiles.Projectile;
 	import com.chameleonquest.interactiveObj.Button;
 	import com.chameleonquest.interactiveObj.InteractiveObj;
+	import com.chameleonquest.interactiveObj.WoodBlock;
 	import org.flixel.*;
 	
     public class PlayState extends FlxState
@@ -104,12 +105,15 @@ package com.chameleonquest
 			FlxG.collide(player, map);
 			FlxG.overlap(player.tongue, bgElems, null, pickupRock);
 			FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
+			FlxG.overlap(player.tongue, intrELems, null, grabItem);
 			FlxG.collide(enemies, map);
 			FlxG.collide(elems, map);
 			FlxG.collide(player, elems, playerElemCollision);
 			// For Interactive game object collision
 			FlxG.collide(projectiles, intrELems, projectileHitCollision);
 			FlxG.collide(projectiles, elems);
+			FlxG.collide(player, intrELems);
+			FlxG.collide(intrELems, map);
 			
 			
 			
@@ -195,6 +199,14 @@ package com.chameleonquest
 		// for interactive game object with projectile collision
 		private function projectileHitCollision(bullet:Projectile, target:InteractiveObj):void {
 			target.hit();
+		}
+		
+		private function grabItem(tongue:Tongue, item:InteractiveObj):void
+		{
+			if (item is WoodBlock)
+			{
+				tongue.grabbedObject = item;
+			}
 		}
     }
 
