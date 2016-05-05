@@ -56,7 +56,7 @@ package com.chameleonquest
 				this.velocity.y = player.velocity.y;
 				if (grabbedObject != null)
 				{
-					
+					/*
 					if ((grabbedObject.isTouching(RIGHT) && this.velocity.x > 0) || (grabbedObject.isTouching(LEFT) && this.velocity.x < 0)
 						|| (player.facing != grabbedFacing))
 					{
@@ -65,7 +65,7 @@ package com.chameleonquest
 						grabbedObject = null;
 					}
 					else
-					{
+					{*/
 						grabbedObject.velocity.x = 0;
 						grabbedObject.velocity.y = 0;
 						if (player.facing == RIGHT)
@@ -74,7 +74,6 @@ package com.chameleonquest
 							{
 								grabbedObject.velocity.x = velocity.x;
 							}
-							//grabbedObject.x = x + 15;
 						}
 						else
 						{
@@ -83,7 +82,7 @@ package com.chameleonquest
 								grabbedObject.velocity.x = velocity.x;
 							}
 						}
-					}
+					//}
 				}
 				super.update();
 			}

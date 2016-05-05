@@ -1,7 +1,6 @@
 package com.chameleonquest 
 {
-	import com.chameleonquest.Rooms.Room1_1State;
-	import com.chameleonquest.Rooms.Room1_2State;
+	import com.chameleonquest.Rooms.*;
 	import org.flixel.*;
 
 	public class GameOverState extends FlxState
@@ -42,6 +41,14 @@ package com.chameleonquest
 			else if (Main.lastRoom == 2)
 			{
 				FlxG.switchState(new Room1_2State());
+			}
+			else if (Main.lastRoom == 3)
+			{
+				FlxG.switchState(new Room1_3State());
+			}
+			else if (Main.lastRoom == 4)
+			{
+				FlxG.switchState(new Room1_4State());
 			}
 			else
 			{
