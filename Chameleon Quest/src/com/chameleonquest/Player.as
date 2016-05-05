@@ -123,6 +123,7 @@ package com.chameleonquest
 					}
 					else
 					{
+						this.cooldown = 0;
 						tongue.shoot();
 					}
 				}
