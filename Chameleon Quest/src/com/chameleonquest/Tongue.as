@@ -35,17 +35,11 @@ package com.chameleonquest
 			{
 				if (this.facing != player.facing) 
 				{
-					var deltaX:Number = this.facing == LEFT ? player.x - this.x : (this.x + this.width) - (player.x + player.width);
-					if (this.facing == LEFT) 
+					if (grabbedObject != null)
 					{
-						this.x = player.x + player.width - (this.width - deltaX);
+						grabbedObject = null;
 					}
-					else
-					{
-						this.x = player.x - deltaX;
-					}
-					
-					this.facing = player.facing;
+					this.kill();
 				}
 				
 				if ((this.facing == LEFT && this.isTouching(LEFT)) || (this.facing == RIGHT && this.isTouching(RIGHT)))
@@ -90,7 +84,7 @@ package com.chameleonquest
 						}
 						else
 						{
-							grabbedObject.x = x - 24;
+							grabbedObject.x = x - 8;
 						}
 					}
 				}

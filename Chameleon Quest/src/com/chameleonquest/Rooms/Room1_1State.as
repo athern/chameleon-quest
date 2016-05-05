@@ -32,14 +32,6 @@ package com.chameleonquest.Rooms
 				player = new Player(0, ROOM_HEIGHT-1);
 			}
 			
-			enemies.add(new PoisonSnake(16 * 8, 16 * (ROOM_HEIGHT - 4)));
-			
-			var poisonSnake:PoisonSnake = new PoisonSnake(16 * 27, 16 * (ROOM_HEIGHT - 2));
-			poisonSnake.facing = FlxObject.LEFT;
-			enemies.add(poisonSnake);
-			
-			enemies.add(new Bird(16 * 20, 16 * 30, 16 * (ROOM_HEIGHT - 8)));
-			
 			intrELems.add(new WoodBlock(43, 14));
 			
 			Main.lastRoom = 1;

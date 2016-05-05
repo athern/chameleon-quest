@@ -35,8 +35,10 @@ package com.chameleonquest.Rooms
 			bgElems.add(new Pile(ROOM_WIDTH - 3, ROOM_HEIGHT - 8));
 			
 			// add enemies
-			enemies.add(new Snake(16 * 14, 16 * (ROOM_HEIGHT - 6)));
-			enemies.add(new Snake(16 * 16, 16 * (ROOM_HEIGHT - 15)));
+			enemies.add(new Snake(16 * 13, 16*15, 16 * (ROOM_HEIGHT - 6)));
+			//enemies.add(new Snake(new Array(new FlxPoint(16 * 14, 16 * (ROOM_HEIGHT - 6)), new FlxPoint(16 * 14 + 5, 16 * (ROOM_HEIGHT - 6)))));
+			enemies.add(new Snake(16 * 16, 16*18-8, 16 * (ROOM_HEIGHT - 15)));
+			//enemies.add(new Snake(new Array(new FlxPoint(16 * 16, 16 * (ROOM_HEIGHT - 15)), new FlxPoint(16 * 18, 16 * (ROOM_HEIGHT - 15)))));
 			enemies.add(new Bird(16 * 6, 16 * 20, 16 * (ROOM_HEIGHT - 22)));
 			
 			

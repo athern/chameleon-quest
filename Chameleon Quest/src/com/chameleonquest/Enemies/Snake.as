@@ -2,44 +2,55 @@ package com.chameleonquest.Enemies
 {
 	import org.flixel.FlxSprite;
 
-	public class Snake extends Enemy
+	public class Snake extends HorizontallyPatrollingEnemy
 	{
-		[Embed(source = "../../../../assets/spritesheet_enemies.png")]public var greenSnake:Class;
+		[Embed(source = "../../../../assets/greensnake.png")]public var greenSnake:Class;
 		
 		protected static const GRAVITY:int = 800;
-		protected static const RUN_SPEED:int = 60;
+		protected static const DEATH_ANIMATION_LENGTH:int = 30;
 		
-		public function Snake(X:Number, Y:Number) 
+		protected var dying:int = -1;
+		
+		
+		public function Snake(MinX:Number, MaxX:Number, Y:Number) 
 		{
-			super(X, Y);
-			
-			this.scale.x = 0.3;
-			this.scale.y = 0.3;
+			speed = 60;
+			super(MinX, MaxX, Y);
 			this.loadSprites();
 			acceleration.y = GRAVITY;
-			maxVelocity.x = RUN_SPEED;
-			drag.x = RUN_SPEED * 16;
-			drag.y = RUN_SPEED * 16;
-			health = 1;
-			power = 2;
+			addAnimation("idle", [0, 2], 3, true);
+			addAnimation("death", [1], 1, false);
+			width = 32;  
+			height = 10;
+			offset.y = 6;
 		}
 		
 		public function loadSprites():void
 		{
-			loadGraphic(greenSnake, true, true, 128, 138);
-			addAnimation("idle", [16], 1, false);
-			addAnimation("death", [24], 1, false);
-			width = 40;  
-			offset.x = 45;
-			height = 15;
-			offset.y = 68;
+			loadGraphic(greenSnake, true, true, 32, 16);
+			addAnimation("idle", [0, 2], 3, true);
+			addAnimation("death", [1], 1, false);
+			width = 32;  
+			height = 10;
+			offset.y = 6;
 		}
 		
 		public override function update():void
 		{
+			if (dying > 0)
+			{
+				dying--;
+			}
+			if (dying == 0)
+			{
+				this.kill();
+			}
 			if (this.health == 0)
 			{
 				play("death");
+				health = 1;
+				dying = DEATH_ANIMATION_LENGTH;
+				velocity.x = 0;
 				this.flicker(1);
 			}
 			else
