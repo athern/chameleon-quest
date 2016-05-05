@@ -1,6 +1,7 @@
 package com.chameleonquest 
 {
 	import org.flixel.*;
+	import com.chameleonquest.Rooms.*;
 	
 	public class MenuState extends FlxState
 	{
@@ -42,7 +43,7 @@ package com.chameleonquest
 		
 		private function onFade():void
 		{
-			FlxG.switchState(new StageState());
+			FlxG.switchState(new Room1_1State());
 		}
 		
 	}

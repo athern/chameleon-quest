@@ -20,7 +20,7 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			
 			Spikes.addSpikeRow(17, ROOM_HEIGHT-1, 3, enemies);
-			Spikes.addSpikeRow(27, ROOM_HEIGHT-1, 4, enemies);
+			Spikes.addSpikeRow(27, ROOM_HEIGHT - 1, 4, enemies);
 			
 			if (Main.lastRoom == 2) {
 				player = new Player(ROOM_WIDTH-3, ROOM_HEIGHT-1);
@@ -35,6 +35,26 @@ package com.chameleonquest.Rooms
 			Main.lastRoom = 1;
 			
 			super.create();
+			
+			var lefthelp:FlxText;
+			lefthelp = new FlxText(20, 177, 70, "<- ->");
+			lefthelp.setFormat(null, 14, 0x555555, "center");
+			lefthelp.alpha = .5;
+			this.add(lefthelp);
+			
+			var jumphelp:FlxText;
+			jumphelp = new FlxText(75, 197, 50, "<-");
+			jumphelp.setFormat(null, 14, 0x555555, "center");
+			jumphelp.alpha = .5;
+			jumphelp.angle = 90;
+			this.add(jumphelp);
+			
+			var spacehelp:FlxText;
+			spacehelp = new FlxText(550, 177, 100, "SPACE");
+			spacehelp.setFormat(null, 14, 0x555555, "center");
+			spacehelp.alpha = .5;
+			this.add(spacehelp);
+			
 		}
 		
 		override public function update():void

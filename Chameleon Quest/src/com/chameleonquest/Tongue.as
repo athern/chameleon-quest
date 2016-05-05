@@ -35,15 +35,7 @@ package com.chameleonquest
 			{
 				if (this.facing != player.facing) 
 				{
-					if (this.hasRock)
-					{
-						player.assignRock();
-					}
-					if (grabbedObject != null)
-					{
-						grabbedObject = null;
-					}
-					this.kill();
+					cleanup();
 				}
 				
 				if ((this.facing == LEFT && this.isTouching(LEFT)) || (this.facing == RIGHT && this.isTouching(RIGHT)))
@@ -57,15 +49,7 @@ package com.chameleonquest
 				}
 				else if ((this.facing == LEFT && this.x >= player.x - OFFSET) || (this.facing == RIGHT && this.x <= (player.x + player.width - this.width + OFFSET)))
 				{
-					if (this.hasRock)
-					{
-						player.assignRock();
-					}
-					if (grabbedObject != null)
-					{
-						grabbedObject = null;
-					}
-					this.kill();
+					cleanup();
 				}
 				
 				this.velocity.x = player.velocity.x + (this.extending ? 1 : -1) * (player.facing == RIGHT ? SPEED : -SPEED)
@@ -76,6 +60,8 @@ package com.chameleonquest
 					if ((grabbedObject.isTouching(RIGHT) && this.velocity.x > 0) || (grabbedObject.isTouching(LEFT) && this.velocity.x < 0)
 						|| (player.facing != grabbedFacing))
 					{
+						grabbedObject.velocity.x = 0;
+						grabbedObject.velocity.y = 0;
 						grabbedObject = null;
 					}
 					else
@@ -84,16 +70,38 @@ package com.chameleonquest
 						grabbedObject.velocity.y = 0;
 						if (player.facing == RIGHT)
 						{
-							grabbedObject.x = x + 24;
+							if (grabbedObject.x > x + 15)
+							{
+								grabbedObject.velocity.x = velocity.x;
+							}
+							//grabbedObject.x = x + 15;
 						}
 						else
 						{
-							grabbedObject.x = x - 8;
+							if (grabbedObject.x > x - 8)
+							{
+								grabbedObject.velocity.x = velocity.x;
+							}
 						}
 					}
 				}
 				super.update();
 			}
+		}
+		
+		public function cleanup():void
+		{
+			if (this.hasRock)
+			{
+				player.assignRock();
+			}
+			if (grabbedObject != null)
+			{
+				grabbedObject.velocity.x = 0;
+				grabbedObject.velocity.y = 0;
+				grabbedObject = null;
+			}
+			this.kill();
 		}
 		
 		public function pickupRock():void
@@ -114,6 +122,7 @@ package com.chameleonquest
 			this.velocity.y = player.velocity.y;
 			this.extending = true;
 			this.hasRock = false;
+			grabbedObject = null;
 		}
 	}
 }

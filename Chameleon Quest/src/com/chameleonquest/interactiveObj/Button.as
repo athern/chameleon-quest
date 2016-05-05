@@ -32,7 +32,7 @@ package com.chameleonquest.interactiveObj
 			{
 				y += 6;
 			}
-			
+			immovable = true;
 			addAnimation("DOWN", [0]);
 			addAnimation("UP", [1]);
 			
