@@ -79,22 +79,7 @@ package com.chameleonquest
 			else
 			{
 			super.update();
-			if (FlxG.keys.SPACE)
-			{
-				// TODO: prevent tongue from coming out repeatedly on space (add cooldown in tongue?)
-				var attack:Projectile = this.player.getNextAttack() as Projectile;
-				if (attack != null) 
-				{
-					var attackX:Number = player.facing == FlxObject.LEFT ? this.player.x - attack.width : this.player.x + this.player.width;
-					var attackY:Number = this.player.y + this.player.height / 2 - attack.height / 2;
-					attack.shoot(attackX, attackY, player.facing == FlxObject.LEFT ? -200 : 200, 0);
-					projectiles.add(attack);
-				}
-				else
-				{
-					player.tongue.shoot();
-				}
-			}
+			
 			
 			FlxG.collide(projectiles, map);
 			FlxG.collide(projectiles, enemies, inflictProjectileDamage);
@@ -114,6 +99,8 @@ package com.chameleonquest
 			FlxG.collide(projectiles, elems);
 			FlxG.collide(player, intrELems);
 			FlxG.collide(intrELems, map);
+			FlxG.collide(intrELems, intrELems);
+			
 			
 			
 			
@@ -206,6 +193,7 @@ package com.chameleonquest
 			if (item is WoodBlock)
 			{
 				tongue.grabbedObject = item;
+				tongue.grabbedFacing = player.facing;
 			}
 		}
     }

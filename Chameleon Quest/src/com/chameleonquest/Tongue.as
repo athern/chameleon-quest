@@ -15,6 +15,7 @@ package com.chameleonquest
 		private var extending:Boolean;
 		private var hasRock:Boolean;
 		public var grabbedObject:InteractiveObj;
+		public var grabbedFacing:uint;
 		
 		public function Tongue(player:Player)
 		{
@@ -73,7 +74,25 @@ package com.chameleonquest
 				this.velocity.y = player.velocity.y;
 				if (grabbedObject != null)
 				{
-					grabbedObject.x = x+16;
+					
+					if ((grabbedObject.isTouching(RIGHT) && this.velocity.x > 0) || (grabbedObject.isTouching(LEFT) && this.velocity.x < 0)
+						|| (player.facing != grabbedFacing))
+					{
+						grabbedObject = null;
+					}
+					else
+					{
+						grabbedObject.velocity.x = 0;
+						grabbedObject.velocity.y = 0;
+						if (player.facing == RIGHT)
+						{
+							grabbedObject.x = x + 24;
+						}
+						else
+						{
+							grabbedObject.x = x - 24;
+						}
+					}
 				}
 				super.update();
 			}

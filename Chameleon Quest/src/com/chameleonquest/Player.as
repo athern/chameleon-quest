@@ -100,6 +100,34 @@ package com.chameleonquest
 				acceleration.x = 0;
 			}
 			
+			if (FlxG.keys.SPACE)
+			{
+				if (this.cooldown > SHOOT_DELAY)
+				{
+					if (this.type != NORMAL || this.hasRock)
+					{
+						// only return a projectile if we've waited long enough from the last attack
+					// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
+						this.cooldown = 0;
+						var attack:Projectile;
+						if (this.hasRock)
+						{
+							this.hasRock = false;
+							attack = new Rock();
+						}
+						var attackX:Number = facing == FlxObject.LEFT ? x - attack.width : x + width;
+						var attackY:Number = y + height / 2 - attack.height / 2;
+						attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -200 : 200, 0);
+						var currentState:PlayState = FlxG.state as PlayState;
+						currentState.projectiles.add(attack);
+					}
+					else
+					{
+						tongue.shoot();
+					}
+				}
+			}
+			
 			
 			velocityModifiers.x = 0;
 			velocityModifiers.y = 0;
@@ -118,18 +146,7 @@ package com.chameleonquest
 		// returns a Projectile if the chameleon has something to shoot and hasn't shot anything recently
 		public function getNextAttack():Projectile
 		{
-			if (this.cooldown > SHOOT_DELAY && 
-				(this.type != NORMAL || this.hasRock))
-			{
-				// only return a projectile if we've waited long enough from the last attack
-				// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
-				this.cooldown = 0;
-				if (this.hasRock)
-				{
-					this.hasRock = false;
-					return new Rock();
-				}
-			}
+			
 			
 			return null;
 		}

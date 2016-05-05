@@ -8,7 +8,6 @@ package com.chameleonquest.interactiveObj
 		public function InteractiveObj(X:int, Y:int) 
 		{
 			super(X, Y);
-			immovable = true;
 		}
 		
 		public function hit():void {

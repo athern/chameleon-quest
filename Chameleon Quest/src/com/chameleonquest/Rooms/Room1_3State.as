@@ -1,5 +1,6 @@
 package com.chameleonquest.Rooms 
 {
+	import com.chameleonquest.interactiveObj.WoodBlock;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	import com.chameleonquest.*;
@@ -33,6 +34,9 @@ package com.chameleonquest.Rooms
 			// add spikes
 			Spikes.addSpikeRow(18, 13, 4, enemies);
 			Spikes.addSpikeRow(12, ROOM_HEIGHT - 2, 13, enemies);
+			
+			intrELems.add(new WoodBlock(7, 10));
+			intrELems.add(new WoodBlock(10, 10));
 			
 			// add enemies
 			enemies.add(new Bird(11* 16, 24* 16, (ROOM_HEIGHT - 8) * 16));

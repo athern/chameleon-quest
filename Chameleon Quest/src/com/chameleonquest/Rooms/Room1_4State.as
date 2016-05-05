@@ -1,5 +1,6 @@
 package com.chameleonquest.Rooms 
 {
+	import com.chameleonquest.interactiveObj.WoodBlock;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	import com.chameleonquest.*;
@@ -27,6 +28,7 @@ package com.chameleonquest.Rooms
 			
 			// add rock pile
 			bgElems.add(new Pile(13, ROOM_HEIGHT - 1));
+			intrELems.add(new WoodBlock(24, 14));
 			
 			// add enemies
 			enemies.add(new Bird(20 * 16, 26 * 16, (ROOM_HEIGHT - 10) * 16));
