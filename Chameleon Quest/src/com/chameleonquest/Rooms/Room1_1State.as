@@ -21,8 +21,6 @@ package com.chameleonquest.Rooms
 			
 			Spikes.addSpikeRow(17, ROOM_HEIGHT-1, 3, enemies);
 			Spikes.addSpikeRow(27, ROOM_HEIGHT-1, 4, enemies);
-			// add rock pile
-			bgElems.add(new Pile(5, ROOM_HEIGHT-1));
 			
 			if (Main.lastRoom == 2) {
 				player = new Player(ROOM_WIDTH-3, ROOM_HEIGHT-1);

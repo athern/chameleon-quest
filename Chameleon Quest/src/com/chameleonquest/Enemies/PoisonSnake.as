@@ -18,8 +18,8 @@ package com.chameleonquest.Enemies
 		
 		public function PoisonSnake(X:int, Y:int) 
 		{
-			speed = 0;
 			super(X, X, Y);
+			speed = 0;
 			health = 2;		
 			cooldown = SHOOT_DELAY;
 			this.facing = RIGHT;

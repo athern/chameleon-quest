@@ -6,23 +6,26 @@ package com.chameleonquest.Enemies
 		
 		protected var minX:Number;
 		protected var maxX:Number;
-		protected var speed:int=50;
+		protected var speed:int;
 		
-		public function HorizontallyPatrollingEnemy(MinX:Number, MaxX:Number, Y:Number) 
+		public function HorizontallyPatrollingEnemy(MinX:Number, MaxX:Number, Y:Number, s:int) 
 		{
 			super((MaxX + MinX) / 2, Y);
 			this.minX = MinX;
 			this.maxX = MaxX;
 			health = 1;
 			power = 2;
-            maxVelocity.x = speed;
+            maxVelocity.x = s;
 			
 			this.facing = LEFT;
-			velocity.x = -speed;
+			velocity.x = -s;
+			speed = s;
 		}
 		
 		public override function update():void
 		{
+			
+			
 			if (this.x <= this.minX || (velocity.x < 0 && this.isTouching(LEFT)))
 			{
 				this.facing = RIGHT;
