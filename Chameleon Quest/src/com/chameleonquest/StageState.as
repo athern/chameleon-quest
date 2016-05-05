@@ -6,6 +6,7 @@ package com.chameleonquest
 	public class StageState extends FlxState
 	{
 		private var currIdx:int;
+		private var currRoomIdx:int;
 		private var stages:Array;
 		private var arrow:FlxText;
 		
@@ -13,15 +14,32 @@ package com.chameleonquest
 			super();
 			
 			currIdx = 0;
-			stages = [
+			currRoomIdx = 0;
+			
+			var room1:Array = [
 			new Room1_1State(), 
 			new Room1_2State(),
 			new Room1_3State(),
 			new Room1_4State(),
 			new Room1_5State(),
-			new Room1_6State(),
+			new Room1_6State()
+			]
+			
+			var room2:Array = [
+			new Room2_1State(),
+			new Room2_2State()
+			]
+			
+			var room3:Array = [
 			new Room3_1State(),
 			new Room3_2State()
+			]
+			
+			
+			stages = [
+			room1, 
+			room2, 
+			room3
 			];
 		}
 		
@@ -39,49 +57,23 @@ package com.chameleonquest
 			
 			// Arrow select
 			arrow = new FlxText(15, 30, FlxG.width, ">");
-			arrow.setFormat(null, 12, 0x000000, "left");
+			arrow.setFormat(null, 12, 0xFF0000, "left");
 			this.add(arrow);
 			
 			// Levels
-			var stage1:FlxText;
-			stage1 = new FlxText(30, 30, FlxG.width, "1-1");
-			stage1.setFormat(null, 12, 0x000000, "left");
-			this.add(stage1);
+			addStage(0, 0, "1-1");
+			addStage(0, 1, "1-2");
+			addStage(0, 2, "1-3");
+			addStage(0, 3, "1-4");
+			addStage(0, 4, "1-5");
+			addStage(0, 5, "1-6");
 			
-			var stage2:FlxText;
-			stage2 = new FlxText(30, 50, FlxG.width, "1-2");
-			stage2.setFormat(null, 12, 0x000000, "left");
-			this.add(stage2);
+			addStage(1, 0, "2-1");
+			addStage(1, 1, "2-2");
 			
-			var stage3:FlxText;
-			stage3 = new FlxText(30, 70, FlxG.width, "1-3");
-			stage3.setFormat(null, 12, 0x000000, "left");
-			this.add(stage3);
+			addStage(2, 0, "3-1");
+			addStage(2, 1, "3-2");
 			
-			var stage4:FlxText;
-			stage4 = new FlxText(30, 90, FlxG.width, "1-4");
-			stage4.setFormat(null, 12, 0x000000, "left");
-			this.add(stage4);
-			
-			var stage5:FlxText;
-			stage5 = new FlxText(30, 110, FlxG.width, "1-5");
-			stage5.setFormat(null, 12, 0x000000, "left");
-			this.add(stage5);	
-			
-			var stage6:FlxText;
-			stage6 = new FlxText(30, 130, FlxG.width, "1-6");
-			stage6.setFormat(null, 12, 0x000000, "left");
-			this.add(stage6);
-			
-			var stage7:FlxText;
-			stage7 = new FlxText(30, 150, FlxG.width, "3-1");
-			stage7.setFormat(null, 12, 0x000000, "left");
-			this.add(stage7);
-			
-			var stage8:FlxText;
-			stage8 = new FlxText(30, 170, FlxG.width, "3-2");
-			stage8.setFormat(null, 12, 0x000000, "left");
-			this.add(stage8);
 		}
 		
 		override public function update():void
@@ -97,12 +89,39 @@ package com.chameleonquest
 			} 
 			else if (FlxG.keys.justPressed("DOWN"))
 			{
-				if (currIdx < stages.length - 1)
+				if (currIdx < stages[currRoomIdx].length - 1)
 				{
 					currIdx++;
 					arrow.y = 30 + currIdx * 20;
 				}
 			}
+			else if (FlxG.keys.justPressed("LEFT"))
+			{
+				if (currRoomIdx > 0)
+				{
+					currRoomIdx--;
+					arrow.x = 15 + currRoomIdx * 50;
+					
+					if (stages[currRoomIdx].length <= currIdx) {
+						currIdx = stages[currRoomIdx].length - 1;
+						arrow.y = 30 + currIdx * 20;
+					}
+				}
+			}
+			else if (FlxG.keys.justPressed("RIGHT"))
+			{
+				if (currRoomIdx < stages.length - 1)
+				{
+					currRoomIdx++;
+					arrow.x = 15 + currRoomIdx * 50;
+					
+					if (stages[currRoomIdx].length <= currIdx) {
+						currIdx = stages[currRoomIdx].length - 1;
+						arrow.y = 30 + currIdx * 20;
+					}
+				}
+			}
+			
 			
 			if (FlxG.keys.pressed("SPACE"))
 			{
@@ -115,7 +134,14 @@ package com.chameleonquest
 		
 		private function onFade():void
 		{
-			FlxG.switchState(stages[currIdx]);
+			FlxG.switchState(stages[currRoomIdx][currIdx]);
+		}
+		
+		private function addStage(x:int, y:int, text:String):void {
+			var stage:FlxText;
+			stage = new FlxText(30 + x*50, 30 + y*20, FlxG.width, text);
+			stage.setFormat(null, 12, 0x000000, "left");
+			this.add(stage);
 		}
 	}
 

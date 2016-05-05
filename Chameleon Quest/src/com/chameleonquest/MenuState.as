@@ -44,6 +44,7 @@ package com.chameleonquest
 		private function onFade():void
 		{
 			FlxG.switchState(new Room1_1State());
+			//FlxG.switchState(new StageState());
 		}
 		
 	}
