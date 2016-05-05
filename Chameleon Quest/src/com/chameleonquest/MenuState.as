@@ -6,7 +6,12 @@ package com.chameleonquest
 	{
 		
 		override public function create():void
-		{			
+		{	
+			
+			// add simple bg
+			add(new Background(0, 0, 1, true));
+			add(new Background(16, 0, 1, true));
+			
 			// Title
 			var title:FlxText;
 			title = new FlxText(0, (FlxG.width / 2) - 80, FlxG.width, "Chameleon Quest");
@@ -20,6 +25,8 @@ package com.chameleonquest
 			this.add(startTxt);
 			
 			FlxG.bgColor = 0xFFFFFFFF;
+			
+			
 		}
 		
 		override public function update():void
