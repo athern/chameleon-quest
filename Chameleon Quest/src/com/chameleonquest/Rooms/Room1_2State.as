@@ -31,7 +31,7 @@ package com.chameleonquest.Rooms
 			Spikes.addSpikeRow(21, ROOM_HEIGHT - 2, 2, enemies);
 			
 			// add rock pile
-			bgElems.add(new Pile(9, (ROOM_HEIGHT - 3)));
+			bgElems.add(new Pile(11, (ROOM_HEIGHT - 3)));
 			bgElems.add(new Pile(ROOM_WIDTH - 3, ROOM_HEIGHT - 8));
 			
 			// add enemies
@@ -44,6 +44,12 @@ package com.chameleonquest.Rooms
 			
 			Main.lastRoom = 2;
 			super.create();
+			
+			var spacehelp:FlxText;
+			spacehelp = new FlxText(7*16, 24*16, 100, "SPACE");
+			spacehelp.setFormat(null, 14, 0x555555, "center");
+			spacehelp.alpha = .5;
+			this.add(spacehelp);
 		}
 		
 		override public function update():void
