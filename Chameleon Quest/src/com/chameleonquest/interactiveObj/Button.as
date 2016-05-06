@@ -12,7 +12,10 @@ package com.chameleonquest.interactiveObj
 		private var timer:int;
 		private var count:int = 0;
 		
-		public function Button(Xindex:int, Yindex:int, t:int=-1, r:int = 0) 
+		private var controlledObj:FlxSprite;
+		private var callback:Function;
+		
+		public function Button(Xindex:int, Yindex:int, obj:FlxSprite, fun:Function, t:int=-1, r:int = 0) 
 		{
 			
 			super(Xindex * 16, Yindex * 16);
@@ -37,6 +40,9 @@ package com.chameleonquest.interactiveObj
 			addAnimation("DOWN", [0]);
 			addAnimation("UP", [1]);
 			
+			controlledObj = obj;
+			callback = fun;
+			
 			isHit = false;
 			immovable = true;
 			
@@ -52,6 +58,7 @@ package com.chameleonquest.interactiveObj
 				this.y += 4
 				play("DOWN");
 				count = timer;
+				callback(controlledObj);
 			}
 			
 		}

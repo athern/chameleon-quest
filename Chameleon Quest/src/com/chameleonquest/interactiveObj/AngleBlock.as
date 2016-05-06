@@ -57,6 +57,11 @@ package com.chameleonquest.interactiveObj
 			}
 		}
 		
+		public static function rotate(block:AngleBlock):void
+		{
+			block.angle += 90;
+		}
+		
 	}
 
 }
