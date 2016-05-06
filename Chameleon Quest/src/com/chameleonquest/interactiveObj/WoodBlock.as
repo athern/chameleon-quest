@@ -6,7 +6,7 @@ package com.chameleonquest.interactiveObj
 	{
 		protected static const GRAVITY:int =800;
 		
-		[Embed(source = "../../../../assets/WoodBlock.png")]
+		[Embed(source = "../../../../assets/woodblock.png")]
 		protected var img:Class;
 		
 		public function WoodBlock(Xindex:int, Yfloorindex:int) 

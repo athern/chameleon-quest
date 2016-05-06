@@ -4,7 +4,7 @@ package com.chameleonquest.Enemies
 	{
 		[Embed(source = "../../../../assets/turtle.png")]public var simpleTurtle:Class;
 		
-		protected static const GRAVITY:int = 2500;
+		protected static const GRAVITY:int = 800;
 		
 		public function Turtle(X:Number, Y:Number) 
 		{
