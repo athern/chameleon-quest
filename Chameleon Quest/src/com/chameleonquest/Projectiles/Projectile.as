@@ -25,13 +25,13 @@ package com.chameleonquest.Projectiles
 					this.kill();
 				}
 				
-				if (this.velocity.x > 0)
+				if (Math.abs(velocity.x) >= Math.abs(velocity.y))
 				{
-					this.facing = RIGHT;
+					this.facing = velocity.x >= 0 ? RIGHT : LEFT;
 				}
 				else
 				{
-					this.facing = LEFT;
+					this.facing = velocity.y >= 0 ? DOWN : UP;
 				}
 				
 				super.update();
@@ -45,7 +45,14 @@ package com.chameleonquest.Projectiles
 			this.solid = true;
 			this.velocity.x = VelocityX;
 			this.velocity.y = VelocityY;
-			this.facing = VelocityX >= 0 ? RIGHT : LEFT;
+			if (Math.abs(velocity.x) >= Math.abs(velocity.y))
+			{
+				this.facing = VelocityX >= 0 ? RIGHT : LEFT;
+			}
+			else
+			{
+				this.facing = VelocityY >= 0 ? DOWN : UP;
+			}
 		}
 		
 	}

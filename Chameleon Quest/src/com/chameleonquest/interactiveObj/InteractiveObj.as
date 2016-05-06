@@ -1,6 +1,7 @@
 package com.chameleonquest.interactiveObj 
 {
 	import org.flixel.*;
+	import com.chameleonquest.Projectiles.*;
 
 	public class InteractiveObj extends FlxSprite
 	{
@@ -10,7 +11,7 @@ package com.chameleonquest.interactiveObj
 			super(X, Y);
 		}
 		
-		public function hit():void {
+		public function hit(bullet:Projectile):void {
 			// placeholder for override
 		}
 		

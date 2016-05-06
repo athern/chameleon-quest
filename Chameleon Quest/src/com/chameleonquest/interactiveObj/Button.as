@@ -1,6 +1,7 @@
 package com.chameleonquest.interactiveObj 
 {
 	import org.flixel.*;
+	import com.chameleonquest.Projectiles.*;
 	
 	public class Button extends InteractiveObj
 	{
@@ -43,7 +44,7 @@ package com.chameleonquest.interactiveObj
 		}
 		
 		// hit the button
-		override public function hit():void {
+		override public function hit(bullet:Projectile):void {
 			if (!isHit) {
 				isHit = true;
 				height = 4;

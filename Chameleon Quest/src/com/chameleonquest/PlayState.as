@@ -185,7 +185,7 @@ package com.chameleonquest
 		
 		// for interactive game object with projectile collision
 		private function projectileHitCollision(bullet:Projectile, target:InteractiveObj):void {
-			target.hit();
+			target.hit(bullet);
 		}
 		
 		private function grabItem(tongue:Tongue, item:InteractiveObj):void

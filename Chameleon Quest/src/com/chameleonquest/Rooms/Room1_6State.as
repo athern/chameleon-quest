@@ -28,6 +28,8 @@ package com.chameleonquest.Rooms
 			intrELems.add(new Button(13, 35, 100, 270));
 			elems.add(new Platform(new Array(new FlxPoint(90, 150), new FlxPoint(90, 540)), 60));
 			elems.add(new Platform(new Array(new FlxPoint(186, 560), new FlxPoint(186, 660)), 60));
+			intrELems.add(new AngleBlock(1, 3, 90));
+			intrELems.add(new AngleBlock(1, 10, 90));
 			Main.lastRoom = 6;
 			super.create();
 		}
