@@ -86,6 +86,7 @@ package com.chameleonquest
 			FlxG.collide(enemyProjectiles, map);
 			FlxG.collide(enemyProjectiles, player, inflictProjectileDamage);
 			FlxG.collide(enemies, map);
+			FlxG.collide(enemies, enemies);
 			FlxG.collide(player, enemies, hurtPlayer);
 			FlxG.collide(player, map);
 			FlxG.overlap(player.tongue, bgElems, null, pickupRock);
