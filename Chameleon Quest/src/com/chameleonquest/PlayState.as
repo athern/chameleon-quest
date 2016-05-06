@@ -78,37 +78,42 @@ package com.chameleonquest
 			}
 			else
 			{
-			super.update();
+				super.update();
 			
 			
-			FlxG.collide(projectiles, map);
-			FlxG.collide(projectiles, enemies, inflictProjectileDamage);
-			FlxG.collide(enemyProjectiles, map);
-			FlxG.collide(enemyProjectiles, player, inflictProjectileDamage);
-			FlxG.collide(enemies, map);
-			FlxG.collide(player, enemies, hurtPlayer);
-			FlxG.collide(player, map);
-			FlxG.overlap(player.tongue, bgElems, null, pickupRock);
-			FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
-			FlxG.overlap(player.tongue, intrELems, null, grabItem);
-			FlxG.collide(enemies, map);
-			FlxG.collide(elems, map);
-			FlxG.collide(player, elems, playerElemCollision);
-			// For Interactive game object collision
-			FlxG.collide(projectiles, intrELems, projectileHitCollision);
-			FlxG.collide(projectiles, elems);
-			FlxG.collide(player, intrELems);
-			FlxG.collide(intrELems, map);
-			FlxG.collide(intrELems, intrELems);
+				FlxG.collide(projectiles, map);
+				FlxG.collide(projectiles, enemies, inflictProjectileDamage);
+				FlxG.collide(enemyProjectiles, map);
+				FlxG.collide(enemyProjectiles, player, inflictProjectileDamage);
+				FlxG.collide(enemies, map);
+				FlxG.collide(player, enemies, hurtPlayer);
+				FlxG.collide(player, map);
+				FlxG.overlap(player.tongue, bgElems, null, pickupRock);
+				FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
+				FlxG.overlap(player.tongue, intrELems, null, grabItem);
+				FlxG.collide(enemies, map);
+				FlxG.collide(elems, map);
+				FlxG.collide(player, elems, playerElemCollision);
+				// For Interactive game object collision
+				FlxG.collide(projectiles, intrELems, projectileHitCollision);
+				FlxG.collide(projectiles, elems);
+				FlxG.collide(player, intrELems);
+				FlxG.collide(intrELems, map);
+				FlxG.collide(intrELems, intrELems);
+				
+				//Player is being squashed!
+				if (player.isTouching(FlxObject.UP) && player.isTouching(FlxObject.DOWN))
+				{
+					heartbar.hit(1);
+				}
+				
 			
 			
-			
-			
-			// check for game over
-			if (heartbar.isEmpty()) {
-				FlxG.flash(0x000000, 0.75);
-				FlxG.fade(0xff000000, 0.5, onFadeOver);
-			}
+				// check for game over
+				if (heartbar.isEmpty()) {
+					FlxG.flash(0x000000, 0.75);
+					FlxG.fade(0xff000000, 0.5, onFadeOver);
+				}
 			}
 
 		}

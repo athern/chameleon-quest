@@ -32,7 +32,7 @@ package com.chameleonquest.interactiveObj
 			{
 				y -= 10;
 			}
-			if (r == 180)
+			else
 			{
 				y += 6;
 			}
@@ -53,9 +53,9 @@ package com.chameleonquest.interactiveObj
 		override public function hit(bullet:Projectile):void {
 			if (!isHit) {
 				isHit = true;
-				height = 4;
-				offset.y = 66
-				this.y += 4
+				//height = 4;
+				//offset.y = 66;
+				//this.y += 4;
 				play("DOWN");
 				count = timer;
 				callback(controlledObj);
@@ -69,8 +69,8 @@ package com.chameleonquest.interactiveObj
 			{
 				count--;
 				if (count == 0) {
-					offset.y = 62;
-					this.y -= 4;
+					//offset.y = 62;
+					//this.y -= 4;
 					play("UP");
 					isHit = false;
 				}
