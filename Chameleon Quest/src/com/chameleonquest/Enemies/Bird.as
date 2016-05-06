@@ -13,6 +13,7 @@ package com.chameleonquest.Enemies
 			play("idle");
 			width = 32;
 			height = 21;
+			immovable = true;
 		}
 		
 		public override function update():void

@@ -42,6 +42,7 @@ package com.chameleonquest.Enemies
 				dying = DEATH_ANIMATION_LENGTH;
 				velocity.x = 0;
 				flicker(1);
+				power = 0;
 			}
 		}
 	}
