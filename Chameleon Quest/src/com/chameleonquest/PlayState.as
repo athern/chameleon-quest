@@ -1,6 +1,7 @@
 package com.chameleonquest 
 {
 	import com.chameleonquest.Enemies.Enemy;
+	import com.chameleonquest.Enemies.Spikes;
 	import com.chameleonquest.Objects.Pile;
 	import com.chameleonquest.Projectiles.Projectile;
 	import com.chameleonquest.interactiveObj.Button;
@@ -85,7 +86,7 @@ package com.chameleonquest
 				FlxG.collide(enemyProjectiles, map);
 				FlxG.collide(enemyProjectiles, player, inflictProjectileDamage);
 				FlxG.collide(enemies, map);
-				FlxG.collide(enemies, enemies);
+				FlxG.collide(enemies, enemies, enemyFriendlyFire);
 				FlxG.collide(player, enemies, hurtPlayer);
 				FlxG.collide(player, map);
 				FlxG.overlap(player.tongue, bgElems, null, pickupRock);
@@ -189,6 +190,18 @@ package com.chameleonquest
 		// for interactive game object with projectile collision
 		private function projectileHitCollision(bullet:Projectile, target:InteractiveObj):void {
 			target.hit(bullet);
+		}
+		
+		private function enemyFriendlyFire(e1:Enemy, e2:Enemy):void
+		{
+			if (e2 is Spikes)
+			{
+				e1.hurt(1);
+			}
+			if (e1 is Spikes)
+			{
+				e2.hurt(1);
+			}
 		}
 		
 		private function grabItem(tongue:Tongue, item:InteractiveObj):void

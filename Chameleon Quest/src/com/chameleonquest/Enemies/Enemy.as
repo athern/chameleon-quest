@@ -25,7 +25,6 @@ package com.chameleonquest.Enemies
 			{
 				this.kill();
 			}
-			//play("idle");
 			
 		}
 		
@@ -36,7 +35,7 @@ package com.chameleonquest.Enemies
 			{
 				flicker(.25);
 			}
-			else
+			else if (dying == -1)
 			{
 				play("death");
 				dying = DEATH_ANIMATION_LENGTH;
