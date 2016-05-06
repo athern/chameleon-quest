@@ -1,5 +1,6 @@
 package com.chameleonquest.Projectiles 
 {
+	import com.chameleonquest.Enemies.Turtle;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxRect;
 	import org.flixel.FlxSprite;
@@ -17,6 +18,9 @@ package com.chameleonquest.Projectiles
 		
 		override public function getDamage(Target:FlxSprite):int
 		{
+			if (Target is Turtle)
+				return 0;
+			
 			return 1;
 		}
 	}

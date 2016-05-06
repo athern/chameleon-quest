@@ -32,7 +32,7 @@ package com.chameleonquest.Rooms
 			
 			// add enemies
 			enemies.add(new Bird(20 * 16, 26 * 16, (ROOM_HEIGHT - 10) * 16));
-			enemies.add(new PoisonSnake(13 * 16, 16 * 3));
+			enemies.add(new PoisonSnake(13 * 16, 16 * 2));
 			//enemies.add(new PoisonSnake(new Array(new FlxPoint(13 * 16, 16 * 3))));
 			
 			Main.lastRoom = 4;

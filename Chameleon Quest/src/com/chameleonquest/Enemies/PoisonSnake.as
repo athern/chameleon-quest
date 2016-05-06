@@ -9,7 +9,7 @@ package com.chameleonquest.Enemies
 
 	public class PoisonSnake extends Snake
 	{
-		[Embed(source = "../../../../assets/purplesnake.png")]public var purpleSnake:Class;
+		[Embed(source = "../../../../assets/purplesnake-2.png")]public var purpleSnake:Class;
 		
 		protected static const GRAVITY:int = 800;
 		protected static const SHOOT_DELAY:Number = 2;
@@ -27,7 +27,7 @@ package com.chameleonquest.Enemies
 		
 		public override function loadSprites():void
 		{
-			loadGraphic(purpleSnake, true, true, 32, 16);
+			loadGraphic(purpleSnake, true, true, 32, 30);
 		}
 		
 		public override function update():void

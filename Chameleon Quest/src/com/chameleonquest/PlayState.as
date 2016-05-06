@@ -79,13 +79,13 @@ package com.chameleonquest
 			else
 			{
 				super.update();
-			
-			
+
 				FlxG.collide(projectiles, map);
 				FlxG.collide(projectiles, enemies, inflictProjectileDamage);
 				FlxG.collide(enemyProjectiles, map);
 				FlxG.collide(enemyProjectiles, player, inflictProjectileDamage);
 				FlxG.collide(enemies, map);
+				FlxG.collide(enemies, enemies);
 				FlxG.collide(player, enemies, hurtPlayer);
 				FlxG.collide(player, map);
 				FlxG.overlap(player.tongue, bgElems, null, pickupRock);
@@ -106,9 +106,7 @@ package com.chameleonquest
 				{
 					heartbar.hit(1);
 				}
-				
-			
-			
+
 				// check for game over
 				if (heartbar.isEmpty()) {
 					FlxG.flash(0x000000, 0.75);
