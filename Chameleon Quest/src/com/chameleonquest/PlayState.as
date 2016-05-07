@@ -1,10 +1,13 @@
 package com.chameleonquest 
 {
 	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.WaterChameleon;
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
+	import com.chameleonquest.Objects.ElementSource;
 	import com.chameleonquest.Objects.Pile;
 	import com.chameleonquest.Objects.Pulley;
+	import com.chameleonquest.Objects.WaterFountain;
 	import com.chameleonquest.Projectiles.Projectile;
 	import com.chameleonquest.interactiveObj.Button;
 	import com.chameleonquest.interactiveObj.InteractiveObj;
@@ -91,9 +94,12 @@ package com.chameleonquest
 				FlxG.collide(enemies, enemies, enemyFriendlyFire);
 				FlxG.collide(player, enemies, hurtPlayer);
 				FlxG.collide(player, map);
-				FlxG.overlap(player.tongue, bgElems, null, pickupRock);
-				FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
-				FlxG.overlap(player.tongue, intrELems, null, grabItem);
+				if (player.tongue != null)
+				{
+					FlxG.overlap(player.tongue, bgElems, null, pickupRock);
+					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
+					FlxG.overlap(player.tongue, intrELems, null, grabItem);
+				}
 				FlxG.collide(enemies, map);
 				FlxG.collide(elems, map);
 				FlxG.collide(player, elems, playerElemCollision);
@@ -103,6 +109,18 @@ package com.chameleonquest
 				FlxG.collide(player, intrELems);
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
+				
+				if (FlxG.keys.justPressed("C")) {
+					FlxG.overlap(player, bgElems, null, changeElement);
+				}
+				
+				if (player.getType() != Player.NORMAL && FlxG.keys.justPressed("X")) {
+					// change back to normal chameleon
+					remove(player);
+					player = Player.cloneFrom(player);
+					add(player.tongue);
+					add(player);
+				}
 				
 				//Player is being squashed!
 				if (player.isTouching(FlxObject.UP) && player.isTouching(FlxObject.DOWN))
@@ -124,6 +142,46 @@ package com.chameleonquest
 			if (elem is Pile)
 			{
 				tongue.pickupRock();
+			}
+		}
+		
+		private function changeElement(me:Player, elem:FlxSprite):void
+		{
+			var src:ElementSource = null;
+			if (elem is ElementSource)
+			{
+				src = elem as ElementSource;
+				if (me.getType() == src.getElementType())
+				{
+					return;
+				}
+				
+				if (me.getType() == Player.NORMAL)
+				{
+					remove(me.tongue);
+				}
+				remove(me);
+				switch (src.getElementType())
+				{
+					case Player.WATER:
+						player = WaterChameleon.cloneFrom(me);
+						break;
+					default:
+						player = me;
+						if (me.tongue != null)
+						{
+							add(player.tongue);
+						}
+				}
+				
+				if (player != me) {
+					if (me.tongue != null) {
+						me.tongue.kill()
+					}
+					me.kill();
+				}
+				
+				add(player);
 			}
 		}
 		

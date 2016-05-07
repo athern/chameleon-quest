@@ -1,8 +1,9 @@
 package com.chameleonquest.Objects 
 {
+	import com.chameleonquest.Chameleons.Player;
 	import org.flixel.*;
 
-	public class WaterFountain extends FlxSprite
+	public class WaterFountain extends FlxSprite implements ElementSource
 	{
 		[Embed(source = "../../../../assets/fountain.png")]public var torchImg:Class;
 		
@@ -22,6 +23,11 @@ package com.chameleonquest.Objects
 			addAnimation("play", [0, 1, 2], 3);
 			
 			play("play");
+		}
+	
+		public function getElementType():uint
+		{
+			return Player.WATER;
 		}
 	}
 

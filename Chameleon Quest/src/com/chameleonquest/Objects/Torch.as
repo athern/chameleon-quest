@@ -1,8 +1,9 @@
 package com.chameleonquest.Objects 
 {
+	import com.chameleonquest.Chameleons.Player;
 	import org.flixel.*;
 
-	public class Torch extends FlxSprite
+	public class Torch extends FlxSprite implements ElementSource
 	{
 		[Embed(source = "../../../../assets/torch.png")]public var torchImg:Class;
 		
@@ -23,6 +24,11 @@ package com.chameleonquest.Objects
 			addAnimation("OFF", [0]);
 			
 			play("LIT");
+		}
+	
+		public function getElementType():uint
+		{
+			return Player.FIRE;
 		}
 	}
 

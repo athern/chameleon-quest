@@ -6,17 +6,17 @@ package com.chameleonquest.Chameleons
 	import com.chameleonquest.Projectiles.Rock;
 	import com.chameleonquest.Tongue;
     import org.flixel.*;
-
+		
     public class Player extends FlxSprite 
     {
 		[Embed(source = "../../../../assets/greenchameleon.png")]public var greenChameleon:Class;
-		
-		protected static const NORMAL:uint = 0x00;
-		protected static const WATER:uint = 0x01;
-		protected static const FIRE:uint = 0x02;
-		protected static const EARTH:uint = 0x03;
-		protected static const WIND:uint = 0x04;
-		protected static const ELECTRICITY:uint = 0x05;
+
+		static public const NORMAL:uint = 0x00;
+		static public const WATER:uint = 0x01;
+		static public const FIRE:uint = 0x02;
+		static public const EARTH:uint = 0x03;
+		static public const WIND:uint = 0x04;
+		static public const ELECTRICITY:uint = 0x05;
 		
 		protected static const RUN_SPEED:int = 120;
 		protected static const GRAVITY:int =800;
@@ -27,17 +27,24 @@ package com.chameleonquest.Chameleons
 		public var tongue:Tongue;
 		protected var jumpPhase:int;
 		protected var invulnerability:int = 0;
-		protected var hasRock:Boolean;
+		protected var hasAmmo:Boolean;
 		protected var cooldown:Number;
 		protected static const MAX_JUMP_HOLD:int = 15;
 		
-		private var type:uint;
+		protected var type:uint;
 		
 		public var velocityModifiers:FlxPoint = new FlxPoint(0, 0);
 		
-        public function Player(Xindex:int,Yfloorindex:int):void // X,Y: Starting coordinates
+        public function Player(Xindex:int,Yfloorindex:int, indexedPoint:Boolean = true):void // X,Y: Starting coordinates
         {
-            super(Xindex*16, Yfloorindex*16-16);
+			if (indexedPoint)
+			{
+				Xindex *= 16;
+				Yfloorindex = Yfloorindex * 16 - 16;
+			}
+			
+			super(Xindex, Yfloorindex);
+			
             loadGraphic(greenChameleon, true, true, 38, 16);
 			width = 20;  
 			offset.x = 9;
@@ -55,13 +62,30 @@ package com.chameleonquest.Chameleons
 			this.type = NORMAL;
         }
 		
+		public static function cloneFrom(reference:Player):Player
+		{
+			var clone:Player = new Player(reference.x, reference.y, false);
+			clone.facing = reference.facing;
+			clone.velocity.x = reference.velocity.x;
+			clone.velocity.y = reference.velocity.y;
+			clone.health = reference.health;
+			
+			return clone;
+		}
+		
 		override public function update():void
 		{
-			
 			if(FlxG.keys.UP && jumpPhase == 0)
             {
-				jumpPhase = 1;
-                velocity.y = -JUMP_SPEED;
+				if (velocity.y > 0 && !this.isTouching(FLOOR))
+				{
+					jumpPhase = MAX_JUMP_HOLD;
+				}
+				else
+				{
+					jumpPhase = 1;
+					velocity.y = -JUMP_SPEED;
+				}
             }
 			else if (FlxG.keys.UP && jumpPhase > 0 && jumpPhase < MAX_JUMP_HOLD) 
 			{
@@ -102,35 +126,7 @@ package com.chameleonquest.Chameleons
 				acceleration.x = 0;
 			}
 			
-			if (FlxG.keys.SPACE)
-			{
-				if (this.cooldown > SHOOT_DELAY)
-				{
-					if (this.type != NORMAL || this.hasRock)
-					{
-						// only return a projectile if we've waited long enough from the last attack
-					// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
-						this.cooldown = 0;
-						var attack:Projectile;
-						if (this.hasRock)
-						{
-							this.hasRock = false;
-							attack = new Rock();
-						}
-						var attackX:Number = facing == FlxObject.LEFT ? x - attack.width : x + width;
-						var attackY:Number = y + height / 2 - attack.height / 2;
-						attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -200 : 200, 0);
-						var currentState:PlayState = FlxG.state as PlayState;
-						currentState.projectiles.add(attack);
-					}
-					else
-					{
-						this.cooldown = 0;
-						tongue.shoot();
-					}
-				}
-			}
-			
+			this.handleShooting();
 			
 			velocityModifiers.x = 0;
 			velocityModifiers.y = 0;
@@ -140,18 +136,63 @@ package com.chameleonquest.Chameleons
             super.update();
         }
 		
+		public function getType():uint
+		{
+			return this.type;
+		}
+		
+		protected function handleShooting():void 
+		{
+			if (FlxG.keys.SPACE)
+			{
+				if (this.cooldown > SHOOT_DELAY)
+				{
+					if (this.hasAmmo)
+					{
+						this.shoot();
+					}
+					else
+					{
+						this.cooldown = 0;
+						tongue.shoot();
+					}
+				}
+			}
+		}
+		
+		protected function shoot():void
+		{
+			// only return a projectile if we've waited long enough from the last attack
+			// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
+			this.cooldown = 0;
+			var attack:Projectile;
+			if (this.hasAmmo)
+			{
+				this.hasAmmo = this.type != NORMAL; // only want to get rid of ammo if we're the normal chameleon
+				attack = this.getNextAttack();
+			} 
+			else
+			{
+				return;
+			}
+			
+			var attackX:Number = facing == FlxObject.LEFT ? x - attack.width : x + width;
+			var attackY:Number = y + height / 2 - attack.height / 2;
+			attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -200 : 200, 0);
+			var currentState:PlayState = FlxG.state as PlayState;
+			currentState.projectiles.add(attack);
+		}
+		
 		public function assignRock():void
 		{
 			// TODO: change to holding rock sprite
-			this.hasRock = true;
+			this.hasAmmo = true;
 		}
 		
 		// returns a Projectile if the chameleon has something to shoot and hasn't shot anything recently
 		public function getNextAttack():Projectile
 		{
-			
-			
-			return null;
+			return new Rock();
 		}
 		
 		//returns damage actually taken
