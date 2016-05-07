@@ -3,6 +3,7 @@ package com.chameleonquest
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
 	import com.chameleonquest.Objects.Pile;
+	import com.chameleonquest.Objects.Pulley;
 	import com.chameleonquest.Projectiles.Projectile;
 	import com.chameleonquest.interactiveObj.Button;
 	import com.chameleonquest.interactiveObj.InteractiveObj;

@@ -43,8 +43,7 @@ package com.chameleonquest.Rooms
 			enemies.add(new Snake(23 * 16, 27 * 16, 10 * 16));
 			enemies.add(new Snake(8 * 16, 13 * 16, 3 * 16));
 			
-			enemies.add(new Turtle(16*16, 16 * 3));
-			enemies.add(new Turtle(16*16, 16 * 2));
+			Turtle.addTutleStack(16 * 16, 16 * 3, 2, enemies),
 			
 			Main.lastRoom = 3;
 			super.create();

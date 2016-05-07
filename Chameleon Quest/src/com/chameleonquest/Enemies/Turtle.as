@@ -1,5 +1,7 @@
 package com.chameleonquest.Enemies 
 {
+	import org.flixel.*;
+
 	public class Turtle extends Enemy
 	{
 		[Embed(source = "../../../../assets/turtle.png")]public var simpleTurtle:Class;
@@ -23,6 +25,13 @@ package com.chameleonquest.Enemies
 			this.facing = RIGHT;
 			
 			acceleration.y = GRAVITY;
+		}
+		
+		public static function addTutleStack(X:int, Y:int, count:int, group:FlxGroup):void
+		{
+			for (var i:int = 0; i < count; i++) {
+				group.add(new Turtle(X, Y - (count - i )* 16));
+			}
 		}
 	}
 
