@@ -36,7 +36,7 @@ package com.chameleonquest
 		// pause state
 		public var pauseText:FlxText;
 		public var quitText:FlxText;
-				
+
         override public function create():void
 		{
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 6)
@@ -59,7 +59,6 @@ package com.chameleonquest
 			setupPauseHUD();
 			
 			add(heartbar);
-						
 			super.create();
 			
 		}
