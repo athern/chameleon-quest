@@ -13,7 +13,7 @@ package com.chameleonquest.Rooms
 		[Embed(source = "../../../../assets/mapCSV_1-5_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
-		//public var pull:Pulley;
+		public var pull:Pulley;
 		
 		override public function create():void
 		{	
@@ -29,20 +29,21 @@ package com.chameleonquest.Rooms
 				player = new Player(0, 14);
 			}
 			bgElems.add(new Pile(6, 15));
-			elems.add(new PlatformOnChain(16 * 13, 16 * 15));
+			//elems.add(new PlatformOnChain(16 * 13, 16 * 15));
 			//elems.add(new PlatformOnChain(16 * 3, 16 * 15));
 			
-			//pull = new Pulley(16 * 13, 16 * 15, 16 * 3, 16 * 15);
-			//elems.add(pull);
+			pull = new Pulley(16 * 3, 16 * 15, 16 * 13, 16 * 15);
 			
 			Main.lastRoom = 5;
 			super.create();
+			
+			add(pull);
 		}
 		
 		override public function update():void
 		{
 			super.update();
-			//FlxG.collide(player, pull, pull.addWeight);
+			FlxG.collide(player, pull, pull.addWeight);
 						
 			if (player.x < 0 && player.y > 20*16) {
 				FlxG.switchState(new Room1_6State());
