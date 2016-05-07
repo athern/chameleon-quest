@@ -1,5 +1,6 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.Chameleons.Player;
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
 	import com.chameleonquest.Objects.Pile;
