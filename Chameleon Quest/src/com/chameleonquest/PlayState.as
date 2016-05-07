@@ -1,5 +1,6 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.Chameleons.FireChameleon;
 	import com.chameleonquest.Chameleons.Player;
 	import com.chameleonquest.Chameleons.WaterChameleon;
 	import com.chameleonquest.Enemies.Enemy;
@@ -164,6 +165,9 @@ package com.chameleonquest
 				{
 					case Player.WATER:
 						player = WaterChameleon.cloneFrom(me);
+						break;
+					case Player.FIRE:
+						player = FireChameleon.cloneFrom(me);
 						break;
 					default:
 						player = me;
