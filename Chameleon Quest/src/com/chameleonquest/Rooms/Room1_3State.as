@@ -1,5 +1,6 @@
 package com.chameleonquest.Rooms 
 {
+	import com.chameleonquest.Chameleons.Player;
 	import com.chameleonquest.interactiveObj.WoodBlock;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;

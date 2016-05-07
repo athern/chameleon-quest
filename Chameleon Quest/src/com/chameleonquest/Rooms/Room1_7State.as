@@ -1,5 +1,7 @@
 package com.chameleonquest.Rooms 
 {
+	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Enemies.BossTurtle;
 	import org.flixel.*;
 	import com.chameleonquest.*;
 	import com.chameleonquest.Objects.*;
@@ -17,6 +19,8 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
 			player.facing = FlxObject.LEFT;
+			
+			enemies.add(new BossTurtle(5 * 16, 16 * 16, 16 * (ROOM_HEIGHT - 6)));
 			
 			Main.lastRoom = 7;
 			super.create();

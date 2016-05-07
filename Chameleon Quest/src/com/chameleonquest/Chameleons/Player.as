@@ -1,13 +1,15 @@
-package com.chameleonquest 
+package com.chameleonquest.Chameleons 
 {
 	import com.chameleonquest.Enemies.Enemy;
+	import com.chameleonquest.PlayState;
 	import com.chameleonquest.Projectiles.Projectile;
 	import com.chameleonquest.Projectiles.Rock;
+	import com.chameleonquest.Tongue;
     import org.flixel.*;
 
     public class Player extends FlxSprite 
     {
-		[Embed(source = "../../../assets/greenchameleon.png")]public var greenChameleon:Class;
+		[Embed(source = "../../../../assets/greenchameleon.png")]public var greenChameleon:Class;
 		
 		protected static const NORMAL:uint = 0x00;
 		protected static const WATER:uint = 0x01;

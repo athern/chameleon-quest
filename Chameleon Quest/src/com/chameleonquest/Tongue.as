@@ -1,5 +1,6 @@
 package com.chameleonquest 
 {
+	import com.chameleonquest.Chameleons.Player;
 	import com.chameleonquest.interactiveObj.InteractiveObj;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxSprite;

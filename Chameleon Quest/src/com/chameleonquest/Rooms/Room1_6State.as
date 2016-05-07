@@ -1,6 +1,7 @@
 package com.chameleonquest.Rooms 
 {
 	import com.chameleonquest.*;
+	import com.chameleonquest.Chameleons.Player;
 	import org.flixel.*;
 	import com.chameleonquest.Objects.*;
 	import com.chameleonquest.interactiveObj.*;
