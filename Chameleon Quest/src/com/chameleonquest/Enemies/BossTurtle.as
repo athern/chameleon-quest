@@ -74,6 +74,15 @@ package com.chameleonquest.Enemies
 				play("flipped"); // it may be better to have a legit flip animation or use angular velocity to spin, but this is fine for now
 			}
 		}
+		
+		override public function hurt(damage:Number):void 
+		{
+			if (this.isFlipped)
+			{
+				// boss turtle is invulnerable when it's not flipped!
+				super.hurt(damage);
+			}
+		}
 	}
 
 }
