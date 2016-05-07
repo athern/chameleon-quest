@@ -22,7 +22,8 @@ package com.chameleonquest
 			new Room1_3State(),
 			new Room1_4State(),
 			new Room1_5State(),
-			new Room1_6State()
+			new Room1_6State(),
+			new Room1_7State()
 			]
 			
 			var room2:Array = [
@@ -67,6 +68,7 @@ package com.chameleonquest
 			addStage(0, 3, "1-4");
 			addStage(0, 4, "1-5");
 			addStage(0, 5, "1-6");
+			addStage(0, 6, "1-7");
 			
 			addStage(1, 0, "2-1");
 			addStage(1, 1, "2-2");
