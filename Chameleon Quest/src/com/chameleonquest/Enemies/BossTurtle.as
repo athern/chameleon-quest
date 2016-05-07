@@ -81,6 +81,9 @@ package com.chameleonquest.Enemies
 			{
 				// boss turtle is invulnerable when it's not flipped!
 				super.hurt(damage);
+				
+				// flip it back over
+				this.flip();
 			}
 		}
 	}
