@@ -19,6 +19,7 @@ package com.chameleonquest.Objects
 		private var bar2Y:int;
 		
 		private var VERTICAL_VEL:int = 20;
+		private var COOLDOWN_COLLISION:int = 1;
 		
 		public function Pulley(X1:int, Y1:int, X2:int, Y2:int) 
 		{
@@ -81,14 +82,22 @@ package com.chameleonquest.Objects
 			
 			// TODO: the separation with it's objects is still not perfect
 			for (var i:int = 0; i < plat1Obj.length; i++) {
-				if (FlxObject.separate(platform1, plat1Obj[i]) && platform1.y > (plat1Obj[i] as FlxSprite).y) {
+				// update the cooldown
+				if (plat1Obj[i][1] > 0) {
+					plat1Obj[i][1] -= FlxG.elapsed;
+				}
+				if (!FlxG.collide(platform1, plat1Obj[i][0]) && plat1Obj[i][1] < 0) {
 					plat1Obj.splice(i, 1);
 					i--;
 				}
 			}
 			
 			for (i = 0; i < plat2Obj.length; i++) {
-				if (FlxObject.separate(platform2, plat2Obj[i]) && platform2.y > (plat2Obj[i] as FlxSprite).y) {
+				// update the cooldown
+				if (plat2Obj[i][1] > 0) {
+					plat2Obj[i][1] -= FlxG.elapsed;
+				}
+				if (!FlxG.collide(platform2, plat2Obj[i][0]) && plat2Obj[i][1] < 0) {
 					plat2Obj.splice(i, 1);
 					i--;
 				}
@@ -101,12 +110,12 @@ package com.chameleonquest.Objects
 			if (p.justTouched(FlxObject.UP)) {
 				if (weightObj.x > platform1.x && weightObj.x < platform1.x + platform1.width) {
 					if (plat1Obj.indexOf(weightObj) == -1) {
-						plat1Obj.push(weightObj);
+						plat1Obj.push(new Array(weightObj, COOLDOWN_COLLISION));
 					}
 					
 				} else if (weightObj.x > platform2.x && weightObj.x < platform2.x + platform2.width) {
 					if (plat2Obj.indexOf(weightObj) == -1) {
-						plat2Obj.push(weightObj);
+						plat2Obj.push(new Array(weightObj, COOLDOWN_COLLISION));
 					}
 				}
 			}
