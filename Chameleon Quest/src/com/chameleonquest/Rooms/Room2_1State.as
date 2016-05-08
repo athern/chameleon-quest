@@ -1,7 +1,7 @@
 package com.chameleonquest.Rooms 
 {
 	import com.chameleonquest.Chameleons.Player;
-	import com.chameleonquest.interactiveObj.WaterWheel;
+	import com.chameleonquest.interactiveObj.*;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	import com.chameleonquest.*;
@@ -21,7 +21,7 @@ package com.chameleonquest.Rooms
 			
 			if (Main.lastRoom == 9)
 			{
-				player = new Player(ROOM_HEIGHT - 1, 2);
+				player = new Player(ROOM_WIDTH - 1, 2);
 			}
 			else
 			{
@@ -30,14 +30,16 @@ package com.chameleonquest.Rooms
 			
 			player.facing = FlxObject.LEFT;
 			
-			elems.add(new Platform(new Array(new FlxPoint(18*16, 16 * 5), new FlxPoint(22 * 16, 16*5)), 60));
+			elems.add(new Platform(new Array(new FlxPoint(18*16, 16 * 6), new FlxPoint(22 * 16, 16*5)), 60));
 			
 			// add spikes
 			Spikes.addSpikeRow(3, ROOM_HEIGHT - 1, 5, enemies);
 			Spikes.addSpikeRow(11, ROOM_HEIGHT - 1, 4, enemies);
 			
+			bgElems.add(new Pile(9, (ROOM_HEIGHT - 2)));
+			
 			enemies.add(new Snake(16, 16 * 3, 16 * (ROOM_HEIGHT - 8)));
-			enemies.add(new Bird(16 * 2, 16 * 23, 16 * 2));
+			enemies.add(new Bird(16 * 9, 16 * 23, 16 * 2));
 			
 			bgElems.add(new WaterFountain(ROOM_WIDTH - 9, ROOM_HEIGHT - 3));
 			
@@ -47,6 +49,12 @@ package com.chameleonquest.Rooms
 			Main.lastRoom = 8;
 			
 			super.create();
+			
+			var hint:FlxText;
+			hint = new FlxText(315, 160, 70, "C");
+			hint.setFormat(null, 14, 0x555555, "center");
+			hint.alpha = .5;
+			this.add(hint);
 		}
 		
 		override public function update():void

@@ -113,7 +113,7 @@ package com.chameleonquest
 				
 				// water grate check
 				if (player.getType() != Player.WATER) {
-					FlxG.overlap(player, bgElems, null, passGrate);
+					FlxG.overlap(player, bgElems, null, passGrate);					
 				}
 				
 				
@@ -146,6 +146,7 @@ package com.chameleonquest
 
 		}
 		
+		// TODO: issue when player try to pass the grate (could crash the game)
 		private function passGrate(player:Player, elem:FlxSprite):void {
 			if (elem is Grate) {
 				FlxG.collide(player, elem);
