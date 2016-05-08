@@ -5,6 +5,7 @@ package com.chameleonquest
 	import com.chameleonquest.Chameleons.WaterChameleon;
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
+	import com.chameleonquest.Enemies.Turtle;
 	import com.chameleonquest.Objects.ElementSource;
 	import com.chameleonquest.Objects.Pile;
 	import com.chameleonquest.Objects.Pulley;
@@ -100,7 +101,6 @@ package com.chameleonquest
 					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
 					FlxG.overlap(player.tongue, intrELems, null, grabItem);
 				}
-				FlxG.collide(enemies, map);
 				FlxG.collide(elems, map);
 				FlxG.collide(player, elems, playerElemCollision);
 				// For Interactive game object collision
