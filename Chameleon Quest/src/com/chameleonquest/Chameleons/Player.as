@@ -176,7 +176,7 @@ package com.chameleonquest.Chameleons
 				return;
 			}
 			
-			var attackX:Number = facing == FlxObject.LEFT ? x - attack.width : x + width;
+			var attackX:Number = facing == FlxObject.LEFT ? x : x + width - attack.width;
 			var attackY:Number = y + height / 2 - attack.height / 2;
 			attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -200 : 200, 0);
 			var currentState:PlayState = FlxG.state as PlayState;
