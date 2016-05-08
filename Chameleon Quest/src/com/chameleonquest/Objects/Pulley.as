@@ -8,12 +8,12 @@ package com.chameleonquest.Objects
 	public class Pulley extends FlxGroup
 	{
 		
-		private var platform1:PlatformOnChain;
+		public var platform1:PlatformOnChain;
 		private var plat1Obj:Array;
 		private var plat1Y:int;
 		private var bar1Y:int;
 		
-		private var platform2:PlatformOnChain;
+		public var platform2:PlatformOnChain;
 		private var plat2Obj:Array;
 		private var plat2Y:int;
 		private var bar2Y:int;
@@ -44,7 +44,7 @@ package com.chameleonquest.Objects
 		
 		override public function update():void
 		{
-			
+			super.update();
 			if (platform1.velocity.y > 0 && platform1.y >= bar1Y) {
 				platform1.velocity.y = 0;
 			} else if (platform1.velocity.y < 0 && platform1.y <= bar1Y) {
@@ -56,67 +56,62 @@ package com.chameleonquest.Objects
 			} else if (platform2.velocity.y < 0 && platform2.y <= bar2Y) {
 				platform2.velocity.y = 0;
 			}
-			
 			var newbar1Y:int = plat1Y - 16 * (plat2Obj.length - plat1Obj.length);
 			var newbar2Y:int = plat2Y - 16 * (plat1Obj.length - plat2Obj.length);
 			
-			if (newbar1Y != bar1Y) {
-				if (newbar1Y > bar1Y) {
-					platform1.velocity.y = VERTICAL_VEL;
+			if (newbar1Y != platform1.y) {
+				if (newbar1Y > platform1.y) {
+					platform1.y++;
 				} else {
-					platform1.velocity.y = -1 * VERTICAL_VEL;
+					platform1.y--;
 				}
 				
 				bar1Y = newbar1Y;
 			}
 			
-			if (newbar2Y != bar2Y) {
-				if (newbar2Y > bar2Y) {
-					platform2.velocity.y = VERTICAL_VEL;
+			if (newbar2Y != platform2.y) {
+				if (newbar2Y > platform2.y) {
+					platform2.y++;
 				} else {
-					platform2.velocity.y = -1 * VERTICAL_VEL;
+					platform2.y--;
 				}
 				
-				bar2Y = newbar2Y
+				bar2Y = newbar2Y;
 			}
 			
 			// TODO: the separation with it's objects is still not perfect
 			for (var i:int = 0; i < plat1Obj.length; i++) {
-				// update the cooldown
-				if (plat1Obj[i][1] > 0) {
-					plat1Obj[i][1] -= FlxG.elapsed;
-				}
-				if (!FlxG.collide(platform1, plat1Obj[i][0]) && plat1Obj[i][1] < 0) {
+				var current:FlxSprite = plat1Obj[i] as FlxSprite;
+				if (!(current.y <= platform1.y && current.x + current.width >= platform1.x && 
+					current.x <= platform1.x + platform1.width))
+				{
 					plat1Obj.splice(i, 1);
 					i--;
 				}
 			}
 			
 			for (i = 0; i < plat2Obj.length; i++) {
-				// update the cooldown
-				if (plat2Obj[i][1] > 0) {
-					plat2Obj[i][1] -= FlxG.elapsed;
-				}
-				if (!FlxG.collide(platform2, plat2Obj[i][0]) && plat2Obj[i][1] < 0) {
+				current = plat2Obj[i] as FlxSprite;
+				if (!(current.y <= platform2.y && current.x + current.width >= platform2.x && 
+					current.x <= platform2.x + platform2.width))
+				{
 					plat2Obj.splice(i, 1);
 					i--;
 				}
 			}
 			
-			super.update()
+			
 		}
 		
 		public function addWeight(weightObj:FlxSprite, p:PlatformOnChain):void {
-			if (p.justTouched(FlxObject.UP)) {
-				if (weightObj.x > platform1.x && weightObj.x < platform1.x + platform1.width) {
-					if (plat1Obj.indexOf(weightObj) == -1) {
-						plat1Obj.push(new Array(weightObj, COOLDOWN_COLLISION));
-					}
+			if (weightObj.x > platform1.x && weightObj.x < platform1.x + platform1.width) {
+				if (plat1Obj.indexOf(weightObj) == -1) {
+					plat1Obj.push(weightObj);
+				}
 					
-				} else if (weightObj.x > platform2.x && weightObj.x < platform2.x + platform2.width) {
-					if (plat2Obj.indexOf(weightObj) == -1) {
-						plat2Obj.push(new Array(weightObj, COOLDOWN_COLLISION));
-					}
+			} else if (weightObj.x > platform2.x && weightObj.x < platform2.x + platform2.width) {
+				if (plat2Obj.indexOf(weightObj) == -1) {
+					plat2Obj.push(weightObj);
 				}
 			}
 		}

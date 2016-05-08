@@ -6,17 +6,39 @@ package com.chameleonquest.Objects
 	public class PlatformOnChain extends Platform
 	{
 		
-		private var chain:FlxGroup;
+		private var chain:Array;
+		private var lastY:int;
 		
 		public function PlatformOnChain(X:int, Y:int) 
 		{
 			super(new Array(new FlxPoint(X, Y)), 0);
-			chain = new FlxGroup();
-			for (var i:int = 0; i < Y; i += 16) {
-				chain.add(new ChainSegment(X+16, i));
+			chain = new Array;
+			lastY = Y;
+			for (var i:int = Y-16; i >= 0; i -= 16) {
+				chain.push(new ChainSegment(X+16, i));
 			}
 			var current:PlayState = FlxG.state as PlayState;
-			current.bgElems.add(chain);
+			for (var j:int = 0; j < chain.length; j++) {
+				current.bgElems.add(chain[j]);
+			}
+		}
+		
+		override public function update():void
+		{
+			super.update();
+			var delta:int = y - lastY;
+			for (var i:int = 0; i < chain.length; i++)
+			{
+				chain[i].y += delta;
+			}
+			if (chain[chain.length - 1].y > 0)
+			{
+				var nowVisible:ChainSegment = new ChainSegment(chain[0].x, chain[chain.length - 1].y - 16);
+				chain.push(nowVisible);
+				var current:PlayState = FlxG.state as PlayState;
+				current.bgElems.add(nowVisible);
+			}
+			lastY = y;
 		}
 		
 	}

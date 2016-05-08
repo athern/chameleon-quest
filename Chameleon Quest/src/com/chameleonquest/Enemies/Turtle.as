@@ -7,6 +7,7 @@ package com.chameleonquest.Enemies
 		[Embed(source = "../../../../assets/turtle.png")]public var simpleTurtle:Class;
 		
 		protected static const GRAVITY:int = 800;
+		protected var startX:int;
 		
 		public function Turtle(X:Number, Y:Number) 
 		{
@@ -21,16 +22,34 @@ package com.chameleonquest.Enemies
 			offset.y = 9;
 			health = 1;
 			power = 2;
+			startX = X;
 						
 			this.facing = RIGHT;
 			
-			acceleration.y = GRAVITY;
+			acceleration.y = 0;
 		}
 		
-		public static function addTutleStack(X:int, Y:int, count:int, group:FlxGroup):void
+		public static function addTurtleStack(X:int, Y:int, count:int, group:FlxGroup):void
 		{
-			for (var i:int = 0; i < count; i++) {
-				group.add(new Turtle(X, Y - (count - i )* 16));
+			for (var i:int = 1; i <= count; i++) {
+				group.add(new Turtle(X, Y - (count - i )* 18));
+			}
+		}
+		
+		override public function update():void
+		{
+			super.update();
+			if (x != startX)
+			{
+				acceleration.y = GRAVITY;
+			}
+			else
+			{
+				acceleration.y = 0;
+			}
+			if (!isTouching(FLOOR))
+			{
+				y++;
 			}
 		}
 	}
