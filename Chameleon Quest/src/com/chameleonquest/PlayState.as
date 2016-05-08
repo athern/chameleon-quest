@@ -45,7 +45,7 @@ package com.chameleonquest
 
         override public function create():void
 		{
-			if (Main.lastRoom >= 1 && Main.lastRoom <= 6)
+			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
 				Background.buildBackground(this, 1);
 			}
@@ -243,6 +243,10 @@ package com.chameleonquest
 			if (target == player)
 			{
 				heartbar.hit(bullet.getDamage(player));
+			}
+			else if (target is Enemy)
+			{
+				(target as Enemy).hitWith(bullet);
 			}
 			else
 			{

@@ -1,5 +1,6 @@
 package com.chameleonquest.Enemies 
 {
+	import com.chameleonquest.Projectiles.Projectile;
 	import org.flixel.FlxG;
 	public class BossTurtle extends HorizontallyPatrollingEnemy
 	{
@@ -75,7 +76,7 @@ package com.chameleonquest.Enemies
 			}
 		}
 		
-		override public function hurt(damage:Number):void 
+		/*override public function hurt(damage:Number):void 
 		{
 			if (this.isFlipped)
 			{
@@ -84,6 +85,20 @@ package com.chameleonquest.Enemies
 				
 				// flip it back over
 				this.flip();
+			}
+		}*/
+		
+		public static function flipBoss(boss:BossTurtle):void
+		{
+			boss.flip();
+		}
+		
+		override public function hitWith(bullet:Projectile):void
+		{
+			if (this.isFlipped && bullet.velocity.y > 0)
+			{
+				hurt(bullet.getDamage(this));
+				flip();
 			}
 		}
 	}
