@@ -28,7 +28,7 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
 			player.facing = FlxObject.LEFT;
-			boss = new BossTurtle(7 * 16, 16 * 16, 16 * (ROOM_HEIGHT - 6));
+			boss = new BossTurtle(7 * 16, 16 * 16, 16 * (ROOM_HEIGHT - 5));
 			enemies.add(boss);
 			elems.add(new Platform(new Array(new FlxPoint(10 * 16, 4 * 16), new FlxPoint(10 * 16, 9 * 16)), 50));
 			bgElems.add(new Pile(24, 11));
