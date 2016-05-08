@@ -30,6 +30,9 @@ package com.chameleonquest.Enemies
 			}
 		}
 		
+		override public function hurt(damage:Number):void 
+		{
+		}
 	}
 
 }
