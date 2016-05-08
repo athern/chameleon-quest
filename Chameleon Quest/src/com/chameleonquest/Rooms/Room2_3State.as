@@ -7,19 +7,19 @@ package com.chameleonquest.Rooms
 	import com.chameleonquest.*;
 	import com.chameleonquest.Objects.*;
 	
-	public class Room2_2State extends PlayState
+	public class Room2_3State extends PlayState
 	{
 		
-		[Embed(source = "../../../../assets/mapCSV_2-2_Map.csv", mimeType = "application/octet-stream")]
+		[Embed(source = "../../../../assets/mapCSV_2-3_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
 		override public function create():void
 		{
 			ROOM_WIDTH = 30;
-			ROOM_HEIGHT = 30;
+			ROOM_HEIGHT = 45;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(1, ROOM_HEIGHT - 6);
-			player.facing = FlxObject.RIGHT;
+			player = new Player(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
+			player.facing = FlxObject.LEFT;
 			
 			super.create();
 		}

@@ -22,7 +22,7 @@ package com.chameleonquest.Projectiles
 		
 		override public function getDamage(Target:FlxSprite):int
 		{
-			return 0.1; // todo
+			return 1; // todo
 		}
 	}
 

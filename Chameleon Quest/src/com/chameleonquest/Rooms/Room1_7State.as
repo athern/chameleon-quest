@@ -17,8 +17,18 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 15;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
-			player.facing = FlxObject.LEFT;
+			
+			if (Main.lastRoom == 8)
+			{
+				player = new Player(1, ROOM_HEIGHT - 1);
+				player.facing = FlxObject.RIGHT;
+			}
+			else
+			{
+				player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
+				player.facing = FlxObject.LEFT;
+			}
+			
 			
 			enemies.add(new BossTurtle(5 * 16, 16 * 16, 16 * (ROOM_HEIGHT - 6)));
 			
@@ -31,7 +41,7 @@ package com.chameleonquest.Rooms
 			super.update();
 			
 			if (player.x < 0) {
-				player.x = 0
+				FlxG.switchState(new Room2_1State());
 			} else if (player.x > map.width - 16) {
 				FlxG.switchState(new Room1_6State());
 			}

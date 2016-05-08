@@ -7,6 +7,7 @@ package com.chameleonquest
 	import com.chameleonquest.Enemies.Spikes;
 	import com.chameleonquest.Enemies.Turtle;
 	import com.chameleonquest.Objects.ElementSource;
+	import com.chameleonquest.Objects.Grate;
 	import com.chameleonquest.Objects.Pile;
 	import com.chameleonquest.Objects.Pulley;
 	import com.chameleonquest.Objects.WaterFountain;
@@ -45,7 +46,7 @@ package com.chameleonquest
 
         override public function create():void
 		{
-			if (Main.lastRoom >= 1 && Main.lastRoom <= 6)
+			if (Main.lastRoom >= 1 && Main.lastRoom <= 9)
 			{
 				Background.buildBackground(this, 1);
 			}
@@ -110,6 +111,12 @@ package com.chameleonquest
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
 				
+				// water grate check
+				if (player.getType() != Player.WATER) {
+					FlxG.overlap(player, bgElems, null, passGrate);
+				}
+				
+				
 				if (FlxG.keys.justPressed("C")) {
 					FlxG.overlap(player, bgElems, null, changeElement);
 				}
@@ -120,6 +127,8 @@ package com.chameleonquest
 					player = Player.cloneFrom(player);
 					add(player.tongue);
 					add(player);
+					FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
+					FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 				}
 				
 				//Player is being squashed!
@@ -135,6 +144,12 @@ package com.chameleonquest
 				}
 			}
 
+		}
+		
+		private function passGrate(player:Player, elem:FlxSprite):void {
+			if (elem is Grate) {
+				FlxG.collide(player, elem);
+			}
 		}
 		
 		private function pickupRock(tongue:Tongue, elem:FlxSprite):void 
@@ -185,6 +200,8 @@ package com.chameleonquest
 				}
 				
 				add(player);
+				FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
+				FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 			}
 		}
 		
