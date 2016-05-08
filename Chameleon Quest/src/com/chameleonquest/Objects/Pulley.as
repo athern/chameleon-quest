@@ -19,7 +19,6 @@ package com.chameleonquest.Objects
 		private var bar2Y:int;
 		
 		private var VERTICAL_VEL:int = 20;
-		private var COOLDOWN_COLLISION:int = 1;
 		
 		public function Pulley(X1:int, Y1:int, X2:int, Y2:int) 
 		{

@@ -16,12 +16,15 @@ package com.chameleonquest.Objects
 		
 		protected var countdown:int;
 		
-		public function StoneGate(Xindex:int, Yfloorindex:int, dropclock:int=-1) 
+		protected var speed:int;
+		
+		public function StoneGate(Xindex:int, Yfloorindex:int, dropclock:int=-1, droptime:int=480) 
 		{
 			super(Xindex * 16, Yfloorindex * 16 - 48, img);
 			clock = dropclock;
 			startY = Yfloorindex * 16 - 48;
 			immovable = true;
+			speed = droptime;
 		}
 		
 		public static function lift(gate:StoneGate):void
@@ -35,7 +38,7 @@ package com.chameleonquest.Objects
 			
 			if (lifted == true && y > startY - 48)
 			{
-				y -= .4;
+				y -= 48/speed*4;
 			}
 			else if (lifted == true && countdown > 0)
 			{
@@ -47,10 +50,15 @@ package com.chameleonquest.Objects
 			}
 			else if (y < startY && lifted == false)
 			{
-				y += .1;
+				y += 48/speed;
 			}
 			
 			super.update();
+		}
+		
+		public static function drop(gate:StoneGate):void
+		{
+			gate.countdown = 0;
 		}
 		
 	}

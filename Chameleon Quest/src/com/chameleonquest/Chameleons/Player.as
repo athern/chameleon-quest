@@ -77,15 +77,8 @@ package com.chameleonquest.Chameleons
 		{
 			if(FlxG.keys.UP && jumpPhase == 0)
             {
-				if (velocity.y > 0 && !this.isTouching(FLOOR))
-				{
-					jumpPhase = MAX_JUMP_HOLD;
-				}
-				else
-				{
-					jumpPhase = 1;
-					velocity.y = -JUMP_SPEED;
-				}
+				jumpPhase = 1;
+				velocity.y = -JUMP_SPEED;
             }
 			else if (FlxG.keys.UP && jumpPhase > 0 && jumpPhase < MAX_JUMP_HOLD) 
 			{

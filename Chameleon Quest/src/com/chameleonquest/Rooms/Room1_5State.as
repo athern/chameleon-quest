@@ -34,7 +34,7 @@ package com.chameleonquest.Rooms
 			}
 			bgElems.add(new Pile(6, 15));
 			
-			pull = new Pulley(16 * 3, 16 * 15, 16 * 13, 16 * 15);
+			pull = new Pulley(16 * 3, 16 * 25, 16 * 13, 16 * 15);
 			turtles = new Array;
 			unstackedturtles = new Array;
 			for (var i:int = 0; i < 100; i++)

@@ -15,7 +15,6 @@ package com.chameleonquest.Enemies
 			this.maxX = MaxX;
 			health = 1;
 			power = 2;
-            maxVelocity.x = s;
 			
 			this.facing = LEFT;
 			velocity.x = -s;

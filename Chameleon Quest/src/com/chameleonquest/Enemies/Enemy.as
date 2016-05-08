@@ -1,6 +1,7 @@
 package com.chameleonquest.Enemies 
 {
 	import org.flixel.*;
+	import com.chameleonquest.Projectiles.*;
 	
 	public class Enemy extends FlxSprite
 	{
@@ -43,6 +44,11 @@ package com.chameleonquest.Enemies
 				flicker(1);
 				power = 0;
 			}
+		}
+		
+		public function hitWith(bullet:Projectile):void
+		{
+			hurt(bullet.getDamage(this));
 		}
 	}
 

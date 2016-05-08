@@ -1,5 +1,6 @@
 package com.chameleonquest.Enemies 
 {
+	import com.chameleonquest.Projectiles.Projectile;
 	import org.flixel.FlxG;
 	public class BossTurtle extends HorizontallyPatrollingEnemy
 	{
@@ -9,7 +10,7 @@ package com.chameleonquest.Enemies
 		private var savedMaxX:Number;
 		private var isFlipped:Boolean;
 		
-		private static const FLIP_TIMER:Number = 5;
+		private var flipTimer:Number = 8;
 		private var cooldown:Number;
 		
 		public function BossTurtle(MinX:Number, MaxX:Number, Y:Number) 
@@ -26,17 +27,16 @@ package com.chameleonquest.Enemies
 			height = 68;
 			offset.x = 16;
 			offset.y = 10;
-			
+			immovable = true;
 			health = 3;
 			power = 2;
-			this.acceleration.y = GRAVITY;
 			this.isFlipped = false;
 			this.cooldown = 0;
 		}
 		
 		public override function update():void
 		{
-			if (this.isFlipped && this.cooldown > FLIP_TIMER) {
+			if (this.isFlipped && this.cooldown > flipTimer) {
 				// flip the turtle back rightside up!
 				this.flip();
 			}
@@ -75,15 +75,19 @@ package com.chameleonquest.Enemies
 			}
 		}
 		
-		override public function hurt(damage:Number):void 
+		public static function flipBoss(boss:BossTurtle):void
 		{
-			if (this.isFlipped)
+			boss.flip();
+		}
+		
+		override public function hitWith(bullet:Projectile):void
+		{
+			if (this.isFlipped && bullet.y < y && bullet.x > x+4 && bullet.x+bullet.width < x + width - 4)
 			{
-				// boss turtle is invulnerable when it's not flipped!
-				super.hurt(damage);
-				
-				// flip it back over
-				this.flip();
+				hurt(bullet.getDamage(this));
+				speed += 20;
+				flipTimer -= 1.5;
+				flip();
 			}
 		}
 	}
