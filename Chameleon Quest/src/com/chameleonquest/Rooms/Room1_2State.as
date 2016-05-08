@@ -42,7 +42,7 @@ package com.chameleonquest.Rooms
 			//enemies.add(new Snake(new Array(new FlxPoint(16 * 16, 16 * (ROOM_HEIGHT - 15)), new FlxPoint(16 * 18, 16 * (ROOM_HEIGHT - 15)))));
 			enemies.add(new Bird(16 * 6, 16 * 20, 16 * (ROOM_HEIGHT - 22)));
 			
-			Turtle.addTutleStack(16 * 19, 16 * (ROOM_HEIGHT - 7), 3, enemies),
+			Turtle.addTurtleStack(16 * 19, 16 * (ROOM_HEIGHT - 7), 3, enemies),
 			
 			Main.lastRoom = 2;
 			super.create();
