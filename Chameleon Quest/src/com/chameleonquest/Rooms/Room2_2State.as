@@ -53,7 +53,7 @@ package com.chameleonquest.Rooms
 			intrELems.add(new WoodBlock(15, (ROOM_HEIGHT - 6)));
 			
 			
-			//enemies.add(new PoisonSnake(11 * 16, (ROOM_HEIGHT - 14) * 16));
+			enemies.add(new PoisonSnake(11 * 16, (ROOM_HEIGHT - 14) * 16));
 			enemies.add(new Bird(11 * 16, 18 * 16, (ROOM_HEIGHT - 20) * 16));
 			enemies.add(new Snake((ROOM_WIDTH - 7) * 16, (ROOM_WIDTH - 6) * 16, (ROOM_HEIGHT - 18) * 16));
 			
