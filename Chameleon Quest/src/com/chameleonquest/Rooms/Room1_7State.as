@@ -21,6 +21,8 @@ package com.chameleonquest.Rooms
 		
 		private var boss:BossTurtle;
 		
+		private var fanfare:Boolean;
+		
 		override public function create():void
 		{	
 			ROOM_WIDTH = 30;
@@ -52,6 +54,10 @@ package com.chameleonquest.Rooms
 			}
 			Main.lastRoom = 7;
 			super.create();
+			
+			
+			// for the boss celebration
+			fanfare = false;
 		}
 		
 		override public function update():void
@@ -72,6 +78,10 @@ package com.chameleonquest.Rooms
 			{
 				StoneGate.lift(leftgate);
 				StoneGate.lift(rightgate);
+				if (!fanfare) {
+					add(new Fanfare(8, 3));
+					fanfare = true;
+				}
 			}
 		}
 		

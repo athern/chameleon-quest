@@ -28,7 +28,7 @@ package com.chameleonquest.Rooms
 			elems.add(new PlatformOnRope(16 * 5, 16 * 19));
 			elems.add(new PlatformOnRope(16 * 18, 16 * 19));
 			elems.add(new PlatformOnRope(16 * 23, 16 * 19));
-			
+						
 			// add torch
 			bgElems.add(new Torch(2, (ROOM_HEIGHT - 11)));
 			

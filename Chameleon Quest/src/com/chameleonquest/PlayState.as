@@ -50,6 +50,9 @@ package com.chameleonquest
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
 				Background.buildBackground(this, 1);
+			} else if (Main.lastRoom >= 8 && Main.lastRoom <= 11)
+			{
+				Background.buildBackground(this, 2);
 			}
 			add(map);
 			add(elems);
