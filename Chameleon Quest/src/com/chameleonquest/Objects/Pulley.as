@@ -103,12 +103,12 @@ package com.chameleonquest.Objects
 		}
 		
 		public function addWeight(weightObj:FlxSprite, p:PlatformOnChain):void {
-			if (weightObj.x > platform1.x && weightObj.x < platform1.x + platform1.width) {
+			if (weightObj.x > platform1.x && weightObj.x < platform1.x + platform1.width && weightObj.y < platform1.y) {
 				if (plat1Obj.indexOf(weightObj) == -1) {
 					plat1Obj.push(weightObj);
 				}
 					
-			} else if (weightObj.x > platform2.x && weightObj.x < platform2.x + platform2.width) {
+			} else if (weightObj.x > platform2.x && weightObj.x < platform2.x + platform2.width && weightObj.y < platform2.y) {
 				if (plat2Obj.indexOf(weightObj) == -1) {
 					plat2Obj.push(weightObj);
 				}

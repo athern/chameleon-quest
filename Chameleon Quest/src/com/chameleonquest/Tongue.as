@@ -2,32 +2,44 @@ package com.chameleonquest
 {
 	import com.chameleonquest.Chameleons.Player;
 	import com.chameleonquest.interactiveObj.InteractiveObj;
-	import org.flixel.FlxObject;
-	import org.flixel.FlxSprite;
+	import org.flixel.*;
 	
 	public class Tongue extends FlxSprite
 	{
-		[Embed(source = "../../../assets/tongue.png")]public var tongue:Class;
+		[Embed(source = "../../../assets/tongueend.png")]public var tongue:Class;
 		public static const SPEED:int = 120;
 		public static const OFFSET:int = 5;
 		protected static const GRAVITY:int =800;
 		
 		private var player:Player;
-		private var extending:Boolean;
+		public var extending:Boolean;
 		private var hasRock:Boolean;
 		public var grabbedObject:InteractiveObj;
 		public var grabbedFacing:uint;
+		
+		private var segments:Array;
+		private var segmentCache:FlxGroup;
+		
+		private var extended:int;
 		
 		public function Tongue(player:Player)
 		{
 			super();
 			loadGraphic(tongue, false, true);
 			this.player = player;
-			immovable = true;
+			segments = new Array;
+			segments.push(this);
+			segmentCache = new FlxGroup();
+			height = 8;
+			for (var i:int = 0; i < 50; i++)
+			{
+				segmentCache.add(new TongueSegment( -16, -16));
+			}
 		}
 		
 		override public function update():void 
 		{
+			
 			if (!this.alive && this.finished)
 			{
 				this.exists = false;
@@ -46,46 +58,89 @@ package com.chameleonquest
 				
 				if (this.extending)
 				{
-					this.extending = (this.facing == LEFT && this.x > (player.x - this.width)) || (this.facing == RIGHT && this.x < (player.x + player.width));
+					this.extending = (this.facing == LEFT && this.x > (player.x - this.width) - 64) || (this.facing == RIGHT && this.x < (player.x + player.width) + 64);
 				}
 				else if ((this.facing == LEFT && this.x >= player.x - OFFSET) || (this.facing == RIGHT && this.x <= (player.x + player.width - this.width + OFFSET)))
 				{
 					cleanup();
 				}
-				
-				this.velocity.x = player.velocity.x + (this.extending ? 1 : -1) * (player.facing == RIGHT ? SPEED : -SPEED)
-				this.velocity.y = player.velocity.y;
+				if (this.extending)
+				{
+					extended += 2;
+				}
+				else
+				{
+					extended -= 2;
+				}
 				if (grabbedObject != null)
 				{
-					/*
-					if ((grabbedObject.isTouching(RIGHT) && this.velocity.x > 0) || (grabbedObject.isTouching(LEFT) && this.velocity.x < 0)
-						|| (player.facing != grabbedFacing))
+					grabbedObject.velocity.x = 0;
+					grabbedObject.velocity.y = 0;
+					if (player.facing == RIGHT)
 					{
-						grabbedObject.velocity.x = 0;
-						grabbedObject.velocity.y = 0;
-						grabbedObject = null;
+						if (grabbedObject.x > x + 15 && !(this.extending))
+						{
+							grabbedObject.velocity.x = -SPEED;
+						}
 					}
 					else
-					{*/
-						grabbedObject.velocity.x = 0;
-						grabbedObject.velocity.y = 0;
-						if (player.facing == RIGHT)
+					{
+						if (grabbedObject.x + grabbedObject.width > x && !(this.extending))
 						{
-							if (grabbedObject.x > x + 15)
-							{
-								grabbedObject.velocity.x = velocity.x;
-							}
+							grabbedObject.velocity.x = SPEED;
 						}
-						else
-						{
-							if (grabbedObject.x > x - 8)
-							{
-								grabbedObject.velocity.x = velocity.x;
-							}
-						}
-					//}
+					}
 				}
+				
 				super.update();
+				
+			}
+		}
+		
+		public function alignWithPlayer():void
+		{
+			y = player.y;
+			if (player.facing == RIGHT)
+			{
+				x = player.x + player.width + extended;
+			}
+			else
+			{
+				x = player.x - 16 - extended;
+			}
+			
+			for (var i:int = 1; i < segments.length; i++)
+			{
+				segments[i].y = y;
+				if (player.facing == RIGHT)
+				{
+					segments[i].x = x - 16 * i;
+					if (segments[i].x < player.x)
+					{
+						segments[i].kill();
+						segments.splice(i, 1);
+						i--;
+					}
+				}
+				if (player.facing == LEFT)
+				{
+					segments[i].x = x + 16 * i;
+					if (segments[i].x + segments[i].width > player.x + player.width)
+					{
+						segments[i].kill();
+						segments.splice(i, 1);
+						i--;
+					}
+				}
+			}
+			if ((player.facing == RIGHT && segments[segments.length - 1].x > player.x + player.width)
+				|| (player.facing == LEFT && segments[segments.length - 1].x + 16 < player.x))
+			{
+				var nowVisible:TongueSegment = segmentCache.getFirstAvailable() as TongueSegment;
+				nowVisible.reset(segments[segments.length - 1].x - ((player.facing == RIGHT) ? 16 : -16), segments[0].y);
+				segments.push(nowVisible);
+				var current:PlayState = FlxG.state as PlayState;
+				current.bgElems.add(nowVisible);
 			}
 		}
 		
@@ -101,7 +156,15 @@ package com.chameleonquest
 				grabbedObject.velocity.y = 0;
 				grabbedObject = null;
 			}
+			for (var i :int = 1; i < segments.length; i++)
+			{
+				segments[i].kill();
+				segments.splice(i, 1);
+				i--;
+			}
+			extended = 0;
 			this.kill();
+			
 		}
 		
 		public function pickupRock():void
@@ -113,13 +176,18 @@ package com.chameleonquest
 		// Sets the projectile to x,y moving in velocity x,y direction
 		public function shoot():void
 		{
-			var newX:Number = player.facing == LEFT ? player.x - OFFSET : player.x + player.width - this.width + OFFSET;
+			extended = 0;
+			for (var i :int = 1; i < segments.length; i++)
+			{
+				segments[i].kill();
+				segments.splice(i, 1);
+				i--;
+			}
+			var newX:Number = player.facing == LEFT ? player.x - OFFSET : player.x + player.width + OFFSET;
 			var newY:Number = player.y;
 			super.reset(newX, newY);
 			this.solid = true;
 			this.facing = player.facing;
-			this.velocity.x = player.velocity.x + (player.facing == RIGHT ? SPEED : -SPEED);
-			this.velocity.y = player.velocity.y;
 			this.extending = true;
 			this.hasRock = false;
 			grabbedObject = null;

@@ -21,6 +21,7 @@ package com.chameleonquest.Rooms
 			player = new Player(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
 			player.facing = FlxObject.LEFT;
 			
+			Main.lastRoom = 11;
 			super.create();
 		}
 		

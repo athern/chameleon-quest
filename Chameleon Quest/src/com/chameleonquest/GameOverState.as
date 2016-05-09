@@ -22,7 +22,7 @@ package com.chameleonquest
 		}
 		
 		override public function update():void
-		{
+		{								
 			// Start the play state
 			if (FlxG.keys.justPressed("SPACE"))
 			{

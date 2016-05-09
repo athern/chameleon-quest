@@ -27,7 +27,7 @@ package com.chameleonquest.Chameleons
 		public var tongue:Tongue;
 		protected var jumpPhase:int;
 		protected var invulnerability:int = 0;
-		protected var hasAmmo:Boolean;
+		public var hasAmmo:Boolean;
 		protected var cooldown:Number;
 		protected static const MAX_JUMP_HOLD:int = 15;
 		
@@ -126,6 +126,7 @@ package com.chameleonquest.Chameleons
 			
 			this.cooldown += FlxG.elapsed;	// ammo cooldown
 			invulnerability--;
+			
             super.update();
         }
 		
@@ -144,11 +145,18 @@ package com.chameleonquest.Chameleons
 					{
 						this.shoot();
 					}
-					else
+					else if (FlxG.keys.justPressed("SPACE"))
 					{
 						this.cooldown = 0;
 						tongue.shoot();
 					}
+				}
+			}
+			if (FlxG.keys.justReleased("SPACE"))
+			{
+				if (tongue.extending)
+				{
+					tongue.extending = false;
 				}
 			}
 		}

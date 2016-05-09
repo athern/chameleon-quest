@@ -6,6 +6,10 @@ package com.chameleonquest
 	{
 		[Embed(source = "../../../assets/bg-land.png")]
 		protected var Area1Land:Class;
+		[Embed(source = "../../../assets/bg-water.png")]
+		protected var Area2Land:Class;
+		[Embed(source = "../../../assets/bg-fire.png")]
+		protected var Area3Land:Class;
 		
 		[Embed(source = "../../../assets/bg-sky.png")]
 		protected var Area1Sky:Class;
@@ -18,7 +22,15 @@ package com.chameleonquest
 			{
 				loadGraphic(Area1Land);
 			}
-			if (area == 1 && land == false)
+			if (area == 2 && land == true)
+			{
+				loadGraphic(Area2Land);
+			}
+			if (area == 3 && land == true)
+			{
+				loadGraphic(Area3Land);
+			}
+			if (land == false)
 			{
 				loadGraphic(Area1Sky);
 			}

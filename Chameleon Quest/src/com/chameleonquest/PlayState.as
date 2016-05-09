@@ -39,6 +39,7 @@ package com.chameleonquest
 		
 		// heart bar
 		public var heartbar:HeartBar = new HeartBar();
+		public var ammoindicator:AmmoIndicator = new AmmoIndicator();
 		
 		// pause state
 		public var pauseText:FlxText;
@@ -49,6 +50,9 @@ package com.chameleonquest
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
 				Background.buildBackground(this, 1);
+			} else if (Main.lastRoom >= 8 && Main.lastRoom <= 11)
+			{
+				Background.buildBackground(this, 2);
 			}
 			add(map);
 			add(elems);
@@ -66,6 +70,8 @@ package com.chameleonquest
 			setupPauseHUD();
 			
 			add(heartbar);
+			add(ammoindicator);
+			add(ammoindicator.currentindicator);
 			super.create();
 			
 		}
@@ -92,16 +98,13 @@ package com.chameleonquest
 				FlxG.collide(projectiles, enemies, inflictProjectileDamage);
 				FlxG.collide(enemyProjectiles, map);
 				FlxG.collide(enemyProjectiles, player, inflictProjectileDamage);
+				FlxG.collide(enemyProjectiles, elems);
+				FlxG.collide(enemyProjectiles, intrELems);
 				FlxG.collide(enemies, map);
 				FlxG.collide(enemies, enemies, enemyFriendlyFire);
 				FlxG.collide(player, enemies, hurtPlayer);
 				FlxG.collide(player, map);
-				if (player.tongue != null)
-				{
-					FlxG.overlap(player.tongue, bgElems, null, pickupRock);
-					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
-					FlxG.overlap(player.tongue, intrELems, null, grabItem);
-				}
+				
 				FlxG.collide(elems, map);
 				FlxG.collide(player, elems, playerElemCollision);
 				// For Interactive game object collision
@@ -135,6 +138,29 @@ package com.chameleonquest
 				if (player.isTouching(FlxObject.UP) && player.isTouching(FlxObject.DOWN))
 				{
 					heartbar.hit(1);
+				}
+				
+				if (player.tongue != null)
+				{
+					player.tongue.alignWithPlayer();
+					FlxG.overlap(player.tongue, bgElems, null, pickupRock);
+					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
+					FlxG.overlap(player.tongue, intrELems, null, grabItem);
+					FlxG.collide(player.tongue, map);
+					FlxG.collide(player.tongue, elems);
+				}
+				
+				if (player is WaterChameleon)
+				{
+					ammoindicator.showWater();
+				}
+				else if (player.hasAmmo)
+				{
+					ammoindicator.showRock();
+				}
+				else
+				{
+					ammoindicator.showTongue();
 				}
 
 				// check for game over
@@ -295,6 +321,7 @@ package com.chameleonquest
 			{
 				tongue.grabbedObject = item;
 				tongue.grabbedFacing = player.facing;
+				tongue.extending = false;
 			}
 		}
     }

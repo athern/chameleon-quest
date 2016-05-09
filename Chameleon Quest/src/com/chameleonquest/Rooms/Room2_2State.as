@@ -13,6 +13,8 @@ package com.chameleonquest.Rooms
 		[Embed(source = "../../../../assets/mapCSV_2-2_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
+		public var grates:FlxGroup = new FlxGroup();
+		
 		override public function create():void
 		{
 			ROOM_WIDTH = 30;
@@ -34,9 +36,11 @@ package com.chameleonquest.Rooms
 			
 			bgElems.add(new Pile(ROOM_WIDTH - 7, 8));
 			
-			bgElems.add(new Grate(ROOM_WIDTH - 4, ROOM_HEIGHT - 8));
-			bgElems.add(new Grate(ROOM_WIDTH - 3, ROOM_HEIGHT - 8));
-			bgElems.add(new Grate(ROOM_WIDTH - 2, ROOM_HEIGHT - 8));
+			grates.add(new Grate(ROOM_WIDTH - 4, ROOM_HEIGHT - 8));
+			grates.add(new Grate(ROOM_WIDTH - 3, ROOM_HEIGHT - 8));
+			grates.add(new Grate(ROOM_WIDTH - 2, ROOM_HEIGHT - 8));
+			
+			bgElems.add(grates);
 			
 			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 8));
 			
@@ -47,6 +51,11 @@ package com.chameleonquest.Rooms
 			intrELems.add(new Button(11, 1, gate, StoneGate.lift, 100, 180));
 			
 			intrELems.add(new WoodBlock(15, (ROOM_HEIGHT - 6)));
+			
+			
+			enemies.add(new PoisonSnake(11 * 16, (ROOM_HEIGHT - 14) * 16));
+			enemies.add(new Bird(11 * 16, 18 * 16, (ROOM_HEIGHT - 20) * 16));
+			enemies.add(new Snake((ROOM_WIDTH - 7) * 16, (ROOM_WIDTH - 6) * 16, (ROOM_HEIGHT - 18) * 16));
 			
 			Main.lastRoom = 9;
 
@@ -63,10 +72,15 @@ package com.chameleonquest.Rooms
 		{
 			super.update();
 			
-			if (player.x < 0 && player.y >= ROOM_HEIGHT - 7) {
-				FlxG.switchState(new Room2_1State());
-			} else if (player.x < 0 && player.y >= ROOM_HEIGHT - 16) {
+			// water grate check
+			if (player.getType() != Player.WATER) {
+				FlxG.collide(player, grates);					
+			}
+			
+			if (player.x < 0 && player.y > ROOM_HEIGHT - 17) {
 				FlxG.switchState(new Room2_3State());
+			} else if (player.x < 0 && player.y > ROOM_HEIGHT - 6) {
+				FlxG.switchState(new Room2_1State());
 			}
 		}
 		
