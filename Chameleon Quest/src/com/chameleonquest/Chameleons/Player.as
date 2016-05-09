@@ -144,11 +144,18 @@ package com.chameleonquest.Chameleons
 					{
 						this.shoot();
 					}
-					else
+					else if (FlxG.keys.justPressed("SPACE"))
 					{
 						this.cooldown = 0;
 						tongue.shoot();
 					}
+				}
+			}
+			if (FlxG.keys.justReleased("SPACE"))
+			{
+				if (tongue.extending)
+				{
+					tongue.extending = false;
 				}
 			}
 		}

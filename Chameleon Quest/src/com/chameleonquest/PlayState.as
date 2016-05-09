@@ -136,6 +136,11 @@ package com.chameleonquest
 				{
 					heartbar.hit(1);
 				}
+				
+				if (player.tongue != null)
+				{
+					player.tongue.alignWithPlayer();
+				}
 
 				// check for game over
 				if (heartbar.isEmpty()) {
@@ -295,6 +300,7 @@ package com.chameleonquest
 			{
 				tongue.grabbedObject = item;
 				tongue.grabbedFacing = player.facing;
+				tongue.extending = false;
 			}
 		}
     }
