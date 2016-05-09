@@ -11,7 +11,7 @@ package com.chameleonquest.Objects
 		
 		public function PlatformOnChain(X:int, Y:int) 
 		{
-			super(new Array(new FlxPoint(X, Y)), 0);
+			super(new Array(new FlxPoint(X+24, Y+8)), 0);
 			chain = new Array;
 			lastY = Y;
 			for (var i:int = Y-16; i >= 0; i -= 16) {

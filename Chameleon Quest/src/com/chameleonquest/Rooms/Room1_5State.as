@@ -27,6 +27,7 @@ package com.chameleonquest.Rooms
 			if (Main.lastRoom == 6)
 			{
 				player = new Player(0, 29);
+				pull = new Pulley(16 * 3, 16 * 10, 16 * 13, 16 * 15);
 			}
 			else
 			{
@@ -39,8 +40,11 @@ package com.chameleonquest.Rooms
 			unstackedturtles = new Array;
 			for (var i:int = 0; i < 100; i++)
 			{
-				turtles.push(new Turtle(16 * 9, 16 * 29 - 16 * i));
+				turtles.push(new Turtle(16 * 9, 16 * 44 - 16 * i));
 			}
+			enemies.add(new PoisonSnake(16, 15 * 16));
+			enemies.add(new PoisonSnake(16, 19 * 16));
+			enemies.add(new PoisonSnake(16, 23 * 16));
 			
 			for (var j:int = 0; j < 100; j++)
 			{
