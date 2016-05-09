@@ -32,7 +32,7 @@ package com.chameleonquest.Rooms
 			
 			player.facing = FlxObject.LEFT;
 			
-			elems.add(new Platform(new Array(new FlxPoint(18*16, 16 * 6), new FlxPoint(22 * 16, 16*5)), 60));
+			elems.add(new Platform(new Array(new FlxPoint(18*16, 16 * 5), new FlxPoint(23 * 16, 16*5)), 60));
 			
 			// add spikes
 			Spikes.addSpikeRow(3, ROOM_HEIGHT - 1, 5, enemies);
