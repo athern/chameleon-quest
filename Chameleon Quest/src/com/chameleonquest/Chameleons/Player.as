@@ -126,6 +126,7 @@ package com.chameleonquest.Chameleons
 			
 			this.cooldown += FlxG.elapsed;	// ammo cooldown
 			invulnerability--;
+			
             super.update();
         }
 		

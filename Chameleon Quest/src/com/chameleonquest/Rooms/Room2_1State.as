@@ -13,6 +13,8 @@ package com.chameleonquest.Rooms
 		[Embed(source = "../../../../assets/mapCSV_2-1_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
+		public var grates:FlxGroup = new FlxGroup();
+		
 		override public function create():void
 		{
 			ROOM_WIDTH = 30;
@@ -43,8 +45,10 @@ package com.chameleonquest.Rooms
 			
 			bgElems.add(new WaterFountain(ROOM_WIDTH - 9, ROOM_HEIGHT - 3));
 			
-			bgElems.add(new Grate(ROOM_WIDTH - 3, 2));
-			bgElems.add(new Grate(ROOM_WIDTH - 3, 3));
+			grates.add(new Grate(ROOM_WIDTH - 3, 2));
+			grates.add(new Grate(ROOM_WIDTH - 3, 3));
+			
+			bgElems.add(grates);
 			
 			Main.lastRoom = 8;
 			
@@ -60,6 +64,11 @@ package com.chameleonquest.Rooms
 		override public function update():void
 		{
 			super.update();
+			
+			// water grate check
+			if (player.getType() != Player.WATER) {
+				FlxG.collide(player, grates);					
+			}
 			
 			if (player.x > ROOM_WIDTH * 16 - 16 && player.y <= 4*16) {
 				FlxG.switchState(new Room2_2State());
