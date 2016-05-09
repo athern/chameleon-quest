@@ -50,8 +50,6 @@ package com.chameleonquest
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
 				Background.buildBackground(this, 1);
-			} else if (Main.lastRoom >= 8 && Main.lastRoom <= 11) {
-				Background.buildBackground(this, 2);
 			}
 			add(map);
 			add(elems);
@@ -103,12 +101,7 @@ package com.chameleonquest
 				FlxG.collide(enemies, enemies, enemyFriendlyFire);
 				FlxG.collide(player, enemies, hurtPlayer);
 				FlxG.collide(player, map);
-				if (player.tongue != null)
-				{
-					FlxG.overlap(player.tongue, bgElems, null, pickupRock);
-					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
-					FlxG.overlap(player.tongue, intrELems, null, grabItem);
-				}
+				
 				FlxG.collide(elems, map);
 				FlxG.collide(player, elems, playerElemCollision);
 				// For Interactive game object collision
@@ -117,6 +110,12 @@ package com.chameleonquest
 				FlxG.collide(player, intrELems);
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
+				
+				// water grate check
+				if (player.getType() != Player.WATER) {
+					FlxG.overlap(player, bgElems, null, passGrate);					
+				}
+				
 				
 				if (FlxG.keys.justPressed("C")) {
 					FlxG.overlap(player, bgElems, null, changeElement);
@@ -141,6 +140,11 @@ package com.chameleonquest
 				if (player.tongue != null)
 				{
 					player.tongue.alignWithPlayer();
+					FlxG.overlap(player.tongue, bgElems, null, pickupRock);
+					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
+					FlxG.overlap(player.tongue, intrELems, null, grabItem);
+					FlxG.collide(player.tongue, map);
+					FlxG.collide(player.tongue, elems);
 				}
 				
 				if (player is WaterChameleon)
@@ -163,6 +167,13 @@ package com.chameleonquest
 				}
 			}
 
+		}
+		
+		// TODO: issue when player try to pass the grate (could crash the game)
+		private function passGrate(player:Player, elem:FlxSprite):void {
+			if (elem is Grate) {
+				FlxG.collide(player, elem);
+			}
 		}
 		
 		private function pickupRock(tongue:Tongue, elem:FlxSprite):void 

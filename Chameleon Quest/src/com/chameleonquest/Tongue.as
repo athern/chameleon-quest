@@ -27,10 +27,10 @@ package com.chameleonquest
 			super();
 			loadGraphic(tongue, false, true);
 			this.player = player;
-			immovable = true;
 			segments = new Array;
 			segments.push(this);
 			segmentCache = new FlxGroup();
+			height = 8;
 			for (var i:int = 0; i < 50; i++)
 			{
 				segmentCache.add(new TongueSegment( -16, -16));
