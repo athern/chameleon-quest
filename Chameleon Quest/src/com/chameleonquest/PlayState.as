@@ -50,6 +50,8 @@ package com.chameleonquest
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
 				Background.buildBackground(this, 1);
+			} else if (Main.lastRoom >= 8 && Main.lastRoom <= 11) {
+				Background.buildBackground(this, 2);
 			}
 			add(map);
 			add(elems);
@@ -116,12 +118,6 @@ package com.chameleonquest
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
 				
-				// water grate check
-				if (player.getType() != Player.WATER) {
-					FlxG.overlap(player, bgElems, null, passGrate);					
-				}
-				
-				
 				if (FlxG.keys.justPressed("C")) {
 					FlxG.overlap(player, bgElems, null, changeElement);
 				}
@@ -167,13 +163,6 @@ package com.chameleonquest
 				}
 			}
 
-		}
-		
-		// TODO: issue when player try to pass the grate (could crash the game)
-		private function passGrate(player:Player, elem:FlxSprite):void {
-			if (elem is Grate) {
-				FlxG.collide(player, elem);
-			}
 		}
 		
 		private function pickupRock(tongue:Tongue, elem:FlxSprite):void 
