@@ -26,19 +26,6 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 15;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			
-			if (Main.lastRoom == 8)
-			{
-				player = new Player(1, ROOM_HEIGHT - 1);
-				player.facing = FlxObject.RIGHT;
-			}
-			else
-			{
-				player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
-				player.facing = FlxObject.LEFT;
-			}
-			
-			
 			boss = new BossTurtle(7 * 16, 16 * 16, 16 * (ROOM_HEIGHT - 5));
 			enemies.add(boss);
 			elems.add(new Platform(new Array(new FlxPoint(10 * 16, 4 * 16), new FlxPoint(10 * 16, 9 * 16)), 50));
@@ -51,6 +38,18 @@ package com.chameleonquest.Rooms
 			elems.add(rightgate);
 			StoneGate.lift(leftgate);
 			StoneGate.lift(rightgate);
+			if (Main.lastRoom == 8)
+			{
+				player = new Player(0, ROOM_HEIGHT - 1);
+				player.facing = FlxObject.RIGHT;
+				enteredBossChamber = true;
+				boss.kill();
+			}
+			else
+			{
+				player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
+				player.facing = FlxObject.LEFT;
+			}
 			Main.lastRoom = 7;
 			super.create();
 		}
