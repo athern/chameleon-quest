@@ -39,6 +39,7 @@ package com.chameleonquest
 		
 		// heart bar
 		public var heartbar:HeartBar = new HeartBar();
+		public var ammoindicator:AmmoIndicator = new AmmoIndicator();
 		
 		// pause state
 		public var pauseText:FlxText;
@@ -68,6 +69,8 @@ package com.chameleonquest
 			setupPauseHUD();
 			
 			add(heartbar);
+			add(ammoindicator);
+			add(ammoindicator.currentindicator);
 			super.create();
 			
 		}
@@ -136,6 +139,19 @@ package com.chameleonquest
 				if (player.tongue != null)
 				{
 					player.tongue.alignWithPlayer();
+				}
+				
+				if (player is WaterChameleon)
+				{
+					ammoindicator.showWater();
+				}
+				else if (player.hasAmmo)
+				{
+					ammoindicator.showRock();
+				}
+				else
+				{
+					ammoindicator.showTongue();
 				}
 
 				// check for game over

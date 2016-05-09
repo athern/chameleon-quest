@@ -27,7 +27,7 @@ package com.chameleonquest.Chameleons
 		public var tongue:Tongue;
 		protected var jumpPhase:int;
 		protected var invulnerability:int = 0;
-		protected var hasAmmo:Boolean;
+		public var hasAmmo:Boolean;
 		protected var cooldown:Number;
 		protected static const MAX_JUMP_HOLD:int = 15;
 		
