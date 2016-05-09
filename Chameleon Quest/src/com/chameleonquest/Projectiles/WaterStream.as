@@ -14,9 +14,9 @@ package com.chameleonquest.Projectiles
 			scale.x = .5;
 			scale.y = .5;
 			width = 16;
-			height = 16;
+			height = 8;
 			offset.x = 8;
-			offset.y = 8;
+			offset.y = 12;
 			this.exists = false;
 		}
 		

@@ -145,7 +145,11 @@ package com.chameleonquest
 					player.tongue.alignWithPlayer();
 				}
 				
-				if (player.hasAmmo)
+				if (player is WaterChameleon)
+				{
+					ammoindicator.showWater();
+				}
+				else if (player.hasAmmo)
 				{
 					ammoindicator.showRock();
 				}

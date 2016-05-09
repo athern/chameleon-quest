@@ -12,6 +12,9 @@ package com.chameleonquest
 		[Embed(source = "../../../assets/rock.png")]
 		public var rockimg:Class;
 		
+		[Embed(source = "../../../assets/water-stream-head.png")]
+		public var waterimg:Class;
+		
 		public var currentindicator:FlxSprite;
 		
 		public function AmmoIndicator() 
@@ -27,6 +30,8 @@ package com.chameleonquest
 		public function showRock():void
 		{
 			currentindicator.loadGraphic(rockimg);
+			currentindicator.scale.x = 1;
+			currentindicator.scale.y = 1;
 			currentindicator.x = x + 7;
 			currentindicator.y = y + 12;
 		}
@@ -34,8 +39,19 @@ package com.chameleonquest
 		public function showTongue():void
 		{
 			currentindicator.loadGraphic(tongueimg);
+			currentindicator.scale.x = 1;
+			currentindicator.scale.y = 1;
 			currentindicator.x = x + 3;
 			currentindicator.y = y + 9;
+		}
+		
+		public function showWater():void
+		{
+			currentindicator.loadGraphic(waterimg);
+			currentindicator.scale.x = .5;
+			currentindicator.scale.y = .5;
+			currentindicator.x = x-4;
+			currentindicator.y = y;
 		}
 		
 	}

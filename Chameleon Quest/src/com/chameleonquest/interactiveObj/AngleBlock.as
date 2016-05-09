@@ -30,37 +30,40 @@ package com.chameleonquest.interactiveObj
 		
 		override public function hit(bullet:Projectile):void
 		{
-			if (angle == 90 && bullet.facing == LEFT)
+			if (bullet is Rock)
 			{
-				bullet.shoot(x-2, y + 5, 0, 200);
-			}
-			if (angle == 0 && bullet.facing == LEFT)
-			{
-				bullet.shoot(x - 2, y - 5, 0, -200);
-			}
-			if (angle == 180 && bullet.facing == RIGHT)
-			{
-				bullet.shoot(x - 2, y + 5, 0, 200);
-			}
-			if (angle == 270 && bullet.facing == RIGHT)
-			{
-				bullet.shoot(x - 2, y - 5, 0, -200);
-			}
-			if (angle == 0 && bullet.facing == DOWN)
-			{
-				bullet.shoot(x + 5, y - 2, 200, 0);
-			}
-			if (angle == 90 && bullet.facing == UP)
-			{
-				bullet.shoot(x + 5, y - 2, 200, 0);
-			}
-			if (angle == 180 && bullet.facing == UP)
-			{
-				bullet.shoot(x - 5, y - 2, -200, 0);
-			}
-			if (angle == 270 && bullet.facing == DOWN)
-			{
-				bullet.shoot(x - 5, y - 2, -200, 0);
+				if (angle == 90 && bullet.facing == LEFT)
+				{
+					bullet.shoot(x-2, y + 5, 0, 200);
+				}
+				if (angle == 0 && bullet.facing == LEFT)
+				{
+					bullet.shoot(x - 2, y - 5, 0, -200);
+				}
+				if (angle == 180 && bullet.facing == RIGHT)
+				{
+					bullet.shoot(x - 2, y + 5, 0, 200);
+				}
+				if (angle == 270 && bullet.facing == RIGHT)
+				{
+					bullet.shoot(x - 2, y - 5, 0, -200);
+				}
+				if (angle == 0 && bullet.facing == DOWN)
+				{
+					bullet.shoot(x + 5, y - 2, 200, 0);
+				}
+				if (angle == 90 && bullet.facing == UP)
+				{
+					bullet.shoot(x + 5, y - 2, 200, 0);
+				}
+				if (angle == 180 && bullet.facing == UP)
+				{
+					bullet.shoot(x - 5, y - 2, -200, 0);
+				}
+				if (angle == 270 && bullet.facing == DOWN)
+				{
+					bullet.shoot(x - 5, y - 2, -200, 0);
+				}
 			}
 		}
 		
