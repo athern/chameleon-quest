@@ -7,10 +7,10 @@ package com.chameleonquest.Rooms
 	import com.chameleonquest.*;
 	import com.chameleonquest.Objects.*;
 	
-	public class Room2_4State extends PlayState
+	public class Room2_5State extends PlayState
 	{
 		
-		[Embed(source = "../../../../assets/mapCSV_2-4_Map.csv", mimeType = "application/octet-stream")]
+		[Embed(source = "../../../../assets/mapCSV_2-5_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
 		override public function create():void
@@ -18,17 +18,10 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(ROOM_WIDTH - 1, 6);
+			player = new Player(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
 			player.facing = FlxObject.LEFT;
 			
-			var gate:StoneGate = new StoneGate(11, 6, -1);
-			elems.add(gate);
-			
-			intrELems.add(new WaterWheel(13, 7, gate, StoneGate.lift));
-			
-			bgElems.add(new WaterFountain(16, 4));
-			
-			Main.lastRoom = 11;
+			Main.lastRoom = 12;
 			super.create();
 		}
 		

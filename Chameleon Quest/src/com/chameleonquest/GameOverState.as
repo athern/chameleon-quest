@@ -22,7 +22,7 @@ package com.chameleonquest
 		}
 		
 		override public function update():void
-		{								
+		{
 			// Start the play state
 			if (FlxG.keys.justPressed("SPACE"))
 			{
@@ -49,6 +49,26 @@ package com.chameleonquest
 			else if (Main.lastRoom == 4)
 			{
 				FlxG.switchState(new Room1_4State());
+			}
+			else if (Main.lastRoom == 5)
+			{
+				FlxG.switchState(new Room1_5State());
+			}
+			else if (Main.lastRoom == 6)
+			{
+				FlxG.switchState(new Room1_6State());
+			}
+			else if (Main.lastRoom == 7)
+			{
+				FlxG.switchState(new Room1_7State());
+			}
+			else if (Main.lastRoom == 8)
+			{
+				FlxG.switchState(new Room2_1State());
+			}
+			else if (Main.lastRoom >= 9)
+			{
+				FlxG.switchState(new Room2_2State());
 			}
 			else
 			{

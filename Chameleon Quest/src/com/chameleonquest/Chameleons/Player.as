@@ -143,10 +143,12 @@ package com.chameleonquest.Chameleons
 				{
 					if (this.hasAmmo)
 					{
+						//logger.logAction(7, {"tongue":0, "rock": 1});
 						this.shoot();
 					}
 					else if (FlxG.keys.justPressed("SPACE"))
 					{
+						//logger.logAction(7, {"tongue":1, "rock": 0});
 						this.cooldown = 0;
 						tongue.shoot();
 					}
