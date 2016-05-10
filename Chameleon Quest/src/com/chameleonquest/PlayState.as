@@ -72,7 +72,6 @@ package com.chameleonquest
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 			
-			
 			setupPauseHUD();
 			
 			add(heartbar);

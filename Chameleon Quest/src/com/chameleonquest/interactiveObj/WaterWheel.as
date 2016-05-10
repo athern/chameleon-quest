@@ -1,13 +1,14 @@
 package com.chameleonquest.interactiveObj 
 {
 	import org.flixel.*;
+	import com.chameleonquest.Projectiles.*;
 	
 	public class WaterWheel extends InteractiveObj
 	{
 		
 		[Embed(source = "../../../../assets/water-wheel.png")]public var wheelImg:Class;
 		
-		public function WaterWheel(Xindex:int, Yindex:int) 
+		public function WaterWheel(Xindex:int, Yindex:int, obj:FlxSprite, fun:Function) 
 		{
 			super(Xindex * 16, Yindex * 16);
 			loadGraphic(wheelImg, true, true, 128, 128);
@@ -21,6 +22,9 @@ package com.chameleonquest.interactiveObj
 			immovable = true;
 		}
 		
+		override public function hit(bullet:Projectile):void {
+			angle += 5;
+		}
 	}
 
 }

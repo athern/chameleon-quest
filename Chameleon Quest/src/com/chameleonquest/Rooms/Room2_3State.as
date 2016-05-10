@@ -68,7 +68,7 @@ package com.chameleonquest.Rooms
 			}
 			
 			if (player.x < 0) {
-				FlxG.switchState(new Room2_4State());
+				FlxG.switchState(new Room2_5State());
 			}
 			
 			if (player.x > map.width - 16) {
