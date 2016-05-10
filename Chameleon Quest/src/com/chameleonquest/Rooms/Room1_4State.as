@@ -20,10 +20,12 @@ package com.chameleonquest.Rooms
 			ROOM_HEIGHT = 15;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			if (Main.lastRoom == 5) {
+				// logger.logLevelStart(1, {"src": 5});
 				player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
 				player.facing = FlxObject.LEFT;
 			}
 			else {
+				// logger.logLevelStart(1, {"src": 3});
 				player = new Player(0, ROOM_HEIGHT - 1);
 			}
 			
@@ -45,10 +47,12 @@ package com.chameleonquest.Rooms
 			super.update();
 			
 			if (player.x < 0) {
+				//logger.logLevelEnd({"dest": 3, "time": playtime});
 				FlxG.switchState(new Room1_3State());
 			}
 			
 			if (player.x > map.width - 16) {
+				//logger.logLevelEnd({"dest": 5, "time": playtime});
 				FlxG.switchState(new Room1_5State());
 			}
 		}

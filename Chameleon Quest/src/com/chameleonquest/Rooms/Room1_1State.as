@@ -24,10 +24,12 @@ package com.chameleonquest.Rooms
 			Spikes.addSpikeRow(27, ROOM_HEIGHT - 1, 4, enemies);
 			
 			if (Main.lastRoom == 2) {
+				// logger.logLevelStart(1, {"src": 2});
 				player = new Player(ROOM_WIDTH-3, ROOM_HEIGHT-1);
 				player.facing = FlxObject.LEFT;
 			}
 			else {
+				// logger.logLevelStart(1, {"src": 0});
 				player = new Player(0, ROOM_HEIGHT-1);
 			}
 			
@@ -69,6 +71,7 @@ package com.chameleonquest.Rooms
 				player.velocity.y = 0;
 			}
 			if (player.x > map.width - 16) {
+				//logger.logLevelEnd({"dest": 2, "time": playtime});
 				FlxG.switchState(new Room1_2State());
 			}
 		}

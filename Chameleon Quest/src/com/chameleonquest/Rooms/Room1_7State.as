@@ -42,6 +42,7 @@ package com.chameleonquest.Rooms
 			StoneGate.lift(rightgate);
 			if (Main.lastRoom == 8)
 			{
+				// logger.logLevelStart(1, {"src": 8});
 				player = new Player(0, ROOM_HEIGHT - 1);
 				player.facing = FlxObject.RIGHT;
 				enteredBossChamber = true;
@@ -49,6 +50,7 @@ package com.chameleonquest.Rooms
 			}
 			else
 			{
+				// logger.logLevelStart(1, {"src": 6});
 				player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
 				player.facing = FlxObject.LEFT;
 			}
@@ -70,12 +72,15 @@ package com.chameleonquest.Rooms
 				StoneGate.drop(rightgate);
 			}
 			if (player.x < 0) {
+				//logger.logLevelEnd({"dest": 8, "time": playtime});
 				FlxG.switchState(new Room2_1State());
 			} else if (player.x > map.width - 16) {
+				//logger.logLevelEnd({"dest": 6, "time": playtime});
 				FlxG.switchState(new Room1_6State());
 			}
 			if (boss.health <= 0)
 			{
+				//logger.logAction(8, {"boss": "water"});
 				StoneGate.lift(leftgate);
 				StoneGate.lift(rightgate);
 				if (!fanfare) {

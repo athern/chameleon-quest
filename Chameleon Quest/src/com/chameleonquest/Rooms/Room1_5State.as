@@ -26,11 +26,13 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			if (Main.lastRoom == 6)
 			{
+				// logger.logLevelStart(1, {"src": 6});
 				player = new Player(0, 29);
 				pull = new Pulley(16 * 3, 16 * 10, 16 * 13, 16 * 15);
 			}
 			else
 			{
+				// logger.logLevelStart(1, {"src": 4});
 				player = new Player(0, 14);
 			}
 			bgElems.add(new Pile(6, 15));
@@ -88,9 +90,11 @@ package com.chameleonquest.Rooms
 				}
 			}
 			
-			if (player.x < 0 && player.y > 20*16) {
+			if (player.x < 0 && player.y > 20 * 16) {
+				//logger.logLevelEnd({"dest": 6, "time": playtime});
 				FlxG.switchState(new Room1_6State());
 			} else if (player.x < 0 && player.y > 13 * 16) {
+				//logger.logLevelEnd({"dest": 4, "time": playtime});
 				FlxG.switchState(new Room1_4State());
 			}
 		}
