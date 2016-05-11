@@ -28,7 +28,7 @@ package com.chameleonquest.Rooms
 			{
 				// logger.logLevelStart(1, {"src": 6});
 				player = new Player(0, 29);
-				pull = new Pulley(16 * 3, 16 * 10, 16 * 19, 16 * 17);
+				pull = new Pulley(16 * 3, 16 * 10, 16 * 19, 16 * 17, 2);
 			}
 			else
 			{
@@ -37,7 +37,7 @@ package com.chameleonquest.Rooms
 			}
 			bgElems.add(new Pile(10, 15));
 			
-			pull = new Pulley(16 * 3, 16 * 25, 16 * 19, 16 * 17);
+			pull = new Pulley(16 * 3, 16 * 25, 16 * 19, 16 * 17, 2);
 			turtles = new Array;
 			unstackedturtles = new Array;
 			for (var i:int = 0; i < 100; i++)
