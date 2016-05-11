@@ -146,10 +146,6 @@ package com.chameleonquest
 		
 		public function cleanup():void
 		{
-			if (this.hasRock)
-			{
-				player.assignRock();
-			}
 			if (grabbedObject != null)
 			{
 				grabbedObject.velocity.x = 0;
@@ -169,8 +165,8 @@ package com.chameleonquest
 		
 		public function pickupRock():void
 		{
-			// TODO: switch to tongue + rock sprite
-			this.hasRock = true;
+			player.assignRock();
+			extending = false;
 		}
 		
 		// Sets the projectile to x,y moving in velocity x,y direction

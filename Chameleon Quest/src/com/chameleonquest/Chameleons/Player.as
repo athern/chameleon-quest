@@ -23,6 +23,7 @@ package com.chameleonquest.Chameleons
 		protected static const JUMP_SPEED:int = 200;
 		protected static const SHOOT_DELAY:Number = .4;
 		protected static const RUN_ACCELERATION:int = 1000;
+		protected static const INVULNERABILITY_TIMER:int = 30;
 		
 		public var tongue:Tongue;
 		protected var jumpPhase:int;
@@ -137,7 +138,7 @@ package com.chameleonquest.Chameleons
 		
 		protected function handleShooting():void 
 		{
-			if (FlxG.keys.SPACE)
+			if (FlxG.keys.justPressed("SPACE"))
 			{
 				if (this.cooldown > SHOOT_DELAY)
 				{
@@ -146,7 +147,7 @@ package com.chameleonquest.Chameleons
 						//logger.logAction(7, {"tongue":0, "rock": 1});
 						this.shoot();
 					}
-					else if (FlxG.keys.justPressed("SPACE"))
+					else
 					{
 						//logger.logAction(7, {"tongue":1, "rock": 0});
 						this.cooldown = 0;
@@ -198,26 +199,30 @@ package com.chameleonquest.Chameleons
 			return new Rock();
 		}
 		
-		//returns damage actually taken
-		public function reactToDamage(source:Enemy):int {
+		// returns damage actually taken
+		public function reactToDamage(source:Enemy=null):int {
 			if (invulnerability > 0) {
 				return 0;
 			}
-			invulnerability = 30;
-			
-			if (source.x > x) {
-				velocity.x -= Math.random() * 100 + 200;
+			invulnerability = INVULNERABILITY_TIMER;
+			flicker(INVULNERABILITY_TIMER / 60);
+			if (source != null)
+			{
+				if (source.x > x && source.x > x + width) {
+					velocity.x = -Math.random() * 100 - 200;
+				}
+				if (source.x < x && source.x + source.width < x) {
+					velocity.x = Math.random() * 100 + 200;
+				}
+				if (source.y > y) {
+					velocity.y = -Math.random() * 100 - 200;
+				}
+				if (source.y < y) {
+					velocity.y = Math.random() * 100 + 200;
+				}
+				return source.power;
 			}
-			if (source.x < x) {
-				velocity.x += Math.random() * 100 + 200;
-			}
-			if (source.y > y) {
-				velocity.y -= Math.random() * 100 + 200;
-			}
-			if (source.y < y) {
-				velocity.y += Math.random() * 100 + 200;
-			}
-			return source.power;
+			return 1;
 		}
     }
 

@@ -6,9 +6,11 @@ package com.chameleonquest
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
 	import com.chameleonquest.Enemies.Turtle;
+	import com.chameleonquest.Objects.ChainSegment;
 	import com.chameleonquest.Objects.ElementSource;
 	import com.chameleonquest.Objects.Grate;
 	import com.chameleonquest.Objects.Pile;
+	import com.chameleonquest.Objects.PlatformOnChain;
 	import com.chameleonquest.Objects.Pulley;
 	import com.chameleonquest.Objects.WaterFountain;
 	import com.chameleonquest.Projectiles.Projectile;
@@ -114,6 +116,8 @@ package com.chameleonquest
 				FlxG.collide(enemies, enemies, enemyFriendlyFire);
 				FlxG.collide(player, enemies, hurtPlayer);
 				FlxG.collide(player, map);
+				FlxG.collide(enemies, elems);
+				FlxG.overlap(enemies, bgElems, null, enemyBackgroundCheck);
 				
 				FlxG.collide(elems, map);
 				FlxG.collide(player, elems, playerElemCollision);
@@ -149,7 +153,7 @@ package com.chameleonquest
 				//Player is being squashed!
 				if (player.isTouching(FlxObject.UP) && player.isTouching(FlxObject.DOWN))
 				{
-					heartbar.hit(1);
+					heartbar.hit(player.reactToDamage());
 				}
 				
 				if (player.tongue != null)
@@ -244,6 +248,10 @@ package com.chameleonquest
 		}
 		
 		public function playerElemCollision(player:Player, elem:FlxObject):void {
+			if (elem is PlatformOnChain)
+			{
+				(elem as PlatformOnChain).pulley.addWeight(player);
+			}
 			if (player.isTouching(FlxObject.FLOOR)) {
 				player.velocityModifiers.x = elem.velocity.x;
 				player.velocityModifiers.y = elem.velocity.y;
@@ -292,6 +300,10 @@ package com.chameleonquest
 		
 		private function hurtPlayer(playerPart:FlxSprite, enemy:Enemy):void
 		{
+			if (playerPart is Tongue)
+			{
+				player.tongue.cleanup();
+			}
 			heartbar.hit(this.player.reactToDamage(enemy));
 		}
 		
@@ -325,6 +337,14 @@ package com.chameleonquest
 			if (e1 is Spikes)
 			{
 				e2.hurt(1);
+			}
+		}
+		
+		private function enemyBackgroundCheck(enemy:Enemy, background:FlxSprite):void
+		{
+			if (background is ChainSegment && enemy.isTouching(FlxObject.FLOOR))
+			{
+				(background as ChainSegment).parentPlatform.pulley.addWeight(enemy);
 			}
 		}
 		

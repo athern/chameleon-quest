@@ -19,7 +19,7 @@ package com.chameleonquest
 		
 		public function AmmoIndicator() 
 		{
-			super(320 - 32, 8, img);
+			super(8, 8, img);
 			scrollFactor.x = 0;
 			scrollFactor.y = 0;
 			currentindicator = new FlxSprite(x + 3, y + 9, tongueimg);

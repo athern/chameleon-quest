@@ -13,8 +13,6 @@ package com.chameleonquest.Rooms
 		[Embed(source = "../../../../assets/mapCSV_1-5_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
-		public var pull:Pulley;
-		
 		public var turtles:Array;
 		
 		public var unstackedturtles:Array;
@@ -28,7 +26,8 @@ package com.chameleonquest.Rooms
 			{
 				// logger.logLevelStart(1, {"src": 6});
 				player = new Player(0, 29);
-				pull = new Pulley(16 * 3, 16 * 10, 16 * 19, 16 * 17, 2);
+				
+				new Pulley(elems, 16 * 3, 16 * 10, 16 * 19, 16 * 17, 2);
 			}
 			else
 			{
@@ -36,8 +35,8 @@ package com.chameleonquest.Rooms
 				player = new Player(0, 14);
 			}
 			bgElems.add(new Pile(10, 15));
-			
-			pull = new Pulley(16 * 3, 16 * 25, 16 * 19, 16 * 17, 2);
+			bgElems.add(new Pile(2, 29));
+			new Pulley(elems, 16 * 3, 16 * 25, 16 * 19, 16 * 17, 2);
 			turtles = new Array;
 			unstackedturtles = new Array;
 			for (var i:int = 0; i < 100; i++)
@@ -55,15 +54,11 @@ package com.chameleonquest.Rooms
 			
 			Main.lastRoom = 5;
 			super.create();
-			
-			add(pull);
 		}
 		
 		override public function update():void
 		{
 			super.update();
-			FlxG.collide(player, pull, pull.addWeight);
-			FlxG.collide(enemies, pull);
 			for (var i:int = 0; i < turtles.length-1; i++)
 			{
 				var cur:Turtle = turtles[i] as Turtle;
@@ -79,14 +74,6 @@ package com.chameleonquest.Rooms
 				if (cur.x == next.x && cur.y - next.y < 16)
 				{
 					next.y = cur.y - 16;
-				}
-			}
-			for (var j:int = 0; j < unstackedturtles.length; j++)
-			{
-				cur = unstackedturtles[j] as Turtle;
-				if (cur.x + cur.width >= pull.platform2.x && cur.isTouching(FlxObject.FLOOR))
-				{
-					pull.addWeight(cur, pull.platform2);
 				}
 			}
 			
