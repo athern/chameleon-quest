@@ -11,7 +11,7 @@ package com.chameleonquest.Enemies
 		
 		public function Snake(MinX:Number, MaxX:Number, Y:Number) 
 		{
-			super(MinX, MaxX, Y, 50);
+			super(MinX, MaxX, Y+2, 50);
 			this.loadSprites();
 			acceleration.y = GRAVITY;
 			addAnimation("idle", [0, 1, 2, 3], 3, true);

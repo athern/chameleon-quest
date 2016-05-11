@@ -110,7 +110,7 @@ package com.chameleonquest
 				FlxG.collide(projectiles, enemies, inflictProjectileDamage);
 				FlxG.collide(enemyProjectiles, map);
 				FlxG.collide(enemyProjectiles, player, inflictProjectileDamage);
-				FlxG.collide(enemyProjectiles, elems);
+				FlxG.collide(enemyProjectiles, elems);32.
 				FlxG.collide(enemyProjectiles, intrELems);
 				FlxG.collide(enemies, map);
 				FlxG.collide(enemies, enemies, enemyFriendlyFire);

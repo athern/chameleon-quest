@@ -11,7 +11,7 @@ package com.chameleonquest.Enemies
 	{
 		[Embed(source = "../../../../assets/purplesnake-2.png")]public var purpleSnake:Class;
 		
-		protected static const GRAVITY:int = 800;
+		protected static const GRAVITY:int = 0;
 		protected static const SHOOT_DELAY:Number = 2;
 		
 		private var cooldown:Number;
@@ -23,6 +23,8 @@ package com.chameleonquest.Enemies
 			health = 2;		
 			cooldown = SHOOT_DELAY;
 			this.facing = RIGHT;
+			immovable = true;
+			acceleration.y = GRAVITY;
 		}
 		
 		public override function loadSprites():void
