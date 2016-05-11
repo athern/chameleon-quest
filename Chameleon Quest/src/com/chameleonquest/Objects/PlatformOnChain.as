@@ -9,9 +9,9 @@ package com.chameleonquest.Objects
 		private var chain:Array;
 		private var lastY:int;
 		
-		public function PlatformOnChain(X:int, Y:int) 
+		public function PlatformOnChain(X:int, Y:int, height:int=1) 
 		{
-			super(new Array(new FlxPoint(X+24, Y+8)), 0);
+			super(new Array(new FlxPoint(X + 24, Y + 8)), 0, height);
 			chain = new Array;
 			lastY = Y;
 			for (var i:int = Y-16; i >= 0; i -= 16) {

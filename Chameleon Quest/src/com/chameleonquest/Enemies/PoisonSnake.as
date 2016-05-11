@@ -46,7 +46,7 @@ package com.chameleonquest.Enemies
 			if (cooldown > SHOOT_DELAY && (attack = new Poison())) 
 			{
 				var attackX:Number = this.facing == RIGHT ? this.x - attack.width : this.x + this.width;
-				var attackY:Number = this.y + this.height / 2 - attack.height / 2;
+				var attackY:Number = this.y + this.height / 2;
 				attack.shoot(attackX, attackY, this.facing == RIGHT ? -200 : 200, 0);
 				currentState.enemyProjectiles.add(attack);
 				cooldown = 0;
