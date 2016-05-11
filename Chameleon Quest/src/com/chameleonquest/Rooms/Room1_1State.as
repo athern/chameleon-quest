@@ -25,11 +25,17 @@ package com.chameleonquest.Rooms
 			
 			if (Main.lastRoom == 2) {
 				// logger.logLevelStart(1, {"src": 2});
+				Preloader.tracker.trackPageview("/level-1");
+				Preloader.tracker.trackEvent("level-1", "level-enter", null, 2);
+				
 				player = new Player(ROOM_WIDTH-3, ROOM_HEIGHT-1);
 				player.facing = FlxObject.LEFT;
 			}
 			else {
 				// logger.logLevelStart(1, {"src": 0});
+				Preloader.tracker.trackPageview("/level-1");
+				Preloader.tracker.trackEvent("level-1", "level-enter", null, 0);
+				
 				player = new Player(0, ROOM_HEIGHT-1);
 			}
 			
@@ -72,6 +78,9 @@ package com.chameleonquest.Rooms
 			}
 			if (player.x > map.width - 16) {
 				//logger.logLevelEnd({"dest": 2, "time": playtime});
+				Preloader.tracker.trackPageview("/level-1-end");
+				Preloader.tracker.trackEvent("level-1", "level-end", null, playtime * 100);
+				
 				FlxG.switchState(new Room1_2State());
 			}
 		}

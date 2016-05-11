@@ -49,12 +49,11 @@ package com.chameleonquest
 		public var quitText:FlxText;
 		
 		// Logging variable
-		// public var logger:Logger;
-		// public var playtime:Number;
+		public var playtime:Number;
 
         override public function create():void
 		{
-			// playtime = 0;
+			playtime = 0;
 			
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
@@ -91,12 +90,14 @@ package com.chameleonquest
 		
 		override public function update():void
 		{
-			//playtime += FlxG.elapsed;
+			playtime += FlxG.elapsed;
 			
 			
 			// handle pause
 			if (FlxG.keys.justPressed("ESCAPE")) {
 				//logger.logAction(2, {"state": FlxG.paused});
+				Preloader.tracker.trackEvent("action", "esc", "" + FlxG.paused);
+				
 				FlxG.paused = !FlxG.paused;
 				togglePauseMenu();
 			}
@@ -105,6 +106,8 @@ package com.chameleonquest
 			{
 				if (FlxG.keys.justPressed("Q")) {
 					// logger.logAction(3);
+					Preloader.tracker.trackEvent("action", "q", null);
+					
 					FlxG.fade(0xff000000, 0.5, onFadeExit);
 				}
 			}
@@ -142,11 +145,15 @@ package com.chameleonquest
 				
 				if (FlxG.keys.justPressed("C")) {
 					//logger.logAction(4);
+					Preloader.tracker.trackEvent("action", "c", null);
+					
 					FlxG.overlap(player, bgElems, null, changeElement);
 				}
 				
 				if (player.getType() != Player.NORMAL && FlxG.keys.justPressed("X")) {
 					//logger.logAction(5, {"type": player.getType()});
+					Preloader.tracker.trackEvent("action", "x", "" + player.getType());
+					
 					// change back to normal chameleon
 					remove(player);
 					player = Player.cloneFrom(player);
@@ -280,6 +287,9 @@ package com.chameleonquest
 		{
 			//logger.logAction(1, {"room": Main.lastRoom, "x": player.x, "y": player.y, "time": playtime});
 			//logger.logLevelEnd({"dest": -1});
+			Preloader.tracker.trackPageview("/game-over");
+			Preloader.tracker.trackEvent("game-over", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +")", playtime * 100);
+			
 			FlxG.switchState(new GameOverState());
 		}
 		

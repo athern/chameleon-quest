@@ -6,6 +6,7 @@ package com.chameleonquest.Chameleons
 	import com.chameleonquest.Projectiles.Rock;
 	import com.chameleonquest.Tongue;
     import org.flixel.*;
+	import com.chameleonquest.*;
 		
     public class Player extends FlxSprite 
     {
@@ -151,12 +152,16 @@ package com.chameleonquest.Chameleons
 					if (ammo > 0)
 					{
 						//logger.logAction(7, {"tongue":0, "rock": 1});
+						Preloader.tracker.trackEvent("action", "space", "projectile");
+						
 						this.shoot();
 						ammo--;
 					}
 					else
 					{
 						//logger.logAction(7, {"tongue":1, "rock": 0});
+						Preloader.tracker.trackEvent("action", "space", "tongue");
+						
 						cooldown = 0;
 						tongue.shoot();
 					}
