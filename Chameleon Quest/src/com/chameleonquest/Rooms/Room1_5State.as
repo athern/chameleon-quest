@@ -28,21 +28,21 @@ package com.chameleonquest.Rooms
 			{
 				// logger.logLevelStart(1, {"src": 6});
 				player = new Player(0, 29);
-				pull = new Pulley(16 * 3, 16 * 10, 16 * 13, 16 * 15);
+				pull = new Pulley(16 * 3, 16 * 10, 16 * 19, 16 * 17);
 			}
 			else
 			{
 				// logger.logLevelStart(1, {"src": 4});
 				player = new Player(0, 14);
 			}
-			bgElems.add(new Pile(6, 15));
+			bgElems.add(new Pile(10, 15));
 			
-			pull = new Pulley(16 * 3, 16 * 25, 16 * 13, 16 * 15);
+			pull = new Pulley(16 * 3, 16 * 25, 16 * 19, 16 * 17);
 			turtles = new Array;
 			unstackedturtles = new Array;
 			for (var i:int = 0; i < 100; i++)
 			{
-				turtles.push(new Turtle(16 * 9, 16 * 44 - 16 * i));
+				turtles.push(new Turtle(16 * 15, 16 * 44 - 16 * i));
 			}
 			enemies.add(new PoisonSnake(16, 15 * 16));
 			enemies.add(new PoisonSnake(16, 19 * 16));
@@ -68,11 +68,11 @@ package com.chameleonquest.Rooms
 			{
 				var cur:Turtle = turtles[i] as Turtle;
 				var next:Turtle = turtles[i + 1] as Turtle;
-				if (cur.x != 16 * 9)
+				if (cur.x != 16 * 15)
 				{
 					unstackedturtles.push(cur);
 					turtles.splice(i, 1);
-					var replacement:Turtle = new Turtle(16 * 9, 0);
+					var replacement:Turtle = new Turtle(16 * 15, 0);
 					turtles.push(replacement);
 					enemies.add(replacement);
 				}

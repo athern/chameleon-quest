@@ -21,7 +21,7 @@ package com.chameleonquest.Enemies
 			offset.x = 16;
 			offset.y = 9;
 			health = 1;
-			power = 2;
+			power = 1;
 			startX = X;
 						
 			this.facing = RIGHT;
