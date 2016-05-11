@@ -22,7 +22,6 @@ package com.chameleonquest.Chameleons
 			
 			this.tongue = null;
 			this.type = Player.FIRE;
-			this.hasAmmo = true;
 			this.charging = false;
 			this.chargeDistance = 0;
 		}

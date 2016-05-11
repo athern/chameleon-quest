@@ -21,16 +21,18 @@ package com.chameleonquest.Chameleons
 		protected static const RUN_SPEED:int = 120;
 		protected static const GRAVITY:int =800;
 		protected static const JUMP_SPEED:int = 200;
-		protected static const SHOOT_DELAY:Number = .4;
+		protected static const SHOOT_DELAY:Number = .2;
 		protected static const RUN_ACCELERATION:int = 1000;
 		protected static const INVULNERABILITY_TIMER:int = 30;
 		
 		public var tongue:Tongue;
 		protected var jumpPhase:int;
 		protected var invulnerability:int = 0;
-		public var hasAmmo:Boolean;
+		public var ammo:int;
 		protected var cooldown:Number;
 		protected static const MAX_JUMP_HOLD:int = 15;
+		
+		protected var rockCache:FlxGroup = new FlxGroup();
 		
 		protected var type:uint;
 		
@@ -56,11 +58,15 @@ package com.chameleonquest.Chameleons
             maxVelocity.x = RUN_SPEED;
             maxVelocity.y = JUMP_SPEED * 3;
 			health = 3;
-			
+			ammo = 0;
 			cooldown = SHOOT_DELAY;
 			
 			this.tongue = new Tongue(this);
 			this.type = NORMAL;
+			for (var i : int = 0; i < 20; i++)
+			{
+				rockCache.add(new Rock());
+			}
         }
 		
 		public static function cloneFrom(reference:Player):Player
@@ -140,17 +146,18 @@ package com.chameleonquest.Chameleons
 		{
 			if (FlxG.keys.justPressed("SPACE"))
 			{
-				if (this.cooldown > SHOOT_DELAY)
+				if (cooldown > SHOOT_DELAY)
 				{
-					if (this.hasAmmo)
+					if (ammo > 0)
 					{
 						//logger.logAction(7, {"tongue":0, "rock": 1});
 						this.shoot();
+						ammo--;
 					}
 					else
 					{
 						//logger.logAction(7, {"tongue":1, "rock": 0});
-						this.cooldown = 0;
+						cooldown = 0;
 						tongue.shoot();
 					}
 				}
@@ -169,17 +176,7 @@ package com.chameleonquest.Chameleons
 			// only return a projectile if we've waited long enough from the last attack
 			// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
 			this.cooldown = 0;
-			var attack:Projectile;
-			if (this.hasAmmo)
-			{
-				this.hasAmmo = this.type != NORMAL; // only want to get rid of ammo if we're the normal chameleon
-				attack = this.getNextAttack();
-			} 
-			else
-			{
-				return;
-			}
-			
+			var attack:Projectile = this.getNextAttack();
 			var attackX:Number = facing == FlxObject.LEFT ? x : x + width - attack.width;
 			var attackY:Number = y + height / 2 - attack.height / 2;
 			attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -200 : 200, 0);
@@ -189,14 +186,13 @@ package com.chameleonquest.Chameleons
 		
 		public function assignRock():void
 		{
-			// TODO: change to holding rock sprite
-			this.hasAmmo = true;
+			this.ammo = 3;
 		}
 		
 		// returns a Projectile if the chameleon has something to shoot and hasn't shot anything recently
 		public function getNextAttack():Projectile
 		{
-			return new Rock();
+			return rockCache.getFirstAvailable() as Projectile;
 		}
 		
 		// returns damage actually taken

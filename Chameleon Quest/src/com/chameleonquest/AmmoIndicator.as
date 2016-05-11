@@ -1,6 +1,6 @@
 package com.chameleonquest 
 {
-	import org.flixel.FlxSprite;
+	import org.flixel.*;
 	public class AmmoIndicator extends FlxSprite
 	{
 		[Embed(source = "../../../assets/ammoindicator.png")]
@@ -27,13 +27,14 @@ package com.chameleonquest
 			currentindicator.scrollFactor.y = 0;
 		}
 		
-		public function showRock():void
+		public function showRock(ammo:int):void
 		{
 			currentindicator.loadGraphic(rockimg);
 			currentindicator.scale.x = 1;
 			currentindicator.scale.y = 1;
 			currentindicator.x = x + 7;
 			currentindicator.y = y + 12;
+			
 		}
 		
 		public function showTongue():void

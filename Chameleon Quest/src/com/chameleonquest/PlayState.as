@@ -42,6 +42,7 @@ package com.chameleonquest
 		// heart bar
 		public var heartbar:HeartBar = new HeartBar();
 		public var ammoindicator:AmmoIndicator = new AmmoIndicator();
+		public var ammoText : FlxText;
 		
 		// pause state
 		public var pauseText:FlxText;
@@ -79,6 +80,11 @@ package com.chameleonquest
 			add(heartbar);
 			add(ammoindicator);
 			add(ammoindicator.currentindicator);
+			ammoText = new FlxText(ammoindicator.x + 3, ammoindicator.y + 10, 16);
+			ammoText.setFormat(null, 8, 0x000000, "center");
+			ammoText.scrollFactor.y = 0;
+			ammoText.scrollFactor.x = 0;					
+			add(ammoText);
 			super.create();
 			
 		}
@@ -169,14 +175,18 @@ package com.chameleonquest
 				if (player is WaterChameleon)
 				{
 					ammoindicator.showWater();
+					ammoText.visible = false;
 				}
-				else if (player.hasAmmo)
+				else if (player.ammo > 0)
 				{
-					ammoindicator.showRock();
+					ammoindicator.showRock(player.ammo);
+					ammoText.text = player.ammo.toString();
+					ammoText.visible = true;
 				}
 				else
 				{
 					ammoindicator.showTongue();
+					ammoText.visible = false;
 				}
 
 				// check for game over

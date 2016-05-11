@@ -19,7 +19,6 @@ package com.chameleonquest.Chameleons
 			
 			this.tongue = null;
 			this.type = Player.WATER;
-			this.hasAmmo = true;
 		}
 		
 		public static function cloneFrom(reference:Player):Player

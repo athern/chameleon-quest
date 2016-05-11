@@ -25,12 +25,12 @@ package com.chameleonquest.Enemies
 		{
 			
 			
-			if (this.x <= this.minX || (velocity.x < 0 && this.isTouching(LEFT)))
+			if (this.x <= this.minX)
 			{
 				this.facing = RIGHT;
 				velocity.x = speed;
 			}
-			else if (this.x >= this.maxX || (velocity.x > 0 && this.isTouching(RIGHT)) || velocity.x == 0)
+			else if (this.x >= this.maxX || velocity.x == 0)
 			{
 				this.facing = LEFT;
 				velocity.x = -speed;

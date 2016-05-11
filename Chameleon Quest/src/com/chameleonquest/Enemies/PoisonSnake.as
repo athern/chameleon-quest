@@ -16,6 +16,8 @@ package com.chameleonquest.Enemies
 		
 		private var cooldown:Number;
 		
+		private var ammoCache:FlxGroup = new FlxGroup();
+		
 		public function PoisonSnake(X:int, Y:int) 
 		{
 			super(X, X, Y);
@@ -25,6 +27,10 @@ package com.chameleonquest.Enemies
 			this.facing = RIGHT;
 			immovable = true;
 			acceleration.y = GRAVITY;
+			for (var i : int = 0; i < 20; i++)
+			{
+				ammoCache.add(new Poison());
+			}
 		}
 		
 		public override function loadSprites():void
@@ -45,7 +51,7 @@ package com.chameleonquest.Enemies
 				facing = RIGHT;
 			}
 			var attack:Projectile;
-			if (cooldown > SHOOT_DELAY && (attack = new Poison())) 
+			if (cooldown > SHOOT_DELAY && (attack = ammoCache.getFirstAvailable() as Projectile)) 
 			{
 				var attackX:Number = this.facing == RIGHT ? this.x - attack.width : this.x + this.width;
 				var attackY:Number = this.y + this.height / 2;
