@@ -45,7 +45,7 @@ package com.chameleonquest.Rooms
 			StoneGate.lift(rightgate);
 			if (Main.lastRoom == 8)
 			{
-				// logger.logLevelStart(1, {"src": 8});
+				Preloader.logger.logLevelStart(1, {"src": 8});
 				Preloader.tracker.trackPageview("/level-7");
 				Preloader.tracker.trackEvent("level-7", "level-enter", null, 8);
 				
@@ -56,7 +56,7 @@ package com.chameleonquest.Rooms
 			}
 			else
 			{
-				// logger.logLevelStart(1, {"src": 6});
+				Preloader.logger.logLevelStart(1, {"src": 6});
 				Preloader.tracker.trackPageview("/level-7");
 				Preloader.tracker.trackEvent("level-7", "level-enter", null, 6);
 				
@@ -104,13 +104,13 @@ package com.chameleonquest.Rooms
 				StoneGate.drop(rightgate);
 			}
 			if (player.x < 0) {
-				//logger.logLevelEnd({"dest": 8, "time": playtime});
+				Preloader.logger.logLevelEnd({"dest": 8, "time": playtime});
 				Preloader.tracker.trackPageview("/level-7-end");
 				Preloader.tracker.trackEvent("level-7", "level-end", null, playtime * 100);
 				
 				FlxG.switchState(new Room2_1State());
 			} else if (player.x > map.width - 16) {
-				//logger.logLevelEnd({"dest": 6, "time": playtime});
+				Preloader.logger.logLevelEnd({"dest": 6, "time": playtime});
 				FlxG.switchState(new Room1_6State());
 			}
 			if (boss.health <= 0)
@@ -118,7 +118,7 @@ package com.chameleonquest.Rooms
 				StoneGate.lift(leftgate);
 				StoneGate.lift(rightgate);
 				if (!fanfare) {
-					//logger.logAction(8, {"boss": "water"});
+					Preloader.logger.logAction(8, {"boss": "water"});
 					Preloader.tracker.trackEvent("level-7", "boss-kill", null);
 
 					add(new Fanfare(8, 3));

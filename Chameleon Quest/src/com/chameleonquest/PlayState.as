@@ -95,7 +95,7 @@ package com.chameleonquest
 			
 			// handle pause
 			if (FlxG.keys.justPressed("ESCAPE")) {
-				//logger.logAction(2, {"state": FlxG.paused});
+				Preloader.logger.logAction(2, {"state": FlxG.paused});
 				Preloader.tracker.trackEvent("action", "esc", "" + FlxG.paused);
 				
 				FlxG.paused = !FlxG.paused;
@@ -105,7 +105,7 @@ package com.chameleonquest
 			if (FlxG.paused)
 			{
 				if (FlxG.keys.justPressed("Q")) {
-					// logger.logAction(3);
+					Preloader.logger.logAction(3, null);
 					Preloader.tracker.trackEvent("action", "q", null);
 					
 					FlxG.fade(0xff000000, 0.5, onFadeExit);
@@ -144,15 +144,15 @@ package com.chameleonquest
 				
 				
 				if (FlxG.keys.justPressed("C")) {
-					//logger.logAction(4);
+					Preloader.logger.logAction(4, null);
 					Preloader.tracker.trackEvent("action", "c", null);
 					
 					FlxG.overlap(player, bgElems, null, changeElement);
 				}
 				
 				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X")) {
-					//logger.logAction(5, {"type": player.getType()});
-					Preloader.tracker.trackEvent("action", "x", "" + player.getType());
+					Preloader.logger.logAction(5, {"type": player.getType().toString()});
+					Preloader.tracker.trackEvent("action", "x", "" + player.getType().toString());
 					
 					// change back to normal chameleon
 					remove(player);
@@ -220,10 +220,13 @@ package com.chameleonquest
 		}
 		
 		private function changeElement(me:Chameleon, elem:FlxSprite):void
-		{
+		{		
 			var src:ElementSource = null;
 			if (elem is ElementSource)
 			{
+				Preloader.logger.logAction(11, {"elem": me.getType().toString() });
+				Preloader.tracker.trackEvent("action", "elem", me.getType().toString());
+			
 				src = elem as ElementSource;
 				if (me.getType() == src.getElementType())
 				{
@@ -278,6 +281,9 @@ package com.chameleonquest
 		// Fade exit from pause
 		private function onFadeExit():void
 		{
+			Preloader.logger.logLevelEnd({"quit": Main.lastRoom, "time": playtime});
+			Preloader.tracker.trackEvent("quit", "level-" + Main.lastRoom, null, playtime * 100);
+			
 			FlxG.paused = !FlxG.paused;
 			FlxG.switchState(new MenuState());
 		}
@@ -285,8 +291,8 @@ package com.chameleonquest
 		// Fade to game over
 		private function onFadeOver():void
 		{
-			//logger.logAction(1, {"room": Main.lastRoom, "x": player.x, "y": player.y, "time": playtime});
-			//logger.logLevelEnd({"dest": -1});
+			Preloader.logger.logAction(1, {"room": Main.lastRoom, "x": player.x, "y": player.y, "time": playtime});
+			Preloader.logger.logLevelEnd({"dest": -1});
 			Preloader.tracker.trackPageview("/game-over");
 			Preloader.tracker.trackEvent("game-over", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +")", playtime * 100);
 			
@@ -320,6 +326,9 @@ package com.chameleonquest
 		
 		protected function hurtPlayer(playerPart:FlxSprite, enemy:Enemy):void
 		{
+			Preloader.logger.logAction(9, {"room": Main.lastRoom, "x": player.x, "y": player.y, "enemy": enemy.toString()});
+			Preloader.tracker.trackEvent("damage", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), " + enemy.toString(), playtime * 100);
+			
 			if (playerPart is Tongue)
 			{
 				player.tongue.cleanup();
@@ -329,6 +338,9 @@ package com.chameleonquest
 		
 		private function inflictProjectileDamage(bullet:Projectile, target:FlxSprite):void 
 		{
+			Preloader.logger.logAction(10, {"room": Main.lastRoom, "x": player.x, "y": player.y, "target": target.toString(), "bullet": bullet.toString()});
+			Preloader.tracker.trackEvent("shoot", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), target: " + target.toString() + ", bullet: " + bullet.toString(), playtime * 100);
+			
 			if (target == player)
 			{
 				heartbar.hit(bullet.getDamage(player));

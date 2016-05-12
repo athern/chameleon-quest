@@ -55,6 +55,7 @@
     <element path="libs\analytics.swf" />
     <element path="libs\analytics.swc" />
     <element path="libs\analytics_flash.swc" />
+    <element path="libs\CGSCommon.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

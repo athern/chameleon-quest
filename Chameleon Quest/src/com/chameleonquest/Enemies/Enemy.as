@@ -2,6 +2,7 @@ package com.chameleonquest.Enemies
 {
 	import org.flixel.*;
 	import com.chameleonquest.Projectiles.*;
+	import com.chameleonquest.*;
 	
 	public class Enemy extends FlxSprite
 	{
@@ -24,6 +25,9 @@ package com.chameleonquest.Enemies
 			}
 			if (dying == 0)
 			{
+				Preloader.logger.logAction(13, {"room": Main.lastRoom, "x": this.x, "y": this.y, "type": this.toString()});
+				Preloader.tracker.trackEvent("enemy", "level-" + Main.lastRoom, "(" + this.x + ", " + this.y +"), type: " + this.toString());
+				
 				this.kill();
 			}
 			

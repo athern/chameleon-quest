@@ -24,7 +24,7 @@ package com.chameleonquest.Rooms
 			Spikes.addSpikeRow(27, ROOM_HEIGHT - 1, 4, enemies);
 			
 			if (Main.lastRoom == 2) {
-				// logger.logLevelStart(1, {"src": 2});
+				Preloader.logger.logLevelStart(1, {"src": 2});
 				Preloader.tracker.trackPageview("/level-1");
 				Preloader.tracker.trackEvent("level-1", "level-enter", null, 2);
 				
@@ -32,7 +32,7 @@ package com.chameleonquest.Rooms
 				player.facing = FlxObject.LEFT;
 			}
 			else {
-				// logger.logLevelStart(1, {"src": 0});
+				Preloader.logger.logLevelStart(1, {"src": 0});
 				Preloader.tracker.trackPageview("/level-1");
 				Preloader.tracker.trackEvent("level-1", "level-enter", null, 0);
 				
@@ -77,7 +77,7 @@ package com.chameleonquest.Rooms
 				player.velocity.y = 0;
 			}
 			if (player.x > map.width - 16) {
-				//logger.logLevelEnd({"dest": 2, "time": playtime});
+				Preloader.logger.logLevelEnd({"dest": 2, "time": playtime});
 				Preloader.tracker.trackPageview("/level-1-end");
 				Preloader.tracker.trackEvent("level-1", "level-end", null, playtime * 100);
 				

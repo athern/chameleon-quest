@@ -151,7 +151,7 @@ package com.chameleonquest.Chameleons
 				{
 					if (ammo > 0)
 					{
-						//logger.logAction(7, {"tongue":0, "rock": 1});
+						Preloader.logger.logAction(7, {"tongue":0, "projectile": 1});
 						Preloader.tracker.trackEvent("action", "space", "projectile");
 						
 						this.shoot();
@@ -159,7 +159,7 @@ package com.chameleonquest.Chameleons
 					}
 					else
 					{
-						//logger.logAction(7, {"tongue":1, "rock": 0});
+						Preloader.logger.logAction(7, {"tongue":1, "projectile": 0});
 						Preloader.tracker.trackEvent("action", "space", "tongue");
 						
 						cooldown = 0;
@@ -191,6 +191,9 @@ package com.chameleonquest.Chameleons
 		
 		public function assignRock():void
 		{
+			Preloader.logger.logAction(12, {"x": this.x, "y": this.y, "room": Main.lastRoom});
+			Preloader.tracker.trackEvent("action", "rock", "(" + this.x + ", " + this.y +")");
+			
 			this.ammo = 3;
 		}
 		

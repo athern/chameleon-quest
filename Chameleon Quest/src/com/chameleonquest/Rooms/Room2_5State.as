@@ -18,8 +18,27 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Chameleon(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
-			player.facing = FlxObject.LEFT;
+			
+			if (Main.lastRoom == 13)
+			{
+				Preloader.logger.logLevelStart(12, {"src": 11});
+				Preloader.tracker.trackPageview("/level-12");
+				Preloader.tracker.trackEvent("level-12", "level-enter", null, 11);
+				
+				player = new Chameleon(ROOM_WIDTH - 1, 3);
+				player.facing = FlxObject.LEFT;
+			}
+			else
+			{
+				Preloader.logger.logLevelStart(12, {"src": 13});
+				Preloader.tracker.trackPageview("/level-12");
+				Preloader.tracker.trackEvent("level-12", "level-enter", null, 13);
+				
+				player = new Chameleon(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
+				player.facing = FlxObject.LEFT;
+			}
+			
+			
 			
 			bgElems.add(new Pile(26, 24));
 			var gate:StoneGate = new StoneGate(25, 1, 100, 480);
@@ -40,8 +59,12 @@ package com.chameleonquest.Rooms
 				player.x = 0;
 			}
 			
-			if (player.x > map.width - 16) {
-				player.x = map.width - 16;
+			if (player.x > map.width - 16 && player.y > ROOM_HEIGHT - 3) {
+				Preloader.logger.logLevelEnd({"dest": 11, "time": playtime});
+				Preloader.tracker.trackPageview("/level-12-end");
+				Preloader.tracker.trackEvent("level-12", "level-end", null, playtime * 100);
+				
+				FlxG.switchState(new Room2_4State());
 			}
 		}
 		
