@@ -44,8 +44,7 @@ package com.chameleonquest.Rooms
 			bgElems.add(new Pile(2, 29));
 			new Pulley(elems, 16 * 3, 16 * 25, 16 * 19, 16 * 17, 2);
 			turtles = new Array;
-			unstackedturtles = new Array;
-			for (var i:int = 0; i < 100; i++)
+			for (var i:int = 0; i < 50; i++)
 			{
 				turtles.push(new Turtle(16 * 15, 16 * 44 - 16 * i));
 			}
@@ -53,7 +52,7 @@ package com.chameleonquest.Rooms
 			enemies.add(new PoisonSnake(16, 19 * 16));
 			enemies.add(new PoisonSnake(16, 23 * 16));
 			
-			for (var j:int = 0; j < 100; j++)
+			for (var j:int = 0; j < 50; j++)
 			{
 				enemies.add(turtles[j]);
 			}
@@ -71,7 +70,6 @@ package com.chameleonquest.Rooms
 				var next:Turtle = turtles[i + 1] as Turtle;
 				if (cur.x != 16 * 15)
 				{
-					unstackedturtles.push(cur);
 					turtles.splice(i, 1);
 					var replacement:Turtle = new Turtle(16 * 15, 0);
 					turtles.push(replacement);

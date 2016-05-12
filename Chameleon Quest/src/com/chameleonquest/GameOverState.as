@@ -74,9 +74,21 @@ package com.chameleonquest
 			{
 				FlxG.switchState(new Room2_1State());
 			}
-			else if (Main.lastRoom >= 9)
+			else if (Main.lastRoom == 9)
 			{
 				FlxG.switchState(new Room2_2State());
+			}
+			else if (Main.lastRoom == 10)
+			{
+				FlxG.switchState(new Room2_3State());
+			}
+			else if (Main.lastRoom == 11)
+			{
+				FlxG.switchState(new Room2_4State());
+			}
+			else if (Main.lastRoom >= 12)
+			{
+				FlxG.switchState(new Room2_5State());
 			}
 			else
 			{

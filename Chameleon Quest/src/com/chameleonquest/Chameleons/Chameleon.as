@@ -61,7 +61,6 @@ package com.chameleonquest.Chameleons
 			health = 3;
 			ammo = 0;
 			cooldown = SHOOT_DELAY;
-			
 			this.tongue = new Tongue(this);
 			this.type = NORMAL;
 			for (var i : int = 0; i < 20; i++)

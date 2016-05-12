@@ -22,7 +22,7 @@ package com.chameleonquest.Objects
 		
 		public function Pulley(group:FlxGroup, X1:int, Y1:int, X2:int, Y2:int, height1:int=1, height2:int=1) 
 		{
-			super();
+			super( -32, -32);
 			platform1 = new PlatformOnChain(X1, Y1, height1);
 			platform2 = new PlatformOnChain(X2, Y2, height2);
 			platform1.pulley = this;
@@ -47,17 +47,6 @@ package com.chameleonquest.Objects
 		override public function update():void
 		{
 			super.update();
-			if (platform1.velocity.y > 0 && platform1.y >= bar1Y) {
-				platform1.velocity.y = 0;
-			} else if (platform1.velocity.y < 0 && platform1.y <= bar1Y) {
-				platform1.velocity.y = 0;
-			}
-			
-			if (platform2.velocity.y > 0 && platform2.y >= bar2Y) {
-				platform2.velocity.y = 0;
-			} else if (platform2.velocity.y < 0 && platform2.y <= bar2Y) {
-				platform2.velocity.y = 0;
-			}
 			var newbar1Y:int = plat1Y - 16 * (plat2Obj.length - plat1Obj.length);
 			var newbar2Y:int = plat2Y - 16 * (plat1Obj.length - plat2Obj.length);
 			

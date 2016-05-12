@@ -22,10 +22,9 @@ package com.chameleonquest.Enemies
 			offset.y = 9;
 			health = 1;
 			power = 1;
-			startX = X;
-						
+			startX = X;		
 			this.facing = RIGHT;
-			
+			drag.x = 10;
 			acceleration.y = 0;
 		}
 		

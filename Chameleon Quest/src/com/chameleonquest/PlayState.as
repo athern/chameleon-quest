@@ -14,6 +14,7 @@ package com.chameleonquest
 	import com.chameleonquest.Objects.Pulley;
 	import com.chameleonquest.Objects.WaterFountain;
 	import com.chameleonquest.Projectiles.Projectile;
+	import com.chameleonquest.Projectiles.WaterStream;
 	import com.chameleonquest.interactiveObj.Button;
 	import com.chameleonquest.interactiveObj.InteractiveObj;
 	import com.chameleonquest.interactiveObj.WoodBlock;
@@ -333,14 +334,30 @@ package com.chameleonquest
 			{
 				player.tongue.cleanup();
 			}
+			
+			if (enemy is Turtle)
+			{
+				enemy.velocity.x = 0;
+				enemy.velocity.y = 0;
+				enemy.x = enemy.last.x;
+				enemy.y = enemy.last.y;
+			}
 			heartbar.hit(this.player.reactToDamage(enemy));
 		}
 		
 		private function inflictProjectileDamage(bullet:Projectile, target:FlxSprite):void 
 		{
+<<<<<<< HEAD
 			Preloader.logger.logAction(10, {"room": Main.lastRoom, "x": player.x, "y": player.y, "target": target.toString(), "bullet": bullet.toString()});
 			Preloader.tracker.trackEvent("shoot", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), target: " + target.toString() + ", bullet: " + bullet.toString(), playtime * 100);
 			
+=======
+			if (target is Turtle && bullet is WaterStream)
+			{
+				target.velocity.x = 0;
+				target.velocity.y = 0;
+			}
+>>>>>>> origin/master
 			if (target == player)
 			{
 				heartbar.hit(bullet.getDamage(player));
