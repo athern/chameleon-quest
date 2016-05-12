@@ -1,6 +1,6 @@
 package com.chameleonquest.Objects 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import org.flixel.*;
 
 	public class Torch extends FlxSprite implements ElementSource
@@ -28,7 +28,7 @@ package com.chameleonquest.Objects
 	
 		public function getElementType():uint
 		{
-			return Player.FIRE;
+			return Chameleon.FIRE;
 		}
 	}
 

@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.interactiveObj.WaterWheel;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
@@ -18,7 +18,7 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(ROOM_WIDTH - 1, 6);
+			player = new Chameleon(ROOM_WIDTH - 1, 6);
 			player.facing = FlxObject.LEFT;
 			
 			var gate:StoneGate = new StoneGate(11, 6, -1);

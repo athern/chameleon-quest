@@ -1,7 +1,7 @@
 package com.chameleonquest.Rooms 
 {
 	import com.chameleonquest.*;
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.Enemies.Bird;
 	import com.chameleonquest.Enemies.PoisonSnake;
 	import com.chameleonquest.Enemies.Snake;
@@ -24,12 +24,18 @@ package com.chameleonquest.Rooms
 			if (Main.lastRoom == 7)
 			{
 				// logger.logLevelStart(1, {"src": 7});
-				player = new Player(0, ROOM_HEIGHT - 1);
+				Preloader.tracker.trackPageview("/level-6");
+				Preloader.tracker.trackEvent("level-6", "level-enter", null, 7);
+				
+				player = new Chameleon(0, ROOM_HEIGHT - 1);
 			}
 			else
 			{
 				// logger.logLevelStart(1, {"src": 5});
-				player = new Player(ROOM_WIDTH - 1, 14);
+				Preloader.tracker.trackPageview("/level-6");
+				Preloader.tracker.trackEvent("level-6", "level-enter", null, 5);
+				
+				player = new Chameleon(ROOM_WIDTH - 1, 14);
 				player.facing = FlxObject.LEFT;
 			}
 			
@@ -69,6 +75,9 @@ package com.chameleonquest.Rooms
 			
 			if (player.x < 0) {
 				//logger.logLevelEnd({"dest": 7, "time": playtime});
+				Preloader.tracker.trackPageview("/level-6-end");
+				Preloader.tracker.trackEvent("level-6", "level-end", null, playtime * 100);
+				
 				FlxG.switchState(new Room1_7State());
 			}
 			else if (player.x > ROOM_WIDTH * 16 - 16) {

@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.interactiveObj.*;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
@@ -23,11 +23,11 @@ package com.chameleonquest.Rooms
 			
 			if (Main.lastRoom == 10)
 			{
-				player = new Player(1, ROOM_HEIGHT - 15);
+				player = new Chameleon(1, ROOM_HEIGHT - 15);
 			}
 			else
 			{
-				player = new Player(1, ROOM_HEIGHT - 6);			
+				player = new Chameleon(1, ROOM_HEIGHT - 6);			
 				
 			}
 			
@@ -73,7 +73,7 @@ package com.chameleonquest.Rooms
 			super.update();
 			
 			// water grate check
-			if (player.getType() != Player.WATER) {
+			if (player.getType() != Chameleon.WATER) {
 				FlxG.collide(player, grates);					
 			}
 			

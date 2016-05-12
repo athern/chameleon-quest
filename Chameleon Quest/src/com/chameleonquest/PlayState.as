@@ -1,7 +1,7 @@
 package com.chameleonquest 
 {
 	import com.chameleonquest.Chameleons.FireChameleon;
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.Chameleons.WaterChameleon;
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
@@ -29,7 +29,7 @@ package com.chameleonquest
 		public var ROOM_HEIGHT:int;
 		
 		public var map:FlxTilemap = new FlxTilemap;
-		public var player:Player;
+		public var player:Chameleon;
 		
 		public var projectiles:FlxGroup = new FlxGroup;
 		public var enemyProjectiles:FlxGroup = new FlxGroup;
@@ -49,12 +49,11 @@ package com.chameleonquest
 		public var quitText:FlxText;
 		
 		// Logging variable
-		// public var logger:Logger;
-		// public var playtime:Number;
+		public var playtime:Number;
 
         override public function create():void
 		{
-			// playtime = 0;
+			playtime = 0;
 			
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
@@ -91,12 +90,14 @@ package com.chameleonquest
 		
 		override public function update():void
 		{
-			//playtime += FlxG.elapsed;
+			playtime += FlxG.elapsed;
 			
 			
 			// handle pause
 			if (FlxG.keys.justPressed("ESCAPE")) {
 				//logger.logAction(2, {"state": FlxG.paused});
+				Preloader.tracker.trackEvent("action", "esc", "" + FlxG.paused);
+				
 				FlxG.paused = !FlxG.paused;
 				togglePauseMenu();
 			}
@@ -105,6 +106,8 @@ package com.chameleonquest
 			{
 				if (FlxG.keys.justPressed("Q")) {
 					// logger.logAction(3);
+					Preloader.tracker.trackEvent("action", "q", null);
+					
 					FlxG.fade(0xff000000, 0.5, onFadeExit);
 				}
 			}
@@ -135,21 +138,25 @@ package com.chameleonquest
 				FlxG.collide(intrELems, intrELems);
 				
 				// water grate check
-				if (player.getType() != Player.WATER) {
+				if (player.getType() != Chameleon.WATER) {
 					FlxG.overlap(player, bgElems, null, passGrate);					
 				}
 				
 				
 				if (FlxG.keys.justPressed("C")) {
 					//logger.logAction(4);
+					Preloader.tracker.trackEvent("action", "c", null);
+					
 					FlxG.overlap(player, bgElems, null, changeElement);
 				}
 				
-				if (player.getType() != Player.NORMAL && FlxG.keys.justPressed("X")) {
+				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X")) {
 					//logger.logAction(5, {"type": player.getType()});
+					Preloader.tracker.trackEvent("action", "x", "" + player.getType());
+					
 					// change back to normal chameleon
 					remove(player);
-					player = Player.cloneFrom(player);
+					player = Chameleon.cloneFrom(player);
 					add(player.tongue);
 					add(player);
 					FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
@@ -198,7 +205,7 @@ package com.chameleonquest
 
 		}
 		
-		private function passGrate(player:Player, elem:FlxSprite):void {
+		private function passGrate(player:Chameleon, elem:FlxSprite):void {
 			if (elem is Grate) {
 				FlxG.collide(player, elem);
 			}
@@ -212,7 +219,7 @@ package com.chameleonquest
 			}
 		}
 		
-		private function changeElement(me:Player, elem:FlxSprite):void
+		private function changeElement(me:Chameleon, elem:FlxSprite):void
 		{
 			var src:ElementSource = null;
 			if (elem is ElementSource)
@@ -223,17 +230,17 @@ package com.chameleonquest
 					return;
 				}
 				
-				if (me.getType() == Player.NORMAL)
+				if (me.getType() == Chameleon.NORMAL)
 				{
 					remove(me.tongue);
 				}
 				remove(me);
 				switch (src.getElementType())
 				{
-					case Player.WATER:
+					case Chameleon.WATER:
 						player = WaterChameleon.cloneFrom(me);
 						break;
-					case Player.FIRE:
+					case Chameleon.FIRE:
 						player = FireChameleon.cloneFrom(me);
 						break;
 					default:
@@ -257,7 +264,7 @@ package com.chameleonquest
 			}
 		}
 		
-		public function playerElemCollision(player:Player, elem:FlxObject):void {
+		public function playerElemCollision(player:Chameleon, elem:FlxObject):void {
 			if (elem is PlatformOnChain)
 			{
 				(elem as PlatformOnChain).pulley.addWeight(player);
@@ -280,6 +287,9 @@ package com.chameleonquest
 		{
 			//logger.logAction(1, {"room": Main.lastRoom, "x": player.x, "y": player.y, "time": playtime});
 			//logger.logLevelEnd({"dest": -1});
+			Preloader.tracker.trackPageview("/game-over");
+			Preloader.tracker.trackEvent("game-over", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +")", playtime * 100);
+			
 			FlxG.switchState(new GameOverState());
 		}
 		

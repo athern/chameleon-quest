@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.Enemies.BossTurtle;
 	import com.chameleonquest.Enemies.Geyser;
 	import com.chameleonquest.interactiveObj.AngleBlock;
@@ -46,7 +46,10 @@ package com.chameleonquest.Rooms
 			if (Main.lastRoom == 8)
 			{
 				// logger.logLevelStart(1, {"src": 8});
-				player = new Player(0, ROOM_HEIGHT - 1);
+				Preloader.tracker.trackPageview("/level-7");
+				Preloader.tracker.trackEvent("level-7", "level-enter", null, 8);
+				
+				player = new Chameleon(0, ROOM_HEIGHT - 1);
 				player.facing = FlxObject.RIGHT;
 				enteredBossChamber = true;
 				boss.kill();
@@ -54,7 +57,10 @@ package com.chameleonquest.Rooms
 			else
 			{
 				// logger.logLevelStart(1, {"src": 6});
-				player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
+				Preloader.tracker.trackPageview("/level-7");
+				Preloader.tracker.trackEvent("level-7", "level-enter", null, 6);
+				
+				player = new Chameleon(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
 				player.facing = FlxObject.LEFT;
 			}
 			Main.lastRoom = 7;
@@ -99,6 +105,9 @@ package com.chameleonquest.Rooms
 			}
 			if (player.x < 0) {
 				//logger.logLevelEnd({"dest": 8, "time": playtime});
+				Preloader.tracker.trackPageview("/level-7-end");
+				Preloader.tracker.trackEvent("level-7", "level-end", null, playtime * 100);
+				
 				FlxG.switchState(new Room2_1State());
 			} else if (player.x > map.width - 16) {
 				//logger.logLevelEnd({"dest": 6, "time": playtime});
@@ -106,10 +115,12 @@ package com.chameleonquest.Rooms
 			}
 			if (boss.health <= 0)
 			{
-				//logger.logAction(8, {"boss": "water"});
 				StoneGate.lift(leftgate);
 				StoneGate.lift(rightgate);
 				if (!fanfare) {
+					//logger.logAction(8, {"boss": "water"});
+					Preloader.tracker.trackEvent("level-7", "boss-kill", null);
+
 					add(new Fanfare(8, 3));
 					fanfare = true;
 				}

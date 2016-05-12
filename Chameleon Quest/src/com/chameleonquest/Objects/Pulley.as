@@ -1,7 +1,7 @@
 package com.chameleonquest.Objects 
 {
 	import adobe.utils.CustomActions;
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import org.flixel.*;
 	import mx.utils.ObjectUtil;
 

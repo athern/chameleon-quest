@@ -1,6 +1,6 @@
 package com.chameleonquest.Objects 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import org.flixel.*;
 
 	public class WaterFountain extends FlxSprite implements ElementSource
@@ -27,7 +27,7 @@ package com.chameleonquest.Objects
 	
 		public function getElementType():uint
 		{
-			return Player.WATER;
+			return Chameleon.WATER;
 		}
 	}
 
