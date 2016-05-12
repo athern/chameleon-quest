@@ -42,6 +42,10 @@ package com.chameleonquest.Rooms
 			Spikes.addSpikeRow(16, ROOM_HEIGHT - 9, 1, enemies);
 			Spikes.addSpikeRow(25, ROOM_HEIGHT - 8, 4, enemies);
 			
+			enemies.add(new PoisonSnake(26 * 16, 18 * 16));
+			enemies.add(new Snake(20 * 16, 22 * 16, 8 * 16));
+			enemies.add(new Bird(3 * 16, 24 * 16, 2 * 16));
+			
 			grates.add(new Grate(14, ROOM_HEIGHT - 15));
 			grates.add(new Grate(14, ROOM_HEIGHT - 16));
 			grates.add(new Grate(15, ROOM_HEIGHT - 16));

@@ -1,5 +1,6 @@
 package com.chameleonquest.Projectiles 
 {
+	import com.chameleonquest.Enemies.Turtle;
 	import org.flixel.FlxSprite;
 	public class WaterStream extends Projectile
 	{
@@ -20,9 +21,13 @@ package com.chameleonquest.Projectiles
 			this.exists = false;
 		}
 		
-		override public function getDamage(Target:FlxSprite):int
+		override public function getDamage(Target:FlxSprite):Number
 		{
-			return 1; // todo
+			if (Target is Turtle)
+			{
+				return 0;
+			}
+			return .1;
 		}
 	}
 

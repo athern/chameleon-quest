@@ -41,7 +41,7 @@ package com.chameleonquest.Chameleons
 		{
 			if (FlxG.keys.SPACE)
 			{
-				if (this.cooldown > SHOOT_DELAY)
+				if (this.cooldown > SHOOT_DELAY / 10)
 				{
 					this.shoot();
 				}

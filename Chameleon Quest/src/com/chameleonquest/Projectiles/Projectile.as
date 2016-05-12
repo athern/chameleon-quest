@@ -6,7 +6,7 @@ package com.chameleonquest.Projectiles
 	{			
 		// Returns the amount of damage this projectile does to the target
 		// Meant to be overridden
-		public function getDamage(Target:FlxSprite):int { return 0; }
+		public function getDamage(Target:FlxSprite):Number { return 0; }
 		
 		override public function update():void
 		{

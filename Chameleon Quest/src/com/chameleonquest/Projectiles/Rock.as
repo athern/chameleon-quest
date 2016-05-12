@@ -16,7 +16,7 @@ package com.chameleonquest.Projectiles
 			this.exists = false;
 		}
 		
-		override public function getDamage(Target:FlxSprite):int
+		override public function getDamage(Target:FlxSprite):Number
 		{
 			if (Target is Turtle)
 				return 0;

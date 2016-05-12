@@ -23,7 +23,7 @@ package com.chameleonquest.Projectiles
 			this.exists = false;
 		}
 		
-		override public function getDamage(Target:FlxSprite):int
+		override public function getDamage(Target:FlxSprite):Number
 		{
 			return 2;
 		}
