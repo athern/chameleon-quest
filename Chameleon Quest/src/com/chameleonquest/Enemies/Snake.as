@@ -9,9 +9,9 @@ package com.chameleonquest.Enemies
 		protected static const GRAVITY:int = 800;
 		
 		
-		public function Snake(MinX:Number, MaxX:Number, Y:Number) 
+		public function Snake(MinX:Number, MaxX:Number, Y:Number, startLoc:uint=0) 
 		{
-			super(MinX, MaxX, Y+2, 50);
+			super(MinX, MaxX, Y + 2, 50, startLoc);
 			this.loadSprites();
 			acceleration.y = GRAVITY;
 			addAnimation("idle", [0, 1, 2, 3], 3, true);

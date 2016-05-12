@@ -55,7 +55,7 @@ package com.chameleonquest.Rooms
 			
 			bgElems.add(grates);
 			
-			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 4));
+			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 2));
 			
 			
 			Main.lastRoom = 10

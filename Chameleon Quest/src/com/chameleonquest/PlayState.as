@@ -58,7 +58,7 @@ package com.chameleonquest
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
 				Background.buildBackground(this, 1);
-			} else if (Main.lastRoom >= 8 && Main.lastRoom <= 11)
+			} else if (Main.lastRoom >= 8 && Main.lastRoom <= 14)
 			{
 				Background.buildBackground(this, 2);
 			}
@@ -119,7 +119,7 @@ package com.chameleonquest
 				FlxG.collide(projectiles, enemies, inflictProjectileDamage);
 				FlxG.collide(enemyProjectiles, map);
 				FlxG.collide(enemyProjectiles, player, inflictProjectileDamage);
-				FlxG.collide(enemyProjectiles, elems);32.
+				FlxG.collide(enemyProjectiles, elems);
 				FlxG.collide(enemyProjectiles, intrELems);
 				FlxG.collide(enemies, map);
 				FlxG.collide(enemies, enemies, enemyFriendlyFire);

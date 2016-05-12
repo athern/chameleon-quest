@@ -42,7 +42,7 @@ package com.chameleonquest.Rooms
 			
 			bgElems.add(grates);
 			
-			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 8));
+			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 6));
 			
 			var gate:StoneGate = new StoneGate(5, 15, -1);
 			elems.add(gate);

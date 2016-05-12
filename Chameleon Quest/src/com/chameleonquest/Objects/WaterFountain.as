@@ -9,7 +9,7 @@ package com.chameleonquest.Objects
 		
 		public function WaterFountain(Xindex:int, Yfloorindex:int) 
 		{
-			super(Xindex*16, Yfloorindex*16-16);
+			super(Xindex*16, Yfloorindex*16-48);
 			loadGraphic(torchImg, true, true, 64, 83);
 			scale.x = 0.5;
 			scale.y = 0.5;

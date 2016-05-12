@@ -43,7 +43,7 @@ package com.chameleonquest.Rooms
 			enemies.add(new Snake(16, 16 * 3, 16 * (ROOM_HEIGHT - 8)));
 			enemies.add(new Bird(16 * 9, 16 * 23, 16 * 2));
 			
-			bgElems.add(new WaterFountain(ROOM_WIDTH - 9, ROOM_HEIGHT - 3));
+			bgElems.add(new WaterFountain(ROOM_WIDTH - 9, ROOM_HEIGHT - 1));
 			
 			grates.add(new Grate(ROOM_WIDTH - 3, 2));
 			grates.add(new Grate(ROOM_WIDTH - 3, 3));

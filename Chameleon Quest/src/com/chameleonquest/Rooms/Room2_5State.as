@@ -21,6 +21,13 @@ package com.chameleonquest.Rooms
 			player = new Chameleon(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
 			player.facing = FlxObject.LEFT;
 			
+			bgElems.add(new Pile(26, 24));
+			var gate:StoneGate = new StoneGate(25, 1, 100, 480);
+			elems.add(gate);
+			bgElems.add(new WaterFountain(26, 13));
+			
+			intrELems.add(new WaterWheel(13, 6, gate, StoneGate.gradualLift));
+			
 			Main.lastRoom = 12;
 			super.create();
 		}

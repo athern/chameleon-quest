@@ -10,18 +10,18 @@ package com.chameleonquest.Enemies
 		
 		public function HorizontallyPatrollingEnemy(MinX:Number, MaxX:Number, Y:Number, s:int, startLoc:uint = 0) 
 		{
-			var startX:int;
+			var startX:Number;
 			if (startLoc == LEFT)
 			{
-				startX = minX;
+				startX = MinX;
 			}
 			else if (startLoc == RIGHT)
 			{
-				startX = maxX;
+				startX = MaxX;
 			}
 			else
 			{
-				startX = minX + MaxX / 2;
+				startX = (MinX + MaxX) / 2;
 			}
 			super(startX, Y);
 			this.minX = MinX;
