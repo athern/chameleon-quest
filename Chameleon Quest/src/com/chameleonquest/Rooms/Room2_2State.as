@@ -47,6 +47,11 @@ package com.chameleonquest.Rooms
 			var gate:StoneGate = new StoneGate(5, 15, -1);
 			elems.add(gate);
 			
+			if (Main.lastRoom == 10)
+			{
+				StoneGate.lift(gate);
+			}
+			
 			intrELems.add(new AngleBlock(11, 7, 0));
 			intrELems.add(new Button(11, 1, gate, StoneGate.lift, 100, 180));
 			

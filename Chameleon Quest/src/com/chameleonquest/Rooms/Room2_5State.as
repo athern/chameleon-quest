@@ -2,6 +2,7 @@ package com.chameleonquest.Rooms
 {
 	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.interactiveObj.WaterWheel;
+	import com.chameleonquest.interactiveObj.WoodBlock;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	import com.chameleonquest.*;
@@ -22,12 +23,21 @@ package com.chameleonquest.Rooms
 			player.facing = FlxObject.LEFT;
 			
 			bgElems.add(new Pile(26, 24));
-			var gate:StoneGate = new StoneGate(25, 1, 100, 480);
+			var gate:StoneGate = new StoneGate(25, 4, 400, 480);
 			elems.add(gate);
 			bgElems.add(new WaterFountain(26, 13));
-			
+			new Pulley(elems, 16 * 4, 16 * 9, 16 * 8, 16 * 7);
 			intrELems.add(new WaterWheel(13, 6, gate, StoneGate.gradualLift));
-			
+			enemies.add(new Turtle(16 * 4 - 10, 16 * 8));
+			var otherTurtle:Turtle = new Turtle(16 * 5 + 2, 16 * 8);
+			otherTurtle.facing = FlxObject.LEFT;
+			enemies.add(otherTurtle);
+			enemies.add(new PoisonSnake(15 * 16, 19 * 16));
+			enemies.add(new Bird(2 * 16, 20 * 16, 2 * 16));
+			enemies.add(new Snake(20 * 16, 23 * 16, 16 * 15));
+			enemies.add(new Snake(7 * 16, 23 * 16, 16 * 11, FlxObject.LEFT));
+			enemies.add(new Snake(7 * 16, 23 * 16, 16 * 7, FlxObject.RIGHT));
+			intrELems.add(new WoodBlock(17, 9));
 			Main.lastRoom = 12;
 			super.create();
 		}

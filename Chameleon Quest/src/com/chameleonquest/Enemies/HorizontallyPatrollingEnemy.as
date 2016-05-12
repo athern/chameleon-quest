@@ -36,7 +36,7 @@ package com.chameleonquest.Enemies
 		
 		public override function update():void
 		{
-			if (velocity.x == 0)
+			if (Math.abs(velocity.x) < speed)
 			{
 				if (Math.random() < .5)
 				{
