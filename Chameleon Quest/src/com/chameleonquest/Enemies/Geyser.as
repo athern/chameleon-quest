@@ -1,6 +1,6 @@
 package com.chameleonquest.Enemies 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import org.flixel.*;
 	
 	public class Geyser extends Enemy
