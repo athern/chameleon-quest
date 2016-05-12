@@ -183,7 +183,7 @@ package com.chameleonquest.Chameleons
 			var attack:Projectile = this.getNextAttack();
 			var attackX:Number = facing == FlxObject.LEFT ? x : x + width - attack.width;
 			var attackY:Number = y + height / 2 - attack.height / 2;
-			attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -200 : 200, 0);
+			attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -200 : 200, isTouching(FLOOR) ? velocity.y : 0);
 			var currentState:PlayState = FlxG.state as PlayState;
 			currentState.projectiles.add(attack);
 		}
