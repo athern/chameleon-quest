@@ -15,7 +15,6 @@ package com.chameleonquest
 		public var extending:Boolean;
 		private var hasRock:Boolean;
 		public var grabbedObject:InteractiveObj;
-		public var grabbedFacing:uint;
 		
 		private var segments:Array;
 		private var segmentCache:FlxGroup;
@@ -48,9 +47,7 @@ package com.chameleonquest
 			{
 				if (this.facing != player.facing) 
 				{
-					// flip the tongue!
-					this.facing = player.facing;
-					this.alignWithPlayer();
+					cleanup();
 				}
 				
 				if ((this.facing == LEFT && this.isTouching(LEFT)) || (this.facing == RIGHT && this.isTouching(RIGHT)))

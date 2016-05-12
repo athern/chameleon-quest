@@ -11,7 +11,7 @@ package com.chameleonquest.interactiveObj
 		
 		public function WoodBlock(Xindex:int, Yfloorindex:int) 
 		{
-			super(Xindex*16, Yfloorindex*16-44);
+			super(Xindex*16, Yfloorindex*16-48);
 			loadGraphic(img);
 			acceleration.y = GRAVITY;
 			width = 14;

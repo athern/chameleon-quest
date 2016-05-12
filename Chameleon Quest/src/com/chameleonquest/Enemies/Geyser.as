@@ -91,14 +91,7 @@ package com.chameleonquest.Enemies
 		
 		public static function init(g:FlxGroup, X:int, Y:int, t:int=100, s:int=2):Geyser
 		{
-			if (Geyser.cache == null)
-			{
-				Geyser.cache = new FlxGroup();
-				for (var a:int = 0; a < 10; a++)
-				{
-					Geyser.cache.add(new Geyser(-32, -32));
-				}
-			}
+			Geyser.initCache();
 			var result:Geyser = Geyser.cache.getFirstAvailable() as Geyser;
 			while (result == null)
 			{
@@ -120,6 +113,18 @@ package com.chameleonquest.Enemies
 				g.add(result.stream[j]);
 			}
 			return result;
+		}
+		
+		public static function initCache():void
+		{
+			if (Geyser.cache == null)
+			{
+				Geyser.cache = new FlxGroup();
+				for (var a:int = 0; a < 10; a++)
+				{
+					Geyser.cache.add(new Geyser(-32, -32));
+				}
+			}
 		}
 		
 		override public function reset(X:Number, Y:Number):void

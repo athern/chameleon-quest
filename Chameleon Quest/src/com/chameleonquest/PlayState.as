@@ -176,8 +176,6 @@ package com.chameleonquest
 					FlxG.overlap(player.tongue, bgElems, null, pickupRock);
 					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
 					FlxG.overlap(player.tongue, intrELems, null, grabItem);
-					FlxG.collide(player.tongue, map);
-					FlxG.collide(player.tongue, elems);
 				}
 				
 				if (player is WaterChameleon)
@@ -269,10 +267,6 @@ package com.chameleonquest
 		}
 		
 		public function playerElemCollision(player:Chameleon, elem:FlxObject):void {
-			if (elem is PlatformOnChain)
-			{
-				(elem as PlatformOnChain).pulley.addWeight(player);
-			}
 			if (player.isTouching(FlxObject.FLOOR)) {
 				player.velocityModifiers.x = elem.velocity.x;
 				player.velocityModifiers.y = elem.velocity.y;
@@ -399,7 +393,6 @@ package com.chameleonquest
 			if (item is WoodBlock)
 			{
 				tongue.grabbedObject = item;
-				tongue.grabbedFacing = player.facing;
 				tongue.extending = false;
 			}
 		}
