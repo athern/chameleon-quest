@@ -7,17 +7,19 @@ package com.chameleonquest.Objects
 		[Embed(source = "../../../../assets/chain.png")]
 		protected var img:Class;
 		
-		override public function ChainSegment(X:int, Y:int) 
+		public var parentPlatform:PlatformOnChain;
+		
+		override public function ChainSegment(X:int, Y:int, platform:PlatformOnChain) 
 		{
-			super(X, Y);
+			super(X-16, Y);
 			loadGraphic(img);
 			scale.x = .125;
 			scale.y = .125;
-			width = 16;
+			width = 48;
 			height = 16;
-			offset.x = 56;
+			offset.x = 40;
 			offset.y = 56;
-			
+			parentPlatform = platform;
 		}
 		
 	}

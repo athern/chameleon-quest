@@ -12,8 +12,7 @@ package com.chameleonquest.interactiveObj
 		private var timer:int;
 		private var count:int = 0;
 		
-		private var controlledObj:FlxSprite;
-		private var callback:Function;
+
 		
 		public function Button(Xindex:int, Yindex:int, obj:FlxSprite, fun:Function, t:int=-1, r:int = 0) 
 		{

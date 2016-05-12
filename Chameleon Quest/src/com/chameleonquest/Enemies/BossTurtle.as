@@ -36,7 +36,7 @@ package com.chameleonquest.Enemies
 		
 		public override function update():void
 		{
-			if (this.isFlipped && this.cooldown > flipTimer) {
+			if (this.isFlipped && this.cooldown > flipTimer && health > 0) {
 				// flip the turtle back rightside up!
 				this.flip();
 			}
@@ -87,7 +87,10 @@ package com.chameleonquest.Enemies
 				hurt(bullet.getDamage(this));
 				speed += 20;
 				flipTimer -= 1.5;
-				flip();
+				if (health > 0)
+				{
+					flip();
+				}
 			}
 		}
 	}

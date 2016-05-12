@@ -7,16 +7,16 @@ package com.chameleonquest.Projectiles
 
 	public class Rock extends Projectile
 	{
-		[Embed(source = "../../../../assets/rock.png")]public var greenChameleon:Class;
+		[Embed(source = "../../../../assets/rock.png")]public var img:Class;
 		
 		public function Rock() 
 		{
 			super();
-            loadGraphic(greenChameleon, false, true);
+            loadGraphic(img, false, true);
 			this.exists = false;
 		}
 		
-		override public function getDamage(Target:FlxSprite):int
+		override public function getDamage(Target:FlxSprite):Number
 		{
 			if (Target is Turtle)
 				return 0;

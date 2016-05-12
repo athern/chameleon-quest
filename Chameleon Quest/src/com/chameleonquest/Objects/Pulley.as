@@ -1,11 +1,11 @@
 package com.chameleonquest.Objects 
 {
 	import adobe.utils.CustomActions;
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import org.flixel.*;
 	import mx.utils.ObjectUtil;
 
-	public class Pulley extends FlxGroup
+	public class Pulley extends FlxSprite
 	{
 		
 		public var platform1:PlatformOnChain;
@@ -20,11 +20,13 @@ package com.chameleonquest.Objects
 		
 		private var VERTICAL_VEL:int = 20;
 		
-		public function Pulley(X1:int, Y1:int, X2:int, Y2:int, height1:int=1, height2:int=1) 
+		public function Pulley(group:FlxGroup, X1:int, Y1:int, X2:int, Y2:int, height1:int=1, height2:int=1) 
 		{
-			super();
+			super( -32, -32);
 			platform1 = new PlatformOnChain(X1, Y1, height1);
 			platform2 = new PlatformOnChain(X2, Y2, height2);
+			platform1.pulley = this;
+			platform2.pulley = this;
 			
 			plat1Obj = new Array();
 			plat2Obj = new Array();
@@ -36,25 +38,15 @@ package com.chameleonquest.Objects
 			// threshold for Y movement
 			bar1Y = plat1Y;
 			bar2Y = plat2Y;
-						
-			this.add(platform1);
-			this.add(platform2);
+			
+			group.add(platform1);
+			group.add(platform2);
+			group.add(this);
 		}
 		
 		override public function update():void
 		{
 			super.update();
-			if (platform1.velocity.y > 0 && platform1.y >= bar1Y) {
-				platform1.velocity.y = 0;
-			} else if (platform1.velocity.y < 0 && platform1.y <= bar1Y) {
-				platform1.velocity.y = 0;
-			}
-			
-			if (platform2.velocity.y > 0 && platform2.y >= bar2Y) {
-				platform2.velocity.y = 0;
-			} else if (platform2.velocity.y < 0 && platform2.y <= bar2Y) {
-				platform2.velocity.y = 0;
-			}
 			var newbar1Y:int = plat1Y - 16 * (plat2Obj.length - plat1Obj.length);
 			var newbar2Y:int = plat2Y - 16 * (plat1Obj.length - plat2Obj.length);
 			
@@ -102,13 +94,13 @@ package com.chameleonquest.Objects
 			
 		}
 		
-		public function addWeight(weightObj:FlxSprite, p:PlatformOnChain):void {
-			if (weightObj.x > platform1.x && weightObj.x < platform1.x + platform1.width && weightObj.y < platform1.y) {
+		public function addWeight(weightObj:FlxSprite):void {
+			if (weightObj.x + weightObj.width > platform1.x && weightObj.x < platform1.x + platform1.width && weightObj.y < platform1.y) {
 				if (plat1Obj.indexOf(weightObj) == -1) {
 					plat1Obj.push(weightObj);
 				}
 					
-			} else if (weightObj.x > platform2.x && weightObj.x < platform2.x + platform2.width && weightObj.y < platform2.y) {
+			} else if (weightObj.x + weightObj.width > platform2.x && weightObj.x < platform2.x + platform2.width && weightObj.y < platform2.y) {
 				if (plat2Obj.indexOf(weightObj) == -1) {
 					plat2Obj.push(weightObj);
 				}

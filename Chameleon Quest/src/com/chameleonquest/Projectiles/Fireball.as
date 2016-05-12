@@ -42,7 +42,7 @@ package com.chameleonquest.Projectiles
 			this.startingX = X;
 		}
 		
-		override public function getDamage(Target:FlxSprite):int
+		override public function getDamage(Target:FlxSprite):Number
 		{
 			return 2;
 		}

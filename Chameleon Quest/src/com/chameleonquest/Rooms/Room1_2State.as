@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.Rooms.*;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
@@ -20,13 +20,20 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			
 			if (Main.lastRoom == 3) {
-				// logger.logLevelStart(1, {"src": 3});
-				player = new Player(ROOM_WIDTH-2, 3);
+				Preloader.logger.logLevelStart(1, {"src": 3});
+				Preloader.tracker.trackPageview("/level-2");
+				Preloader.tracker.trackEvent("level-2", "level-enter", null, 3);
+				
+				
+				player = new Chameleon(ROOM_WIDTH-2, 3);
 				player.facing = FlxObject.LEFT;
 			}
 			else {
-				// logger.logLevelStart(1, {"src": 1});
-				player = new Player(0, ROOM_HEIGHT-1);
+				Preloader.logger.logLevelStart(1, {"src": 1});
+				Preloader.tracker.trackPageview("/level-2");
+				Preloader.tracker.trackEvent("level-2", "level-enter", null, 1);
+				
+				player = new Chameleon(0, ROOM_HEIGHT-1);
 			}
 			
 			elems.add(new Platform(new Array(new FlxPoint(40, 160), new FlxPoint(19 * 16, 160)), 60));
@@ -38,10 +45,8 @@ package com.chameleonquest.Rooms
 			bgElems.add(new Pile(ROOM_WIDTH - 3, ROOM_HEIGHT - 8));
 			
 			// add enemies
-			enemies.add(new Snake(16 * 13, 16*15, 16 * (ROOM_HEIGHT - 8)));
-			//enemies.add(new Snake(new Array(new FlxPoint(16 * 14, 16 * (ROOM_HEIGHT - 6)), new FlxPoint(16 * 14 + 5, 16 * (ROOM_HEIGHT - 6)))));
-			enemies.add(new Snake(16 * 16, 16*18-8, 16 * (ROOM_HEIGHT - 14)));
-			//enemies.add(new Snake(new Array(new FlxPoint(16 * 16, 16 * (ROOM_HEIGHT - 15)), new FlxPoint(16 * 18, 16 * (ROOM_HEIGHT - 15)))));
+			enemies.add(new Snake(16 * 13, 16*15, 16 * (ROOM_HEIGHT - 7)));
+			enemies.add(new Snake(16 * 16, 16*18-8, 16 * (ROOM_HEIGHT - 13)));
 			enemies.add(new Bird(16 * 6, 16 * 20, 16 * (ROOM_HEIGHT - 22)));
 			
 			Turtle.addTurtleStack(16 * 19, 16 * (ROOM_HEIGHT - 7), 3, enemies),
@@ -61,14 +66,17 @@ package com.chameleonquest.Rooms
 			super.update();
 			
 			if (player.x < 0) {
-				//logger.logLevelEnd({"dest": 1, "time": playtime});
+				Preloader.logger.logLevelEnd({"dest": 1, "time": playtime});
 				FlxG.switchState(new Room1_1State());
 			}
 			if (player.x > map.width - 32) {
 				player.velocity.y = 0;
 			}
 			if (player.x > map.width - 16) {
-				//logger.logLevelEnd({"dest": 3, "time": playtime});
+				Preloader.logger.logLevelEnd({"dest": 3, "time": playtime});
+				Preloader.tracker.trackPageview("/level-2-end");
+				Preloader.tracker.trackEvent("level-2", "level-end", null, playtime * 100);
+				
 				FlxG.switchState(new Room1_3State());
 			}
 		}

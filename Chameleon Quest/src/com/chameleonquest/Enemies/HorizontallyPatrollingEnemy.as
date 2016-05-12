@@ -8,9 +8,22 @@ package com.chameleonquest.Enemies
 		protected var maxX:Number;
 		protected var speed:int;
 		
-		public function HorizontallyPatrollingEnemy(MinX:Number, MaxX:Number, Y:Number, s:int) 
+		public function HorizontallyPatrollingEnemy(MinX:Number, MaxX:Number, Y:Number, s:int, startLoc:uint = 0) 
 		{
-			super((MaxX + MinX) / 2, Y);
+			var startX:Number;
+			if (startLoc == LEFT)
+			{
+				startX = MinX;
+			}
+			else if (startLoc == RIGHT)
+			{
+				startX = MaxX;
+			}
+			else
+			{
+				startX = (MinX + MaxX) / 2;
+			}
+			super(startX, Y);
 			this.minX = MinX;
 			this.maxX = MaxX;
 			health = 1;
@@ -23,14 +36,26 @@ package com.chameleonquest.Enemies
 		
 		public override function update():void
 		{
+			if (Math.abs(velocity.x) < speed)
+			{
+				if (Math.random() < .5)
+				{
+					this.facing = LEFT;
+					velocity.x = -speed;
+				}
+				else
+				{
+					this.facing = RIGHT;
+					velocity.x = speed;
+				}
+			}
 			
-			
-			if (this.x <= this.minX || (velocity.x < 0 && this.isTouching(LEFT)))
+			if (this.x <= this.minX)
 			{
 				this.facing = RIGHT;
 				velocity.x = speed;
 			}
-			else if (this.x >= this.maxX || (velocity.x > 0 && this.isTouching(RIGHT)))
+			else if (this.x >= this.maxX)
 			{
 				this.facing = LEFT;
 				velocity.x = -speed;

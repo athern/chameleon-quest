@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import org.flixel.*;
 	import com.chameleonquest.*;
 	import com.chameleonquest.Objects.*;
@@ -13,8 +13,6 @@ package com.chameleonquest.Rooms
 		[Embed(source = "../../../../assets/mapCSV_1-5_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
-		public var pull:Pulley;
-		
 		public var turtles:Array;
 		
 		public var unstackedturtles:Array;
@@ -26,21 +24,27 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			if (Main.lastRoom == 6)
 			{
-				// logger.logLevelStart(1, {"src": 6});
-				player = new Player(0, 29);
-				pull = new Pulley(16 * 3, 16 * 10, 16 * 19, 16 * 17, 2);
+				Preloader.logger.logLevelStart(1, {"src": 6});
+				Preloader.tracker.trackPageview("/level-5");
+				Preloader.tracker.trackEvent("level-5", "level-enter", null, 6);
+				
+				player = new Chameleon(0, 29);
+				
+				new Pulley(elems, 16 * 3, 16 * 10, 16 * 19, 16 * 17, 2);
 			}
 			else
 			{
-				// logger.logLevelStart(1, {"src": 4});
-				player = new Player(0, 14);
+				Preloader.logger.logLevelStart(1, {"src": 4});
+				Preloader.tracker.trackPageview("/level-5");
+				Preloader.tracker.trackEvent("level-5", "level-enter", null, 4);
+				
+				player = new Chameleon(0, 14);
 			}
 			bgElems.add(new Pile(10, 15));
-			
-			pull = new Pulley(16 * 3, 16 * 25, 16 * 19, 16 * 17, 2);
+			bgElems.add(new Pile(2, 29));
+			new Pulley(elems, 16 * 3, 16 * 25, 16 * 19, 16 * 17, 2);
 			turtles = new Array;
-			unstackedturtles = new Array;
-			for (var i:int = 0; i < 100; i++)
+			for (var i:int = 0; i < 50; i++)
 			{
 				turtles.push(new Turtle(16 * 15, 16 * 44 - 16 * i));
 			}
@@ -48,29 +52,24 @@ package com.chameleonquest.Rooms
 			enemies.add(new PoisonSnake(16, 19 * 16));
 			enemies.add(new PoisonSnake(16, 23 * 16));
 			
-			for (var j:int = 0; j < 100; j++)
+			for (var j:int = 0; j < 50; j++)
 			{
 				enemies.add(turtles[j]);
 			}
 			
 			Main.lastRoom = 5;
 			super.create();
-			
-			add(pull);
 		}
 		
 		override public function update():void
 		{
 			super.update();
-			FlxG.collide(player, pull, pull.addWeight);
-			FlxG.collide(enemies, pull);
 			for (var i:int = 0; i < turtles.length-1; i++)
 			{
 				var cur:Turtle = turtles[i] as Turtle;
 				var next:Turtle = turtles[i + 1] as Turtle;
 				if (cur.x != 16 * 15)
 				{
-					unstackedturtles.push(cur);
 					turtles.splice(i, 1);
 					var replacement:Turtle = new Turtle(16 * 15, 0);
 					turtles.push(replacement);
@@ -81,20 +80,15 @@ package com.chameleonquest.Rooms
 					next.y = cur.y - 16;
 				}
 			}
-			for (var j:int = 0; j < unstackedturtles.length; j++)
-			{
-				cur = unstackedturtles[j] as Turtle;
-				if (cur.x + cur.width >= pull.platform2.x && cur.isTouching(FlxObject.FLOOR))
-				{
-					pull.addWeight(cur, pull.platform2);
-				}
-			}
 			
 			if (player.x < 0 && player.y > 20 * 16) {
-				//logger.logLevelEnd({"dest": 6, "time": playtime});
+				Preloader.logger.logLevelEnd({"dest": 6, "time": playtime});
+				Preloader.tracker.trackPageview("/level-5-end");
+				Preloader.tracker.trackEvent("level-5", "level-end", null, playtime * 100);
+				
 				FlxG.switchState(new Room1_6State());
 			} else if (player.x < 0 && player.y > 13 * 16) {
-				//logger.logLevelEnd({"dest": 4, "time": playtime});
+				Preloader.logger.logLevelEnd({"dest": 4, "time": playtime});
 				FlxG.switchState(new Room1_4State());
 			}
 		}

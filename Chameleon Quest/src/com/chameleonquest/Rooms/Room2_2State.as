@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.interactiveObj.*;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
@@ -23,11 +23,19 @@ package com.chameleonquest.Rooms
 			
 			if (Main.lastRoom == 10)
 			{
-				player = new Player(1, ROOM_HEIGHT - 15);
+				Preloader.logger.logLevelStart(9, {"src": 10});
+				Preloader.tracker.trackPageview("/level-9");
+				Preloader.tracker.trackEvent("level-9", "level-enter", null, 10);
+				
+				player = new Chameleon(1, ROOM_HEIGHT - 15);
 			}
 			else
 			{
-				player = new Player(1, ROOM_HEIGHT - 6);			
+				Preloader.logger.logLevelStart(9, {"src": 8});
+				Preloader.tracker.trackPageview("/level-9");
+				Preloader.tracker.trackEvent("level-9", "level-enter", null, 8);
+				
+				player = new Chameleon(1, ROOM_HEIGHT - 6);			
 				
 			}
 			
@@ -42,10 +50,15 @@ package com.chameleonquest.Rooms
 			
 			bgElems.add(grates);
 			
-			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 8));
+			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 6));
 			
 			var gate:StoneGate = new StoneGate(5, 15, -1);
 			elems.add(gate);
+			
+			if (Main.lastRoom == 10)
+			{
+				StoneGate.lift(gate);
+			}
 			
 			intrELems.add(new AngleBlock(11, 7, 0));
 			intrELems.add(new Button(11, 1, gate, StoneGate.lift, 100, 180));
@@ -73,13 +86,21 @@ package com.chameleonquest.Rooms
 			super.update();
 			
 			// water grate check
-			if (player.getType() != Player.WATER) {
+			if (player.getType() != Chameleon.WATER) {
 				FlxG.collide(player, grates);					
 			}
 			
 			if (player.x < 0 && player.y > ROOM_HEIGHT - 17) {
+				Preloader.logger.logLevelEnd({"dest": 10, "time": playtime});
+				Preloader.tracker.trackPageview("/level-9-end");
+				Preloader.tracker.trackEvent("level-9", "level-end", null, playtime * 100);
+				
 				FlxG.switchState(new Room2_3State());
 			} else if (player.x < 0 && player.y > ROOM_HEIGHT - 6) {
+				Preloader.logger.logLevelEnd({"dest": 8, "time": playtime});
+				Preloader.tracker.trackPageview("/level-9-end");
+				Preloader.tracker.trackEvent("level-9", "level-end", null, playtime * 100);
+				
 				FlxG.switchState(new Room2_1State());
 			}
 		}

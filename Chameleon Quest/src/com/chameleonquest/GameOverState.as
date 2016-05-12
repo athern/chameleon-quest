@@ -8,6 +8,10 @@ package com.chameleonquest
 		
 		override public function create():void
 		{			
+			Preloader.logger.logLevelStart(99, {"src": Main.lastRoom});
+			Preloader.tracker.trackPageview("/go-screen");
+			Preloader.tracker.trackEvent("game-over", "source", null, Main.lastRoom);
+				
 			// game over text
 			var goText:FlxText;
 			goText = new FlxText(0, (FlxG.width / 2) - 80, FlxG.width, "Game Over");
@@ -34,6 +38,10 @@ package com.chameleonquest
 		
 		private function onFade():void
 		{
+			Preloader.logger.logAction(14, {"room": Main.lastRoom});
+			Preloader.logger.logLevelEnd(null);
+			Preloader.tracker.trackEvent("restart", "dest", null, Main.lastRoom);
+			
 			if (Main.lastRoom == 1)
 			{
 				FlxG.switchState(new Room1_1State());
@@ -66,9 +74,21 @@ package com.chameleonquest
 			{
 				FlxG.switchState(new Room2_1State());
 			}
-			else if (Main.lastRoom >= 9)
+			else if (Main.lastRoom == 9)
 			{
 				FlxG.switchState(new Room2_2State());
+			}
+			else if (Main.lastRoom == 10)
+			{
+				FlxG.switchState(new Room2_3State());
+			}
+			else if (Main.lastRoom == 11)
+			{
+				FlxG.switchState(new Room2_4State());
+			}
+			else if (Main.lastRoom >= 12)
+			{
+				FlxG.switchState(new Room2_5State());
 			}
 			else
 			{

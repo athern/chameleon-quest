@@ -3,7 +3,7 @@ package com.chameleonquest.Chameleons
 	import com.chameleonquest.Projectiles.Fireball;
 	import com.chameleonquest.Projectiles.Projectile;
 	import org.flixel.FlxG;
-	public class FireChameleon extends Player
+	public class FireChameleon extends Chameleon
 	{
 		[Embed(source = "../../../../assets/redchameleon.png")]public var redChameleon:Class;
 		private var charging:Boolean;
@@ -21,15 +21,14 @@ package com.chameleonquest.Chameleons
 			offset.y = 2;
 			
 			this.tongue = null;
-			this.type = Player.FIRE;
-			this.hasAmmo = true;
+			this.type = Chameleon.FIRE;
 			this.charging = false;
 			this.chargeDistance = 0;
 		}
 		
-		public static function cloneFrom(reference:Player):Player
+		public static function cloneFrom(reference:Chameleon):Chameleon
 		{
-			var clone:Player = new FireChameleon(reference.x, reference.y, false);
+			var clone:Chameleon = new FireChameleon(reference.x, reference.y, false);
 			clone.facing = reference.facing;
 			clone.velocity.x = reference.velocity.x;
 			clone.velocity.y = reference.velocity.y;

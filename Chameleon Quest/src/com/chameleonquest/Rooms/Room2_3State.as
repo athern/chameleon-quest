@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.interactiveObj.WaterWheel;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
@@ -23,12 +23,20 @@ package com.chameleonquest.Rooms
 			
 			if (Main.lastRoom == 11)
 			{
-				player = new Player(1, 4);
+				Preloader.logger.logLevelStart(10, {"src": 11});
+				Preloader.tracker.trackPageview("/level-10");
+				Preloader.tracker.trackEvent("level-10", "level-enter", null, 11);
+				
+				player = new Chameleon(1, 4);
 				player.facing = FlxObject.RIGHT;
 			}
 			else
 			{
-				player = new Player(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
+				Preloader.logger.logLevelStart(10, {"src": 9});
+				Preloader.tracker.trackPageview("/level-10");
+				Preloader.tracker.trackEvent("level-10", "level-enter", null, 9);
+				
+				player = new Chameleon(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
 				player.facing = FlxObject.LEFT;
 			}
 			
@@ -42,6 +50,10 @@ package com.chameleonquest.Rooms
 			Spikes.addSpikeRow(16, ROOM_HEIGHT - 9, 1, enemies);
 			Spikes.addSpikeRow(25, ROOM_HEIGHT - 8, 4, enemies);
 			
+			enemies.add(new PoisonSnake(26 * 16, 18 * 16));
+			enemies.add(new Snake(20 * 16, 22 * 16, 8 * 16));
+			enemies.add(new Bird(3 * 16, 24 * 16, 2 * 16));
+			
 			grates.add(new Grate(14, ROOM_HEIGHT - 15));
 			grates.add(new Grate(14, ROOM_HEIGHT - 16));
 			grates.add(new Grate(15, ROOM_HEIGHT - 16));
@@ -51,7 +63,7 @@ package com.chameleonquest.Rooms
 			
 			bgElems.add(grates);
 			
-			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 4));
+			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 2));
 			
 			
 			Main.lastRoom = 10
@@ -63,15 +75,23 @@ package com.chameleonquest.Rooms
 			super.update();
 			
 			// water grate check
-			if (player.getType() != Player.WATER) {
+			if (player.getType() != Chameleon.WATER) {
 				FlxG.collide(player, grates);					
 			}
 			
 			if (player.x < 0) {
-				FlxG.switchState(new Room2_5State());
+				Preloader.logger.logLevelEnd({"dest": 11, "time": playtime});
+				Preloader.tracker.trackPageview("/level-10-end");
+				Preloader.tracker.trackEvent("level-10", "level-end", null, playtime * 100);
+				
+				FlxG.switchState(new Room2_4State());
 			}
 			
 			if (player.x > map.width - 16) {
+				Preloader.logger.logLevelEnd({"dest": 9, "time": playtime});
+				Preloader.tracker.trackPageview("/level-10-end");
+				Preloader.tracker.trackEvent("level-10", "level-end", null, playtime * 100);
+				
 				FlxG.switchState(new Room2_2State());
 			}
 		}
