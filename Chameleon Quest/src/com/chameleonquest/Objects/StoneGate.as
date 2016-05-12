@@ -33,6 +33,16 @@ package com.chameleonquest.Objects
 			gate.countdown = gate.clock;
 		}
 		
+		public static function gradualLift(gate:StoneGate):void
+		{
+			if (gate.y > gate.startY - 48)
+			{
+				gate.y -= .5;
+			}
+			gate.lifted = true;
+			gate.countdown = gate.clock;
+		}
+		
 		override public function update():void
 		{
 			

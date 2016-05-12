@@ -14,6 +14,9 @@ package com.chameleonquest.interactiveObj
 	
 		protected var patrolling:Boolean;
 		
+		protected var controlledObj:FlxSprite;
+		protected var callback:Function;
+		
 		public function InteractiveObj(X:int, Y:int) 
 		{
 			super(X, Y);

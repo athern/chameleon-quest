@@ -18,12 +18,14 @@ package com.chameleonquest.interactiveObj
 			offset.x = 40;
 			height = 48;
 			offset.y = 40;
-			
+			controlledObj = obj;
+			callback = fun;
 			immovable = true;
 		}
 		
 		override public function hit(bullet:Projectile):void {
 			angle += 5;
+			callback(controlledObj);
 		}
 	}
 
