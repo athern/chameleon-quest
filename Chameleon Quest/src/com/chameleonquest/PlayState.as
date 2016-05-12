@@ -308,7 +308,7 @@ package com.chameleonquest
 		}
 		
 		
-		private function hurtPlayer(playerPart:FlxSprite, enemy:Enemy):void
+		protected function hurtPlayer(playerPart:FlxSprite, enemy:Enemy):void
 		{
 			if (playerPart is Tongue)
 			{

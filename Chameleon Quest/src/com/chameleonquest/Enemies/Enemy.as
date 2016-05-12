@@ -5,7 +5,7 @@ package com.chameleonquest.Enemies
 	
 	public class Enemy extends FlxSprite
 	{
-		public var power:int;
+		public var power:int=1;
 		
 		protected static const DEATH_ANIMATION_LENGTH:int = 30;
 		

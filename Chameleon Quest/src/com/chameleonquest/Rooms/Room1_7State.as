@@ -2,6 +2,7 @@ package com.chameleonquest.Rooms
 {
 	import com.chameleonquest.Chameleons.Player;
 	import com.chameleonquest.Enemies.BossTurtle;
+	import com.chameleonquest.Enemies.Geyser;
 	import com.chameleonquest.interactiveObj.AngleBlock;
 	import com.chameleonquest.interactiveObj.Button;
 	import org.flixel.*;
@@ -22,6 +23,8 @@ package com.chameleonquest.Rooms
 		private var boss:BossTurtle;
 		
 		private var fanfare:Boolean;
+		
+		private var geysers:FlxGroup = new FlxGroup();
 		
 		override public function create():void
 		{	
@@ -56,7 +59,7 @@ package com.chameleonquest.Rooms
 			}
 			Main.lastRoom = 7;
 			super.create();
-			
+			add(geysers);
 			
 			// for the boss celebration
 			fanfare = false;
@@ -65,6 +68,29 @@ package com.chameleonquest.Rooms
 		override public function update():void
 		{
 			super.update();
+			FlxG.collide(player, geysers, hurtPlayer);
+			if (boss.health == 3)
+			{
+				if (enteredBossChamber && Math.random() < .002)
+				{
+					Geyser.init(geysers, Math.random() * 16 * 12 + 8 * 16, 16 * 13);
+				}
+			}
+			if (boss.health == 2)
+			{
+				if (enteredBossChamber && Math.random() < .004)
+				{
+					Geyser.init(geysers, Math.random() * 16 * 12 + 8 * 16, 16 * 13, 75, 3);
+				}
+			}
+			if (boss.health == 1)
+			{
+				if (enteredBossChamber && Math.random() < .008)
+				{
+					Geyser.init(geysers, Math.random() * 16 * 12 + 8 * 16, 16 * 13, 50, 4);
+				}
+			}
+			
 			if (player.x < 370 && !enteredBossChamber)
 			{
 				enteredBossChamber = true;
