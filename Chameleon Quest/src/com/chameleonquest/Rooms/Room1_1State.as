@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.interactiveObj.Button;
 	import com.chameleonquest.interactiveObj.WoodBlock;
 	import org.flixel.*;
@@ -28,7 +28,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-1");
 				Preloader.tracker.trackEvent("level-1", "level-enter", null, 2);
 				
-				player = new Player(ROOM_WIDTH-3, ROOM_HEIGHT-1);
+				player = new Chameleon(ROOM_WIDTH-3, ROOM_HEIGHT-1);
 				player.facing = FlxObject.LEFT;
 			}
 			else {
@@ -36,7 +36,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-1");
 				Preloader.tracker.trackEvent("level-1", "level-enter", null, 0);
 				
-				player = new Player(0, ROOM_HEIGHT-1);
+				player = new Chameleon(0, ROOM_HEIGHT-1);
 			}
 			
 			intrELems.add(new WoodBlock(43, 14));

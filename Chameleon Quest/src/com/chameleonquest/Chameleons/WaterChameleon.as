@@ -4,7 +4,7 @@ package com.chameleonquest.Chameleons
 	import com.chameleonquest.Projectiles.WaterStream;
 	import org.flixel.FlxG;
 
-	public class WaterChameleon extends Player
+	public class WaterChameleon extends Chameleon
 	{
 		[Embed(source = "../../../../assets/bluechameleon.png")]public var blueChameleon:Class;
 		
@@ -18,12 +18,12 @@ package com.chameleonquest.Chameleons
 			offset.y = 2;
 			
 			this.tongue = null;
-			this.type = Player.WATER;
+			this.type = Chameleon.WATER;
 		}
 		
-		public static function cloneFrom(reference:Player):Player
+		public static function cloneFrom(reference:Chameleon):Chameleon
 		{
-			var clone:Player = new WaterChameleon(reference.x, reference.y, false);
+			var clone:Chameleon = new WaterChameleon(reference.x, reference.y, false);
 			clone.facing = reference.facing;
 			clone.velocity.x = reference.velocity.x;
 			clone.velocity.y = reference.velocity.y;

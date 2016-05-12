@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.Enemies.BossTurtle;
 	import com.chameleonquest.interactiveObj.AngleBlock;
 	import com.chameleonquest.interactiveObj.Button;
@@ -46,7 +46,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-7");
 				Preloader.tracker.trackEvent("level-7", "level-enter", null, 8);
 				
-				player = new Player(0, ROOM_HEIGHT - 1);
+				player = new Chameleon(0, ROOM_HEIGHT - 1);
 				player.facing = FlxObject.RIGHT;
 				enteredBossChamber = true;
 				boss.kill();
@@ -57,7 +57,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-7");
 				Preloader.tracker.trackEvent("level-7", "level-enter", null, 6);
 				
-				player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
+				player = new Chameleon(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
 				player.facing = FlxObject.LEFT;
 			}
 			Main.lastRoom = 7;

@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import org.flixel.*;
 	import com.chameleonquest.*;
 	import com.chameleonquest.Objects.*;
@@ -28,7 +28,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-5");
 				Preloader.tracker.trackEvent("level-5", "level-enter", null, 6);
 				
-				player = new Player(0, 29);
+				player = new Chameleon(0, 29);
 				
 				new Pulley(elems, 16 * 3, 16 * 10, 16 * 19, 16 * 17, 2);
 			}
@@ -38,7 +38,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-5");
 				Preloader.tracker.trackEvent("level-5", "level-enter", null, 4);
 				
-				player = new Player(0, 14);
+				player = new Chameleon(0, 14);
 			}
 			bgElems.add(new Pile(10, 15));
 			bgElems.add(new Pile(2, 29));

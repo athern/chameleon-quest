@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.interactiveObj.WaterWheel;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
@@ -18,7 +18,7 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
+			player = new Chameleon(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
 			player.facing = FlxObject.LEFT;
 			
 			Main.lastRoom = 12;

@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.interactiveObj.WoodBlock;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
@@ -24,7 +24,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-4");
 				Preloader.tracker.trackEvent("level-4", "level-enter", null, 5);
 				
-				player = new Player(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
+				player = new Chameleon(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
 				player.facing = FlxObject.LEFT;
 			}
 			else {
@@ -32,7 +32,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-4");
 				Preloader.tracker.trackEvent("level-4", "level-enter", null, 3);
 				
-				player = new Player(0, ROOM_HEIGHT - 1);
+				player = new Chameleon(0, ROOM_HEIGHT - 1);
 			}
 			
 			// add rock pile

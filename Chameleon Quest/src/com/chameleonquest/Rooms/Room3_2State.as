@@ -1,6 +1,6 @@
 package com.chameleonquest.Rooms 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	import com.chameleonquest.*;
@@ -16,7 +16,7 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 45;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Player(0, 3);
+			player = new Chameleon(0, 3);
 			
 			// add spikes
 			Spikes.addSpikeRow(19, ROOM_HEIGHT - 1, 8, enemies);

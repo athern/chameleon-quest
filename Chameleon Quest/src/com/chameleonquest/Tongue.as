@@ -1,6 +1,6 @@
 package com.chameleonquest 
 {
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.interactiveObj.InteractiveObj;
 	import org.flixel.*;
 	
@@ -11,7 +11,7 @@ package com.chameleonquest
 		public static const OFFSET:int = 5;
 		protected static const GRAVITY:int =800;
 		
-		private var player:Player;
+		private var player:Chameleon;
 		public var extending:Boolean;
 		private var hasRock:Boolean;
 		public var grabbedObject:InteractiveObj;
@@ -22,7 +22,7 @@ package com.chameleonquest
 		
 		private var extended:int;
 		
-		public function Tongue(player:Player)
+		public function Tongue(player:Chameleon)
 		{
 			super();
 			loadGraphic(tongue, false, true);
@@ -48,7 +48,9 @@ package com.chameleonquest
 			{
 				if (this.facing != player.facing) 
 				{
-					cleanup();
+					// flip the tongue!
+					this.facing = player.facing;
+					this.alignWithPlayer();
 				}
 				
 				if ((this.facing == LEFT && this.isTouching(LEFT)) || (this.facing == RIGHT && this.isTouching(RIGHT)))

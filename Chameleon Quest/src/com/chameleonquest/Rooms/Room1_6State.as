@@ -1,7 +1,7 @@
 package com.chameleonquest.Rooms 
 {
 	import com.chameleonquest.*;
-	import com.chameleonquest.Chameleons.Player;
+	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.Enemies.Bird;
 	import com.chameleonquest.Enemies.PoisonSnake;
 	import com.chameleonquest.Enemies.Snake;
@@ -27,7 +27,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-6");
 				Preloader.tracker.trackEvent("level-6", "level-enter", null, 7);
 				
-				player = new Player(0, ROOM_HEIGHT - 1);
+				player = new Chameleon(0, ROOM_HEIGHT - 1);
 			}
 			else
 			{
@@ -35,7 +35,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-6");
 				Preloader.tracker.trackEvent("level-6", "level-enter", null, 5);
 				
-				player = new Player(ROOM_WIDTH - 1, 14);
+				player = new Chameleon(ROOM_WIDTH - 1, 14);
 				player.facing = FlxObject.LEFT;
 			}
 			

@@ -8,7 +8,7 @@ package com.chameleonquest.Chameleons
     import org.flixel.*;
 	import com.chameleonquest.*;
 		
-    public class Player extends FlxSprite 
+    public class Chameleon extends FlxSprite 
     {
 		[Embed(source = "../../../../assets/greenchameleon.png")]public var greenChameleon:Class;
 
@@ -39,7 +39,7 @@ package com.chameleonquest.Chameleons
 		
 		public var velocityModifiers:FlxPoint = new FlxPoint(0, 0);
 		
-        public function Player(Xindex:int,Yfloorindex:int, indexedPoint:Boolean = true):void // X,Y: Starting coordinates
+        public function Chameleon(Xindex:int,Yfloorindex:int, indexedPoint:Boolean = true):void // X,Y: Starting coordinates
         {
 			if (indexedPoint)
 			{
@@ -70,9 +70,9 @@ package com.chameleonquest.Chameleons
 			}
         }
 		
-		public static function cloneFrom(reference:Player):Player
+		public static function cloneFrom(reference:Chameleon):Chameleon
 		{
-			var clone:Player = new Player(reference.x, reference.y, false);
+			var clone:Chameleon = new Chameleon(reference.x, reference.y, false);
 			clone.facing = reference.facing;
 			clone.velocity.x = reference.velocity.x;
 			clone.velocity.y = reference.velocity.y;
