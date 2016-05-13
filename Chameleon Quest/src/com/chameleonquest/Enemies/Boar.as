@@ -1,13 +1,19 @@
 package com.chameleonquest.Enemies 
 {
-	import org.flixel.FlxSprite;
+	import com.chameleonquest.PlayState;
+	import org.flixel.*;
 
 	public class Boar extends HorizontallyPatrollingEnemy
 	{
 		[Embed(source = "../../../../assets/boar.png")]public var greenSnake:Class;
 		
 		protected static const GRAVITY:int = 800;
+		protected static const CHARGE_DELAY:Number = 2;
 		
+		private var cooldown:Number;
+		private var isCharging:Boolean;
+		
+		private var player:FlxSprite;
 		
 		public function Boar(MinX:Number, MaxX:Number, Y:Number, startLoc:uint=0) 
 		{
@@ -20,7 +26,12 @@ package com.chameleonquest.Enemies
 			width = 32;  
 			height = 24;
 			//offset.y = 6;
-			play("charge");
+			play("idle");
+			
+			var currState:PlayState = FlxG.state as PlayState;
+			player = currState.player;
+			cooldown = CHARGE_DELAY;
+			isCharging = false;
 		}
 		
 		public function loadSprites():void
@@ -30,6 +41,24 @@ package com.chameleonquest.Enemies
 		
 		public override function update():void
 		{
+			if ((player.x < this.x + 32 && player.x > this.x && this.facing == FlxObject.RIGHT) || 
+			(player.x > this.x - 32 && player.x < this.x && this.facing == FlxObject.LEFT)) {
+				play("charge");
+				velocity.x = 0;
+				speed = 0;
+				isCharging = true;
+			}
+			
+			if (isCharging) {
+				cooldown -= FlxG.elapsed;
+				if (cooldown < 0) {
+					play("idle");
+					isCharging = false;
+					cooldown = CHARGE_DELAY;
+					velocity.x = -50;
+					speed = 50;
+				}
+			}
 			super.update();
 		}
 		

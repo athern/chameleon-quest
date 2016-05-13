@@ -41,6 +41,9 @@ package com.chameleonquest.Rooms
 			
 			intrELems.add(new WoodBlock(43, 14));
 			
+			enemies.add(new Boar(16*10, 16 * 15, 16 * 10));
+
+			
 			Main.lastRoom = 1;
 			
 			super.create();
