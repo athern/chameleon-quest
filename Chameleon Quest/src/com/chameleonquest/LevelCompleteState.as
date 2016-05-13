@@ -29,15 +29,44 @@ package com.chameleonquest
 			timeText = new FlxText(0, 80, FlxG.width, "Time: " + t.toPrecision(5));
 			timeText.setFormat(null, 14, 0x000000, "center");
 			this.add(timeText);
+			if (Main.stars[Main.lastRoom] == 0)
+			{
+				Main.stars[Main.lastRoom] = 1;
+			}
+			if (t < Main.bestTimes[Main.lastRoom])
+			{
+				Main.bestTimes[Main.lastRoom] = t;
+				var recordText:FlxText = new FlxText(0, 100, FlxG.width, "New record!");
+				recordText.setFormat(null, 14, 0x000000, "center");
+				add(recordText);
+			}
+			if (t <= ace)
+			{
+				var congratsText:FlxText = new FlxText(0, 120, FlxG.width, "You beat the ace time!");
+				congratsText.setFormat(null, 14, 0x000000, "center");
+				add(congratsText);
+				Main.stars[Main.lastRoom] = 3;
+			}
+			else if (t <= par)
+			{
+				var parText:FlxText = new FlxText(0, 120, FlxG.width, "You beat the par time!");
+				parText.setFormat(null, 14, 0x000000, "center");
+				add(parText);
+				if (Main.stars[Main.lastRoom] < 2)
+				{
+					Main.stars[Main.lastRoom] = 2;
+				}
+			}
+			
 			
 			// continue Text
 			var continueTxt:FlxText;
-			continueTxt = new FlxText(0, 120, FlxG.width, "SPACE - Continue");
+			continueTxt = new FlxText(0, 160, FlxG.width, "SPACE - Continue");
 			continueTxt.setFormat(null, 12, 0x000000, "center");
 			this.add(continueTxt);
 			
 			var menuTxt:FlxText;
-			menuTxt = new FlxText(0, 160, FlxG.width, "ESCAPE - Level Select");
+			menuTxt = new FlxText(0, 180, FlxG.width, "ESCAPE - Level Select");
 			menuTxt.setFormat(null, 12, 0x000000, "center");
 			add(menuTxt);
 		}
