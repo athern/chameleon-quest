@@ -59,6 +59,12 @@ package com.chameleonquest.Rooms
 			spacehelp.setFormat(null, 14, 0x555555, "center");
 			spacehelp.alpha = .5;
 			this.add(spacehelp);
+			
+			var morehelp:FlxText;
+			morehelp = new FlxText(5 * 16, 25 * 16, 150, "GRAB ROCKS TO FIRE");
+			morehelp.setFormat(null, 8, 0x555555, "center");
+			morehelp.alpha = .5;
+			add(morehelp);
 		}
 		
 		override public function update():void
