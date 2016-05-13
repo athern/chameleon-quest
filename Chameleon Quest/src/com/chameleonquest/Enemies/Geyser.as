@@ -78,7 +78,6 @@ package com.chameleonquest.Enemies
 		
 		public static function grabSegment():GeyserSegment
 		{
-			Geyser.initCache();
 			var result:GeyserSegment = Geyser.streamCache.getFirstAvailable() as GeyserSegment;
 			while (result == null)
 			{
@@ -90,7 +89,6 @@ package com.chameleonquest.Enemies
 		
 		public static function init(g:FlxGroup, X:int, Y:int, t:int=100, s:int=2):Geyser
 		{
-			Geyser.initCache();
 			var result:Geyser = Geyser.cache.getFirstAvailable() as Geyser;
 			while (result == null)
 			{
@@ -116,21 +114,15 @@ package com.chameleonquest.Enemies
 		
 		public static function initCache():void
 		{
-			if (Geyser.cache == null)
+			Geyser.cache = new FlxGroup();
+			for (var a:int = 0; a < 10; a++)
 			{
-				Geyser.cache = new FlxGroup();
-				for (var a:int = 0; a < 10; a++)
-				{
-					Geyser.cache.add(new Geyser(-32, -32));
-				}
+				Geyser.cache.add(new Geyser(-32, -32));
 			}
-			if (Geyser.streamCache == null)
+			Geyser.streamCache = new FlxGroup();
+			for (var b:int = 0; b < 200; b++)
 			{
-				Geyser.streamCache = new FlxGroup();
-				for (var b:int = 0; b < 200; b++)
-				{
-					Geyser.streamCache.add(new GeyserSegment( -32, -32));
-				}
+				Geyser.streamCache.add(new GeyserSegment( -32, -32));
 			}
 		}
 		

@@ -64,6 +64,7 @@ package com.chameleonquest.Rooms
 				player.facing = FlxObject.LEFT;
 			}
 			Main.lastRoom = 7;
+			Geyser.initCache();
 			super.create();
 			add(geysers);
 			
@@ -108,10 +109,9 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-7-end");
 				Preloader.tracker.trackEvent("level-7", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new LevelCompleteState(playtime));
+				FlxG.switchState(new LevelCompleteState(playtime, 90, 40));
 			} else if (player.x > map.width - 16) {
-				Preloader.logger.logLevelEnd({"dest": 6, "time": playtime});
-				FlxG.switchState(new Room1_6State());
+				player.x = map.width - 16;
 			}
 			if (boss.health <= 0)
 			{
