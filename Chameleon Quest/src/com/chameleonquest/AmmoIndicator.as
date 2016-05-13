@@ -39,7 +39,7 @@ package com.chameleonquest
 		
 		public function showTongue():void
 		{
-			currentindicator.loadGraphic(tongueimg);
+			currentindicator.loadGraphic(tongueimg, true, false, 16, 16);
 			currentindicator.scale.x = 1;
 			currentindicator.scale.y = 1;
 			currentindicator.x = x + 3;

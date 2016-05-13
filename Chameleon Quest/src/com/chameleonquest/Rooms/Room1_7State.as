@@ -33,9 +33,9 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			boss = new BossTurtle(7 * 16, 16 * 16, 16 * (ROOM_HEIGHT - 5));
 			enemies.add(boss);
-			elems.add(new Platform(new Array(new FlxPoint(10 * 16, 4 * 16), new FlxPoint(10 * 16, 9 * 16)), 50));
+			elems.add(new Platform(new Array(new FlxPoint(9 * 16, 4 * 16), new FlxPoint(9 * 16, 9 * 16)), 50));
 			bgElems.add(new Pile(24, 11));
-			intrELems.add(new Button(5, 1, boss, BossTurtle.flipBoss, 250, 90));
+			intrELems.add(new Button(5, 1, boss, BossTurtle.flipBoss, 250, 90, Button.RED));
 			intrELems.add(new AngleBlock(15, 7, 90));
 			leftgate = new StoneGate(2, 14, -1, 20);
 			rightgate = new StoneGate(26, 14, -1, 20);
@@ -64,6 +64,7 @@ package com.chameleonquest.Rooms
 				player.facing = FlxObject.LEFT;
 			}
 			Main.lastRoom = 7;
+			Geyser.initCache();
 			super.create();
 			add(geysers);
 			
@@ -106,12 +107,11 @@ package com.chameleonquest.Rooms
 			if (player.x < 0) {
 				Preloader.logger.logLevelEnd({"dest": 8, "time": playtime});
 				Preloader.tracker.trackPageview("/level-7-end");
-				Preloader.tracker.trackEvent("level-7", "level-end", null, playtime * 100);
+				Preloader.tracker.trackEvent("level-7", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new Room2_1State());
+				FlxG.switchState(new LevelCompleteState(playtime, 90, 40));
 			} else if (player.x > map.width - 16) {
-				Preloader.logger.logLevelEnd({"dest": 6, "time": playtime});
-				FlxG.switchState(new Room1_6State());
+				player.x = map.width - 16;
 			}
 			if (boss.health <= 0)
 			{

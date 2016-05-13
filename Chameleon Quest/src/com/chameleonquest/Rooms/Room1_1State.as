@@ -64,6 +64,12 @@ package com.chameleonquest.Rooms
 			spacehelp.alpha = .5;
 			this.add(spacehelp);
 			
+			var morehelp:FlxText;
+			morehelp = new FlxText(500, 200, 150, "GRAB BLOCKS WITH TONGUE");
+			morehelp.setFormat(null, 8, 0x555555, "center");
+			morehelp.alpha = .5;
+			add(morehelp);
+			
 		}
 		
 		override public function update():void
@@ -79,9 +85,9 @@ package com.chameleonquest.Rooms
 			if (player.x > map.width - 16) {
 				Preloader.logger.logLevelEnd({"dest": 2, "time": playtime});
 				Preloader.tracker.trackPageview("/level-1-end");
-				Preloader.tracker.trackEvent("level-1", "level-end", null, playtime * 100);
+				Preloader.tracker.trackEvent("level-1", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new Room1_2State());
+				FlxG.switchState(new LevelCompleteState(playtime, 30, 8));
 			}
 		}
 		

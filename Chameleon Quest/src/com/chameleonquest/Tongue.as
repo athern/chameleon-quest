@@ -1,6 +1,7 @@
 package com.chameleonquest 
 {
 	import com.chameleonquest.Chameleons.Chameleon;
+	import com.chameleonquest.Projectiles.Rock;
 	import com.chameleonquest.interactiveObj.InteractiveObj;
 	import org.flixel.*;
 	
@@ -15,7 +16,6 @@ package com.chameleonquest
 		public var extending:Boolean;
 		private var hasRock:Boolean;
 		public var grabbedObject:InteractiveObj;
-		public var grabbedFacing:uint;
 		
 		private var segments:Array;
 		private var segmentCache:FlxGroup;
@@ -25,7 +25,10 @@ package com.chameleonquest
 		public function Tongue(player:Chameleon)
 		{
 			super();
-			loadGraphic(tongue, false, true);
+			loadGraphic(tongue, true, true, 16, 16);
+			addAnimation("basic", [0]);
+			addAnimation("holdingRock", [1]);
+			play("basic");
 			this.player = player;
 			segments = new Array;
 			segments.push(this);
@@ -48,9 +51,7 @@ package com.chameleonquest
 			{
 				if (this.facing != player.facing) 
 				{
-					// flip the tongue!
-					this.facing = player.facing;
-					this.alignWithPlayer();
+					cleanup();
 				}
 				
 				if ((this.facing == LEFT && this.isTouching(LEFT)) || (this.facing == RIGHT && this.isTouching(RIGHT)))
@@ -64,6 +65,11 @@ package com.chameleonquest
 				}
 				else if ((this.facing == LEFT && this.x >= player.x - OFFSET) || (this.facing == RIGHT && this.x <= (player.x + player.width - this.width + OFFSET)))
 				{
+					if (hasRock)
+					{
+						player.assignRock();
+					}
+					
 					cleanup();
 				}
 				if (this.extending)
@@ -80,14 +86,14 @@ package com.chameleonquest
 					grabbedObject.velocity.y = 0;
 					if (player.facing == RIGHT)
 					{
-						if (grabbedObject.x > x + 15 && !(this.extending))
+						if (grabbedObject.x >= x + 15 && !(this.extending))
 						{
 							grabbedObject.velocity.x = -SPEED;
 						}
 					}
 					else
 					{
-						if (grabbedObject.x + grabbedObject.width > x && !(this.extending))
+						if (grabbedObject.x + grabbedObject.width >= x && !(this.extending))
 						{
 							grabbedObject.velocity.x = SPEED;
 						}
@@ -150,6 +156,10 @@ package com.chameleonquest
 		{
 			if (grabbedObject != null)
 			{
+				if (grabbedObject is Rock)
+				{
+					player.assignRock();
+				}
 				grabbedObject.velocity.x = 0;
 				grabbedObject.velocity.y = 0;
 				grabbedObject = null;
@@ -167,8 +177,9 @@ package com.chameleonquest
 		
 		public function pickupRock():void
 		{
-			player.assignRock();
+			play("holdingRock");
 			extending = false;
+			hasRock = true;
 		}
 		
 		// Sets the projectile to x,y moving in velocity x,y direction
@@ -189,6 +200,7 @@ package com.chameleonquest
 			this.extending = true;
 			this.hasRock = false;
 			grabbedObject = null;
+			play("basic");
 		}
 	}
 }

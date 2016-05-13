@@ -23,7 +23,14 @@ package com.chameleonquest
 			new Room1_4State(),
 			new Room1_5State(),
 			new Room1_6State(),
-			new Room1_7State()
+			new Room1_7State(),
+			new Room2_1State(),
+			new Room2_2State(),
+			new Room2_3State(),
+			new Room2_4State(),
+			new Room2_5State(),
+			new Room3_1State(),
+			new Room3_2State()
 			]
 			
 			var room2:Array = [
@@ -38,6 +45,7 @@ package com.chameleonquest
 			new Room3_1State(),
 			new Room3_2State()
 			]
+			
 			
 			
 			stages = [
@@ -73,14 +81,14 @@ package com.chameleonquest
 			addStage(0, 5, "1-6");
 			addStage(0, 6, "1-7");
 			
-			addStage(1, 0, "2-1");
-			addStage(1, 1, "2-2");
-			addStage(1, 2, "2-3");
-			addStage(1, 3, "2-4");
-			addStage(1, 4, "2-5");
+			addStage(0, 7, "2-1");
+			addStage(0, 8, "2-2");
+			addStage(0, 9, "2-3");
+			addStage(0, 10, "2-4");
+			addStage(0, 11, "2-5");
 			
-			addStage(2, 0, "3-1");
-			addStage(2, 1, "3-2");
+			//addStage(0, 12, "3-1");
+			//addStage(0, 13, "3-2");
 			
 		}
 		
@@ -92,15 +100,15 @@ package com.chameleonquest
 				if (currIdx > 0) 
 				{
 					currIdx--;
-					arrow.y = 30 + currIdx * 20;
+					arrow.y = 30 + currIdx * 15;
 				}
 			} 
 			else if (FlxG.keys.justPressed("DOWN"))
 			{
-				if (currIdx < stages[currRoomIdx].length - 1)
+				if (currIdx < stages[currRoomIdx].length - 1 && currIdx < Main.bestRoom)
 				{
 					currIdx++;
-					arrow.y = 30 + currIdx * 20;
+					arrow.y = 30 + currIdx * 15;
 				}
 			}
 			else if (FlxG.keys.justPressed("LEFT"))
@@ -112,7 +120,7 @@ package com.chameleonquest
 					
 					if (stages[currRoomIdx].length <= currIdx) {
 						currIdx = stages[currRoomIdx].length - 1;
-						arrow.y = 30 + currIdx * 20;
+						arrow.y = 30 + currIdx * 15;
 					}
 				}
 			}
@@ -125,7 +133,7 @@ package com.chameleonquest
 					
 					if (stages[currRoomIdx].length <= currIdx) {
 						currIdx = stages[currRoomIdx].length - 1;
-						arrow.y = 30 + currIdx * 20;
+						arrow.y = 30 + currIdx * 15;
 					}
 				}
 			}
@@ -147,8 +155,23 @@ package com.chameleonquest
 		
 		private function addStage(x:int, y:int, text:String):void {
 			var stage:FlxText;
-			stage = new FlxText(30 + x*50, 30 + y*20, FlxG.width, text);
-			stage.setFormat(null, 12, 0x000000, "left");
+			if (Main.bestTimes[x * 7 + y + 1] < Number.MAX_VALUE)
+			{
+				text = text + " : " + (Main.bestTimes[x * 7 + y + 1] as Number).toPrecision(5) + " ";
+			}
+			for (var stars:int = Main.stars[x * 7 + y + 1]; stars > 0; stars--)
+			{
+				text += "*";
+			}
+			stage = new FlxText(30 + x * 50, 30 + y * 15, FlxG.width, text);
+			if (Main.bestRoom >= x * 7 + y)
+			{
+				stage.setFormat(null, 10, 0x000000, "left");
+			}
+			else
+			{
+				stage.setFormat(null, 10, 0x555555, "left");
+			}
 			this.add(stage);
 		}
 	}

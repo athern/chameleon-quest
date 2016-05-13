@@ -9,8 +9,19 @@ package com.chameleonquest
     {
 		public static var lastRoom:int = 0;
 		
+		public static var bestTimes:Array = new Array();
+		
+		public static var stars:Array = new Array();
+		
+		public static var bestRoom:int = 0;
+		
         public function Main()
         {
+			for (var i:int = 0; i < 35; i++)
+			{
+				bestTimes.push(Number.MAX_VALUE);
+				stars.push(0);
+			}
             super(320, 240, MenuState, 2); //Create a new FlxGame object at 320x240 with 2x pixels, then load PlayState
         }
     }
