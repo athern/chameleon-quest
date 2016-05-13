@@ -61,8 +61,8 @@ package com.chameleonquest.Rooms
 			intrELems.add(new Button(1, 21, rotatingBlock, AngleBlock.rotate, 20, 0));
 			intrELems.add(new Button(15, 15, gate2, StoneGate.lift, 100, 180));
 			intrELems.add(new Button(14, 20, patrollingBlock, InteractiveObj.stopOrStart, 20, 270));
-			elems.add(new Platform(new Array(new FlxPoint(80, 180), new FlxPoint(80, 300)), 60));
-			elems.add(new Platform(new Array(new FlxPoint(186, 340), new FlxPoint(186, 440)), 50));
+			elems.add(new Platform(new Array(new FlxPoint(3*16, 11*16), new FlxPoint(3*16, 18*16)), 60));
+			elems.add(new Platform(new Array(new FlxPoint(10*16, 21*16), new FlxPoint(10*16, 26*16)), 50));
 			
 			
 			Main.lastRoom = 6;

@@ -38,7 +38,7 @@ package com.chameleonquest.Rooms
 			bgElems.add(new Pile(5, 5));
 			bgElems.add(new Pile(6, ROOM_HEIGHT - 1));
 			
-			elems.add(new Platform(new Array(new FlxPoint(15 * 16, (ROOM_HEIGHT - 5) * 16), new FlxPoint(20 * 16, (ROOM_HEIGHT - 5) * 16)), 60));
+			elems.add(new Platform(new Array(new FlxPoint(13 * 16, (ROOM_HEIGHT - 6) * 16), new FlxPoint(18 * 16, (ROOM_HEIGHT - 6) * 16)), 60));
 			
 			// add spikes
 			Spikes.addSpikeRow(18, 13, 4, enemies);
