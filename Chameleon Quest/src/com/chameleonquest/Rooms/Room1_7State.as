@@ -35,7 +35,7 @@ package com.chameleonquest.Rooms
 			enemies.add(boss);
 			elems.add(new Platform(new Array(new FlxPoint(9 * 16, 4 * 16), new FlxPoint(9 * 16, 9 * 16)), 50));
 			bgElems.add(new Pile(24, 11));
-			intrELems.add(new Button(5, 1, boss, BossTurtle.flipBoss, 250, 90));
+			intrELems.add(new Button(5, 1, boss, BossTurtle.flipBoss, 250, 90, Button.RED));
 			intrELems.add(new AngleBlock(15, 7, 90));
 			leftgate = new StoneGate(2, 14, -1, 20);
 			rightgate = new StoneGate(26, 14, -1, 20);
