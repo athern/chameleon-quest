@@ -13,6 +13,8 @@ package com.chameleonquest
 		
 		public static var stars:Array = new Array();
 		
+		public static var bestRoom:int = 0;
+		
         public function Main()
         {
 			for (var i:int = 0; i < 35; i++)

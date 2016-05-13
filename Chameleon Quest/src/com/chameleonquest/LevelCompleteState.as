@@ -32,6 +32,7 @@ package com.chameleonquest
 			if (Main.stars[Main.lastRoom] == 0)
 			{
 				Main.stars[Main.lastRoom] = 1;
+				Main.bestRoom = Main.lastRoom;
 			}
 			if (t < Main.bestTimes[Main.lastRoom])
 			{

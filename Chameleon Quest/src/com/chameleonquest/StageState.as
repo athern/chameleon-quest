@@ -105,7 +105,7 @@ package com.chameleonquest
 			} 
 			else if (FlxG.keys.justPressed("DOWN"))
 			{
-				if (currIdx < stages[currRoomIdx].length - 1)
+				if (currIdx < stages[currRoomIdx].length - 1 && currIdx < Main.bestRoom)
 				{
 					currIdx++;
 					arrow.y = 30 + currIdx * 15;
@@ -163,8 +163,15 @@ package com.chameleonquest
 			{
 				text += "*";
 			}
-			stage = new FlxText(30 + x*50, 30 + y*15, FlxG.width, text);
-			stage.setFormat(null, 10, 0x000000, "left");
+			stage = new FlxText(30 + x * 50, 30 + y * 15, FlxG.width, text);
+			if (Main.bestRoom >= x * 7 + y)
+			{
+				stage.setFormat(null, 10, 0x000000, "left");
+			}
+			else
+			{
+				stage.setFormat(null, 10, 0x555555, "left");
+			}
 			this.add(stage);
 		}
 	}
