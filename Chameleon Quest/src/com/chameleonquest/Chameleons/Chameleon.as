@@ -27,7 +27,7 @@ package com.chameleonquest.Chameleons
 		protected static const INVULNERABILITY_TIMER:int = 30;
 		
 		public var tongue:Tongue;
-		protected var jumpPhase:int;
+		public var jumpPhase:int;
 		protected var invulnerability:int = 0;
 		public var ammo:int;
 		protected var cooldown:Number;
@@ -50,6 +50,9 @@ package com.chameleonquest.Chameleons
 			super(Xindex, Yfloorindex);
 			
             loadGraphic(greenChameleon, true, true, 38, 16);
+			addAnimation("basic", [0]);
+			addAnimation("holdingRock", [1]);
+			play("basic");
 			width = 20;  
 			offset.x = 9;
 			height = 14;
@@ -76,6 +79,7 @@ package com.chameleonquest.Chameleons
 			clone.velocity.x = reference.velocity.x;
 			clone.velocity.y = reference.velocity.y;
 			clone.health = reference.health;
+			clone.jumpPhase = reference.jumpPhase;
 			
 			return clone;
 		}
@@ -160,6 +164,11 @@ package com.chameleonquest.Chameleons
 						
 						this.shoot();
 						ammo--;
+			
+						if (this.ammo == 0)
+						{
+							play("basic");
+						}
 					}
 					else
 					{
@@ -199,6 +208,7 @@ package com.chameleonquest.Chameleons
 			Preloader.tracker.trackEvent("action", "rock", "(" + this.x + ", " + this.y +")");
 			
 			this.ammo = 3;
+			play("holdingRock");
 		}
 		
 		// returns a Projectile if the chameleon has something to shoot and hasn't shot anything recently
