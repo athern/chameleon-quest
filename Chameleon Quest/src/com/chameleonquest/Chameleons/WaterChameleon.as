@@ -28,6 +28,7 @@ package com.chameleonquest.Chameleons
 			clone.velocity.x = reference.velocity.x;
 			clone.velocity.y = reference.velocity.y;
 			clone.health = reference.health;
+			clone.jumpPhase = reference.jumpPhase;
 			
 			return clone;
 		}
