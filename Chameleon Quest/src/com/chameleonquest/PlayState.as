@@ -287,7 +287,7 @@ package com.chameleonquest
 		private function onFadeExit():void
 		{
 			Preloader.logger.logLevelEnd({"quit": Main.lastRoom, "time": playtime});
-			Preloader.tracker.trackEvent("quit", "level-" + Main.lastRoom, null, playtime * 100);
+			Preloader.tracker.trackEvent("quit", "level-" + Main.lastRoom, null, int(Math.round(playtime)));
 			
 			FlxG.paused = !FlxG.paused;
 			FlxG.switchState(new MenuState());
@@ -299,7 +299,7 @@ package com.chameleonquest
 			Preloader.logger.logAction(1, {"room": Main.lastRoom, "x": player.x, "y": player.y, "time": playtime});
 			Preloader.logger.logLevelEnd({"dest": -1});
 			Preloader.tracker.trackPageview("/game-over");
-			Preloader.tracker.trackEvent("game-over", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +")", playtime * 100);
+			Preloader.tracker.trackEvent("game-over", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +")", int(Math.round(playtime)));
 			
 			FlxG.switchState(new GameOverState());
 		}
@@ -332,7 +332,7 @@ package com.chameleonquest
 		protected function hurtPlayer(playerPart:FlxSprite, enemy:Enemy):void
 		{
 			Preloader.logger.logAction(9, {"room": Main.lastRoom, "x": player.x, "y": player.y, "enemy": enemy.toString()});
-			Preloader.tracker.trackEvent("damage", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), " + enemy.toString(), playtime * 100);
+			Preloader.tracker.trackEvent("damage", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), " + enemy.toString(), int(Math.round(playtime)));
 			
 			if (playerPart is Tongue)
 			{
@@ -352,7 +352,7 @@ package com.chameleonquest
 		private function inflictProjectileDamage(bullet:Projectile, target:FlxSprite):void 
 		{
 			Preloader.logger.logAction(10, {"room": Main.lastRoom, "x": player.x, "y": player.y, "target": target.toString(), "bullet": bullet.toString()});
-			Preloader.tracker.trackEvent("shoot", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), target: " + target.toString() + ", bullet: " + bullet.toString(), playtime * 100);
+			Preloader.tracker.trackEvent("shoot", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), target: " + target.toString() + ", bullet: " + bullet.toString(), int(Math.round(playtime)));
 			
 			if (target is Turtle && bullet is WaterStream)
 			{

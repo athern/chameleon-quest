@@ -58,15 +58,13 @@ package com.chameleonquest.Rooms
 			if (player.x < 0) {
 				Preloader.logger.logLevelEnd({"dest": 12, "time": playtime});
 				Preloader.tracker.trackPageview("/level-11-end");
-				Preloader.tracker.trackEvent("level-11", "level-end", null, playtime * 100);
+				Preloader.tracker.trackEvent("level-11", "level-end", null, int(Math.round(playtime)));
 				
 				FlxG.switchState(new Room2_5State());
 			}
 			
 			if (player.x > map.width - 16) {
 				Preloader.logger.logLevelEnd({"dest": 10, "time": playtime});
-				Preloader.tracker.trackPageview("/level-11-end");
-				Preloader.tracker.trackEvent("level-11", "level-end", null, playtime * 100);
 				
 				FlxG.switchState(new Room2_3State());
 			}
