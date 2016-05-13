@@ -85,7 +85,7 @@ package com.chameleonquest
 			addStage(0, 8, "2-2");
 			addStage(0, 9, "2-3");
 			addStage(0, 10, "2-4");
-			//addStage(0, 11, "2-5");
+			addStage(0, 11, "2-5");
 			
 			//addStage(0, 12, "3-1");
 			//addStage(0, 13, "3-2");
@@ -100,7 +100,7 @@ package com.chameleonquest
 				if (currIdx > 0) 
 				{
 					currIdx--;
-					arrow.y = 30 + currIdx * 20;
+					arrow.y = 30 + currIdx * 15;
 				}
 			} 
 			else if (FlxG.keys.justPressed("DOWN"))
@@ -108,7 +108,7 @@ package com.chameleonquest
 				if (currIdx < stages[currRoomIdx].length - 1)
 				{
 					currIdx++;
-					arrow.y = 30 + currIdx * 20;
+					arrow.y = 30 + currIdx * 15;
 				}
 			}
 			else if (FlxG.keys.justPressed("LEFT"))
@@ -120,7 +120,7 @@ package com.chameleonquest
 					
 					if (stages[currRoomIdx].length <= currIdx) {
 						currIdx = stages[currRoomIdx].length - 1;
-						arrow.y = 30 + currIdx * 20;
+						arrow.y = 30 + currIdx * 15;
 					}
 				}
 			}
@@ -133,7 +133,7 @@ package com.chameleonquest
 					
 					if (stages[currRoomIdx].length <= currIdx) {
 						currIdx = stages[currRoomIdx].length - 1;
-						arrow.y = 30 + currIdx * 20;
+						arrow.y = 30 + currIdx * 15;
 					}
 				}
 			}
@@ -163,8 +163,8 @@ package com.chameleonquest
 			{
 				text += "*";
 			}
-			stage = new FlxText(30 + x*50, 30 + y*20, FlxG.width, text);
-			stage.setFormat(null, 12, 0x000000, "left");
+			stage = new FlxText(30 + x*50, 30 + y*15, FlxG.width, text);
+			stage.setFormat(null, 10, 0x000000, "left");
 			this.add(stage);
 		}
 	}
