@@ -41,9 +41,6 @@ package com.chameleonquest.Rooms
 			
 			intrELems.add(new WoodBlock(43, 14));
 			
-			enemies.add(new Boar(16*10, 16 * 15, 16 * 10));
-
-			
 			Main.lastRoom = 1;
 			
 			super.create();
@@ -90,7 +87,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-1-end");
 				Preloader.tracker.trackEvent("level-1", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new Room1_2State());
+				FlxG.switchState(new LevelCompleteState(playtime));
 			}
 		}
 		
