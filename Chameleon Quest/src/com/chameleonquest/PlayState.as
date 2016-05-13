@@ -18,6 +18,7 @@ package com.chameleonquest
 	import com.chameleonquest.interactiveObj.Button;
 	import com.chameleonquest.interactiveObj.InteractiveObj;
 	import com.chameleonquest.interactiveObj.WoodBlock;
+	import com.chameleonquest.Rooms.*;
 	import org.flixel.*;
 	
     public class PlayState extends FlxState
@@ -74,6 +75,10 @@ package com.chameleonquest
 			add(enemyProjectiles);
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
+			FlxG.camera.deadzone.x = 160 - 16;
+			FlxG.camera.deadzone.y = 120 - 16;
+			FlxG.camera.deadzone.width = 32;
+			FlxG.camera.deadzone.height = 32;
 			
 			setupPauseHUD();
 			
@@ -149,6 +154,11 @@ package com.chameleonquest
 					Preloader.tracker.trackEvent("action", "c", null);
 					
 					FlxG.overlap(player, bgElems, null, changeElement);
+				}
+				
+				if (FlxG.keys.justPressed("R")) {
+					FlxG.flash(0x000000, 0.75);
+					FlxG.switchState(getStage(Main.lastRoom));
 				}
 				
 				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X")) {
@@ -394,6 +404,62 @@ package com.chameleonquest
 			{
 				tongue.grabbedObject = item;
 				tongue.extending = false;
+			}
+		}
+		
+		public static function getStage(number:int):FlxState
+		{
+			if (number == 1)
+			{
+				return new Room1_1State();
+			}
+			else if (number == 2)
+			{
+				return new Room1_2State();
+			}
+			else if (number == 3)
+			{
+				return new Room1_3State();
+			}
+			else if (number == 4)
+			{
+				return new Room1_4State();
+			}
+			else if (number == 5)
+			{
+				return new Room1_5State();
+			}
+			else if (number == 6)
+			{
+				return new Room1_6State();
+			}
+			else if (number == 7)
+			{
+				return new Room1_7State();
+			}
+			else if (number == 8)
+			{
+				return new Room2_1State();
+			}
+			else if (number == 9)
+			{
+				return new Room2_2State();
+			}
+			else if (number == 10)
+			{
+				return new Room2_3State();
+			}
+			else if (number == 11)
+			{
+				return new Room2_4State();
+			}
+			else if (number >= 12)
+			{
+				return new Room2_5State();
+			}
+			else
+			{
+				return new MenuState();
 			}
 		}
     }

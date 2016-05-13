@@ -77,14 +77,14 @@ package com.chameleonquest
 					grabbedObject.velocity.y = 0;
 					if (player.facing == RIGHT)
 					{
-						if (grabbedObject.x > x + 15 && !(this.extending))
+						if (grabbedObject.x >= x + 15 && !(this.extending))
 						{
 							grabbedObject.velocity.x = -SPEED;
 						}
 					}
 					else
 					{
-						if (grabbedObject.x + grabbedObject.width > x && !(this.extending))
+						if (grabbedObject.x + grabbedObject.width >= x && !(this.extending))
 						{
 							grabbedObject.velocity.x = SPEED;
 						}

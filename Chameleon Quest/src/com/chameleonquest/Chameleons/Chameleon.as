@@ -126,6 +126,11 @@ package com.chameleonquest.Chameleons
 				acceleration.x = 0;
 			}
 			
+			if (FlxG.keys.X)
+			{
+				ammo = 0;
+			}
+			
 			this.handleShooting();
 			
 			velocityModifiers.x = 0;
