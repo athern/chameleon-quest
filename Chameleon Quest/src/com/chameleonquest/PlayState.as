@@ -1,8 +1,6 @@
 package com.chameleonquest 
 {
-	import com.chameleonquest.Chameleons.FireChameleon;
-	import com.chameleonquest.Chameleons.Chameleon;
-	import com.chameleonquest.Chameleons.WaterChameleon;
+	import com.chameleonquest.Chameleons.*;
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
 	import com.chameleonquest.Enemies.Turtle;
@@ -170,6 +168,7 @@ package com.chameleonquest
 					player = Chameleon.cloneFrom(player);
 					add(player.tongue);
 					add(player);
+					player.tongue.cleanup();
 					FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 					FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 				}
@@ -254,6 +253,15 @@ package com.chameleonquest
 						break;
 					case Chameleon.FIRE:
 						player = FireChameleon.cloneFrom(me);
+						break;
+					case Chameleon.EARTH:
+						player = EarthChameleon.cloneFrom(me);
+						break;
+					case Chameleon.WIND:
+						player = WindChameleon.cloneFrom(me);
+						break;
+					case Chameleon.ELECTRICITY:
+						player = ElectricChameleon.cloneFrom(me);
 						break;
 					default:
 						player = me;
