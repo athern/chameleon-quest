@@ -57,7 +57,7 @@ package com.chameleonquest.interactiveObj
 			play("UP");
 		}
 		
-		private function loadButtonSprite(type:uint) {
+		private function loadButtonSprite(type:uint):void {
 			if (type == RED) {
 				loadGraphic(redImg, true, true, 128, 128);
 			} else if (type == BLUE) {

@@ -31,7 +31,7 @@ package com.chameleonquest.Rooms
 						
 			// add torch
 			bgElems.add(new Torch(2, (ROOM_HEIGHT - 11)));
-						
+									
 			super.create();
 		}
 		
