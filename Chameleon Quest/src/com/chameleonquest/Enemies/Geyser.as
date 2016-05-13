@@ -78,15 +78,14 @@ package com.chameleonquest.Enemies
 		
 		public static function grabSegment():GeyserSegment
 		{
-			if (Geyser.streamCache == null)
+			Geyser.initCache();
+			var result:GeyserSegment = Geyser.streamCache.getFirstAvailable() as GeyserSegment;
+			while (result == null)
 			{
-				Geyser.streamCache = new FlxGroup();
-				for (var i:int = 0; i < 500; i++)
-				{
-					Geyser.streamCache.add(new GeyserSegment( -32, -32));
-				}
+				Geyser.streamCache.add(new GeyserSegment( -32, -32));
+				result = Geyser.streamCache.getFirstAvailable() as GeyserSegment;
 			}
-			return Geyser.streamCache.getFirstAvailable() as GeyserSegment;
+			return result;
 		}
 		
 		public static function init(g:FlxGroup, X:int, Y:int, t:int=100, s:int=2):Geyser
@@ -123,6 +122,14 @@ package com.chameleonquest.Enemies
 				for (var a:int = 0; a < 10; a++)
 				{
 					Geyser.cache.add(new Geyser(-32, -32));
+				}
+			}
+			if (Geyser.streamCache == null)
+			{
+				Geyser.streamCache = new FlxGroup();
+				for (var b:int = 0; b < 200; b++)
+				{
+					Geyser.streamCache.add(new GeyserSegment( -32, -32));
 				}
 			}
 		}
