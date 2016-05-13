@@ -133,6 +133,7 @@ package com.chameleonquest.Chameleons
 			if (FlxG.keys.X)
 			{
 				ammo = 0;
+				play("basic");
 			}
 			
 			this.handleShooting();

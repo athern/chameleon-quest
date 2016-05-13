@@ -41,7 +41,7 @@ package com.chameleonquest.Rooms
 			
 			var gate:StoneGate = new StoneGate(11, 6, -1);
 			elems.add(gate);
-			enemies.add(new Snake(1 * 16, 26 * 16, 4 * 16, 1));
+			enemies.add(new Boar(1 * 16, 26 * 16, 4 * 16, 1));
 			
 			intrELems.add(new WaterWheel(13, 7, gate, StoneGate.gradualLift));
 			

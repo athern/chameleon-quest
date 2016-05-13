@@ -5,15 +5,13 @@ package com.chameleonquest.Enemies
 
 	public class Boar extends HorizontallyPatrollingEnemy
 	{
-		[Embed(source = "../../../../assets/boar.png")]public var greenSnake:Class;
+		[Embed(source = "../../../../assets/boar.png")]public var img:Class;
 		
 		protected static const GRAVITY:int = 800;
 		protected static const CHARGE_DELAY:Number = 2;
 		
 		private var cooldown:Number;
 		private var isCharging:Boolean;
-		
-		private var player:FlxSprite;
 		
 		public function Boar(MinX:Number, MaxX:Number, Y:Number, startLoc:uint=0) 
 		{
@@ -28,38 +26,41 @@ package com.chameleonquest.Enemies
 			//offset.y = 6;
 			play("idle");
 			
-			var currState:PlayState = FlxG.state as PlayState;
-			player = currState.player;
+			
 			cooldown = CHARGE_DELAY;
 			isCharging = false;
 		}
 		
 		public function loadSprites():void
 		{
-			loadGraphic(greenSnake, true, true, 32, 24);
+			loadGraphic(img, true, true, 32, 24);
 		}
 		
 		public override function update():void
 		{
-			if ((player.x < this.x + 32 && player.x > this.x && this.facing == FlxObject.RIGHT) || 
-			(player.x > this.x - 32 && player.x < this.x && this.facing == FlxObject.LEFT)) {
+			var currState:PlayState = FlxG.state as PlayState;
+			var player:FlxSprite = currState.player;
+			
+			cooldown -= FlxG.elapsed;
+			if (cooldown < 0 && !isCharging && player.y < this.y + 64 && player.y > this.y - 64 && 
+			((player.x > this.x && this.facing == FlxObject.RIGHT) || 
+			(player.x < this.x && this.facing == FlxObject.LEFT))) {
 				play("charge");
-				velocity.x = 0;
-				speed = 0;
+				speed = 150;
 				isCharging = true;
 			}
 			
 			if (isCharging) {
-				cooldown -= FlxG.elapsed;
-				if (cooldown < 0) {
+				if (isTouching(RIGHT) || isTouching(LEFT)) {
 					play("idle");
 					isCharging = false;
 					cooldown = CHARGE_DELAY;
-					velocity.x = -50;
 					speed = 50;
 				}
 			}
 			super.update();
+			
+			
 		}
 		
 	}
