@@ -1,5 +1,8 @@
 package com.chameleonquest.Chameleons 
 {
+	import com.chameleonquest.Projectiles.Gust;
+	import com.chameleonquest.Projectiles.Projectile;
+	import org.flixel.FlxG;
 	public class WindChameleon extends Chameleon
 	{
 		[Embed(source = "../../../../assets/whitechameleon.png")]public var whiteChameleon:Class;
@@ -27,6 +30,22 @@ package com.chameleonquest.Chameleons
 			clone.jumpPhase = reference.jumpPhase;
 			
 			return clone;
+		}
+		
+		override public function getNextAttack():Projectile 
+		{
+			return new Gust();
+		}
+		
+		override protected function handleShooting():void 
+		{
+			if (FlxG.keys.SPACE)
+			{
+				if (this.cooldown > SHOOT_DELAY)
+				{
+					this.shoot();
+				}
+			}
 		}
 		
 	}
