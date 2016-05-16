@@ -3,6 +3,8 @@ package com.chameleonquest.Projectiles
 	import org.flixel.FlxSprite;
 	public class ElectricBolt extends Projectile
 	{		
+		[Embed(source = "../../../../assets/bolt.png")]public var bolt:Class;
+		
 		private const maxChains:int = 3; // todo
 		private var chainCount:int;
 		private var storedVelocityX:int;
@@ -11,12 +13,20 @@ package com.chameleonquest.Projectiles
 		public function ElectricBolt() 
 		{
 			super();
-			// TODO: change the following once the actual sprite is in
-			this.offset.y = 10;
-			this.height = 10;
-			
+			loadGraphic(bolt, true, true, 64, 64);
+			scale.x = .5;
+			scale.y = .5;
+			height = 14;
+			width = 32;
+			offset.x = 16;
+			offset.y = 24;
 			this.exists = false;
 			this.reshooting = false;
+		}
+		
+		override public function update():void 
+		{
+			super.update();
 		}
 		
 		override public function getDamage(Target:FlxSprite):Number
