@@ -21,7 +21,11 @@ package com.chameleonquest
 			var gid:uint = 119; //INSERT TEAM GID HERE
 			var gname:String = "cgs_gc_chameleon_quest_log";
 			var skey:String = "b4b8c257ae5ef1df0bf399923638ad6c";
-			var cid:int = 1; //category id; treat this like a "version id" or "release number" to help differentiate data from different versions
+			
+			//category id; treat this like a "version id" or "release number" to help differentiate data from different versions
+			//var cid:int = 1; // FOR DEVELOPMENT
+			var cid:int = 2;
+			
 			logger = Logger.initialize(gid, gname, skey, 1, null); //automatically logs a page load; don't need any parameters
 
 			className = "com.chameleonquest.Main";
