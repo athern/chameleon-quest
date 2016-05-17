@@ -24,7 +24,7 @@ package com.chameleonquest.Chameleons
 		protected static const JUMP_SPEED:int = 200;
 		protected static const SHOOT_DELAY:Number = .2;
 		protected static const RUN_ACCELERATION:int = 1000;
-		protected static const INVULNERABILITY_TIMER:int = 30;
+		protected static const INVULNERABILITY_TIMER:int = 60;
 		
 		public var tongue:Tongue;
 		public var jumpPhase:int;
@@ -225,6 +225,7 @@ package com.chameleonquest.Chameleons
 			}
 			invulnerability = INVULNERABILITY_TIMER;
 			flicker(INVULNERABILITY_TIMER / 60);
+			FlxG.flash(0xcc0000, .1);
 			if (source != null)
 			{
 				if (source.x > x && source.x > x + width) {

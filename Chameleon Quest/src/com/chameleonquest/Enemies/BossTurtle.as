@@ -1,5 +1,6 @@
 package com.chameleonquest.Enemies 
 {
+	import com.chameleonquest.PlayState;
 	import com.chameleonquest.Projectiles.Projectile;
 	import org.flixel.FlxG;
 	public class BossTurtle extends HorizontallyPatrollingEnemy
@@ -72,6 +73,7 @@ package com.chameleonquest.Enemies
 				this.cooldown = 0;
 				
 				play("flipped"); // it may be better to have a legit flip animation or use angular velocity to spin, but this is fine for now
+				FlxG.shake();
 			}
 		}
 		

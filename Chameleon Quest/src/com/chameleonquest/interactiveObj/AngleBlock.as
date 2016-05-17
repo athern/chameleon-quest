@@ -2,6 +2,8 @@ package com.chameleonquest.interactiveObj
 {
 	import com.chameleonquest.Projectiles.Projectile;
 	import com.chameleonquest.Projectiles.Rock;
+	import flash.geom.ColorTransform;
+	import flash.geom.Rectangle;
 	import org.flixel.*;
 	
 	public class AngleBlock extends InteractiveObj
@@ -9,7 +11,13 @@ package com.chameleonquest.interactiveObj
 		[Embed(source="../../../../assets/angleblock.png")]
 		protected var img:Class;
 		
-		public function AngleBlock(Xindex:int, Yindex:int, r:int) 
+		static public const RED:uint = 0x00;
+		static public const BLUE:uint = 0x01;
+		static public const GREEN:uint = 0x02;
+		static public const YELLOW:uint = 0x03;
+		static public const GREY:uint = 0x04;
+		
+		public function AngleBlock(Xindex:int, Yindex:int, r:int, type:uint = GREY) 
 		{
 			var xOff:int = 2;
 			var yOff:int = 2;
@@ -26,14 +34,42 @@ package com.chameleonquest.interactiveObj
 				xOff = 6;
 				yOff = 6;
 			}
-			super(Xindex * 16 + xOff, Yindex * 16 + yOff);
-			loadGraphic(img);
+			super(Xindex * 16 + xOff, Yindex * 16 + yOff);  
+			
 			angle = r;
 			width = 8;
 			height = 8;
 			offset.x = xOff;
 			offset.y = yOff;
 			immovable = true;
+			if (type == RED)
+			{
+				loadGraphic(img, false, false, 16, 16, true);
+				pixels.colorTransform(new Rectangle(0, 0, 16, 16), new ColorTransform(1, .5, .5));
+				dirty = true;
+			}
+			if (type == BLUE)
+			{
+				loadGraphic(img, false, false, 16, 16, true);
+				pixels.colorTransform(new Rectangle(0, 0, 16, 16), new ColorTransform(.5, .5, 1));
+				dirty = true;
+			}
+			if (type == GREEN)
+			{
+				loadGraphic(img, false, false, 16, 16, true);
+				pixels.colorTransform(new Rectangle(0, 0, 16, 16), new ColorTransform(.5, 1, .5));
+				dirty = true;
+			}
+			if (type == YELLOW)
+			{
+				loadGraphic(img, false, false, 16, 16, true);
+				pixels.colorTransform(new Rectangle(0, 0, 16, 16), new ColorTransform(1.5, 1.5, 0));
+				dirty = true;
+			}
+			if (type == GREY)
+			{
+				loadGraphic(img, false, false, 16, 16, true);
+			}
 			speed = 0;
 		}
 		

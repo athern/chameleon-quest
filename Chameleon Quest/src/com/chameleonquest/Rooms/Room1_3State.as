@@ -18,21 +18,11 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			if (Main.lastRoom == 4) {
-				Preloader.logger.logLevelStart(1, {"src": 4});
-				Preloader.tracker.trackPageview("/level-3");
-				Preloader.tracker.trackEvent("level-3", "level-enter", null, 4);
+			Preloader.logger.logLevelStart(1, {"src": 2});
+			Preloader.tracker.trackPageview("/level-3");
+			Preloader.tracker.trackEvent("level-3", "level-enter", null, 2);
 				
-				player = new Chameleon(ROOM_WIDTH-2, ROOM_HEIGHT -1);
-				player.facing = FlxObject.LEFT;
-			}
-			else {
-				Preloader.logger.logLevelStart(1, {"src": 2});
-				Preloader.tracker.trackPageview("/level-3");
-				Preloader.tracker.trackEvent("level-3", "level-enter", null, 2);
-				
-				player = new Chameleon(0, 5);
-			}
+			player = new Chameleon(0, 5);
 			
 			// add rock pile
 			bgElems.add(new Pile(5, 5));

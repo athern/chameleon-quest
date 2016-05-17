@@ -43,26 +43,11 @@ package com.chameleonquest.Rooms
 			elems.add(rightgate);
 			StoneGate.lift(leftgate);
 			StoneGate.lift(rightgate);
-			if (Main.lastRoom == 8)
-			{
-				Preloader.logger.logLevelStart(1, {"src": 8});
-				Preloader.tracker.trackPageview("/level-7");
-				Preloader.tracker.trackEvent("level-7", "level-enter", null, 8);
-				
-				player = new Chameleon(0, ROOM_HEIGHT - 1);
-				player.facing = FlxObject.RIGHT;
-				enteredBossChamber = true;
-				boss.kill();
-			}
-			else
-			{
-				Preloader.logger.logLevelStart(1, {"src": 6});
-				Preloader.tracker.trackPageview("/level-7");
-				Preloader.tracker.trackEvent("level-7", "level-enter", null, 6);
-				
-				player = new Chameleon(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
-				player.facing = FlxObject.LEFT;
-			}
+			Preloader.logger.logLevelStart(1, {"src": 6});
+			Preloader.tracker.trackPageview("/level-7");
+			Preloader.tracker.trackEvent("level-7", "level-enter", null, 6);
+			player = new Chameleon(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
+			player.facing = FlxObject.LEFT;
 			Main.lastRoom = 7;
 			Geyser.initCache();
 			super.create();
