@@ -41,7 +41,7 @@ package com.chameleonquest
 			var room3:Array = [
 			new Room3_1State(),
 			new Room3_2State()
-			]
+			];
 			
 			stages = [
 			room1, room2, room3
@@ -70,8 +70,8 @@ package com.chameleonquest
 			arrow.setFormat(null, 12, 0xFF0000, "left");
 			this.add(arrow);
 			
-			worlds.push(addWorld(0, "World 1"));
-			worlds.push(addWorld(1, "World 2"));
+			addWorld(0, "World 1");
+			addWorld(1, "World 2");
 			
 			for (var i :int = 0; i < worlds.length; i++)
 			{
@@ -80,20 +80,20 @@ package com.chameleonquest
 			
 			// Levels
 
-			levels.push(addStage(0, 0, "1-1: The Quest Begins\t\t\t"));
-			levels.push(addStage(0, 1, "1-2: Predators\t\t\t\t\t"));
-			levels.push(addStage(0, 2, "1-3: Into The Depths\t\t\t"));
-			levels.push(addStage(0, 3, "1-4: Long Way Around\t\t\t"));
-			levels.push(addStage(0, 4, "1-5: All The Way Down\t\t\t"));
-			levels.push(addStage(0, 5, "1-6: Powered By Buttons\t\t"));
-			levels.push(addStage(0, 6, "1-7: The Water Guardian\t\t"));
+			addStage(0, 0, "1-1: The Quest Begins\t\t\t");
+			addStage(0, 1, "1-2: Predators\t\t\t\t\t");
+			addStage(0, 2, "1-3: Into The Depths\t\t\t");
+			addStage(0, 3, "1-4: Long Way Around\t\t\t");
+			addStage(0, 4, "1-5: All The Way Down\t\t\t");
+			addStage(0, 5, "1-6: Powered By Buttons\t\t");
+			addStage(0, 6, "1-7: The Water Guardian\t\t");
 			
-			levels.push(addStage(1, 0, "2-1: Just Grate\t\t\t\t\t"));
-			levels.push(addStage(1, 1, "2-2: Choose Your Tools\t\t\t"));
-			levels.push(addStage(1, 2, "2-3: Rise From The Depths\t\t"));
-			levels.push(addStage(1, 3, "2-4: Enemy At The Gate\t\t\t"));
-			levels.push(addStage(1, 4, "2-5: Putting It All Together\t\t"));
-			levels.push(addStage(1, 5, "2-6: Stairway to (Heaven?)\t\t"));
+			addStage(1, 0, "2-1: Just Grate\t\t\t\t\t");
+			addStage(1, 1, "2-2: Choose Your Tools\t\t\t");
+			addStage(1, 2, "2-3: Rise From The Depths\t\t");
+			addStage(1, 3, "2-4: Enemy At The Gate\t\t\t");
+			addStage(1, 4, "2-5: Putting It All Together\t\t");
+			addStage(1, 5, "2-6: Stairway to (Heaven?)\t\t");
 			
 		}
 		
@@ -190,7 +190,7 @@ package com.chameleonquest
 			headings.visible = false;
 		}
 		
-		private function addStage(x:int, y:int, text:String):FlxText {
+		private function addStage(x:int, y:int, text:String):void {
 			var stage:FlxText;
 			if (Main.bestTimes[x * 7 + y + 1] < Number.MAX_VALUE)
 			{
@@ -211,10 +211,10 @@ package com.chameleonquest
 			}
 			this.add(stage);
 			stage.visible = false;
-			return stage;
+			levels.push(stage);
 		}
 		
-		private function addWorld(y:int, text:String):FlxText {
+		private function addWorld(y:int, text:String):void {
 			var stage:FlxText = new FlxText(15, 80 + y * 20, FlxG.width, text);
 			if (Main.bestRoom >= y * 7)
 			{
@@ -226,7 +226,7 @@ package com.chameleonquest
 			}
 			this.add(stage);
 			stage.visible = false;
-			return stage;
+			worlds.push(stage);
 		}
 	}
 
