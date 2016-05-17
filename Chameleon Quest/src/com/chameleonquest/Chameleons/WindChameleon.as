@@ -7,7 +7,7 @@ package com.chameleonquest.Chameleons
 	{
 		[Embed(source = "../../../../assets/whitechameleon.png")]public var whiteChameleon:Class;
 		private var doubleJump:Boolean;
-		private var jumpCount = 0;
+		private var jumpCount:int = 0;
 		
 		public function WindChameleon(Xindex:int,Yfloorindex:int, indexedPoint:Boolean = true) 
 		{

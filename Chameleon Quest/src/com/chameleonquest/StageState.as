@@ -28,6 +28,16 @@ package com.chameleonquest
 			new Room1_5State(),
 			new Room1_6State(),
 			new Room1_7State(),
+<<<<<<< 1dfde46e9a4911c1cfab8a63da7a100634439bd4
+			new Room2_1State(),
+			new Room2_2State(),
+			new Room2_3State(),
+			new Room2_4State(),
+			new Room2_5State(),
+			new Room2_6State(),
+			new Room3_1State(),
+			new Room3_2State()
+=======
 			//new Room2_1State(),
 			//new Room2_2State(),
 			//new Room2_3State(),
@@ -35,27 +45,11 @@ package com.chameleonquest
 			//new Room2_5State(),
 			//new Room3_1State(),
 			//new Room3_2State()
+>>>>>>> Things look nicer, mostly
 			]
-			
-			var room2:Array = [
-			new Room2_1State(),
-			new Room2_2State(),
-			new Room2_3State(),
-			new Room2_4State(),
-			new Room2_5State()
-			]
-			
-			var room3:Array = [
-			new Room3_1State(),
-			new Room3_2State()
-			]
-			
-			
 			
 			stages = [
-			room1, 
-			room2, 
-			room3
+			room1
 			];
 		}
 		
@@ -90,6 +84,7 @@ package com.chameleonquest
 			}
 			
 			// Levels
+
 			levels.push(addStage(0, 0, "1-1: The Quest Begins\t\t\t"));
 			levels.push(addStage(0, 1, "1-2: Predators\t\t\t\t\t"));
 			levels.push(addStage(0, 2, "1-3: Into The Depths\t\t\t"));
@@ -103,9 +98,7 @@ package com.chameleonquest
 			levels.push(addStage(1, 2, "2-3: Rise From The Depths\t\t"));
 			levels.push(addStage(1, 3, "2-4: Enemy At The Gate\t\t\t"));
 			levels.push(addStage(1, 4, "2-5: Putting It All Together\t\t"));
-			
-			//addStage(0, 12, "3-1");
-			//addStage(0, 13, "3-2");
+			levels.push(addStage(1, 5, "2-6:                        \t\t"));
 			
 		}
 		
@@ -129,33 +122,6 @@ package com.chameleonquest
 					arrow.y = 78 + currIdx * 20;
 				}
 			}
-			/*
-			else if (FlxG.keys.justPressed("LEFT"))
-			{
-				if (currRoomIdx > 0)
-				{
-					currRoomIdx--;
-					arrow.x = 15 + currRoomIdx * 50;
-					
-					if (stages[currRoomIdx].length <= currIdx) {
-						currIdx = stages[currRoomIdx].length - 1;
-						arrow.y = 30 + currIdx * 15;
-					}
-				}
-			}
-			else if (FlxG.keys.justPressed("RIGHT"))
-			{
-				if (currRoomIdx < stages.length - 1)
-				{
-					currRoomIdx++;
-					arrow.x = 15 + currRoomIdx * 50;
-					
-					if (stages[currRoomIdx].length <= currIdx) {
-						currIdx = stages[currRoomIdx].length - 1;
-						arrow.y = 30 + currIdx * 15;
-					}
-				}
-			}*/
 			
 			
 			if (FlxG.keys.justPressed("SPACE"))
