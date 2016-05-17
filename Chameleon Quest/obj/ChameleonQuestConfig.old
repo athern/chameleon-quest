@@ -32,7 +32,6 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-<<<<<<< HEAD
       <path-element>C:\Users\Riley\Documents\GitHub\chameleon-quest\Chameleon Quest\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
@@ -44,19 +43,6 @@
   </compiler>
   <file-specs>
     <path-element>C:\Users\Riley\Documents\GitHub\chameleon-quest\Chameleon Quest\src\com\chameleonquest\Main.as</path-element>
-=======
-      <path-element>C:\Users\Cindy\Documents\GitHub\chameleon-quest\Chameleon Quest\src</path-element>
-      <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
-    </source-path>
-    <library-path append="true">
-      <path-element>C:\Users\Cindy\Documents\GitHub\chameleon-quest\Chameleon Quest\libs\analytics.swc</path-element>
-      <path-element>C:\Users\Cindy\Documents\GitHub\chameleon-quest\Chameleon Quest\libs\analytics_flash.swc</path-element>
-      <path-element>C:\Users\Cindy\Documents\GitHub\chameleon-quest\Chameleon Quest\libs\CGSCommon.swc</path-element>
-    </library-path>
-  </compiler>
-  <file-specs>
-    <path-element>C:\Users\Cindy\Documents\GitHub\chameleon-quest\Chameleon Quest\src\com\chameleonquest\Main.as</path-element>
->>>>>>> origin/master
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>

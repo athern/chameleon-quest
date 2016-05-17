@@ -27,29 +27,24 @@ package com.chameleonquest
 			new Room1_4State(),
 			new Room1_5State(),
 			new Room1_6State(),
-			new Room1_7State(),
-<<<<<<< 1dfde46e9a4911c1cfab8a63da7a100634439bd4
+			new Room1_7State()
+			];
+			var room2:Array = [
 			new Room2_1State(),
 			new Room2_2State(),
 			new Room2_3State(),
 			new Room2_4State(),
 			new Room2_5State(),
-			new Room2_6State(),
+			new Room2_6State()
+			];
+			
+			var room3:Array = [
 			new Room3_1State(),
 			new Room3_2State()
-=======
-			//new Room2_1State(),
-			//new Room2_2State(),
-			//new Room2_3State(),
-			//new Room2_4State(),
-			//new Room2_5State(),
-			//new Room3_1State(),
-			//new Room3_2State()
->>>>>>> Things look nicer, mostly
 			]
 			
 			stages = [
-			room1
+			room1, room2, room3
 			];
 		}
 		
