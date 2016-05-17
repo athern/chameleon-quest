@@ -6,6 +6,8 @@ package com.chameleonquest.Chameleons
 	public class WindChameleon extends Chameleon
 	{
 		[Embed(source = "../../../../assets/whitechameleon.png")]public var whiteChameleon:Class;
+		private var doubleJump:Boolean;
+		private var jumpCount = 0;
 		
 		public function WindChameleon(Xindex:int,Yfloorindex:int, indexedPoint:Boolean = true) 
 		{
@@ -18,6 +20,8 @@ package com.chameleonquest.Chameleons
 			
 			this.tongue = null;
 			this.type = Chameleon.WIND;
+			this.doubleJump = false;
+			this.jumpCount = 0;
 		}
 		
 		public static function cloneFrom(reference:Chameleon):Chameleon
@@ -30,6 +34,33 @@ package com.chameleonquest.Chameleons
 			clone.jumpPhase = reference.jumpPhase;
 			
 			return clone;
+		}
+		
+		override public function update():void 
+		{
+			super.update();
+			
+			if (!FlxG.keys.UP && acceleration.y > 0 && jumpCount < 2)
+			{
+				// currently jumping, enable double jumping
+				doubleJump = true;
+				jumpCount++;
+			}
+			else if (isTouching(FLOOR))
+			{
+				// on the ground, reset double jump capabilities
+				doubleJump = false;
+				jumpCount = 0;
+			}
+			
+			if(FlxG.keys.UP && doubleJump)
+            {
+				// jump again!
+				jumpPhase = 0;
+				acceleration.y = 0;
+				doubleJump = false;
+				jumpCount++;
+            }
 		}
 		
 		override public function getNextAttack():Projectile 
