@@ -26,7 +26,7 @@ package com.chameleonquest
 			//var cid:int = 1; // FOR DEVELOPMENT
 			var cid:int = 2;
 			
-			logger = Logger.initialize(gid, gname, skey, 1, null); //automatically logs a page load; don't need any parameters
+			logger = Logger.initialize(gid, gname, skey, cid, null); //automatically logs a page load; don't need any parameters
 
 			className = "com.chameleonquest.Main";
 			super();
