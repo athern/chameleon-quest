@@ -29,30 +29,13 @@ package com.chameleonquest
 			new Room2_3State(),
 			new Room2_4State(),
 			new Room2_5State(),
+			new Room2_6State(),
 			new Room3_1State(),
 			new Room3_2State()
 			]
-			
-			var room2:Array = [
-			new Room2_1State(),
-			new Room2_2State(),
-			new Room2_3State(),
-			new Room2_4State(),
-			new Room2_5State(),
-			new Room2_6State()
-			]
-			
-			var room3:Array = [
-			new Room3_1State(),
-			new Room3_2State()
-			]
-			
-			
 			
 			stages = [
-			room1, 
-			room2, 
-			room3
+			room1
 			];
 		}
 		
@@ -87,6 +70,7 @@ package com.chameleonquest
 			addStage(0, 9, "2-3");
 			addStage(0, 10, "2-4");
 			addStage(0, 11, "2-5");
+			addStage(0, 12, "2-6");
 			
 			//addStage(0, 12, "3-1");
 			//addStage(0, 13, "3-2");
@@ -112,7 +96,7 @@ package com.chameleonquest
 					arrow.y = 30 + currIdx * 15;
 				}
 			}
-			else if (FlxG.keys.justPressed("LEFT"))
+			/*else if (FlxG.keys.justPressed("LEFT"))
 			{
 				if (currRoomIdx > 0)
 				{
@@ -137,7 +121,7 @@ package com.chameleonquest
 						arrow.y = 30 + currIdx * 15;
 					}
 				}
-			}
+			}*/
 			
 			
 			if (FlxG.keys.pressed("SPACE"))
