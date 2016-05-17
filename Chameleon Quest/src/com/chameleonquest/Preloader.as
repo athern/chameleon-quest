@@ -23,8 +23,8 @@ package com.chameleonquest
 			var skey:String = "b4b8c257ae5ef1df0bf399923638ad6c";
 			
 			//category id; treat this like a "version id" or "release number" to help differentiate data from different versions
-			//var cid:int = 1; // FOR DEVELOPMENT
-			var cid:int = 2;
+			var cid:int = 1; // FOR DEVELOPMENT
+			//var cid:int = 2;
 			
 			logger = Logger.initialize(gid, gname, skey, 1, null); //automatically logs a page load; don't need any parameters
 
