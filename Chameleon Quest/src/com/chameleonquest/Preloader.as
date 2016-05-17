@@ -15,8 +15,9 @@ package com.chameleonquest
 		public function Preloader():void
 		{
 			// Google analytics
-			tracker = new GATracker(this, "UA-77647600-1", "AS3", false);
-			
+			tracker = new GATracker(this, "UA-77647600-1", "AS3", true); // FOR DEVELOPMENT
+			//tracker = new GATracker(this, "UA-77647600-1", "AS3", false);
+
 			// Logger
 			var gid:uint = 119; //INSERT TEAM GID HERE
 			var gname:String = "cgs_gc_chameleon_quest_log";
