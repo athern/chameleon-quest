@@ -59,6 +59,12 @@ package com.chameleonquest.Rooms
 			spacehelp.setFormat(null, 14, 0x555555, "center");
 			spacehelp.alpha = .5;
 			this.add(spacehelp);
+			
+			var morehelp:FlxText;
+			morehelp = new FlxText(5 * 16, 25 * 16, 150, "GRAB ROCKS TO FIRE");
+			morehelp.setFormat(null, 8, 0x555555, "center");
+			morehelp.alpha = .5;
+			add(morehelp);
 		}
 		
 		override public function update():void
@@ -66,8 +72,7 @@ package com.chameleonquest.Rooms
 			super.update();
 			
 			if (player.x < 0) {
-				Preloader.logger.logLevelEnd({"dest": 1, "time": playtime});
-				FlxG.switchState(new Room1_1State());
+				player.x = 0;
 			}
 			if (player.x > map.width - 32) {
 				player.velocity.y = 0;
@@ -75,9 +80,9 @@ package com.chameleonquest.Rooms
 			if (player.x > map.width - 16) {
 				Preloader.logger.logLevelEnd({"dest": 3, "time": playtime});
 				Preloader.tracker.trackPageview("/level-2-end");
-				Preloader.tracker.trackEvent("level-2", "level-end", null, playtime * 100);
+				Preloader.tracker.trackEvent("level-2", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new Room1_3State());
+				FlxG.switchState(new LevelCompleteState(playtime, 60, 22));
 			}
 		}
 		

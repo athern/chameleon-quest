@@ -36,11 +36,11 @@ package com.chameleonquest.Enemies
 		override public function hurt(damage:Number):void
 		{
 			health -= damage;
-			if (health > 0)
+			if (health > 0 && damage > 0)
 			{
 				flicker(.25);
 			}
-			else if (dying == -1)
+			else if (health <= 0 && dying == -1)
 			{
 				play("death");
 				dying = DEATH_ANIMATION_LENGTH;

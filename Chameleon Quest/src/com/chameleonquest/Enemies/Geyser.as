@@ -78,27 +78,17 @@ package com.chameleonquest.Enemies
 		
 		public static function grabSegment():GeyserSegment
 		{
-			if (Geyser.streamCache == null)
+			var result:GeyserSegment = Geyser.streamCache.getFirstAvailable() as GeyserSegment;
+			while (result == null)
 			{
-				Geyser.streamCache = new FlxGroup();
-				for (var i:int = 0; i < 500; i++)
-				{
-					Geyser.streamCache.add(new GeyserSegment( -32, -32));
-				}
+				Geyser.streamCache.add(new GeyserSegment( -32, -32));
+				result = Geyser.streamCache.getFirstAvailable() as GeyserSegment;
 			}
-			return Geyser.streamCache.getFirstAvailable() as GeyserSegment;
+			return result;
 		}
 		
 		public static function init(g:FlxGroup, X:int, Y:int, t:int=100, s:int=2):Geyser
 		{
-			if (Geyser.cache == null)
-			{
-				Geyser.cache = new FlxGroup();
-				for (var a:int = 0; a < 10; a++)
-				{
-					Geyser.cache.add(new Geyser(-32, -32));
-				}
-			}
 			var result:Geyser = Geyser.cache.getFirstAvailable() as Geyser;
 			while (result == null)
 			{
@@ -120,6 +110,20 @@ package com.chameleonquest.Enemies
 				g.add(result.stream[j]);
 			}
 			return result;
+		}
+		
+		public static function initCache():void
+		{
+			Geyser.cache = new FlxGroup();
+			for (var a:int = 0; a < 10; a++)
+			{
+				Geyser.cache.add(new Geyser(-32, -32));
+			}
+			Geyser.streamCache = new FlxGroup();
+			for (var b:int = 0; b < 200; b++)
+			{
+				Geyser.streamCache.add(new GeyserSegment( -32, -32));
+			}
 		}
 		
 		override public function reset(X:Number, Y:Number):void

@@ -12,9 +12,7 @@ package com.chameleonquest.Rooms
 		
 		[Embed(source = "../../../../assets/mapCSV_2-3_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
-		
-		public var grates:FlxGroup = new FlxGroup();
-		
+				
 		override public function create():void
 		{
 			ROOM_WIDTH = 30;
@@ -66,7 +64,7 @@ package com.chameleonquest.Rooms
 			bgElems.add(new WaterFountain(6, ROOM_HEIGHT - 2));
 			
 			
-			Main.lastRoom = 10
+			Main.lastRoom = 10;
 			super.create();
 		}
 		
@@ -74,25 +72,16 @@ package com.chameleonquest.Rooms
 		{
 			super.update();
 			
-			// water grate check
-			if (player.getType() != Chameleon.WATER) {
-				FlxG.collide(player, grates);					
-			}
-			
 			if (player.x < 0) {
 				Preloader.logger.logLevelEnd({"dest": 11, "time": playtime});
 				Preloader.tracker.trackPageview("/level-10-end");
-				Preloader.tracker.trackEvent("level-10", "level-end", null, playtime * 100);
+				Preloader.tracker.trackEvent("level-10", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new Room2_4State());
+				FlxG.switchState(new LevelCompleteState(playtime, 80, 40));
 			}
 			
 			if (player.x > map.width - 16) {
-				Preloader.logger.logLevelEnd({"dest": 9, "time": playtime});
-				Preloader.tracker.trackPageview("/level-10-end");
-				Preloader.tracker.trackEvent("level-10", "level-end", null, playtime * 100);
-				
-				FlxG.switchState(new Room2_2State());
+				player.x = map.width - 16;
 			}
 		}
 		

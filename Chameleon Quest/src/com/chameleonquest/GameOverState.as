@@ -41,59 +41,8 @@ package com.chameleonquest
 			Preloader.logger.logAction(14, {"room": Main.lastRoom});
 			Preloader.logger.logLevelEnd(null);
 			Preloader.tracker.trackEvent("restart", "dest", null, Main.lastRoom);
-			
-			if (Main.lastRoom == 1)
-			{
-				FlxG.switchState(new Room1_1State());
-			}
-			else if (Main.lastRoom == 2)
-			{
-				FlxG.switchState(new Room1_2State());
-			}
-			else if (Main.lastRoom == 3)
-			{
-				FlxG.switchState(new Room1_3State());
-			}
-			else if (Main.lastRoom == 4)
-			{
-				FlxG.switchState(new Room1_4State());
-			}
-			else if (Main.lastRoom == 5)
-			{
-				FlxG.switchState(new Room1_5State());
-			}
-			else if (Main.lastRoom == 6)
-			{
-				FlxG.switchState(new Room1_6State());
-			}
-			else if (Main.lastRoom == 7)
-			{
-				FlxG.switchState(new Room1_7State());
-			}
-			else if (Main.lastRoom == 8)
-			{
-				FlxG.switchState(new Room2_1State());
-			}
-			else if (Main.lastRoom == 9)
-			{
-				FlxG.switchState(new Room2_2State());
-			}
-			else if (Main.lastRoom == 10)
-			{
-				FlxG.switchState(new Room2_3State());
-			}
-			else if (Main.lastRoom == 11)
-			{
-				FlxG.switchState(new Room2_4State());
-			}
-			else if (Main.lastRoom >= 12)
-			{
-				FlxG.switchState(new Room2_5State());
-			}
-			else
-			{
-				FlxG.switchState(new MenuState());
-			}
+			FlxG.switchState(PlayState.getStage(Main.lastRoom));
+		
 		}
 	}
 

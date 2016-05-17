@@ -1,8 +1,6 @@
 package com.chameleonquest 
 {
-	import com.chameleonquest.Chameleons.FireChameleon;
-	import com.chameleonquest.Chameleons.Chameleon;
-	import com.chameleonquest.Chameleons.WaterChameleon;
+	import com.chameleonquest.Chameleons.*;
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
 	import com.chameleonquest.Enemies.Turtle;
@@ -18,6 +16,7 @@ package com.chameleonquest
 	import com.chameleonquest.interactiveObj.Button;
 	import com.chameleonquest.interactiveObj.InteractiveObj;
 	import com.chameleonquest.interactiveObj.WoodBlock;
+	import com.chameleonquest.Rooms.*;
 	import org.flixel.*;
 	
     public class PlayState extends FlxState
@@ -39,6 +38,8 @@ package com.chameleonquest
 		public var elems:FlxGroup = new FlxGroup;
 		public var bgElems:FlxGroup = new FlxGroup;
 		public var intrELems:FlxGroup = new FlxGroup;
+		
+		public var grates:FlxGroup = new FlxGroup;
 		
 		// heart bar
 		public var heartbar:HeartBar = new HeartBar();
@@ -74,6 +75,10 @@ package com.chameleonquest
 			add(enemyProjectiles);
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
+			FlxG.camera.deadzone.x = 160 - 16;
+			FlxG.camera.deadzone.y = 120 - 16;
+			FlxG.camera.deadzone.width = 32;
+			FlxG.camera.deadzone.height = 32;
 			
 			setupPauseHUD();
 			
@@ -138,11 +143,6 @@ package com.chameleonquest
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
 				
-				// water grate check
-				if (player.getType() != Chameleon.WATER) {
-					FlxG.overlap(player, bgElems, null, passGrate);					
-				}
-				
 				
 				if (FlxG.keys.justPressed("C")) {
 					Preloader.logger.logAction(4, null);
@@ -151,7 +151,12 @@ package com.chameleonquest
 					FlxG.overlap(player, bgElems, null, changeElement);
 				}
 				
-				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X")) {
+				if (FlxG.keys.justPressed("R")) {
+					FlxG.flash(0x000000, 0.75);
+					FlxG.switchState(getStage(Main.lastRoom));
+				}
+				
+				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X") && !FlxG.overlap(player, grates)) {
 					Preloader.logger.logAction(5, {"type": player.getType().toString()});
 					Preloader.tracker.trackEvent("action", "x", "" + player.getType().toString());
 					
@@ -160,6 +165,7 @@ package com.chameleonquest
 					player = Chameleon.cloneFrom(player);
 					add(player.tongue);
 					add(player);
+					player.tongue.cleanup();
 					FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 					FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 				}
@@ -170,14 +176,17 @@ package com.chameleonquest
 					heartbar.hit(player.reactToDamage());
 				}
 				
+				// water grate check
+				if (player.getType() != Chameleon.WATER) {
+					FlxG.collide(player, grates);					
+				}
+				
 				if (player.tongue != null)
 				{
 					player.tongue.alignWithPlayer();
 					FlxG.overlap(player.tongue, bgElems, null, pickupRock);
 					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
 					FlxG.overlap(player.tongue, intrELems, null, grabItem);
-					FlxG.collide(player.tongue, map);
-					FlxG.collide(player.tongue, elems);
 				}
 				
 				if (player is WaterChameleon)
@@ -247,6 +256,15 @@ package com.chameleonquest
 					case Chameleon.FIRE:
 						player = FireChameleon.cloneFrom(me);
 						break;
+					case Chameleon.EARTH:
+						player = EarthChameleon.cloneFrom(me);
+						break;
+					case Chameleon.WIND:
+						player = WindChameleon.cloneFrom(me);
+						break;
+					case Chameleon.ELECTRICITY:
+						player = ElectricChameleon.cloneFrom(me);
+						break;
 					default:
 						player = me;
 						if (me.tongue != null)
@@ -269,10 +287,6 @@ package com.chameleonquest
 		}
 		
 		public function playerElemCollision(player:Chameleon, elem:FlxObject):void {
-			if (elem is PlatformOnChain)
-			{
-				(elem as PlatformOnChain).pulley.addWeight(player);
-			}
 			if (player.isTouching(FlxObject.FLOOR)) {
 				player.velocityModifiers.x = elem.velocity.x;
 				player.velocityModifiers.y = elem.velocity.y;
@@ -283,7 +297,7 @@ package com.chameleonquest
 		private function onFadeExit():void
 		{
 			Preloader.logger.logLevelEnd({"quit": Main.lastRoom, "time": playtime});
-			Preloader.tracker.trackEvent("quit", "level-" + Main.lastRoom, null, playtime * 100);
+			Preloader.tracker.trackEvent("quit", "level-" + Main.lastRoom, null, int(Math.round(playtime)));
 			
 			FlxG.paused = !FlxG.paused;
 			FlxG.switchState(new MenuState());
@@ -295,7 +309,7 @@ package com.chameleonquest
 			Preloader.logger.logAction(1, {"room": Main.lastRoom, "x": player.x, "y": player.y, "time": playtime});
 			Preloader.logger.logLevelEnd({"dest": -1});
 			Preloader.tracker.trackPageview("/game-over");
-			Preloader.tracker.trackEvent("game-over", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +")", playtime * 100);
+			Preloader.tracker.trackEvent("game-over", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +")", int(Math.round(playtime)));
 			
 			FlxG.switchState(new GameOverState());
 		}
@@ -328,7 +342,7 @@ package com.chameleonquest
 		protected function hurtPlayer(playerPart:FlxSprite, enemy:Enemy):void
 		{
 			Preloader.logger.logAction(9, {"room": Main.lastRoom, "x": player.x, "y": player.y, "enemy": enemy.toString()});
-			Preloader.tracker.trackEvent("damage", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), " + enemy.toString(), playtime * 100);
+			Preloader.tracker.trackEvent("damage", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), " + enemy.toString(), int(Math.round(playtime)));
 			
 			if (playerPart is Tongue)
 			{
@@ -348,7 +362,7 @@ package com.chameleonquest
 		private function inflictProjectileDamage(bullet:Projectile, target:FlxSprite):void 
 		{
 			Preloader.logger.logAction(10, {"room": Main.lastRoom, "x": player.x, "y": player.y, "target": target.toString(), "bullet": bullet.toString()});
-			Preloader.tracker.trackEvent("shoot", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), target: " + target.toString() + ", bullet: " + bullet.toString(), playtime * 100);
+			Preloader.tracker.trackEvent("shoot", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), target: " + target.toString() + ", bullet: " + bullet.toString(), int(Math.round(playtime)));
 			
 			if (target is Turtle && bullet is WaterStream)
 			{
@@ -399,8 +413,63 @@ package com.chameleonquest
 			if (item is WoodBlock)
 			{
 				tongue.grabbedObject = item;
-				tongue.grabbedFacing = player.facing;
 				tongue.extending = false;
+			}
+		}
+		
+		public static function getStage(number:int):FlxState
+		{
+			if (number == 1)
+			{
+				return new Room1_1State();
+			}
+			else if (number == 2)
+			{
+				return new Room1_2State();
+			}
+			else if (number == 3)
+			{
+				return new Room1_3State();
+			}
+			else if (number == 4)
+			{
+				return new Room1_4State();
+			}
+			else if (number == 5)
+			{
+				return new Room1_5State();
+			}
+			else if (number == 6)
+			{
+				return new Room1_6State();
+			}
+			else if (number == 7)
+			{
+				return new Room1_7State();
+			}
+			else if (number == 8)
+			{
+				return new Room2_1State();
+			}
+			else if (number == 9)
+			{
+				return new Room2_2State();
+			}
+			else if (number == 10)
+			{
+				return new Room2_3State();
+			}
+			else if (number == 11)
+			{
+				return new Room2_4State();
+			}
+			else if (number >= 12)
+			{
+				return new Room2_5State();
+			}
+			else
+			{
+				return new MenuState();
 			}
 		}
     }

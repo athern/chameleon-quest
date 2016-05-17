@@ -6,7 +6,15 @@ package com.chameleonquest.interactiveObj
 	public class Button extends InteractiveObj
 	{
 		
-		[Embed(source = "../../../../assets/button.png")]public var buttonImg:Class;
+		[Embed(source = "../../../../assets/button.png")]public var redImg:Class;
+		[Embed(source = "../../../../assets/button-blue.png")]public var blueImg:Class;
+		[Embed(source = "../../../../assets/button-green.png")]public var greenImg:Class;
+		[Embed(source = "../../../../assets/button-yellow.png")]public var yellowImg:Class;
+		
+		static public const RED:uint = 0x00;
+		static public const BLUE:uint = 0x01;
+		static public const GREEN:uint = 0x02;
+		static public const YELLOW:uint = 0x03;
 		
 		private var isHit:Boolean;
 		private var timer:int;
@@ -14,11 +22,12 @@ package com.chameleonquest.interactiveObj
 		
 
 		
-		public function Button(Xindex:int, Yindex:int, obj:FlxSprite, fun:Function, t:int=-1, r:int = 0) 
+		public function Button(Xindex:int, Yindex:int, obj:FlxSprite, fun:Function, t:int=-1, r:int = 0, type:uint=RED) 
 		{
 			
 			super(Xindex * 16, Yindex * 16);
-			loadGraphic(buttonImg, true, true, 128, 128);
+			loadButtonSprite(type);
+			
 			scale.x = 0.125;
 			scale.y = 0.125;
 			width = 16;  
@@ -46,6 +55,19 @@ package com.chameleonquest.interactiveObj
 			immovable = true;
 			
 			play("UP");
+		}
+		
+		private function loadButtonSprite(type:uint):void {
+			if (type == RED) {
+				loadGraphic(redImg, true, true, 128, 128);
+			} else if (type == BLUE) {
+				loadGraphic(blueImg, true, true, 128, 128);
+			} else if (type == GREEN) {
+				loadGraphic(greenImg, true, true, 128, 128);
+			} else if (type == YELLOW) {
+				loadGraphic(yellowImg, true, true, 128, 128);
+			}
+			
 		}
 		
 		// hit the button

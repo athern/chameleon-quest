@@ -38,7 +38,7 @@ package com.chameleonquest.Rooms
 			bgElems.add(new Pile(5, 5));
 			bgElems.add(new Pile(6, ROOM_HEIGHT - 1));
 			
-			elems.add(new Platform(new Array(new FlxPoint(15 * 16, (ROOM_HEIGHT - 5) * 16), new FlxPoint(20 * 16, (ROOM_HEIGHT - 5) * 16)), 60));
+			elems.add(new Platform(new Array(new FlxPoint(13 * 16, (ROOM_HEIGHT - 6) * 16), new FlxPoint(18 * 16, (ROOM_HEIGHT - 6) * 16)), 60));
 			
 			// add spikes
 			Spikes.addSpikeRow(18, 13, 4, enemies);
@@ -63,16 +63,15 @@ package com.chameleonquest.Rooms
 			super.update();
 			
 			if (player.x < 0) {
-				Preloader.logger.logLevelEnd({"dest": 2, "time": playtime});
-				FlxG.switchState(new Room1_2State());
+				player.x = 0;
 			}
 			
 			if (player.x > map.width - 16) {
 				Preloader.logger.logLevelEnd({"dest": 4, "time": playtime});
 				Preloader.tracker.trackPageview("/level-3-end");
-				Preloader.tracker.trackEvent("level-3", "level-end", null, playtime * 100);
+				Preloader.tracker.trackEvent("level-3", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new Room1_4State());
+				FlxG.switchState(new LevelCompleteState(playtime, 60, 20));
 			}
 		}
 		
