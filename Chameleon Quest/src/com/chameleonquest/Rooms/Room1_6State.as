@@ -34,11 +34,11 @@ package com.chameleonquest.Rooms
 			enemies.add(new Bird(4 * 16, 22 * 16, 152));
 			enemies.add(new Snake(9 * 16, 11 * 16, 6 * 16));
 			enemies.add(new PoisonSnake(26 * 16, 27 * 16));
-			var rotatingBlock:AngleBlock = new AngleBlock(1, 8, 180);
-			var patrollingBlock:AngleBlock = new AngleBlock(14, 18, 0);
+			var rotatingBlock:AngleBlock = new AngleBlock(1, 8, 180, AngleBlock.RED);
+			var patrollingBlock:AngleBlock = new AngleBlock(14, 18, 0, AngleBlock.BLUE);
 			patrollingBlock.patrol(14 * 16+4, 20 * 16, 20);
-			var gate1:StoneGate = new StoneGate(8, 21, -1);
-			var gate2:StoneGate = new StoneGate(7, 29, -1);
+			var gate1:StoneGate = new StoneGate(8, 21, -1, 480, StoneGate.YELLOW);
+			var gate2:StoneGate = new StoneGate(7, 29, -1, 480, StoneGate.GREEN);
 			elems.add(gate1);
 			elems.add(gate2);
 			intrELems.add(rotatingBlock);
@@ -46,10 +46,10 @@ package com.chameleonquest.Rooms
 			intrELems.add(new AngleBlock(1, 10, 90));
 			intrELems.add(new AngleBlock(28, 18, 180));
 			intrELems.add(new AngleBlock(28, 28, 270));
-			intrELems.add(new Button(1, 5, gate1, StoneGate.lift, 100, 180, Button.RED));
+			intrELems.add(new Button(1, 5, gate1, StoneGate.lift, 100, 180, Button.YELLOW));
 			intrELems.add(new Button(1, 21, rotatingBlock, AngleBlock.rotate, 20, 0, Button.RED));
-			intrELems.add(new Button(15, 15, gate2, StoneGate.lift, 100, 180, Button.RED));
-			intrELems.add(new Button(14, 20, patrollingBlock, InteractiveObj.stopOrStart, 20, 270, Button.RED));
+			intrELems.add(new Button(15, 15, gate2, StoneGate.lift, 100, 180, Button.GREEN));
+			intrELems.add(new Button(14, 20, patrollingBlock, InteractiveObj.stopOrStart, 20, 270, Button.BLUE));
 			elems.add(new Platform(new Array(new FlxPoint(3*16, 11*16), new FlxPoint(3*16, 18*16)), 60));
 			elems.add(new Platform(new Array(new FlxPoint(10*16, 21*16), new FlxPoint(10*16, 26*16)), 50));
 			
