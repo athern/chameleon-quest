@@ -12,9 +12,7 @@ package com.chameleonquest.Rooms
 		
 		[Embed(source = "../../../../assets/mapCSV_2-3_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
-		
-		public var grates:FlxGroup = new FlxGroup();
-		
+				
 		override public function create():void
 		{
 			ROOM_WIDTH = 30;
@@ -73,11 +71,6 @@ package com.chameleonquest.Rooms
 		override public function update():void
 		{
 			super.update();
-			
-			// water grate check
-			if (player.getType() != Chameleon.WATER) {
-				FlxG.collide(player, grates);					
-			}
 			
 			if (player.x < 0) {
 				Preloader.logger.logLevelEnd({"dest": 11, "time": playtime});

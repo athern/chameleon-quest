@@ -38,7 +38,8 @@ package com.chameleonquest
 			new Room2_2State(),
 			new Room2_3State(),
 			new Room2_4State(),
-			new Room2_5State()
+			new Room2_5State(),
+			new Room2_6State()
 			]
 			
 			var room3:Array = [

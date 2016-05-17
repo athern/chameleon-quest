@@ -39,6 +39,8 @@ package com.chameleonquest
 		public var bgElems:FlxGroup = new FlxGroup;
 		public var intrELems:FlxGroup = new FlxGroup;
 		
+		public var grates:FlxGroup = new FlxGroup;
+		
 		// heart bar
 		public var heartbar:HeartBar = new HeartBar();
 		public var ammoindicator:AmmoIndicator = new AmmoIndicator();
@@ -141,11 +143,6 @@ package com.chameleonquest
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
 				
-				// water grate check
-				if (player.getType() != Chameleon.WATER) {
-					FlxG.overlap(player, bgElems, null, passGrate);					
-				}
-				
 				
 				if (FlxG.keys.justPressed("C")) {
 					Preloader.logger.logAction(4, null);
@@ -159,7 +156,7 @@ package com.chameleonquest
 					FlxG.switchState(getStage(Main.lastRoom));
 				}
 				
-				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X")) {
+				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X") && !FlxG.overlap(player, grates)) {
 					Preloader.logger.logAction(5, {"type": player.getType().toString()});
 					Preloader.tracker.trackEvent("action", "x", "" + player.getType().toString());
 					
@@ -177,6 +174,11 @@ package com.chameleonquest
 				if (player.isTouching(FlxObject.UP) && player.isTouching(FlxObject.DOWN))
 				{
 					heartbar.hit(player.reactToDamage());
+				}
+				
+				// water grate check
+				if (player.getType() != Chameleon.WATER) {
+					FlxG.collide(player, grates);					
 				}
 				
 				if (player.tongue != null)
