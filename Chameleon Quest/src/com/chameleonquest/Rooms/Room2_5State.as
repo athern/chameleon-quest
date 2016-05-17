@@ -42,8 +42,8 @@ package com.chameleonquest.Rooms
 			enemies.add(new PoisonSnake(15 * 16, 19 * 16));
 			enemies.add(new Bird(2 * 16, 20 * 16, 2 * 16));
 			enemies.add(new Snake(20 * 16, 23 * 16, 16 * 15));
-			enemies.add(new Snake(7 * 16, 23 * 16, 16 * 11, FlxObject.LEFT));
-			enemies.add(new Snake(7 * 16, 23 * 16, 16 * 7, FlxObject.RIGHT));
+			enemies.add(new Snake(4 * 16, 23 * 16, 16 * 11, FlxObject.LEFT));
+			enemies.add(new Snake(4 * 16, 23 * 16, 16 * 7, FlxObject.RIGHT));
 			intrELems.add(new WoodBlock(17, 9));
 			Main.lastRoom = 12;
 			super.create();
@@ -62,7 +62,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-12-end");
 				Preloader.tracker.trackEvent("level-12", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new Room2_4State());
+				FlxG.switchState(new LevelCompleteState(playtime, 40, 120));
 			}
 		}
 		

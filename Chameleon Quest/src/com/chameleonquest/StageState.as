@@ -93,7 +93,7 @@ package com.chameleonquest
 			levels.push(addStage(1, 2, "2-3: Rise From The Depths\t\t"));
 			levels.push(addStage(1, 3, "2-4: Enemy At The Gate\t\t\t"));
 			levels.push(addStage(1, 4, "2-5: Putting It All Together\t\t"));
-			levels.push(addStage(1, 5, "2-6:                        \t\t"));
+			levels.push(addStage(1, 5, "2-6: Stairway to (Heaven?)\t\t"));
 			
 		}
 		
