@@ -21,23 +21,12 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			if (Main.lastRoom == 7)
-			{
-				Preloader.logger.logLevelStart(1, {"src": 7});
-				Preloader.tracker.trackPageview("/level-6");
-				Preloader.tracker.trackEvent("level-6", "level-enter", null, 7);
+			Preloader.logger.logLevelStart(1, {"src": 5});
+			Preloader.tracker.trackPageview("/level-6");
+			Preloader.tracker.trackEvent("level-6", "level-enter", null, 5);
 				
-				player = new Chameleon(0, ROOM_HEIGHT - 1);
-			}
-			else
-			{
-				Preloader.logger.logLevelStart(1, {"src": 5});
-				Preloader.tracker.trackPageview("/level-6");
-				Preloader.tracker.trackEvent("level-6", "level-enter", null, 5);
-				
-				player = new Chameleon(ROOM_WIDTH - 1, 14);
-				player.facing = FlxObject.LEFT;
-			}
+			player = new Chameleon(ROOM_WIDTH - 1, 14);
+			player.facing = FlxObject.LEFT;
 			
 			bgElems.add(new Pile(16, 11));
 			bgElems.add(new Pile(6, 21));

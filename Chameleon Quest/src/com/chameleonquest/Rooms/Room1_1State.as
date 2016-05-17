@@ -23,21 +23,11 @@ package com.chameleonquest.Rooms
 			Spikes.addSpikeRow(17, ROOM_HEIGHT-1, 3, enemies);
 			Spikes.addSpikeRow(27, ROOM_HEIGHT - 1, 4, enemies);
 			
-			if (Main.lastRoom == 2) {
-				Preloader.logger.logLevelStart(1, {"src": 2});
-				Preloader.tracker.trackPageview("/level-1");
-				Preloader.tracker.trackEvent("level-1", "level-enter", null, 2);
+			Preloader.logger.logLevelStart(1, {"src": 0});
+			Preloader.tracker.trackPageview("/level-1");
+			Preloader.tracker.trackEvent("level-1", "level-enter", null, 0);
 				
-				player = new Chameleon(ROOM_WIDTH-3, ROOM_HEIGHT-1);
-				player.facing = FlxObject.LEFT;
-			}
-			else {
-				Preloader.logger.logLevelStart(1, {"src": 0});
-				Preloader.tracker.trackPageview("/level-1");
-				Preloader.tracker.trackEvent("level-1", "level-enter", null, 0);
-				
-				player = new Chameleon(0, ROOM_HEIGHT-1);
-			}
+			player = new Chameleon(0, ROOM_HEIGHT-1);
 			
 			intrELems.add(new WoodBlock(43, 14));
 			
