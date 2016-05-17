@@ -15,6 +15,8 @@ package com.chameleonquest
 		
 		public static var bestRoom:int = 0;
 		
+		private static var save:SaveGame;
+		
         public function Main()
         {
 			for (var i:int = 0; i < 35; i++)
@@ -23,7 +25,19 @@ package com.chameleonquest
 				stars.push(0);
 			}
             super(320, 240, MenuState, 2); //Create a new FlxGame object at 320x240 with 2x pixels, then load PlayState
+			
+			save = new SaveGame()
         }
+		
+		public static function saveGame():void
+		{
+			if (save == null) 
+			{
+				save = new SaveGame()
+			}
+			
+			save.saveGameProgress();
+		}
     }
 	
 }

@@ -59,6 +59,7 @@ package com.chameleonquest
 				}
 			}
 			
+			Main.saveGame();
 			
 			// continue Text
 			var continueTxt:FlxText;
