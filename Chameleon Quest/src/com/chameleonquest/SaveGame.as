@@ -27,6 +27,11 @@ package com.chameleonquest
 			bestRoom = 0;
 			bestTimes = new Array();
 			stars = new Array();
+			for (var i:int = 0; i < 35; i++)
+			{
+				bestTimes.push(Number.MAX_VALUE);
+				stars.push(0);
+			}
 		}
 		
 		// saves current progress
