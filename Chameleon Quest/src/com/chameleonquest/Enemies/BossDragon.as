@@ -7,6 +7,9 @@ package com.chameleonquest.Enemies
 	import org.flixel.FlxGroup;
 	public class BossDragon extends HorizontallyPatrollingEnemy
 	{
+		
+		[Embed(source = "../../../../assets/dragon.png")]
+		protected var img:Class;
 		protected static const SHOOT_DELAY:Number = 2; // perhaps this can be decresed on damage to speed up firing
 		private var cooldown:Number;
 		private var ammoCache:FlxGroup = new FlxGroup();
@@ -14,7 +17,7 @@ package com.chameleonquest.Enemies
 		public function BossDragon(MinX:Number, MaxX:Number, Y:Number) 
 		{
 			super(MinX, MaxX, Y, 50);
-			
+			loadGraphic(img, false, true);
 			cooldown = 0;			
 			immovable = true;
 			

@@ -1,6 +1,7 @@
 package com.chameleonquest.Rooms 
 {
 	import com.chameleonquest.Chameleons.Chameleon;
+	import com.chameleonquest.Enemies.BossDragon;
 	import org.flixel.*;
 	import com.chameleonquest.Objects.*;
 	import com.chameleonquest.*;
@@ -45,6 +46,7 @@ package com.chameleonquest.Rooms
 			elems.add(gate2);
 			intrELems.add(new WaterWheel(10, 16, gate1, StoneGate.gradualLift));
 			intrELems.add(new WaterWheel(38, 16, gate2, StoneGate.gradualLift));
+			enemies.add(new BossDragon(200, 400, 140));
 			Main.lastRoom = 14;
 			super.create();
 		}
