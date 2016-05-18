@@ -35,7 +35,8 @@ package com.chameleonquest
 			new Room2_3State(),
 			new Room2_4State(),
 			new Room2_5State(),
-			new Room2_6State()
+			new Room2_6State(),
+			new Room2_7State()
 			];
 			
 			var room3:Array = [
@@ -94,6 +95,7 @@ package com.chameleonquest
 			addStage(1, 3, "2-4: Enemy At The Gate\t\t\t");
 			addStage(1, 4, "2-5: Putting It All Together\t\t");
 			addStage(1, 5, "2-6: Stairway to (Heaven?)\t\t");
+			addStage(1, 6, "2-7: The Fire Guardian\t\t");
 			
 		}
 		

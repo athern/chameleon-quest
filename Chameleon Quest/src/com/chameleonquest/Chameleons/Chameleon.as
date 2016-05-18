@@ -220,7 +220,7 @@ package com.chameleonquest.Chameleons
 		
 		// returns damage actually taken
 		public function reactToDamage(source:Enemy=null):int {
-			if (invulnerability > 0) {
+			if (invulnerability > 0 || source.health <= 0) {
 				return 0;
 			}
 			invulnerability = INVULNERABILITY_TIMER;

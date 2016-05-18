@@ -467,9 +467,13 @@ package com.chameleonquest
 			{
 				return new Room2_5State();
 			}
-			else if (number >= 13)
+			else if (number == 13)
 			{
 				return new Room2_6State();
+			}
+			else if (number >= 14)
+			{
+				return new Room2_7State();
 			}
 			else
 			{
