@@ -147,6 +147,12 @@ package com.chameleonquest
 				FlxG.flash(0x000000, .2);
 			}
 			
+			if (FlxG.keys.pressed("R") && FlxG.keys.pressed("S") && FlxG.keys.pressed("ENTER"))
+			{
+				Main.resetSaveData();
+				Main.saveGame();
+			}
+			
 			
 			
 			super.update();

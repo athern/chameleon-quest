@@ -19,14 +19,11 @@ package com.chameleonquest
 		
         public function Main()
         {
-			for (var i:int = 0; i < 35; i++)
-			{
-				bestTimes.push(Number.MAX_VALUE);
-				stars.push(0);
-			}
+			
             super(320, 240, MenuState, 2); //Create a new FlxGame object at 320x240 with 2x pixels, then load PlayState
 			
 			save = new SaveGame()
+			
         }
 		
 		public static function saveGame():void
@@ -36,6 +33,19 @@ package com.chameleonquest
 				save = new SaveGame()
 			}
 			
+			save.saveGameProgress();
+		}
+		
+		public static function resetSaveData():void
+		{
+			bestRoom = 0;
+			bestTimes = new Array();
+			stars = new Array();
+			for (var i:int = 0; i < 35; i++)
+			{
+				bestTimes.push(Number.MAX_VALUE);
+				stars.push(0);
+			}
 			save.saveGameProgress();
 		}
     }
