@@ -53,6 +53,8 @@ package com.chameleonquest.Rooms
 			intrELems.add(new WaterWheel(41, 15, gate, StoneGate.gradualLift));
 			
 			enemies.add(new Turtle(16 * 26, 16 * 15));
+			enemies.add(new Bird(15 * 16, 22 * 16, 16 * 16));
+			enemies.add(new Bird(26 * 16, 36 * 16, 18 * 16));
 			Main.lastRoom = 13;
 			super.create();
 		}
