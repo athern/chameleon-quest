@@ -5,6 +5,8 @@ package com.chameleonquest.Enemies
 	import org.flixel.FlxG;
 	public class Dragonling extends Enemy
 	{
+		[Embed(source = "../../../../assets/dragon_attack.png")]public var img:Class;
+		
 		protected static const GRAVITY:int =800;
 		protected static const JUMP_SPEED:int = 200;
 		protected static const SPEED:int = 50;
@@ -17,8 +19,13 @@ package com.chameleonquest.Enemies
 		public function Dragonling(X:int, Y:int) 
 		{
 			super(X, Y);
-			// TODO: sprites
-			
+			loadGraphic(img, true, true, 32, 32);
+			width = 26;
+			height = 18;
+			offset.x = 3;
+			offset.y = 7;
+			addAnimation("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 10, true);
+			play("idle")
 			health = 1;
 		}
 		
@@ -28,7 +35,7 @@ package com.chameleonquest.Enemies
 			
 			var player:Chameleon = (FlxG.state as PlayState).player;
 			this.velocity.x = player.x < this.x ? -SPEED : SPEED;
-			this.facing == this.velocity.x < 0 ? LEFT : RIGHT;
+			this.facing = this.velocity.x < 0 ? RIGHT : LEFT;
 			
 			var pY:Number = player.y + player.height;
 			var mY:Number = this.y + this.height;
