@@ -45,7 +45,7 @@ package com.chameleonquest
 			];
 			
 			stages = [
-			room1, room2, room3
+			room1, room2//, room3
 			];
 		}
 		
