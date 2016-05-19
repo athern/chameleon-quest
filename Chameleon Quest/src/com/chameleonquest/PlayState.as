@@ -174,6 +174,7 @@ package com.chameleonquest
 				if (player.isTouching(FlxObject.UP) && player.isTouching(FlxObject.DOWN))
 				{
 					heartbar.hit(player.reactToDamage());
+					player.x -= 2;
 				}
 				
 				// water grate check
