@@ -162,8 +162,7 @@ package com.chameleonquest
 		
 		private function onFade():void
 		{
-			//FlxG.switchState(stages[currRoomIdx][currIdx]);
-			FlxG.switchState(new Room2_7State());
+			FlxG.switchState(stages[currRoomIdx][currIdx]);
 		}
 		
 		private function toLevelMenu():void

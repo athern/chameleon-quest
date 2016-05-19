@@ -2,6 +2,7 @@ package com.chameleonquest.Rooms
 {
 	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.Enemies.BossDragon;
+	import com.chameleonquest.Enemies.Dragonling;
 	import org.flixel.*;
 	import com.chameleonquest.Objects.*;
 	import com.chameleonquest.*;
@@ -24,12 +25,14 @@ package com.chameleonquest.Rooms
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			
-			Preloader.logger.logLevelStart(13, {"src": 12});
-			Preloader.tracker.trackPageview("/level-13");
-			Preloader.tracker.trackEvent("level-13", "level-enter", null, 12);
+			Preloader.logger.logLevelStart(14, {"src": 13});
+			Preloader.tracker.trackPageview("/level-14");
+			Preloader.tracker.trackEvent("level-14", "level-enter", null, 13);
 				
 			player = new Chameleon(0, 23);
 			player.facing = FlxObject.RIGHT;
+			
+			enemies.add(new Dragonling(16 * 2, 16 * 23))
 											
 			bgElems.add(new WaterFountain(2, 23));
 			
@@ -60,9 +63,9 @@ package com.chameleonquest.Rooms
 			}
 			
 			if (player.x > map.width - 16) {
-				Preloader.logger.logLevelEnd({"dest": 14, "time": playtime});
-				Preloader.tracker.trackPageview("/level-13-end");
-				Preloader.tracker.trackEvent("level-13", "level-end", null, int(Math.round(playtime)));
+				Preloader.logger.logLevelEnd({"dest": 15, "time": playtime});
+				Preloader.tracker.trackPageview("/level-14-end");
+				Preloader.tracker.trackEvent("level-14", "level-end", null, int(Math.round(playtime)));
 				FlxG.switchState(new LevelCompleteState(playtime, 40, 100));
 				
 			}
@@ -71,7 +74,7 @@ package com.chameleonquest.Rooms
 			{
 				enteredBossChamber = true;
 				StoneGate.drop(leftgate);
-				//StoneGate.drop(rightgate);
+				StoneGate.drop(rightgate);
 			}
 		}
 		
