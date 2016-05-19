@@ -173,7 +173,7 @@ package com.chameleonquest
 				//Player is being squashed!
 				if (player.isTouching(FlxObject.UP) && player.isTouching(FlxObject.DOWN))
 				{
-					heartbar.hit(player.reactToDamage());
+					heartbar.hit(player.takeDamage(1));
 					player.x -= 2;
 				}
 				
@@ -372,7 +372,7 @@ package com.chameleonquest
 			}
 			if (target == player)
 			{
-				heartbar.hit(bullet.getDamage(player));
+				heartbar.hit(player.takeDamage(bullet.getDamage(player)));
 			}
 			else if (target is Enemy)
 			{

@@ -16,9 +16,9 @@ package com.chameleonquest.Objects
 		[Embed(source = "../../../../assets/stonegate.png")]
 		protected var img:Class;
 		
-		protected var clock:int;
+		public var clock:int;
 		
-		protected var lifted:Boolean;
+		public var lifted:Boolean;
 		
 		protected var startY:int;
 		protected var startX:int;

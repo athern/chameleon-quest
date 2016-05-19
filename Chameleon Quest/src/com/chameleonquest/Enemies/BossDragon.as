@@ -24,14 +24,16 @@ package com.chameleonquest.Enemies
 			loadGraphic(img, false, true);
 			cooldown = 0;			
 			immovable = true;
-			
+			width = 100;
+			height = 100;
+			offset.x = 14;
+			offset.y = 14;
 			for (var i : int = 0; i < 50; i++)
 			{
 				var dracarys:Fireball = new Fireball(50);
 				dracarys.angle = 90; // rotate it so it's facing down!
 				ammoCache.add(dracarys);
 			}
-			
 			(FlxG.state as PlayState).enemyProjectiles.add(ammoCache);
 			
 			health = 3;
@@ -71,6 +73,7 @@ package com.chameleonquest.Enemies
 				
 				hurtCooldown = 0;
 				callForHelp = true;
+				
 			}
 		}
 		
