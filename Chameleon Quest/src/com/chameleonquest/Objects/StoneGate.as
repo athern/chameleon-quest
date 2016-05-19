@@ -159,6 +159,10 @@ package com.chameleonquest.Objects
 			gate.countdown = 0;
 		}
 		
+		public function get isLifted():Boolean
+		{
+			return this.lifted;
+		}
 	}
 
 }

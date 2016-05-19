@@ -2,6 +2,9 @@ package com.chameleonquest.Rooms
 {
 	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.Enemies.BossDragon;
+	import com.chameleonquest.Enemies.Dragonling;
+	import com.chameleonquest.Enemies.Enemy;
+	import com.chameleonquest.Enemies.Geyser;
 	import org.flixel.*;
 	import com.chameleonquest.Objects.*;
 	import com.chameleonquest.*;
@@ -17,6 +20,11 @@ package com.chameleonquest.Rooms
 		
 		private var leftgate:StoneGate;
 		private var rightgate:StoneGate;
+		private var gate1:StoneGate;
+		private var gate2:StoneGate;
+		
+		private var boss:BossDragon;
+		private var geysers:FlxGroup;
 		
 		override public function create():void
 		{
@@ -40,15 +48,21 @@ package com.chameleonquest.Rooms
 			StoneGate.lift(leftgate);
 			StoneGate.lift(rightgate);
 			
-			var gate1:StoneGate = new StoneGate(27, 27, 400, 480, StoneGate.GREY, 270);
+			gate1 = new StoneGate(27, 27, 400, 480, StoneGate.GREY, 270);
 			elems.add(gate1);
-			var gate2:StoneGate = new StoneGate(23, 24, 400, 480, StoneGate.GREY, 90);
+			gate2 = new StoneGate(23, 24, 400, 480, StoneGate.GREY, 90);
 			elems.add(gate2);
 			intrELems.add(new WaterWheel(10, 16, gate1, StoneGate.gradualLift));
 			intrELems.add(new WaterWheel(38, 16, gate2, StoneGate.gradualLift));
-			enemies.add(new BossDragon(200, 400, 140));
+			boss = new BossDragon(200, 400, 140);
+			enemies.add(boss);
+			
 			Main.lastRoom = 14;
 			super.create();
+			
+			geysers = new FlxGroup();
+			Geyser.initCache();
+			add(geysers);
 		}
 		
 		override public function update():void
@@ -73,8 +87,36 @@ package com.chameleonquest.Rooms
 				StoneGate.drop(leftgate);
 				//StoneGate.drop(rightgate);
 			}
+			
+			FlxG.overlap(enemies, geysers, null, hurtEnemy);
+			
+			if (gate1.isLifted && gate2.isLifted)
+			{
+				if (geysers.countLiving() < 1)
+				{
+					Geyser.init(geysers, 16 * 25 - 8, 16 * 13, 40);
+				}
+			}
+			
+			if (boss.spawnDragonlings)
+			{
+				var numDragonlings:int = (3 - boss.health);
+				for (var i:int = 0; i < numDragonlings; i++)
+				{
+					enemies.add(new Dragonling(16 * 2, 16 * 7));
+				}
+			}
 		}
 		
+		public function hurtEnemy(victim:Enemy, geyser:Enemy):void {
+			if (victim is BossDragon) {
+				(victim as BossDragon).hitWithGeyser();
+			}
+			else
+			{
+				victim.hurt(1);
+			}
+		}
 	}
 
 }
