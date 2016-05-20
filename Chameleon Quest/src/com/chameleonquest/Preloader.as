@@ -24,7 +24,7 @@ package com.chameleonquest
 			
 			//category id; treat this like a "version id" or "release number" to help differentiate data from different versions
 			//var cid:int = 1; // FOR DEVELOPMENT
-			var cid:int = 2;
+			var cid:int = 3;
 			
 			logger = Logger.initialize(gid, gname, skey, cid, null); //automatically logs a page load; don't need any parameters
 
