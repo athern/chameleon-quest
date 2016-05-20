@@ -15,8 +15,8 @@ package com.chameleonquest
 		public function Preloader():void
 		{
 			// Google analytics
-			//tracker = new GATracker(this, "UA-77647600-1", "AS3", true); // FOR DEVELOPMENT
-			tracker = new GATracker(this, "UA-77647600-1", "AS3", false);
+			tracker = new GATracker(this, "UA-77647600-1", "AS3", true); // FOR DEVELOPMENT
+			//tracker = new GATracker(this, "UA-77647600-1", "AS3", false);
 
 			// Logger
 			var gid:uint = 119; //INSERT TEAM GID HERE
@@ -24,8 +24,8 @@ package com.chameleonquest
 			var skey:String = "b4b8c257ae5ef1df0bf399923638ad6c";
 			
 			//category id; treat this like a "version id" or "release number" to help differentiate data from different versions
-			//var cid:int = 1; // FOR DEVELOPMENT
-			var cid:int = 3;
+			var cid:int = 1; // FOR DEVELOPMENT
+			//var cid:int = 3;
 			
 			logger = Logger.initialize(gid, gname, skey, cid, null); //automatically logs a page load; don't need any parameters
 
