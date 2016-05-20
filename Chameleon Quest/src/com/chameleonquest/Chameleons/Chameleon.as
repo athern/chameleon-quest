@@ -218,31 +218,31 @@ package com.chameleonquest.Chameleons
 			return rockCache.getFirstAvailable() as Projectile;
 		}
 		
-		// returns damage actually taken
-		public function reactToDamage(source:Enemy=null):int {
+		public function takeDamage(damage:int):int {
 			if (invulnerability > 0) {
 				return 0;
 			}
 			invulnerability = INVULNERABILITY_TIMER;
 			flicker(INVULNERABILITY_TIMER / 60);
 			FlxG.flash(0xcc0000, .1);
-			if (source != null)
-			{
-				if (source.x > x && source.x > x + width) {
-					velocity.x = -Math.random() * 100 - 200;
-				}
-				if (source.x < x && source.x + source.width < x) {
-					velocity.x = Math.random() * 100 + 200;
-				}
-				if (source.y > y) {
-					velocity.y = -Math.random() * 100 - 200;
-				}
-				if (source.y < y) {
-					velocity.y = Math.random() * 100 + 200;
-				}
-				return source.power;
+			return damage;
+		}
+		
+		// returns damage actually taken
+		public function reactToDamage(source:Enemy):int {
+			if (source.x > x && source.x > x + width) {
+				velocity.x = -Math.random() * 100 - 200;
 			}
-			return 1;
+			if (source.x < x && source.x + source.width < x) {
+				velocity.x = Math.random() * 100 + 200;
+			}
+			if (source.y > y) {
+				velocity.y = -Math.random() * 100 - 200;
+			}
+			if (source.y < y) {
+				velocity.y = Math.random() * 100 + 200;
+			}
+			return takeDamage(source.power);
 		}
     }
 

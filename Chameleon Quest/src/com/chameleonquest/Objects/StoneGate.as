@@ -16,24 +16,39 @@ package com.chameleonquest.Objects
 		[Embed(source = "../../../../assets/stonegate.png")]
 		protected var img:Class;
 		
-		protected var clock:int;
+		public var clock:int;
 		
-		protected var lifted:Boolean;
+		public var lifted:Boolean;
 		
 		protected var startY:int;
+		protected var startX:int;
 		
 		protected var countdown:int;
 		
 		protected var speed:int;
 		
-		public function StoneGate(Xindex:int, Yfloorindex:int, dropclock:int=-1, droptime:int=480, type:uint=GREY) 
+		public function StoneGate(Xindex:int, Yfloorindex:int, dropclock:int=-1, droptime:int=480, type:uint=GREY, r:int = 0) 
 		{
-			super(Xindex * 16, Yfloorindex * 16 - 48);
+			if (r == 0)
+			{
+				startY = Yfloorindex * 16 - 48;
+				startX = Xindex * 16;
+			}
+			if (r == 270)
+			{
+				startY = Yfloorindex * 16 - 24;
+				startX = Xindex * 16 - 40;
+			}
+			if (r == 90)
+			{
+				startY = Yfloorindex * 16 - 8;
+				startX = Xindex * 16 + 24;
+			}
+			super(startX, startY);
 			clock = dropclock;
-			startY = Yfloorindex * 16 - 48;
 			immovable = true;
 			speed = droptime;
-			
+			angle = r;
 			if (type == RED)
 			{
 				loadGraphic(img, false, false, 32, 48, true);
@@ -72,20 +87,48 @@ package com.chameleonquest.Objects
 		
 		public static function gradualLift(gate:StoneGate):void
 		{
-			if (gate.y > gate.startY - 48)
+			if (gate.y > gate.startY - 48 && gate.angle == 0)
 			{
-				gate.y -= .5;
+				gate.y--;
+				if (gate.y <= gate.startY - 48)
+				{
+					gate.lifted = true;
+				}
 			}
-			gate.lifted = true;
+			if (gate.x > gate.startX - 48 && gate.angle == 270)
+			{
+				gate.x--;
+				if (gate.x <= gate.startX - 48)
+				{
+					gate.lifted = true;
+				}
+			}
+			if (gate.x < gate.startX + 48 && gate.angle == 90)
+			{
+				gate.x++;
+				if (gate.x >= gate.startX + 48)
+				{
+					gate.lifted = true;
+				}
+			}
+			//gate.lifted = true;
 			gate.countdown = gate.clock;
 		}
 		
 		override public function update():void
 		{
 			
-			if (lifted == true && y > startY - 48)
+			if (lifted == true && y > startY - 48 && angle == 0)
 			{
 				y -= 48/speed*4;
+			}
+			else if (lifted == true && x > startX - 48 && angle == 270)
+			{
+				x -= 48 / speed * 4;
+			}
+			else if (lifted == true && x < startX + 48 && angle == 90)
+			{
+				x += 48 / speed * 4;
 			}
 			else if (lifted == true && countdown > 0)
 			{
@@ -95,9 +138,17 @@ package com.chameleonquest.Objects
 			{
 				lifted = false;
 			}
-			else if (y < startY && lifted == false)
+			else if (y < startY && lifted == false && angle == 0)
 			{
 				y += 48/speed;
+			}
+			else if (x < startX && !lifted && angle == 270)
+			{
+				x += 48 / speed;
+			}
+			else if (x > startX && !lifted && angle == 90)
+			{
+				x -= 48 / speed;
 			}
 			
 			super.update();
@@ -108,6 +159,10 @@ package com.chameleonquest.Objects
 			gate.countdown = 0;
 		}
 		
+		public function get isLifted():Boolean
+		{
+			return this.lifted;
+		}
 	}
 
 }

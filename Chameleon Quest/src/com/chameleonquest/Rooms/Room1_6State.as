@@ -50,7 +50,7 @@ package com.chameleonquest.Rooms
 			intrELems.add(new Button(1, 21, rotatingBlock, AngleBlock.rotate, 20, 0, Button.RED));
 			intrELems.add(new Button(15, 15, gate2, StoneGate.lift, 100, 180, Button.GREEN));
 			intrELems.add(new Button(14, 20, patrollingBlock, InteractiveObj.stopOrStart, 20, 270, Button.BLUE));
-			elems.add(new Platform(new Array(new FlxPoint(3*16, 11*16), new FlxPoint(3*16, 18*16)), 60));
+			elems.add(new Platform(new Array(new FlxPoint(3*16, 14*16), new FlxPoint(3*16, 18*16)), 60));
 			elems.add(new Platform(new Array(new FlxPoint(10*16, 21*16), new FlxPoint(10*16, 26*16)), 50));
 			
 			

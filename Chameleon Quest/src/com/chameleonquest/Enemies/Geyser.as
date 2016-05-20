@@ -12,7 +12,8 @@ package com.chameleonquest.Enemies
 		private var age:int;
 		private var fadetime:int;
 		public var speed:int;
-		
+		private var hangtime:int;
+		public var fade:Boolean=false;
 		public var lastY:int;
 		
 		public var stream:Array;
@@ -22,7 +23,7 @@ package com.chameleonquest.Enemies
 		
 		public var group:FlxGroup;
 		
-		public function Geyser(X:int, Y:int, t:int = 100, s:int = 2) 
+		public function Geyser(X:int, Y:int, t:int = 100, s:int = 2, h:int = 50) 
 		{
 			super(X, Y);
 			loadGraphic(img, true, false, 32, 32, false);
@@ -34,12 +35,17 @@ package com.chameleonquest.Enemies
 			stream = new Array();
 			stream.push(this);
 			immovable = true;
+			hangtime = h;
 		}
 		
 		override public function update():void
 		{
 			super.update();
 			age++;
+			if (fade)
+			{
+				y += 3 * speed;
+			}
 			if (y <= 48)
 			{
 				fadetime++;
@@ -48,7 +54,7 @@ package com.chameleonquest.Enemies
 			{
 				y -= speed;
 			}
-			if (fadetime > 50)
+			if (fadetime > hangtime)
 			{
 				y += 2*speed;
 			}
@@ -87,7 +93,7 @@ package com.chameleonquest.Enemies
 			return result;
 		}
 		
-		public static function init(g:FlxGroup, X:int, Y:int, t:int=100, s:int=2):Geyser
+		public static function init(g:FlxGroup, X:int, Y:int, t:int=100, s:int=2, h:int=50):Geyser
 		{
 			var result:Geyser = Geyser.cache.getFirstAvailable() as Geyser;
 			while (result == null)
@@ -101,6 +107,7 @@ package com.chameleonquest.Enemies
 			result.group = g;
 			result.chargetime = t;
 			result.speed = s;
+			result.hangtime = h;
 			for (var i:int = Y+32; i < FlxG.camera.bounds.bottom; i += 32) {
 				var next:GeyserSegment = Geyser.grabSegment();
 				next.reset(result.x, i);

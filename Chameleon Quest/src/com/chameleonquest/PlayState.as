@@ -107,6 +107,13 @@ package com.chameleonquest
 				FlxG.paused = !FlxG.paused;
 				togglePauseMenu();
 			}
+			if (FlxG.keys.justPressed("R")) {
+				Preloader.logger.logAction(15, {"room": Main.lastRoom});
+				Preloader.tracker.trackEvent("action", "reset", "level-" + Main.lastRoom);
+				FlxG.flash(0x000000, 0.75);
+				FlxG.switchState(getStage(Main.lastRoom));
+				FlxG.paused = false;
+			}
 			// handle quit
 			if (FlxG.paused)
 			{
@@ -175,7 +182,8 @@ package com.chameleonquest
 				//Player is being squashed!
 				if (player.isTouching(FlxObject.UP) && player.isTouching(FlxObject.DOWN))
 				{
-					heartbar.hit(player.reactToDamage());
+					heartbar.hit(player.takeDamage(1));
+					player.x -= 2;
 				}
 				
 				// water grate check
@@ -319,12 +327,12 @@ package com.chameleonquest
 		// Sets up the Pause Menu
 		private function setupPauseHUD():void {
 			// Pause HUD
-			pauseText = new FlxText(0, (FlxG.width / 2) - 80, FlxG.width, "Game Paused");
+			pauseText = new FlxText(0, (FlxG.width / 2) - 90, FlxG.width, "Game Paused");
 			pauseText.setFormat(null, 18, 0x000000, "center");
 			pauseText.scrollFactor.x = 0;
 			pauseText.scrollFactor.y = 0;
 			
-			quitText = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"q\" to quit\nPress ESC to resume");
+			quitText = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"q\" to quit\n\nPress \"r\" to reset level\n\nPress ESC to resume");
 			quitText.setFormat(null, 12, 0x000000, "center");
 			quitText.scrollFactor.x = 0;
 			quitText.scrollFactor.y = 0;
@@ -373,7 +381,7 @@ package com.chameleonquest
 			}
 			if (target == player)
 			{
-				heartbar.hit(bullet.getDamage(player));
+				heartbar.hit(player.takeDamage(bullet.getDamage(player)));
 			}
 			else if (target is Enemy)
 			{
@@ -469,9 +477,13 @@ package com.chameleonquest
 			{
 				return new Room2_5State();
 			}
-			else if (number >= 13)
+			else if (number == 13)
 			{
 				return new Room2_6State();
+			}
+			else if (number >= 14)
+			{
+				return new Room2_7State();
 			}
 			else
 			{
