@@ -108,6 +108,8 @@ package com.chameleonquest
 				togglePauseMenu();
 			}
 			if (FlxG.keys.justPressed("R")) {
+				Preloader.logger.logAction(15, {"room": Main.lastRoom});
+				Preloader.tracker.trackEvent("action", "reset", "level-" + Main.lastRoom);
 				FlxG.flash(0x000000, 0.75);
 				FlxG.switchState(getStage(Main.lastRoom));
 				FlxG.paused = false;
