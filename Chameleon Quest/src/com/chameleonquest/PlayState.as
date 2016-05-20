@@ -107,6 +107,11 @@ package com.chameleonquest
 				FlxG.paused = !FlxG.paused;
 				togglePauseMenu();
 			}
+			if (FlxG.keys.justPressed("R")) {
+				FlxG.flash(0x000000, 0.75);
+				FlxG.switchState(getStage(Main.lastRoom));
+				FlxG.paused = false;
+			}
 			// handle quit
 			if (FlxG.paused)
 			{
@@ -151,10 +156,7 @@ package com.chameleonquest
 					FlxG.overlap(player, bgElems, null, changeElement);
 				}
 				
-				if (FlxG.keys.justPressed("R")) {
-					FlxG.flash(0x000000, 0.75);
-					FlxG.switchState(getStage(Main.lastRoom));
-				}
+				
 				
 				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X") && !FlxG.overlap(player, grates)) {
 					Preloader.logger.logAction(5, {"type": player.getType().toString()});
@@ -318,12 +320,12 @@ package com.chameleonquest
 		// Sets up the Pause Menu
 		private function setupPauseHUD():void {
 			// Pause HUD
-			pauseText = new FlxText(0, (FlxG.width / 2) - 80, FlxG.width, "Game Paused");
+			pauseText = new FlxText(0, (FlxG.width / 2) - 90, FlxG.width, "Game Paused");
 			pauseText.setFormat(null, 18, 0x000000, "center");
 			pauseText.scrollFactor.x = 0;
 			pauseText.scrollFactor.y = 0;
 			
-			quitText = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"q\" to quit\nPress ESC to resume");
+			quitText = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"q\" to quit\n\nPress \"r\" to reset level\n\nPress ESC to resume");
 			quitText.setFormat(null, 12, 0x000000, "center");
 			quitText.scrollFactor.x = 0;
 			quitText.scrollFactor.y = 0;

@@ -12,6 +12,7 @@ package com.chameleonquest
 		private var worldSelected:Boolean = false;
 		private var levels:Array = new Array();
 		private var worlds:Array = new Array();
+		private var starRows:Array = new Array();
 		private var headings:FlxText;
 		
 		public function StageState() {
@@ -172,10 +173,12 @@ package com.chameleonquest
 				if (currRoomIdx * 7 <= i && i < currRoomIdx * 7 + 7)
 				{
 					levels[i].visible = true;
+					starRows[i].visible = true;
 				}
 				else
 				{
 					levels[i].visible = false;
+					starRows[i].visible = false;
 				}
 			}
 			for (var j : int = 0; j < worlds.length; j++)
@@ -190,6 +193,7 @@ package com.chameleonquest
 			for (var i : int = 0; i < levels.length; i++)
 			{
 				levels[i].visible = false;
+				starRows[i].visible = false;
 			}
 			for (var j :int = 0; j < worlds.length; j++)
 			{
@@ -204,9 +208,12 @@ package com.chameleonquest
 			{
 				text = text + (Main.bestTimes[x * 7 + y + 1] as Number).toPrecision(5) + " \t\t\t\t";
 			}
-			for (var stars:int = Main.stars[x * 7 + y + 1]; stars > 0; stars--)
+			starRows.push(new FlxGroup());
+			this.add(starRows[x*7+y] as FlxGroup);
+			(starRows[x*7+y] as FlxGroup).visible = false;
+			for (var stars:int = 0; stars < 3; stars++)
 			{
-				text += "*";
+				(starRows[x*7+y] as FlxGroup).add(new Star(260 + 13 * stars, 80 + y * 20, Main.stars[x * 7 + y + 1] > stars));
 			}
 			stage = new FlxText(15, 80 + y * 20, FlxG.width, text);
 			if (Main.bestRoom >= x * 7 + y)
