@@ -11,12 +11,12 @@ package com.chameleonquest.Objects
 		{
 			super(X, Y);
 			loadGraphic(img);
-			scale.x = .25;
-			scale.y = .25;
-			width = 16;
-			height = 16;
-			offset.x = 24;
-			offset.y = 24;
+			scale.x = .5;
+			scale.y = .5;
+			width = 32;
+			height = 32;
+			offset.x = 16;
+			offset.y = 16;
 			
 		}
 		

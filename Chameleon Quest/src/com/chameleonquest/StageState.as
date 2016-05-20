@@ -46,7 +46,7 @@ package com.chameleonquest
 			];
 			
 			stages = [
-			room1, room2//, room3
+			room1, room2, room3
 			];
 		}
 		
@@ -74,6 +74,7 @@ package com.chameleonquest
 			
 			addWorld(0, "World 1");
 			addWorld(1, "World 2");
+			addWorld(2, "World 3");
 			
 			for (var i :int = 0; i < worlds.length; i++)
 			{
@@ -96,7 +97,10 @@ package com.chameleonquest
 			addStage(1, 3, "2-4: Enemy At The Gate\t\t\t");
 			addStage(1, 4, "2-5: Putting It All Together\t\t");
 			addStage(1, 5, "2-6: Stairway to (Heaven?)\t\t");
-			addStage(1, 6, "2-7: The Fire Guardian\t\t");
+			addStage(1, 6, "2-7: The Fire Guardian\t\t\t");
+			
+			addStage(2, 0, "3-1: You Have To Burn The Ropes\t");
+			addStage(2, 1, "3-2: Chameleona Jones\t\t");
 			
 		}
 		

@@ -17,9 +17,9 @@ package com.chameleonquest.Projectiles
 			scale.x = .5;
 			scale.y = .5;
 			width = 16;
-			height = 16;
+			height = 12;
 			offset.x = 8;
-			offset.y = 8;
+			offset.y = 10;
 			this.exists = false;
 			
 			this.maxDistance = maxDistance;

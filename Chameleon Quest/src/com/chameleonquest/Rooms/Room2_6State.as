@@ -71,7 +71,7 @@ package com.chameleonquest.Rooms
 				Preloader.logger.logLevelEnd({"dest": 14, "time": playtime});
 				Preloader.tracker.trackPageview("/level-13-end");
 				Preloader.tracker.trackEvent("level-13", "level-end", null, int(Math.round(playtime)));
-				FlxG.switchState(new LevelCompleteState(playtime, 30, 80));
+				FlxG.switchState(new LevelCompleteState(playtime, 80, 30));
 				
 				
 			}

@@ -64,6 +64,10 @@ package com.chameleonquest
 			{
 				Background.buildBackground(this, 2);
 			}
+			else if (Main.lastRoom >= 15 && Main.lastRoom <= 21)
+			{
+				Background.buildBackground(this, 3);
+			}
 			add(map);
 			add(elems);
 			add(bgElems);
@@ -476,9 +480,17 @@ package com.chameleonquest
 			{
 				return new Room2_6State();
 			}
-			else if (number >= 14)
+			else if (number == 14)
 			{
 				return new Room2_7State();
+			}
+			else if (number == 15)
+			{
+				return new Room3_1State();
+			}
+			else if (number >= 16)
+			{
+				return new Room3_2State();
 			}
 			else
 			{
