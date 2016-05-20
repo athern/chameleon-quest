@@ -36,33 +36,23 @@ package com.chameleonquest.Enemies
 		
 		public override function update():void
 		{
-			if (velocity.x == 0)
+			if (angle != 180)
 			{
-				if (facing == LEFT)
+				if (Math.abs(velocity.x) < speed)
 				{
-					velocity.x = speed;
-					facing = RIGHT;
-				}
-				else
-				{
-					velocity.x = -speed;
-					facing = LEFT;
-				}
-			}
-			if (Math.abs(velocity.x) < speed)
-			{
 					velocity.x = facing == LEFT ? -speed : speed;
-			}
+				}
 			
-			if (this.x <= this.minX)
-			{
-				this.facing = RIGHT;
-				velocity.x = speed;
-			}
-			else if (this.x >= this.maxX)
-			{
-				this.facing = LEFT;
-				velocity.x = -speed;
+				if (this.x <= this.minX)
+				{
+					this.facing = RIGHT;
+					velocity.x = speed;
+				}
+				else if (this.x >= this.maxX)
+				{
+					this.facing = LEFT;
+					velocity.x = -speed;
+				}
 			}
 			
 			super.update();

@@ -132,12 +132,12 @@ package com.chameleonquest.Rooms
 						next.fade = true;
 					}
 				}
-				gate1.x += 24;
-				gate2.x -= 24;
+				//gate1.x += 24;
+				//gate2.x -= 24;
 				gate1.clock -= 300;
 				gate2.clock -= 300;
-				gate1.lifted = false;
-				gate2.lifted = false;
+				gate1.state = 3;
+				gate2.state = 3;
 			}
 		}
 		

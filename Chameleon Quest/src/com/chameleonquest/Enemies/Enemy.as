@@ -8,7 +8,7 @@ package com.chameleonquest.Enemies
 	{
 		public var power:int=1;
 		
-		protected static const DEATH_ANIMATION_LENGTH:int = 30;
+		protected static const DEATH_ANIMATION_LENGTH:int = 10;
 		
 		protected var dying:int = -1;
 		
@@ -47,6 +47,7 @@ package com.chameleonquest.Enemies
 				velocity.x = 0;
 				flicker(1);
 				power = 0;
+				angle = 180;
 			}
 		}
 		

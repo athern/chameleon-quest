@@ -1,5 +1,6 @@
 package com.chameleonquest.interactiveObj 
 {
+	import com.chameleonquest.Objects.StoneGate;
 	import org.flixel.*;
 	import com.chameleonquest.Projectiles.*;
 	
@@ -26,6 +27,14 @@ package com.chameleonquest.interactiveObj
 		override public function hit(bullet:Projectile):void {
 			angle += 5;
 			callback(controlledObj);
+		}
+		
+		override public function update():void {
+			super.update();
+			if (controlledObj is StoneGate && (controlledObj as StoneGate).isFalling())
+			{
+				angle--;
+			}
 		}
 	}
 

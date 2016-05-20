@@ -29,6 +29,10 @@ package com.chameleonquest.Enemies
 		
 		public override function update():void
 		{
+			if (angle == 180)
+			{
+				angle = 0;
+			}
 			super.update();
 		}
 		
