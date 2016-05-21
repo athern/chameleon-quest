@@ -88,7 +88,6 @@ package com.chameleonquest.Objects
 		
 		public static function gradualLift(gate:StoneGate):void
 		{
-			gate.state = 1;
 			if (gate.y > gate.startY - 48 && gate.angle == 0)
 			{
 				gate.y--;
@@ -160,7 +159,6 @@ package com.chameleonquest.Objects
 			{
 				state = 0;
 			}
-			
 			super.update();
 		}
 		
