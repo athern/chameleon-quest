@@ -216,7 +216,8 @@ package com.chameleonquest
 				}
 
 				// check for game over
-				if (heartbar.isEmpty()) {
+				if (heartbar.isEmpty() || player.x < -100 || player.x > FlxG.camera.bounds.right + 100 
+						|| player.y < -100 || player.y > FlxG.camera.bounds.bottom + 100) {
 					FlxG.flash(0x000000, 0.75);
 					FlxG.fade(0xff000000, 0.5, onFadeOver);
 				}
