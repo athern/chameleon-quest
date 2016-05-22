@@ -11,7 +11,7 @@ package com.chameleonquest
 		public function HeartBar() 
 		{
 			super();
-			hearts = [new Heart(32, 0), new Heart(48, 0), new Heart(64, 0)];
+			hearts = [new Heart(32, 16), new Heart(48, 16), new Heart(64, 16)];
 			this.add(hearts[0]);
 			this.add(hearts[1]);
 			this.add(hearts[2]);

@@ -12,13 +12,7 @@ package com.chameleonquest
 		public function Heart(X:int, Y:int):void 
 		{
 			super(X, Y);
-            loadGraphic(heartsImg, true, true, 128, 128);
-			scale.x = 0.125;
-			scale.y = 0.125;
-			width = 16;  
-			offset.x = 48;
-			height = 16;
-			offset.y = 48;
+            loadGraphic(heartsImg, true, true, 16, 16);
 			
 			addAnimation("HALF", [0]);
 			addAnimation("FULL", [1]);

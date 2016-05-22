@@ -31,7 +31,7 @@ package com.chameleonquest.Rooms
 			
 			// add rock pile
 			bgElems.add(new Pile(11, (ROOM_HEIGHT - 3)));
-			bgElems.add(new Pile(ROOM_WIDTH - 3, ROOM_HEIGHT - 8));
+			bgElems.add(new Pile(ROOM_WIDTH - 5, ROOM_HEIGHT - 8));
 			
 			// add enemies
 			enemies.add(new Snake(16 * 13, 16*15, 16 * (ROOM_HEIGHT - 7)));
