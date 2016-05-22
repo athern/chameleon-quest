@@ -1153,8 +1153,8 @@ package org.flixel
 					{
 						Object2.y -= overlap;
 					}
-					Object1.velocity.y = 0;
-					Object2.velocity.y = 0;
+					//Object1.velocity.y = 0;
+					//Object2.velocity.y = 0;
 					//overlap *= 0.5;
 					//Object1.y = Object1.y - overlap;
 					//Object2.y += overlap;

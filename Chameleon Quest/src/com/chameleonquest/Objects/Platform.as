@@ -31,18 +31,17 @@ package com.chameleonquest.Objects
 			points = p;
 			waittime = w;
 			speed = s;
-			if (p.length > 1)
-			{
-				//followPath(new FlxPath(p), s, PATH_YOYO);
-			}
 			immovable = true;
 		}
 		
 		override public function update():void
 		{
 			super.update();
-			velocity.x = 0;
-			velocity.y = 0;
+			if (points.length > 1)
+			{
+				velocity.x = 0;
+				velocity.y = 0;
+			}
 			if (points[(i + 1) % points.length].x > points[i].x && points[(i + 1) % points.length].x > x)
 			{
 				velocity.x = speed;

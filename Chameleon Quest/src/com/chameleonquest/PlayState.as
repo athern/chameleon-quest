@@ -10,7 +10,9 @@ package com.chameleonquest
 	import com.chameleonquest.Objects.Pile;
 	import com.chameleonquest.Objects.PlatformOnChain;
 	import com.chameleonquest.Objects.Pulley;
+	import com.chameleonquest.Objects.RopeSegment;
 	import com.chameleonquest.Objects.WaterFountain;
+	import com.chameleonquest.Projectiles.Fireball;
 	import com.chameleonquest.Projectiles.Projectile;
 	import com.chameleonquest.Projectiles.WaterStream;
 	import com.chameleonquest.interactiveObj.Button;
@@ -144,6 +146,7 @@ package com.chameleonquest
 				FlxG.collide(player, map);
 				FlxG.collide(enemies, elems);
 				FlxG.overlap(enemies, bgElems, null, enemyBackgroundCheck);
+				FlxG.overlap(projectiles, bgElems, null, projectileBackgroundCheck);
 				
 				FlxG.collide(elems, map);
 				FlxG.collide(player, elems, playerElemCollision);
@@ -415,6 +418,15 @@ package com.chameleonquest
 			if (background is ChainSegment && enemy.isTouching(FlxObject.FLOOR))
 			{
 				(background as ChainSegment).parentPlatform.pulley.addWeight(enemy);
+			}
+		}
+		
+		private function projectileBackgroundCheck(projectile:Projectile, background:FlxSprite):void
+		{
+			if (projectile is Fireball && background is RopeSegment)
+			{
+				(background as RopeSegment).triggerDrop();
+				background.kill();
 			}
 		}
 		
