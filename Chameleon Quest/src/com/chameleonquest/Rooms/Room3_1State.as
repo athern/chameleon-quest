@@ -23,8 +23,8 @@ package com.chameleonquest.Rooms
 			Preloader.tracker.trackPageview("/level-15");
 			Preloader.tracker.trackEvent("level-15", "level-enter", null, 14);
 			// add spikes
-			Spikes.addSpikeRow(5, ROOM_HEIGHT - 1, 2, enemies);
-			Spikes.addSpikeRow(15, ROOM_HEIGHT -3, 13, enemies);
+			Spikes.addSpikeRow(5, ROOM_HEIGHT - 1, 2, enemies, 6);
+			Spikes.addSpikeRow(15, ROOM_HEIGHT -3, 13, enemies, 6);
 			
 			// add rope platform
 			elems.add(new PlatformOnRope(16 * 5, 16 * 19));

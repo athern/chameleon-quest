@@ -6,12 +6,18 @@ package com.chameleonquest.Enemies
 	{
 		[Embed(source = "../../../../assets/spike.png")]public var spikeImg:Class;
 		
+		[Embed(source = "../../../../assets/obsidianspike.png")]public var OHKOspike:Class;
+		
 		public function Spikes(Xindex:int, Yindex:int, damage:int=2) 
 		{
 			super(16 * Xindex, 16 * Yindex + 8);
 			if (damage == 2)
 			{
-				loadGraphic(spikeImg, true, true, 16, 8);
+				loadGraphic(spikeImg);
+			}
+			if (damage == 6)
+			{
+				loadGraphic(OHKOspike);
 			}
 			power = damage;
 			immovable = true;
