@@ -402,11 +402,11 @@ package com.chameleonquest
 		{
 			if (e2 is Spikes)
 			{
-				e1.hurt(1);
+				e1.hurt(e2.power);
 			}
 			if (e1 is Spikes)
 			{
-				e2.hurt(1);
+				e2.hurt(e1.power);
 			}
 		}
 		

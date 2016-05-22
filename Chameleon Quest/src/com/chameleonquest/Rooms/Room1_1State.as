@@ -55,7 +55,7 @@ package com.chameleonquest.Rooms
 			this.add(spacehelp);
 			
 			var morehelp:FlxText;
-			morehelp = new FlxText(500, 200, 150, "GRAB BLOCKS WITH TONGUE");
+			morehelp = new FlxText(520, 200, 150, "GRAB BLOCKS WITH TONGUE");
 			morehelp.setFormat(null, 8, 0x555555, "center");
 			morehelp.alpha = .5;
 			add(morehelp);
