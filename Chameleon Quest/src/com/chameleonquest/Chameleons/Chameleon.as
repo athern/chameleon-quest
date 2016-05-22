@@ -52,6 +52,11 @@ package com.chameleonquest.Chameleons
             loadGraphic(greenChameleon, true, true, 38, 16);
 			addAnimation("basic", [0]);
 			addAnimation("holdingRock", [1]);
+			addAnimation("walking", [2, 4], 4);
+			addAnimation("carryingRock", [3, 5], 4);
+			addAnimation("jump", [6]);
+			addAnimation("jumpWithRock", [7]);
+			
 			play("basic");
 			width = 20;  
 			offset.x = 9;
@@ -114,16 +119,40 @@ package com.chameleonquest.Chameleons
 			
 			if (FlxG.keys.LEFT)
             {
+				if (ammo > 0)
+				{
+					play("carryingRock");
+				}
+				else
+				{
+					play("walking");
+				}
                 facing = LEFT;
 				acceleration.x = -RUN_ACCELERATION;
             }
             else if (FlxG.keys.RIGHT)
             {
+				if (ammo > 0)
+				{
+					play("carryingRock");
+				}
+				else
+				{
+					play("walking");
+				}
                 facing = RIGHT;
 				acceleration.x = RUN_ACCELERATION;            
             }
 			else
 			{
+				if (ammo > 0)
+				{
+					play("holdingRock");
+				}
+				else
+				{
+					play("basic");
+				}
 				if(velocityModifiers.x != 0) {
 					velocity.x = velocityModifiers.x;
 				}
@@ -133,7 +162,18 @@ package com.chameleonquest.Chameleons
 			if (FlxG.keys.X)
 			{
 				ammo = 0;
-				play("basic");
+			}
+			
+			if (jumpPhase != 0)
+			{
+				if (ammo > 0)
+				{
+					play("jumpWithRock");
+				}
+				else
+				{
+					play("jump");
+				}
 			}
 			
 			this.handleShooting();
@@ -165,11 +205,6 @@ package com.chameleonquest.Chameleons
 						
 						this.shoot();
 						ammo--;
-			
-						if (this.ammo == 0)
-						{
-							play("basic");
-						}
 					}
 					else
 					{
@@ -196,7 +231,7 @@ package com.chameleonquest.Chameleons
 			// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
 			this.cooldown = 0;
 			var attack:Projectile = this.getNextAttack();
-			var attackX:Number = facing == FlxObject.LEFT ? x : x + width - attack.width;
+			var attackX:Number = facing == FlxObject.LEFT ? x - attack.width: x + width;
 			var attackY:Number = y + height / 2 - attack.height / 2;
 			attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -200 : 200, isTouching(FLOOR) ? velocity.y : 0);
 			var currentState:PlayState = FlxG.state as PlayState;
@@ -209,7 +244,6 @@ package com.chameleonquest.Chameleons
 			Preloader.tracker.trackEvent("action", "rock", "(" + this.x + ", " + this.y +")");
 			
 			this.ammo = 3;
-			play("holdingRock");
 		}
 		
 		// returns a Projectile if the chameleon has something to shoot and hasn't shot anything recently

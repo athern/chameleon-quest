@@ -13,7 +13,7 @@ package com.chameleonquest.Objects
 		{
 			super(new Array(new FlxPoint(X, Y)), 0);
 			chain = new FlxGroup();
-			for (var i:int = 0; i < Y; i += 16) {
+			for (var i:int = 0; i < Y; i += 32) {
 				chain.add(new RopeSegment(X+8, i-16));
 			}
 			var current:PlayState = FlxG.state as PlayState;
