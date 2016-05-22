@@ -200,8 +200,12 @@ package com.chameleonquest
 					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
 					FlxG.overlap(player.tongue, intrELems, null, grabItem);
 				}
-				
-				if (player is WaterChameleon)
+				if (player is FireChameleon)
+				{
+					ammoindicator.showFire();
+					ammoText.visible = false;
+				}
+				else if (player is WaterChameleon)
 				{
 					ammoindicator.showWater();
 					ammoText.visible = false;

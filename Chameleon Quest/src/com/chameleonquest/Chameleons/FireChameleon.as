@@ -8,8 +8,8 @@ package com.chameleonquest.Chameleons
 		[Embed(source = "../../../../assets/redchameleon.png")]public var redChameleon:Class;
 		private var charging:Boolean;
 		private var chargeDistance:Number;
-		private static const MIN_CHARGE_DISTANCE:Number = 50;
-		private static const MAX_CHARGE_DISTANCE:Number = 200;
+		private static const MIN_CHARGE_DISTANCE:Number = 10;
+		private static const MAX_CHARGE_DISTANCE:Number = 40;
 		
 		public function FireChameleon(Xindex:int,Yfloorindex:int, indexedPoint:Boolean = true) 
 		{
@@ -40,7 +40,7 @@ package com.chameleonquest.Chameleons
 		
 		override public function getNextAttack():Projectile 
 		{
-			return new Fireball(this.chargeDistance);
+			return new Fireball(this.chargeDistance*5);
 		}
 		
 		override protected function handleShooting():void 
@@ -52,16 +52,16 @@ package com.chameleonquest.Chameleons
 					this.chargeDistance = MIN_CHARGE_DISTANCE;
 					this.charging = true;
 				}
-				else if (this.chargeDistance <= MAX_CHARGE_DISTANCE)
+				else if (this.chargeDistance < MAX_CHARGE_DISTANCE)
 				{
-					this.chargeDistance += 5;
+					this.chargeDistance++;
 				}
 			}
 			else if (this.charging) 
 			{
 				if (this.cooldown > SHOOT_DELAY)
 				{
-					this.shoot();
+					this.shoot(100+chargeDistance*5);
 				}
 				
 				this.charging = false;

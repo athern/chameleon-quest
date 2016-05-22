@@ -225,7 +225,7 @@ package com.chameleonquest.Chameleons
 			}
 		}
 		
-		protected function shoot():void
+		protected function shoot(vel:int=200):void
 		{
 			// only return a projectile if we've waited long enough from the last attack
 			// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
@@ -233,7 +233,7 @@ package com.chameleonquest.Chameleons
 			var attack:Projectile = this.getNextAttack();
 			var attackX:Number = facing == FlxObject.LEFT ? x - attack.width: x + width;
 			var attackY:Number = y + height / 2 - attack.height / 2;
-			attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -200 : 200, isTouching(FLOOR) ? velocity.y : 0);
+			attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -vel : vel, isTouching(FLOOR) ? velocity.y : 0);
 			var currentState:PlayState = FlxG.state as PlayState;
 			currentState.projectiles.add(attack);
 		}
