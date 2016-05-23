@@ -62,19 +62,24 @@ package com.chameleonquest
 			levelTitle.setFormat(null, 16, 0x000000, "center");
 			this.add(levelTitle);
 			
-			headings = new FlxText(30, 60, FlxG.width, "LEVEL                 BEST TIME      RATING");
-			headings.setFormat(null, 12, 0x000000, "left");
+			var controlText:FlxText;
+			controlText = new FlxText(0, 25, FlxG.width, "UP and DOWN to scroll\t\tSPACE to select");
+			controlText.setFormat(null, 8, 0x000000, "center");
+			add(controlText);
+			
+			headings = new FlxText(30, 40, FlxG.width, "LEVEL\t\t\t\t\t\t\tBEST TIME\t  RATING");
+			headings.setFormat(null, 8, 0x000000, "left");
 			this.add(headings);
 			headings.visible = false;
 			
 			// Arrow select
-			arrow = new FlxText(5, 78, FlxG.width, ">");
+			arrow = new FlxText(5, 58, FlxG.width, ">");
 			arrow.setFormat(null, 12, 0xFF0000, "left");
 			this.add(arrow);
 			
-			addWorld(0, "World 1");
-			addWorld(1, "World 2");
-			addWorld(2, "World 3");
+			addWorld(0, "World 1 - The Meadows");
+			addWorld(1, "World 2 - The Swamp");
+			addWorld(2, "World 3 - The Volcano");
 			
 			for (var i :int = 0; i < worlds.length; i++)
 			{
@@ -83,24 +88,24 @@ package com.chameleonquest
 			
 			// Levels
 
-			addStage(0, 0, "1-1: The Quest Begins\t\t\t");
-			addStage(0, 1, "1-2: Predators\t\t\t\t\t");
-			addStage(0, 2, "1-3: Into The Depths\t\t\t");
-			addStage(0, 3, "1-4: Long Way Around\t\t\t");
-			addStage(0, 4, "1-5: All The Way Down\t\t\t");
-			addStage(0, 5, "1-6: Powered By Buttons\t\t");
-			addStage(0, 6, "1-7: The Water Guardian\t\t");
+			addStage(0, 0, "1-1: The Quest Begins\t\t\t\t");
+			addStage(0, 1, "1-2: Predators\t\t\t\t\t\t");
+			addStage(0, 2, "1-3: Into The Depths\t\t\t\t");
+			addStage(0, 3, "1-4: Long Way Around\t\t\t\t");
+			addStage(0, 4, "1-5: All The Way Down\t\t\t\t");
+			addStage(0, 5, "1-6: Powered By Buttons\t\t\t");
+			addStage(0, 6, "1-7: The Water Guardian\t\t\t");
 			
-			addStage(1, 0, "2-1: Just Grate\t\t\t\t\t");
-			addStage(1, 1, "2-2: Choose Your Tools\t\t\t");
-			addStage(1, 2, "2-3: Rise From The Depths\t\t");
-			addStage(1, 3, "2-4: Enemy At The Gate\t\t\t");
-			addStage(1, 4, "2-5: Putting It All Together\t\t");
-			addStage(1, 5, "2-6: Stairway to (Heaven?)\t\t");
-			addStage(1, 6, "2-7: The Fire Guardian\t\t\t");
+			addStage(1, 0, "2-1: Just Grate\t\t\t\t\t\t");
+			addStage(1, 1, "2-2: Choose Your Tools\t\t\t\t");
+			addStage(1, 2, "2-3: Rise From The Depths\t\t\t");
+			addStage(1, 3, "2-4: Enemy At The Gate\t\t\t\t");
+			addStage(1, 4, "2-5: Putting It All Together\t\t\t");
+			addStage(1, 5, "2-6: Stairway to (Heaven?)\t\t\t");
+			addStage(1, 6, "2-7: The Fire Guardian\t\t\t\t");
 			
 			addStage(2, 0, "3-1: You Have To Burn The Ropes\t");
-			addStage(2, 1, "3-2: Chameleona Jones\t\t");
+			addStage(2, 1, "3-2: Chameleona Jones\t\t\t\t");
 			
 		}
 		
@@ -112,7 +117,7 @@ package com.chameleonquest
 				if (currIdx > 0) 
 				{
 					currIdx--;
-					arrow.y = 78 + currIdx * 20;
+					arrow.y = 58 + currIdx * 25;
 				}
 			} 
 			else if (FlxG.keys.justPressed("DOWN"))
@@ -121,7 +126,7 @@ package com.chameleonquest
 						|| (!worldSelected && currIdx < stages.length - 1 && (currIdx + 1) * 7 <= Main.bestRoom))
 				{
 					currIdx++;
-					arrow.y = 78 + currIdx * 20;
+					arrow.y = 58 + currIdx * 25;
 				}
 			}
 			
@@ -137,7 +142,7 @@ package com.chameleonquest
 				{
 					currRoomIdx = currIdx;
 					currIdx = 0;
-					arrow.y = 78;
+					arrow.y = 58;
 					toLevelMenu();
 					worldSelected = true;
 					FlxG.flash(0xff000000, .2);
@@ -148,7 +153,7 @@ package com.chameleonquest
 			if (FlxG.keys.justPressed("ESCAPE") && worldSelected)
 			{
 				currIdx = 0;
-				arrow.y = 78;
+				arrow.y = 58;
 				toWorldMenu();
 				worldSelected = false;
 				FlxG.flash(0x000000, .2);
@@ -210,16 +215,17 @@ package com.chameleonquest
 			var stage:FlxText;
 			if (Main.bestTimes[x * 7 + y + 1] < Number.MAX_VALUE)
 			{
-				text = text + (Main.bestTimes[x * 7 + y + 1] as Number).toPrecision(5) + " \t\t\t\t";
+				text = text + (Main.bestTimes[x * 7 + y + 1] as Number).toPrecision(5) + "\n PAR TIME: " + Main.parTimes[x * 7 + y]
+						+ "\t\tACE TIME: " + Main.aceTimes[x * 7 + y];
 			}
 			starRows.push(new FlxGroup());
 			this.add(starRows[x*7+y] as FlxGroup);
 			(starRows[x*7+y] as FlxGroup).visible = false;
 			for (var stars:int = 0; stars < 3; stars++)
 			{
-				(starRows[x*7+y] as FlxGroup).add(new Star(260 + 13 * stars, 80 + y * 20, Main.stars[x * 7 + y + 1] > stars));
+				(starRows[x*7+y] as FlxGroup).add(new Star(260 + 13 * stars, 60 + y * 25, Main.stars[x * 7 + y + 1] > stars));
 			}
-			stage = new FlxText(15, 80 + y * 20, FlxG.width, text);
+			stage = new FlxText(15, 60 + y * 25, FlxG.width, text);
 			if (Main.bestRoom >= x * 7 + y)
 			{
 				stage.setFormat(null, 8, 0x000000, "left");
@@ -234,7 +240,12 @@ package com.chameleonquest
 		}
 		
 		private function addWorld(y:int, text:String):void {
-			var stage:FlxText = new FlxText(15, 80 + y * 20, FlxG.width, text);
+			var starsForThisArea:int = 0;
+			for (var i :int = y * 7; i < (y + 1) * 7; i++)
+			{
+				starsForThisArea += Main.stars[i+1];
+			}
+			var stage:FlxText = new FlxText(15, 60 + y * 25, FlxG.width, text + "\t\t\tStars: " + starsForThisArea + "/21");
 			if (Main.bestRoom >= y * 7)
 			{
 				stage.setFormat(null, 8, 0x000000, "left");

@@ -41,7 +41,7 @@ package com.chameleonquest
 			Preloader.logger.logAction(14, {"room": Main.lastRoom});
 			Preloader.logger.logLevelEnd(null);
 			Preloader.tracker.trackEvent("restart", "dest", null, Main.lastRoom);
-			FlxG.switchState(PlayState.getStage(Main.lastRoom));
+			FlxG.switchState(Main.getStage(Main.lastRoom));
 		
 		}
 	}

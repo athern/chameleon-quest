@@ -62,7 +62,7 @@ package com.chameleonquest.Rooms
 				Preloader.tracker.trackPageview("/level-12-end");
 				Preloader.tracker.trackEvent("level-12", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new LevelCompleteState(playtime, 120, 40));
+				FlxG.switchState(new LevelCompleteState(playtime));
 			}
 		}
 		

@@ -23,7 +23,6 @@ package com.chameleonquest
 	
     public class PlayState extends FlxState
     {
-		
 		[Embed(source = "../../../assets/tile-16.png")]
 		public var levelTiles:Class;
 		
@@ -117,7 +116,7 @@ package com.chameleonquest
 				Preloader.logger.logAction(15, {"room": Main.lastRoom});
 				Preloader.tracker.trackEvent("action", "reset", "level-" + Main.lastRoom);
 				FlxG.flash(0x000000, 0.75);
-				FlxG.switchState(getStage(Main.lastRoom));
+				FlxG.switchState(Main.getStage(Main.lastRoom));
 				FlxG.paused = false;
 			}
 			// handle quit
@@ -443,6 +442,8 @@ package com.chameleonquest
 			}
 		}
 		
+		/*
+		
 		public static function getStage(number:int):FlxState
 		{
 			if (number == 1)
@@ -513,7 +514,7 @@ package com.chameleonquest
 			{
 				return new MenuState();
 			}
-		}
+		}*/
     }
 
 }
