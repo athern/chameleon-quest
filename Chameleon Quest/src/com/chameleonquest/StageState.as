@@ -7,7 +7,6 @@ package com.chameleonquest
 	{
 		private var currIdx:int;
 		private var currRoomIdx:int;
-		private var stages:Array;
 		private var arrow:FlxText;
 		private var worldSelected:Boolean = false;
 		private var levels:Array = new Array();
@@ -20,34 +19,6 @@ package com.chameleonquest
 			
 			currIdx = 0;
 			currRoomIdx = 0;
-			
-			var room1:Array = [
-			new Room1_1State(), 
-			new Room1_2State(),
-			new Room1_3State(),
-			new Room1_4State(),
-			new Room1_5State(),
-			new Room1_6State(),
-			new Room1_7State()
-			];
-			var room2:Array = [
-			new Room2_1State(),
-			new Room2_2State(),
-			new Room2_3State(),
-			new Room2_4State(),
-			new Room2_5State(),
-			new Room2_6State(),
-			new Room2_7State()
-			];
-			
-			var room3:Array = [
-			new Room3_1State(),
-			new Room3_2State()
-			];
-			
-			stages = [
-			room1, room2, room3
-			];
 		}
 		
 		override public function create():void
@@ -106,6 +77,7 @@ package com.chameleonquest
 			
 			addStage(2, 0, "3-1: You Have To Burn The Ropes\t");
 			addStage(2, 1, "3-2: Chameleona Jones\t\t\t\t");
+			addStage(2, 2, "3-3: Shifty Business\t\t\t\t");
 			
 		}
 		
@@ -122,8 +94,8 @@ package com.chameleonquest
 			} 
 			else if (FlxG.keys.justPressed("DOWN"))
 			{
-				if ((worldSelected && currIdx < stages[currRoomIdx].length - 1 && currIdx + currRoomIdx * 7 < Main.bestRoom)
-						|| (!worldSelected && currIdx < stages.length - 1 && (currIdx + 1) * 7 <= Main.bestRoom))
+				if ((worldSelected && currIdx < 6 && currIdx + currRoomIdx * 7 < Main.bestRoom)
+						|| (!worldSelected && currIdx < 2 && (currIdx + 1) * 7 <= Main.bestRoom))
 				{
 					currIdx++;
 					arrow.y = 58 + currIdx * 25;
@@ -172,7 +144,7 @@ package com.chameleonquest
 		
 		private function onFade():void
 		{
-			FlxG.switchState(stages[currRoomIdx][currIdx]);
+			FlxG.switchState(Main.getStage(currRoomIdx*7+currIdx+1));
 		}
 		
 		private function toLevelMenu():void

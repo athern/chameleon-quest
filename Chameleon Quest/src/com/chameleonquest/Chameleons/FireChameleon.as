@@ -9,7 +9,7 @@ package com.chameleonquest.Chameleons
 		private var charging:Boolean;
 		private var chargeDistance:Number;
 		private static const MIN_CHARGE_DISTANCE:Number = 10;
-		private static const MAX_CHARGE_DISTANCE:Number = 40;
+		private static const MAX_CHARGE_DISTANCE:Number = 60;
 		
 		public function FireChameleon(Xindex:int,Yfloorindex:int, indexedPoint:Boolean = true) 
 		{

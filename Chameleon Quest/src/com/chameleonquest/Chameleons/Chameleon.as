@@ -231,7 +231,7 @@ package com.chameleonquest.Chameleons
 			// TODO: once attack hits something, reset cooldown to SHOOT_DELAY
 			this.cooldown = 0;
 			var attack:Projectile = this.getNextAttack();
-			var attackX:Number = facing == FlxObject.LEFT ? x - attack.width: x + width;
+			var attackX:Number = facing == FlxObject.LEFT ? x - attack.width + 4: x + width - 4;
 			var attackY:Number = y + height / 2 - attack.height / 2;
 			attack.shoot(attackX, attackY, facing == FlxObject.LEFT ? -vel : vel, isTouching(FLOOR) ? velocity.y : 0);
 			var currentState:PlayState = FlxG.state as PlayState;
