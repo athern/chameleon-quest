@@ -1,6 +1,10 @@
 package com.chameleonquest.Rooms 
 {
 	import com.chameleonquest.Chameleons.Chameleon;
+	import com.chameleonquest.Objects.Boulder;
+	import com.chameleonquest.Objects.Platform;
+	import com.chameleonquest.Objects.PlatformOnRope;
+	import com.chameleonquest.Objects.Torch;
 	import org.flixel.*;
 	import com.chameleonquest.Enemies.*;
 	import com.chameleonquest.*;
@@ -11,9 +15,11 @@ package com.chameleonquest.Rooms
 		[Embed(source = "../../../../assets/mapCSV_3-2_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
+		public var boulderDropped:Boolean;
+		
 		override public function create():void
 		{
-			ROOM_WIDTH = 30;
+			ROOM_WIDTH = 45;
 			ROOM_HEIGHT = 45;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			player = new Chameleon(0, 3);
@@ -21,7 +27,11 @@ package com.chameleonquest.Rooms
 			Preloader.tracker.trackPageview("/level-16");
 			Preloader.tracker.trackEvent("level-16", "level-enter", null, 15);
 			// add spikes
-			Spikes.addSpikeRow(19, ROOM_HEIGHT - 1, 8, enemies);
+			Spikes.addSpikeRow(14, ROOM_HEIGHT - 2, 27, enemies, 6);
+			elems.add(new Platform(new Array(new FlxPoint(20 * 16, 42 * 16)), 0));
+			elems.add(new PlatformOnRope(30 * 16, 40 * 16));
+			elems.add(new Platform(new Array(new FlxPoint(37 * 16, 42 * 16)), 0));
+			bgElems.add(new Torch(18, 7));
 			Main.lastRoom = 16;
 			super.create();
 		}
@@ -32,6 +42,12 @@ package com.chameleonquest.Rooms
 			
 			if (player.x < 0) {
 				player.x = 0;
+			}
+			
+			if (player.y > 12 * 16 && !boulderDropped)
+			{
+				elems.add(new Boulder(22 * 16, -64));
+				boulderDropped = true;
 			}
 			
 			if (player.x > map.width - 16) {

@@ -37,8 +37,8 @@ package com.chameleonquest
 			Room3_2State
 			];
 			
-		public static var parTimes:Array = [30, 60, 60, 45, 30, 90, 90, 30, 50, 80, 40, 120, 80, 100, 50, 40];
-		public static var aceTimes:Array = [ 8, 22, 20, 14, 10, 30, 40, 12, 20, 40, 24,  40, 30,  50, 15, 10];
+		public static var parTimes:Array = [30, 60, 60, 45, 30, 90, 90, 30, 50, 80, 40, 120, 80, 100, 50, 30];
+		public static var aceTimes:Array = [ 8, 22, 20, 14, 10, 30, 40, 12, 20, 40, 24,  40, 30,  50, 15, 15];
 		
         public function Main()
         {

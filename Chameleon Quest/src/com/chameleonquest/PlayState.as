@@ -4,6 +4,7 @@ package com.chameleonquest
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
 	import com.chameleonquest.Enemies.Turtle;
+	import com.chameleonquest.Objects.Boulder;
 	import com.chameleonquest.Objects.ChainSegment;
 	import com.chameleonquest.Objects.ElementSource;
 	import com.chameleonquest.Objects.Grate;
@@ -307,6 +308,10 @@ package com.chameleonquest
 				player.velocityModifiers.x = elem.velocity.x;
 				player.velocityModifiers.y = elem.velocity.y;
 			}
+			if (elem is Boulder)
+			{
+				heartbar.hit(player.takeDamage(6));
+			}
 		}
 		
 		// Fade exit from pause
@@ -441,80 +446,7 @@ package com.chameleonquest
 				tongue.extending = false;
 			}
 		}
-		
-		/*
-		
-		public static function getStage(number:int):FlxState
-		{
-			if (number == 1)
-			{
-				return new Room1_1State();
-			}
-			else if (number == 2)
-			{
-				return new Room1_2State();
-			}
-			else if (number == 3)
-			{
-				return new Room1_3State();
-			}
-			else if (number == 4)
-			{
-				return new Room1_4State();
-			}
-			else if (number == 5)
-			{
-				return new Room1_5State();
-			}
-			else if (number == 6)
-			{
-				return new Room1_6State();
-			}
-			else if (number == 7)
-			{
-				return new Room1_7State();
-			}
-			else if (number == 8)
-			{
-				return new Room2_1State();
-			}
-			else if (number == 9)
-			{
-				return new Room2_2State();
-			}
-			else if (number == 10)
-			{
-				return new Room2_3State();
-			}
-			else if (number == 11)
-			{
-				return new Room2_4State();
-			}
-			else if (number == 12)
-			{
-				return new Room2_5State();
-			}
-			else if (number == 13)
-			{
-				return new Room2_6State();
-			}
-			else if (number == 14)
-			{
-				return new Room2_7State();
-			}
-			else if (number == 15)
-			{
-				return new Room3_1State();
-			}
-			else if (number >= 16)
-			{
-				return new Room3_2State();
-			}
-			else
-			{
-				return new MenuState();
-			}
-		}*/
+	
     }
 
 }
