@@ -27,6 +27,18 @@ package com.chameleonquest
 			timeText = new FlxText(0, 80, FlxG.width, "Time: " + t.toPrecision(5));
 			timeText.setFormat(null, 14, 0x000000, "center");
 			this.add(timeText);
+			var star:Star = new Star(132, 150, true);
+			star.scale.x = 2;
+			star.scale.y = 2;
+			add(star);
+			star = new Star(158, 150, t <= Main.parTimes[Main.lastRoom - 1]);
+			star.scale.x = 2;
+			star.scale.y = 2;
+			add(star);
+			star = new Star(184, 150, t <= Main.aceTimes[Main.lastRoom - 1]);
+			star.scale.x = 2;
+			star.scale.y = 2;
+			add(star);
 			if (Main.stars[Main.lastRoom] == 0)
 			{
 				Main.stars[Main.lastRoom] = 1;
@@ -61,12 +73,12 @@ package com.chameleonquest
 			
 			// continue Text
 			var continueTxt:FlxText;
-			continueTxt = new FlxText(0, 160, FlxG.width, "SPACE - Continue");
+			continueTxt = new FlxText(0, 170, FlxG.width, "SPACE - Continue");
 			continueTxt.setFormat(null, 12, 0x000000, "center");
 			this.add(continueTxt);
 			
 			var menuTxt:FlxText;
-			menuTxt = new FlxText(0, 180, FlxG.width, "ESCAPE - Level Select");
+			menuTxt = new FlxText(0, 190, FlxG.width, "ESCAPE - Level Select");
 			menuTxt.setFormat(null, 12, 0x000000, "center");
 			add(menuTxt);
 		}

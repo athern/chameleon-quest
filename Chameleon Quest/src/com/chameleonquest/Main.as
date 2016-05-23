@@ -75,7 +75,7 @@ package com.chameleonquest
 		public static function getStage(number:int):FlxState
 		{
 			if(number < stages.length)
-				return (new stages[number] as FlxState);
+				return (new stages[number-1] as FlxState);
 			else
 				return new MenuState();
 		}
