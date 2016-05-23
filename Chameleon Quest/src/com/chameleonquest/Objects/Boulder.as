@@ -18,16 +18,23 @@ package com.chameleonquest.Objects
 		
 		override public function update():void {
 			super.update();
-			angle += 10;
-			if (isTouching(FLOOR) && Math.abs(velocity.x) < 100)
+			if (facing == RIGHT)
+			{
+				angle += 10;
+			}
+			if (facing == LEFT)
+			{
+				angle -= 10;
+			}
+			if (isTouching(FLOOR) && Math.abs(velocity.x) < 110)
 			{
 				if (facing == LEFT)
 				{
-					velocity.x = -100;
+					velocity.x = -110;
 				}
 				if (facing == RIGHT)
 				{
-					velocity.x = 100;
+					velocity.x = 110;
 				}
 			}
 			if (isTouching(LEFT))
