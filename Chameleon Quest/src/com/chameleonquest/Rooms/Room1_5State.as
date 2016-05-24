@@ -22,7 +22,7 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 45;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			Preloader.logger.logLevelStart(1, {"src": 4});
+			Preloader.logger.logLevelStart(5, {"src": 4});
 			Preloader.tracker.trackPageview("/level-5");
 			Preloader.tracker.trackEvent("level-5", "level-enter", null, 4);
 				
