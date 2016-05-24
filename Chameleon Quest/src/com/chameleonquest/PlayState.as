@@ -54,10 +54,12 @@ package com.chameleonquest
 		
 		// Logging variable
 		public var playtime:Number;
+		private var lastSec:Number;
 
         override public function create():void
 		{
 			playtime = 0;
+			lastSec = 1;
 			
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
@@ -102,7 +104,15 @@ package com.chameleonquest
 		
 		override public function update():void
 		{
-			playtime += FlxG.elapsed;
+			if (!FlxG.paused) {
+				playtime += FlxG.elapsed;
+				
+				if (lastSec < playtime) {
+					lastSec += 1;
+					// log location
+					Preloader.logger.logAction(77, {"x": player.x, "y": player.y, "room": Main.lastRoom});
+				}
+			}
 			
 			
 			// handle pause
