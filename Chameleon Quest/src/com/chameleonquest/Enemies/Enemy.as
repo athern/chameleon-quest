@@ -25,9 +25,6 @@ package com.chameleonquest.Enemies
 			}
 			if (dying == 0)
 			{
-				Preloader.logger.logAction(13, {"room": Main.lastRoom, "x": this.x, "y": this.y, "type": this.toString()});
-				Preloader.tracker.trackEvent("enemy", "level-" + Main.lastRoom, "(" + this.x + ", " + this.y +"), type: " + this.toString());
-				
 				this.kill();
 			}
 			
@@ -42,6 +39,8 @@ package com.chameleonquest.Enemies
 			}
 			else if (health <= 0 && dying == -1)
 			{
+				Preloader.logger.logAction(13, {"room": Main.lastRoom, "x": this.x, "y": this.y, "type": this.toString()});
+				Preloader.tracker.trackEvent("enemy", "level-" + Main.lastRoom, "(" + this.x + ", " + this.y +"), type: " + this.toString());
 				play("death");
 				dying = DEATH_ANIMATION_LENGTH;
 				velocity.x = 0;
