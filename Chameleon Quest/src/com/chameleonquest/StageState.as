@@ -187,9 +187,9 @@ package com.chameleonquest
 			var stage:FlxText;
 			if (Main.bestTimes[x * 7 + y + 1] < Number.MAX_VALUE)
 			{
-				text = text + (Main.bestTimes[x * 7 + y + 1] as Number).toPrecision(5) + "\n PAR TIME: " + Main.parTimes[x * 7 + y]
-						+ "\t\tACE TIME: " + Main.aceTimes[x * 7 + y];
+				text = text + (Main.bestTimes[x * 7 + y + 1] as Number).toPrecision(5);
 			}
+			text = text + "\n PAR TIME: " + Main.parTimes[x * 7 + y] + "\t\tACE TIME: " + Main.aceTimes[x * 7 + y]
 			starRows.push(new FlxGroup());
 			this.add(starRows[x*7+y] as FlxGroup);
 			(starRows[x*7+y] as FlxGroup).visible = false;
