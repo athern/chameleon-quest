@@ -302,8 +302,9 @@ package com.chameleonquest
 				
 				if (player != me) {
 					if (me.tongue != null) {
-						me.tongue.kill()
+						me.tongue.cleanup()
 					}
+					
 					me.kill();
 				}
 				

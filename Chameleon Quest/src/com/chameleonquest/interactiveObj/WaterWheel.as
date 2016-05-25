@@ -22,8 +22,11 @@ package com.chameleonquest.interactiveObj
 		}
 		
 		override public function hit(bullet:Projectile):void {
-			angle += 5;
-			callback(controlledObj);
+			if (bullet is WaterStream)
+			{
+				angle += 5;
+				callback(controlledObj);
+			}
 		}
 		
 		override public function update():void {
