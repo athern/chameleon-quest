@@ -1,6 +1,7 @@
 package com.chameleonquest 
 {
 	import com.chameleonquest.Logger;
+	import com.google.analytics.debug.DebugConfiguration;
 	import org.flixel.*;
 	import org.flixel.system.FlxPreloader;
 	import com.google.analytics.AnalyticsTracker;
@@ -17,7 +18,7 @@ package com.chameleonquest
 			// Google analytics
 			tracker = new GATracker(this, "UA-77647600-1", "AS3", true); // FOR DEVELOPMENT
 			//tracker = new GATracker(this, "UA-77647600-1", "AS3", false);
-
+						
 			// Logger
 			var gid:uint = 119; //INSERT TEAM GID HERE
 			var gname:String = "cgs_gc_chameleon_quest_log";
