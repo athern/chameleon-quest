@@ -34,6 +34,7 @@ package com.chameleonquest
 			segments.push(this);
 			segmentCache = new FlxGroup();
 			height = 8;
+			offset.y = 4;
 			for (var i:int = 0; i < 50; i++)
 			{
 				segmentCache.add(new TongueSegment( -16, -16));
@@ -107,7 +108,7 @@ package com.chameleonquest
 		
 		public function alignWithPlayer():void
 		{
-			y = player.y;
+			y = player.y+4;
 			if (player.facing == RIGHT)
 			{
 				x = player.x + player.width + extended;

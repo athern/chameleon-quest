@@ -12,6 +12,8 @@ package com.chameleonquest
 			super(X, Y);
 			loadGraphic(img, false, true);
 			exists = false;
+			height = 8;
+			offset.y = 4;
 		}
 		
 	}

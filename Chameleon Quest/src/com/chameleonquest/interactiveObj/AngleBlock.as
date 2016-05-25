@@ -19,7 +19,7 @@ package com.chameleonquest.interactiveObj
 		
 		public function AngleBlock(Xindex:int, Yindex:int, r:int, type:uint = GREY) 
 		{
-			var xOff:int = 2;
+			/*var xOff:int = 2;
 			var yOff:int = 2;
 			if (r == 0)
 			{
@@ -33,14 +33,14 @@ package com.chameleonquest.interactiveObj
 			{
 				xOff = 6;
 				yOff = 6;
-			}
-			super(Xindex * 16 + xOff, Yindex * 16 + yOff);  
+			}*/
+			super(Xindex * 16, Yindex * 16);  
 			
 			angle = r;
-			width = 8;
-			height = 8;
-			offset.x = xOff;
-			offset.y = yOff;
+			//width = 8;
+			//height = 8;
+			//offset.x = xOff;
+			//offset.y = yOff;
 			immovable = true;
 			if (type == RED)
 			{
@@ -77,45 +77,54 @@ package com.chameleonquest.interactiveObj
 		{
 			if (bullet is Rock)
 			{
-				if (angle == 90 && bullet.facing == LEFT)
+				if (((angle == 0 || angle == 270) && bullet.facing == UP && bullet.y >= y + width - 6) ||
+				((angle == 0 || angle == 90) && bullet.facing == RIGHT && bullet.x + bullet.width <= x + 6) ||
+				((angle == 90 || angle == 180) && bullet.facing == DOWN && bullet.y + bullet.width <= y + 6) ||
+				((angle == 180 || angle == 270) && bullet.facing == LEFT && bullet.x >= x + width - 6))
 				{
-					bullet.shoot(x, y + 5, 0, 200);
+					bullet.kill();
 				}
-				if (angle == 0 && bullet.facing == LEFT)
+				
+				if (angle == 90 && bullet.facing == LEFT && bullet.x <= x + 6)
 				{
-					bullet.shoot(x, y - 5, 0, -200);
+					bullet.shoot(bullet.x, bullet.y, 0, 200);
 				}
-				if (angle == 180 && bullet.facing == RIGHT)
+				if (angle == 0 && bullet.facing == LEFT && bullet.x <= x + 6)
 				{
-					bullet.shoot(x - 4, y + 5, 0, 200);
+					bullet.shoot(bullet.x, bullet.y, 0, -200);
 				}
-				if (angle == 270 && bullet.facing == RIGHT)
+				if (angle == 180 && bullet.facing == RIGHT && bullet.x + bullet.width >= x + width - 6)
 				{
-					bullet.shoot(x - 4, y - 5, 0, -200);
+					bullet.shoot(bullet.x, bullet.y, 0, 200);
 				}
-				if (angle == 0 && bullet.facing == DOWN)
+				if (angle == 270 && bullet.facing == RIGHT && bullet.x + bullet.width >= x + width - 6)
 				{
-					bullet.shoot(x + 5, y - 4, 200, 0);
+					bullet.shoot(bullet.x, bullet.y, 0, -200);
 				}
-				if (angle == 90 && bullet.facing == UP)
+				if (angle == 0 && bullet.facing == DOWN && bullet.y + bullet.height >= y + height - 6)
 				{
-					bullet.shoot(x + 5, y, 200, 0);
+					bullet.shoot(bullet.x, bullet.y, 200, 0);
 				}
-				if (angle == 180 && bullet.facing == UP)
+				if (angle == 90 && bullet.facing == UP && bullet.y <= y + 6)
 				{
-					bullet.shoot(x - 5, y, -200, 0);
+					bullet.shoot(bullet.x, bullet.y, 200, 0);
 				}
-				if (angle == 270 && bullet.facing == DOWN)
+				if (angle == 180 && bullet.facing == UP && bullet.y <= y + 6)
 				{
-					bullet.shoot(x - 5, y - 4, -200, 0);
+					bullet.shoot(bullet.x, bullet.y, -200, 0);
 				}
+				if (angle == 270 && bullet.facing == DOWN && bullet.y + bullet.height >= y + height - 6)
+				{
+					bullet.shoot(bullet.x, bullet.y, -200, 0);
+				}
+				
 			}
 		}
 		
 		public static function rotate(block:AngleBlock):void
 		{
 			InteractiveObj.rotate(block);
-			if (block.angle == 0)
+			/*if (block.angle == 0)
 			{
 				block.offset.x -= 4;
 				block.x -= 4;
@@ -134,7 +143,7 @@ package com.chameleonquest.interactiveObj
 			{
 				block.offset.y += 4;
 				block.y += 4;
-			}
+			}*/
 		}
 		
 		public override function update():void

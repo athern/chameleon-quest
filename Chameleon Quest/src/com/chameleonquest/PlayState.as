@@ -151,7 +151,7 @@ package com.chameleonquest
 				FlxG.collide(elems, map);
 				FlxG.collide(player, elems, playerElemCollision);
 				// For Interactive game object collision
-				FlxG.collide(projectiles, intrELems, projectileHitCollision);
+				FlxG.overlap(projectiles, intrELems, null, projectileHitCollision);
 				FlxG.collide(projectiles, elems);
 				FlxG.collide(player, intrELems);
 				FlxG.collide(intrELems, map);
@@ -385,11 +385,7 @@ package com.chameleonquest
 			Preloader.logger.logAction(10, {"room": Main.lastRoom, "x": player.x, "y": player.y, "target": target.toString(), "bullet": bullet.toString()});
 			Preloader.tracker.trackEvent("shoot", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), target: " + target.toString() + ", bullet: " + bullet.toString(), int(Math.round(playtime)));
 			
-			if (target is Turtle && bullet is WaterStream)
-			{
-				target.velocity.x = 0;
-				target.velocity.y = 0;
-			}
+			
 			if (target == player)
 			{
 				heartbar.hit(player.takeDamage(bullet.getDamage(player)));
@@ -407,6 +403,10 @@ package com.chameleonquest
 		// for interactive game object with projectile collision
 		private function projectileHitCollision(bullet:Projectile, target:InteractiveObj):void {
 			target.hit(bullet);
+			if (bullet is WaterStream || target is WoodBlock)
+			{
+				bullet.kill();
+			}
 		}
 		
 		private function enemyFriendlyFire(e1:Enemy, e2:Enemy):void

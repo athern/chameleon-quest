@@ -6,7 +6,9 @@ package com.chameleonquest.Enemies
 		
 		protected var minX:Number;
 		protected var maxX:Number;
-		protected var speed:int;
+		public var speed:int;
+		
+		protected var hittingWall:int;
 		
 		public function HorizontallyPatrollingEnemy(MinX:Number, MaxX:Number, Y:Number, s:int, startLoc:uint = 0) 
 		{
@@ -43,16 +45,29 @@ package com.chameleonquest.Enemies
 					velocity.x = facing == LEFT ? -speed : speed;
 				}
 			
-				if (this.x <= this.minX)
+				if ((this.x <= this.minX) || (facing == LEFT && hittingWall >= 10))
 				{
 					this.facing = RIGHT;
 					velocity.x = speed;
 				}
-				else if (this.x >= this.maxX)
+				else if ((this.x >= this.maxX) || (facing == RIGHT && hittingWall >= 10))
 				{
 					this.facing = LEFT;
 					velocity.x = -speed;
 				}
+				
+				if ((facing == LEFT && isTouching(LEFT)) || (facing == RIGHT && isTouching(RIGHT)))
+				{
+					hittingWall++;
+				}
+				else
+				{
+					hittingWall = 0;
+				}
+			}
+			else
+			{
+				velocity.x = 0;
 			}
 			
 			super.update();

@@ -38,7 +38,7 @@ package com.chameleonquest.Rooms
 			player = new Chameleon(0, 23);
 			player.facing = FlxObject.RIGHT;
 											
-			bgElems.add(new WaterFountain(2, 23));
+			bgElems.add(new WaterFountain(11, 23));
 			leftgate = new StoneGate(7, 23, -1, 20);
 			rightgate = new StoneGate(42, 23, -1, 20);
 			elems.add(leftgate);
@@ -92,7 +92,7 @@ package com.chameleonquest.Rooms
 			{
 				if (geysers.countLiving() < 1)
 				{
-					Geyser.init(geysers, 16 * 25 - 8, 16 * 13, 30, 2);
+					Geyser.init(geysers, 16 * 25 - 8, 16 * 13, 30, 2, 200);
 				}
 			}
 			
@@ -103,7 +103,7 @@ package com.chameleonquest.Rooms
 				if (!fanfare) {
 					Preloader.logger.logAction(8, {"boss": "fire"});
 					Preloader.tracker.trackEvent("level-14", "boss-kill", null);
-
+					enemies.kill();
 					add(new Fanfare(18, 14));
 					fanfare = true;
 				}
@@ -127,8 +127,8 @@ package com.chameleonquest.Rooms
 						next.fade = true;
 					}
 				}
-				gate1.x += 24;
-				gate2.x -= 24;
+				//gate1.x += 24;
+				//gate2.x -= 24;
 				gate1.clock -= 300;
 				gate2.clock -= 300;
 				gate1.state = 3;
@@ -153,7 +153,7 @@ package com.chameleonquest.Rooms
 				var next:Geyser = geysers.members[i] as Geyser;
 				if (next != null)
 				{
-					next.y = FlxG.camera.bounds.bottom + 16;
+					next.y = FlxG.camera.bounds.bottom + 100;
 				}
 			}
 		}

@@ -11,11 +11,14 @@ package com.chameleonquest.interactiveObj
 		
 		public function WaterWheel(Xindex:int, Yindex:int, obj:FlxSprite, fun:Function) 
 		{
-			super(Xindex * 16, Yindex * 16);
+			super(Xindex * 16+12, Yindex * 16);
 			loadGraphic(wheelImg, true, true, 48, 48);
 			controlledObj = obj;
 			callback = fun;
 			immovable = true;
+			FlxG.visualDebug = true;
+			width = 22;
+			offset.x = 12;
 		}
 		
 		override public function hit(bullet:Projectile):void {
