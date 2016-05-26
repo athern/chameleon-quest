@@ -117,8 +117,8 @@ package com.chameleonquest.Objects
 		{
 			var particles:FlxEmitter = new FlxEmitter(x + 16, y + 16);
 			particles.makeParticles(explosion, 100);
-			particles.setXSpeed(-800, 800);
-			particles.setYSpeed( -800, 800);
+			particles.setXSpeed(-400, 400);
+			particles.setYSpeed( -400, 400);
 			particles.start(true, .5);
 			var current:PlayState = FlxG.state as PlayState;
 			current.particles.add(particles);

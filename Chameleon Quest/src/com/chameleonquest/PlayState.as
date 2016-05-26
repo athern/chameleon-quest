@@ -477,7 +477,8 @@ package com.chameleonquest
 		
 		private function particleElemCollision(particle:FlxParticle, elem:Object):void
 		{
-			elem.velocity = particle.velocity;
+			elem.velocity.y += particle.velocity.y/10;
+			elem.velocity.x += particle.velocity.x/10;
 			particle.kill();
 		}
 	
