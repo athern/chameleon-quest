@@ -34,11 +34,11 @@ package com.chameleonquest.Objects
 			{
 				if (facing == LEFT)
 				{
-					velocity.x = -110;
+					velocity.x = -100;
 				}
 				if (facing == RIGHT)
 				{
-					velocity.x = 110;
+					velocity.x = 100;
 				}
 			}
 			if (isTouching(LEFT))
