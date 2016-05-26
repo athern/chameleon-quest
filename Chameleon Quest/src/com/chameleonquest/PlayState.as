@@ -350,7 +350,7 @@ package com.chameleonquest
 		{
 			Preloader.logger.logAction(1, {"room": Main.lastRoom, "x": player.x, "y": player.y, "time": playtime});
 			Preloader.logger.logLevelEnd({"dest": -1});
-			Preloader.tracker.trackPageview("/game-over");
+			Preloader.tracker.trackPageview(Preloader.flag + "/game-over");
 			Preloader.tracker.trackEvent("game-over", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +")", int(Math.round(playtime)));
 			
 			FlxG.switchState(new GameOverState());

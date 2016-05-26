@@ -9,7 +9,7 @@ package com.chameleonquest
 		override public function create():void
 		{			
 			Preloader.logger.logLevelStart(99, {"src": Main.lastRoom});
-			Preloader.tracker.trackPageview("/go-screen");
+			Preloader.tracker.trackPageview(Preloader.flag + "/go-screen");
 			Preloader.tracker.trackEvent("game-over", "source", null, Main.lastRoom);
 				
 			// game over text

@@ -44,7 +44,7 @@ package com.chameleonquest.Rooms
 			StoneGate.lift(leftgate);
 			StoneGate.lift(rightgate);
 			Preloader.logger.logLevelStart(7, {"src": 6});
-			Preloader.tracker.trackPageview("/level-7");
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-7");
 			Preloader.tracker.trackEvent("level-7", "level-enter", null, 6);
 			player = new Chameleon(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
 			player.facing = FlxObject.LEFT;
@@ -91,7 +91,7 @@ package com.chameleonquest.Rooms
 			}
 			if (player.x < 0) {
 				Preloader.logger.logLevelEnd({"dest": 8, "time": playtime});
-				Preloader.tracker.trackPageview("/level-7-end");
+				Preloader.tracker.trackPageview(Preloader.flag + "/level-7-end");
 				Preloader.tracker.trackEvent("level-7", "level-end", null, int(Math.round(playtime)));
 				
 				FlxG.switchState(new LevelCompleteState(playtime));

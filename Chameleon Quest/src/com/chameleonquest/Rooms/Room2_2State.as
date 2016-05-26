@@ -20,7 +20,7 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			
 			Preloader.logger.logLevelStart(9, {"src": 8});
-			Preloader.tracker.trackPageview("/level-9");
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-9");
 			Preloader.tracker.trackEvent("level-9", "level-enter", null, 8);
 				
 			player = new Chameleon(1, ROOM_HEIGHT - 6);			
@@ -73,7 +73,7 @@ package com.chameleonquest.Rooms
 			
 			if (player.x < 0 && player.y > ROOM_HEIGHT - 17) {
 				Preloader.logger.logLevelEnd({"dest": 10, "time": playtime});
-				Preloader.tracker.trackPageview("/level-9-end");
+				Preloader.tracker.trackPageview(Preloader.flag + "/level-9-end");
 				Preloader.tracker.trackEvent("level-9", "level-end", null, int(Math.round(playtime)));
 				
 				FlxG.switchState(new LevelCompleteState(playtime));
