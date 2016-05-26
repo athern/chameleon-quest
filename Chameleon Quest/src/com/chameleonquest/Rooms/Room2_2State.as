@@ -47,7 +47,7 @@ package com.chameleonquest.Rooms
 			}
 			
 			intrELems.add(new AngleBlock(11, 7, 0));
-			intrELems.add(new Button(11, 1, gate, StoneGate.lift, 100, 180, Button.RED));
+			intrELems.add(new Button(11, 5, gate, StoneGate.lift, 100, 180, Button.RED));
 			
 			intrELems.add(new WoodBlock(15, (ROOM_HEIGHT - 6)));
 			
