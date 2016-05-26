@@ -164,6 +164,7 @@ package com.chameleonquest
 				FlxG.overlap(projectiles, bgElems, null, projectileBackgroundCheck);
 				FlxG.collide(elems, intrELems);
 				FlxG.collide(elems, map);
+				FlxG.collide(elems, elems);
 				FlxG.collide(player, elems, playerElemCollision);
 				// For Interactive game object collision
 				FlxG.overlap(projectiles, intrELems, null, projectileHitCollision);

@@ -1145,13 +1145,16 @@ package org.flixel
 				
 				if(!obj1immovable && !obj2immovable)
 				{
+					//trace(overlap);
 					if (Object1.y < Object2.y)
 					{
-						Object1.y -= overlap;
+						Object1.y -= Math.abs(overlap);
+						Object1.velocity.y = Object2.velocity.y;
 					}
 					else
 					{
-						Object2.y -= overlap;
+						Object2.y -= Math.abs(overlap);
+						Object2.velocity.y = Object1.velocity.y;
 					}
 					//Object1.velocity.y = 0;
 					//Object2.velocity.y = 0;

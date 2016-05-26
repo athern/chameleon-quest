@@ -27,10 +27,15 @@ package com.chameleonquest.Rooms
 			Preloader.tracker.trackPageview("/level-16");
 			Preloader.tracker.trackEvent("level-16", "level-enter", null, 15);
 			// add spikes
-			Spikes.addSpikeRow(14, ROOM_HEIGHT - 2, 27, enemies, 6);
-			elems.add(new Platform(new Array(new FlxPoint(20 * 16, 42 * 16)), 0));
-			elems.add(new PlatformOnRope(30 * 16, 40 * 16));
-			elems.add(new Platform(new Array(new FlxPoint(37 * 16, 42 * 16)), 0));
+			Spikes.addSpikeRow(15, ROOM_HEIGHT - 3, 5, enemies, 6);
+			Spikes.addSpikeRow(23, ROOM_HEIGHT - 3, 3, enemies, 6);
+			Spikes.addSpikeRow(29, ROOM_HEIGHT - 3, 3, enemies, 6);
+			Spikes.addSpikeRow(35, ROOM_HEIGHT - 3, 2, enemies, 6);
+			Spikes.addSpikeRow(40, ROOM_HEIGHT - 3, 1, enemies, 6);
+			elems.add(new Platform(new Array(new FlxPoint(20 * 16, 43 * 16-8)), 0));
+			elems.add(new PlatformOnRope(32 * 16, 40 * 16));
+			elems.add(new Platform(new Array(new FlxPoint(26 * 16, 43 * 16 - 8)), 0));
+			elems.add(new Platform(new Array(new FlxPoint(37 * 16, 43 * 16-8)), 0));
 			bgElems.add(new Torch(18, 7));
 			Main.lastRoom = 16;
 			super.create();
