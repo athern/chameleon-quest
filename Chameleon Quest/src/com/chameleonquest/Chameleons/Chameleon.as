@@ -11,6 +11,7 @@ package com.chameleonquest.Chameleons
     public class Chameleon extends FlxSprite 
     {
 		[Embed(source = "../../../../assets/greenchameleon.png")]public var greenChameleon:Class;
+		[Embed(source = "../../../../assets/Blip_Select.mp3")]public var shootSound:Class;
 
 		static public const NORMAL:uint = 0x00;
 		static public const WATER:uint = 0x01;
@@ -200,6 +201,7 @@ package com.chameleonquest.Chameleons
 				{
 					if (ammo > 0)
 					{
+						FlxG.play(shootSound);
 						Preloader.logger.logAction(7, {"tongue":0, "projectile": 1});
 						Preloader.tracker.trackEvent("action", "space", "projectile");
 						
