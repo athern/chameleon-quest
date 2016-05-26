@@ -58,19 +58,19 @@ package com.chameleonquest.Objects
 						fire.angle = (fire.angle + 270) % 360;
 						if (fire.angle == 90)
 						{
-							fire.x += 5;
+							fire.x -= 5;
 						}
 						if (fire.angle == 180)
 						{
-							fire.y += 5;
+							fire.y -= 5;
 						}
 						if (fire.angle == 270)
 						{
-							fire.x -= 5;
+							fire.x += 5;
 						}
 						if (fire.angle == 0)
 						{
-							fire.y -= 5;
+							fire.y += 5;
 						}
 					}
 				}
@@ -117,8 +117,8 @@ package com.chameleonquest.Objects
 		{
 			var particles:FlxEmitter = new FlxEmitter(x + 16, y + 16);
 			particles.makeParticles(explosion, 100);
-			particles.setXSpeed(-500, 500);
-			particles.setYSpeed( -500, 500);
+			particles.setXSpeed(-800, 800);
+			particles.setYSpeed( -800, 800);
 			particles.start(true, .5);
 			var current:PlayState = FlxG.state as PlayState;
 			current.particles.add(particles);

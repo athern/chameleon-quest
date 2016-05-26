@@ -2,11 +2,7 @@ package com.chameleonquest.Rooms
 {
 	import com.chameleonquest.Enemies.PoisonSnake;
 	import com.chameleonquest.Enemies.Snake;
-	import com.chameleonquest.Enemies.Bird;
 	import com.chameleonquest.Enemies.Squirrel;
-	import com.chameleonquest.Objects.Grate;
-	import com.chameleonquest.Objects.StoneGate;
-	import com.chameleonquest.interactiveObj.WaterWheel;
 	import com.chameleonquest.Enemies.SpikedWoodBlock;
 	import org.flixel.*;
 	import com.chameleonquest.*;

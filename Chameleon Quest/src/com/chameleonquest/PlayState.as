@@ -162,7 +162,7 @@ package com.chameleonquest
 				FlxG.collide(enemies, elems);
 				FlxG.overlap(enemies, bgElems, null, enemyBackgroundCheck);
 				FlxG.overlap(projectiles, bgElems, null, projectileBackgroundCheck);
-				
+				FlxG.collide(elems, intrELems);
 				FlxG.collide(elems, map);
 				FlxG.collide(player, elems, playerElemCollision);
 				// For Interactive game object collision
@@ -173,7 +173,7 @@ package com.chameleonquest
 				FlxG.collide(intrELems, intrELems);
 				FlxG.collide(particles, map);
 				//FlxG.overlap(particles, elems, null, particleElemCollision);
-				//FlxG.overlap(particles, intrELems, null, particleElemCollision);
+				FlxG.overlap(particles, intrELems, null, particleElemCollision);
 				FlxG.collide(particles, enemies);
 				
 				
@@ -478,7 +478,6 @@ package com.chameleonquest
 		private function particleElemCollision(particle:FlxParticle, elem:Object):void
 		{
 			elem.velocity = particle.velocity;
-			trace(elem.velocity.x);
 			particle.kill();
 		}
 	

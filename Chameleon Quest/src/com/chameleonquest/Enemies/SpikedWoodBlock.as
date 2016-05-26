@@ -14,7 +14,7 @@ package com.chameleonquest.Enemies
 			super(Xindex*16-8, Yfloorindex*16-48);
 			loadGraphic(img);
 			acceleration.y = GRAVITY;
-			drag.x = 200;
+			drag.x = 500;
 			power = 6;
 		}
 		
