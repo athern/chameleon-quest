@@ -162,7 +162,7 @@ package com.chameleonquest
 				FlxG.collide(enemies, elems);
 				FlxG.overlap(enemies, bgElems, null, enemyBackgroundCheck);
 				FlxG.overlap(projectiles, bgElems, null, projectileBackgroundCheck);
-				FlxG.collide(elems, intrELems);
+				FlxG.collide(elems, intrELems, bigButtonCheck);
 				FlxG.collide(elems, map);
 				FlxG.collide(elems, elems);
 				FlxG.collide(player, elems, playerElemCollision);
@@ -476,11 +476,19 @@ package com.chameleonquest
 			}
 		}
 		
-		private function particleElemCollision(particle:FlxParticle, elem:Object):void
+		private function particleElemCollision(particle:FlxParticle, elem:FlxSprite):void
 		{
 			elem.velocity.y += particle.velocity.y/10;
 			elem.velocity.x += particle.velocity.x/10;
 			particle.kill();
+		}
+		
+		private function bigButtonCheck(elem:FlxSprite, intrElem:FlxSprite):void
+		{
+			if (elem is Boulder && intrElem is Button && intrElem.width == 64)
+			{
+				(intrElem as Button).activate();
+			}
 		}
 	
     }
