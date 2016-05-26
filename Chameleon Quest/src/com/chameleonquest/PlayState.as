@@ -35,6 +35,7 @@ package com.chameleonquest
 		public var map:FlxTilemap = new FlxTilemap;
 		public var player:Chameleon;
 		
+		public var preMap:FlxGroup = new FlxGroup();
 		public var projectiles:FlxGroup = new FlxGroup;
 		public var enemyProjectiles:FlxGroup = new FlxGroup;
 		public var enemies:FlxGroup = new FlxGroup;
@@ -75,6 +76,8 @@ package com.chameleonquest
 			{
 				Background.buildBackground(this, 3);
 			}
+			
+			add(preMap);
 			add(map);
 			add(bgElems);
 			add(elems);

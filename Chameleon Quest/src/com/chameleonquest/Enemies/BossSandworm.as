@@ -9,11 +9,16 @@ package com.chameleonquest.Enemies
 	{
 		[Embed(source = "../../../../assets/worm.png")] protected var sandworm:Class;
 		private static const SPEED:Number = 100;
-		private static const OFFSET:Number = 5;
+		private static const OFFSET:Number = 25;
 		private var SURFACE_TIME:Number = 5;
 		private var surfaceCooldown:Number;
 		private var currentTunnel:TunnelEntrance;
 		private var emerged:Boolean;
+		
+		private static const SPRITE_WIDTH:Number = 128;
+		private static const SPRITE_HEIGHT:Number = 135;
+		private static const X_OFFSET:Number = 64;
+		private static const Y_OFFSET:Number = 73;
 		
 		public function BossSandworm(X:Number, Y:Number) 
 		{
@@ -21,10 +26,10 @@ package com.chameleonquest.Enemies
 			loadGraphic(sandworm, true, true, 256, 282);
 			scale.x = 0.5;
 			scale.y = 0.5;
-			width = 128;
-			height = 135;
-			offset.x = 64;
-			offset.y = 73;
+			width = SPRITE_WIDTH;
+			height = SPRITE_HEIGHT;
+			offset.x = X_OFFSET;
+			offset.y = Y_OFFSET;
 			
 			health = 3;
 			surfaceCooldown = SURFACE_TIME;
@@ -69,6 +74,7 @@ package com.chameleonquest.Enemies
 				velocity.x = 0;
 				exists = false;
 				currentTunnel = null;
+				emerged = false;
 			}
 			
 			surfaceCooldown += FlxG.elapsed;
@@ -93,10 +99,14 @@ package com.chameleonquest.Enemies
 		{
 			// TODO
 			var newX:Number = tunnel.x;//tunnel.isSideways ? tunnel.x - (tunnel.height / 2) : tunnel.x;
-			var newY:Number = tunnel.isSideways ? tunnel.y - (tunnel.width + this.width / 4) : tunnel.y;
+			var newY:Number = tunnel.isSideways ? tunnel.y - (tunnel.width - this.width / 4) : tunnel.y;
 			reset(newX, newY);
 			
 			this.angle = tunnel.isSideways ? -90 : 0;
+			this.width = tunnel.isSideways ? SPRITE_HEIGHT : SPRITE_WIDTH;
+			this.height = tunnel.isSideways ? SPRITE_WIDTH : SPRITE_HEIGHT;
+			offset.x = tunnel.isSideways ? Y_OFFSET : X_OFFSET;
+			offset.y = tunnel.isSideways ? X_OFFSET : Y_OFFSET;
 			
 			currentTunnel = tunnel;
 			surfaceCooldown = 0;

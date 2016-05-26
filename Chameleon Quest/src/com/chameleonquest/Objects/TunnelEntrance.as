@@ -1,40 +1,39 @@
 package com.chameleonquest.Objects 
 {
+	import com.chameleonquest.PlayState;
+	import org.flixel.FlxG;
+	import org.flixel.FlxGroup;
 	import org.flixel.FlxSprite;
 	public class TunnelEntrance extends FlxSprite
 	{
-		[Embed(source = "../../../../assets/turtle.png")]public var pileImg:Class;
 		private var open:Boolean;
 		private var sideways:Boolean;
+		private var dirt:FlxGroup;
+		private var id:int;
 		
-		public function TunnelEntrance(X:Number, Y:Number, sideways:Boolean = false) 
+		public function TunnelEntrance(X:Number, Y:Number, ID:int, sideways:Boolean = false) 
 		{
 			super(X, Y);
-			loadGraphic(pileImg, true, true, 128, 36);
+			this.sideways = sideways;
 			
 			if (sideways)
 			{
 				angle = -90;
-				height = 128;  
-				width = 15;
-				offset.x = 40;
+				height = TunnelDirt.SPRITE_WIDTH * 2;  
+				width = TunnelDirt.SPRITE_HEIGHT;
 			}
 			else
 			{
-				width = 128;  
-				height = 15;
+				width = TunnelDirt.SPRITE_WIDTH * 2;  
+				height = TunnelDirt.SPRITE_HEIGHT;
 			}
 			
-			this.sideways = sideways;			
-			open = true;
-		}
-		
-		public function collapse():void
-		{
-			// no longer allow the sandworm to emerge from here
-			open = false; 
+			buildSprite();
 			
-			// play collapse animation
+			//this.x = sideways ? X + TunnelDirt.SPRITE_HEIGHT : X;
+			//this.y = sideways ? Y : Y + TunnelDirt.SPRITE_HEIGHT;
+					
+			open = true;
 		}
 		
 		public function get isOpen():Boolean
@@ -45,6 +44,50 @@ package com.chameleonquest.Objects
 		public function get isSideways():Boolean
 		{
 			return this.sideways;
+		}
+		
+		public function get dirtPile():FlxGroup
+		{
+			return this.dirt;
+		}
+		
+		public function get tunnelId():int
+		{
+			return this.id;
+		}
+		
+		public function collapse():void
+		{
+			// no longer allow the sandworm to emerge from here
+			open = false; 
+			
+			// play collapse animation
+			for (var i:int = 0; i < dirt.length; i++)
+			{
+				var dirtPile:TunnelDirt = dirt.members[i] as TunnelDirt;
+				if (this.sideways)
+				{
+					dirtPile.angle = 90;
+					dirtPile.x += this.width / 2;
+				}
+				else
+				{
+					dirtPile.angle = 180;
+					dirtPile.y += this.height / 2
+				}
+			}
+		}
+		
+		private function buildSprite():void
+		{
+			dirt = new FlxGroup();
+			
+			for (var i:int = 0; i < 3; i++)
+			{
+				var dirtX:Number = this.sideways ? this.x : this.x + (i * TunnelDirt.SPRITE_WIDTH / 2);
+				var dirtY:Number = this.sideways ? this.y + (i * TunnelDirt.SPRITE_HEIGHT / 2) : this.y;
+				dirt.add(new TunnelDirt(dirtX, dirtY, this.sideways));
+			}
 		}
 	}
 
