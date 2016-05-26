@@ -6,15 +6,17 @@ package com.chameleonquest.Rooms
 	import com.chameleonquest.LevelCompleteState;
 	import com.chameleonquest.Main;
 	import com.chameleonquest.Objects.TunnelEntrance;
+	import com.chameleonquest.PlayState;
 	import com.chameleonquest.Preloader;
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
+	
 	public class Room3_7State extends PlayState
 	{		
 		[Embed(source = "../../../../assets/mapCSV_3-7_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
-		private const var EMERGENCE_TIME:Number = 10;
+		private const EMERGENCE_TIME:Number = 10;
 		private var bossTimer:Number;
 		private var tunnels:FlxGroup;
 		private var boss:BossSandworm;
@@ -23,6 +25,11 @@ package com.chameleonquest.Rooms
 		{
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
+			
+			boss = new BossSandworm(0, 0);
+			add(boss);
+			//enemies.add(boss);
+			
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			player = new Chameleon(0, 29);
 			Preloader.logger.logLevelStart(21, {"src": 20});
@@ -32,16 +39,18 @@ package com.chameleonquest.Rooms
 			tunnels = new FlxGroup();
 			
 			// TODO
-			tunnels.add(new TunnelEntrance(0, 0));
+			tunnels.add(new TunnelEntrance(16 * 20, 16 * (ROOM_HEIGHT - 3)));
+			tunnels.add(new TunnelEntrance(16 * 2, 16 * 19));
 			//tunnels.add(new TunnelEntrance(**, **));
 			//tunnels.add(new TunnelEntrance(**, **));
-			//tunnels.add(new TunnelEntrance(**, **));
-			add(tunnels);
+			bgElems.add(tunnels);
 			
-			boss = new BossSandworm(0, 0);
-			enemies.add(boss);
+			//boss = new BossSandworm(0, 0);
+			//enemies.add(boss);
 			
-			Main.lastRoom = 21;
+			bossTimer = 0;
+			
+			//Main.lastRoom = 21;
 			super.create();
 		}
 		
@@ -65,12 +74,16 @@ package com.chameleonquest.Rooms
 				// emerge!
 				do
 				{
-					var tunnel:TunnelEntrance = tunnels.getRandom();
+					var tunnel:TunnelEntrance = tunnels.getRandom() as TunnelEntrance;
 				}
 				while (!tunnel.isOpen);
 				
 				boss.emergeFrom(tunnel);
+				
+				bossTimer = -EMERGENCE_TIME;
 			}
+			
+			bossTimer += FlxG.elapsed;
 		}
 	}
 
