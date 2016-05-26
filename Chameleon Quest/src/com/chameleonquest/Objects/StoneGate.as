@@ -78,6 +78,15 @@ package com.chameleonquest.Objects
 			{
 				loadGraphic(img, false, false, 32, 48, true);
 			}
+			if (angle == 90 || angle == 270)
+			{
+				width = 48;
+				height = 32;
+				offset.x -= 8;
+				offset.y += 8;
+				x -= 8;
+				y += 8;
+			}
 		}
 		
 		public static function lift(gate:StoneGate):void
@@ -96,38 +105,37 @@ package com.chameleonquest.Objects
 					gate.state = 2;
 				}
 			}
-			if (gate.x > gate.startX - 48 && gate.angle == 270)
+			if (gate.x - gate.offset.x > gate.startX - 48 && gate.angle == 270)
 			{
 				gate.x--;
-				if (gate.x <= gate.startX - 48)
+				if (gate.x - gate.offset.x <= gate.startX - 48)
 				{
 					gate.state = 2;
 				}
 			}
-			if (gate.x < gate.startX + 48 && gate.angle == 90)
+			if (gate.x - gate.offset.x < gate.startX + 48 && gate.angle == 90)
 			{
 				gate.x++;
-				if (gate.x >= gate.startX + 48)
+				if (gate.x - gate.offset.x >= gate.startX + 48)
 				{
 					gate.state = 2;
 				}
 			}
-			//gate.lifted = true;
 			gate.countdown = gate.clock;
 		}
 		
 		override public function update():void
 		{
-			
+			super.update();
 			if (state == 1 && y > startY - 48 && angle == 0)
 			{
 				y -= 48/speed*4;
 			}
-			else if (state == 1 && x > startX - 48 && angle == 270)
+			else if (state == 1 && x - offset.x > startX - 48 && angle == 270)
 			{
 				x -= 48 / speed * 4;
 			}
-			else if (state == 1 && x < startX + 48 && angle == 90)
+			else if (state == 1 && x - offset.x < startX + 48 && angle == 90)
 			{
 				x += 48 / speed * 4;
 			}
@@ -147,11 +155,11 @@ package com.chameleonquest.Objects
 			{
 				y += 48/speed;
 			}
-			else if (x < startX && state == 3 && angle == 270)
+			else if (x - offset.x < startX && state == 3 && angle == 270)
 			{
 				x += 48 / speed;
 			}
-			else if (x > startX && state == 3 && angle == 90)
+			else if (x - offset.x > startX && state == 3 && angle == 90)
 			{
 				x -= 48 / speed;
 			}
@@ -159,7 +167,7 @@ package com.chameleonquest.Objects
 			{
 				state = 0;
 			}
-			super.update();
+			
 		}
 		
 		public static function drop(gate:StoneGate):void

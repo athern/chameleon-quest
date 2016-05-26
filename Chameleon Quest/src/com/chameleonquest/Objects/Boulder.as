@@ -26,15 +26,19 @@ package com.chameleonquest.Objects
 			{
 				angle -= 10;
 			}
-			if (isTouching(FLOOR) && Math.abs(velocity.x) < 110)
+			if (isTouching(FLOOR))
+			{
+				velocity.y -= 80;
+			}
+			if (isTouching(FLOOR) && Math.abs(velocity.x) == 0)
 			{
 				if (facing == LEFT)
 				{
-					velocity.x = -110;
+					velocity.x = -100;
 				}
 				if (facing == RIGHT)
 				{
-					velocity.x = 110;
+					velocity.x = 100;
 				}
 			}
 			if (isTouching(LEFT))
