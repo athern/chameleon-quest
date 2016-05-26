@@ -1,6 +1,7 @@
 package com.chameleonquest.Enemies 
 {
 	import com.chameleonquest.Objects.TunnelEntrance;
+	import com.chameleonquest.PlayState;
 	import com.chameleonquest.Projectiles.Projectile;
 	import org.flixel.FlxG;
 	import org.flixel.FlxSprite;
@@ -37,20 +38,35 @@ package com.chameleonquest.Enemies
 		{
 			super.update();
 			
+			var currentState:PlayState = FlxG.state as PlayState;
+			this.facing = (angle == 0 && currentState.player.x < this.x) || (angle != 0 && this.y < currentState.player.y) ? RIGHT : LEFT;
+			
 			// handle moving up and down
-			if (emerged && surfaceCooldown < SURFACE_TIME && velocity.y < 0 && (currentTunnel.y - this.y) > (this.height - OFFSET))
+			if (emerged && surfaceCooldown < SURFACE_TIME && 
+				((this.angle == 0 && velocity.y < 0 && (currentTunnel.y - this.y) > (this.height - OFFSET)) ||
+				(this.angle != 0 && velocity.x < 0 && (currentTunnel.x - this.x) > (this.height - OFFSET))))
 			{
-				velocity.y = 0;
 				// stop moving up!
+				velocity.y = 0;
+				velocity.x = 0;
 			}
-			else if (emerged && surfaceCooldown > SURFACE_TIME && velocity.y == 0)
+			else if (emerged && surfaceCooldown > SURFACE_TIME && ((this.angle == 0 && velocity.y == 0) || (this.angle != 0 && velocity.x == 0)))
 			{
-				velocity.y = SPEED;
+				if (angle == 0)
+				{
+					velocity.y = SPEED;
+				}
+				else
+				{
+					velocity.x = SPEED;
+				}
 			}
-			else if (emerged && surfaceCooldown > SURFACE_TIME && velocity.y > 0 && (this.y - OFFSET) > currentTunnel.y)
+			else if (emerged && surfaceCooldown > SURFACE_TIME && 
+					((angle == 0 && velocity.y > 0 && (this.y - OFFSET) > currentTunnel.y) || (angle != 0 && velocity.x > 0 && currentTunnel.x < (this.x - OFFSET))))
 			{
 				// stop moving down!
 				velocity.y = 0;
+				velocity.x = 0;
 				exists = false;
 				currentTunnel = null;
 			}
@@ -76,13 +92,16 @@ package com.chameleonquest.Enemies
 		public function emergeFrom(tunnel:TunnelEntrance):void
 		{
 			// TODO
-			var newX:Number = tunnel.x;
-			var newY:Number = tunnel.y;
+			var newX:Number = tunnel.x;//tunnel.isSideways ? tunnel.x - (tunnel.height / 2) : tunnel.x;
+			var newY:Number = tunnel.isSideways ? tunnel.y - (tunnel.width + this.width / 4) : tunnel.y;
 			reset(newX, newY);
+			
+			this.angle = tunnel.isSideways ? -90 : 0;
 			
 			currentTunnel = tunnel;
 			surfaceCooldown = 0;
-			velocity.y = -SPEED;
+			velocity.y = this.angle == 0 ? -SPEED : 0;
+			velocity.x = this.angle == 0 ? 0 : -SPEED;
 			emerged = true;
 		}
 	}
