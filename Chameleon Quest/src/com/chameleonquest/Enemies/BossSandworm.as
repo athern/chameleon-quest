@@ -24,6 +24,8 @@ package com.chameleonquest.Enemies
 		{
 			super(X, Y);
 			loadGraphic(sandworm, true, true, 256, 282);
+			addAnimation("basic", [0, 1, 3, 6, 7], 10, true);
+			play("basic");
 			scale.x = 0.5;
 			scale.y = 0.5;
 			width = SPRITE_WIDTH;
