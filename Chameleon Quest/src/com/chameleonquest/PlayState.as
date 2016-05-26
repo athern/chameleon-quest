@@ -7,11 +7,13 @@ package com.chameleonquest
 	import com.chameleonquest.Objects.Boulder;
 	import com.chameleonquest.Objects.ChainSegment;
 	import com.chameleonquest.Objects.ElementSource;
+	import com.chameleonquest.Objects.FuseSegment;
 	import com.chameleonquest.Objects.Grate;
 	import com.chameleonquest.Objects.Pile;
 	import com.chameleonquest.Objects.PlatformOnChain;
 	import com.chameleonquest.Objects.Pulley;
 	import com.chameleonquest.Objects.RopeSegment;
+	import com.chameleonquest.Objects.StoneGate;
 	import com.chameleonquest.Objects.WaterFountain;
 	import com.chameleonquest.Projectiles.Fireball;
 	import com.chameleonquest.Projectiles.Projectile;
@@ -36,6 +38,7 @@ package com.chameleonquest
 		public var projectiles:FlxGroup = new FlxGroup;
 		public var enemyProjectiles:FlxGroup = new FlxGroup;
 		public var enemies:FlxGroup = new FlxGroup;
+		public var particles:FlxGroup = new FlxGroup;
 		
 		public var elems:FlxGroup = new FlxGroup;
 		public var bgElems:FlxGroup = new FlxGroup;
@@ -73,14 +76,16 @@ package com.chameleonquest
 				Background.buildBackground(this, 3);
 			}
 			add(map);
-			add(elems);
 			add(bgElems);
+			add(elems);
+			
 			add(intrELems);
 			add(player.tongue);
 			add(player);
 			add(enemies);
 			add(projectiles);
 			add(enemyProjectiles);
+			add(particles);
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 			FlxG.camera.deadzone.x = 160 - 16;
@@ -166,6 +171,10 @@ package com.chameleonquest
 				FlxG.collide(player, intrELems);
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
+				FlxG.collide(particles, map);
+				//FlxG.overlap(particles, elems, null, particleElemCollision);
+				//FlxG.overlap(particles, intrELems, null, particleElemCollision);
+				FlxG.collide(particles, enemies);
 				
 				
 				if (FlxG.keys.justPressed("C")) {
@@ -394,8 +403,8 @@ package com.chameleonquest
 		{
 			Preloader.logger.logAction(10, {"room": Main.lastRoom, "x": player.x, "y": player.y, "target": target.toString(), "bullet": bullet.toString()});
 			Preloader.tracker.trackEvent("shoot", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), target: " + target.toString() + ", bullet: " + bullet.toString(), int(Math.round(playtime)));
-			
-			
+		
+		
 			if (target == player)
 			{
 				heartbar.hit(player.takeDamage(bullet.getDamage(player)));
@@ -446,6 +455,14 @@ package com.chameleonquest
 				(background as RopeSegment).triggerDrop();
 				background.kill();
 			}
+			if (projectile is Fireball && background is FuseSegment)
+			{
+				var fuse:FuseSegment = background as FuseSegment;
+				if (fuse.variant == 2)
+				{
+					fuse.source.startBurning(fuse);
+				}
+			}
 		}
 		
 		private function grabItem(tongue:Tongue, item:InteractiveObj):void
@@ -455,6 +472,13 @@ package com.chameleonquest
 				tongue.grabbedObject = item;
 				tongue.extending = false;
 			}
+		}
+		
+		private function particleElemCollision(particle:FlxParticle, elem:Object):void
+		{
+			elem.velocity = particle.velocity;
+			trace(elem.velocity.x);
+			particle.kill();
 		}
 	
     }

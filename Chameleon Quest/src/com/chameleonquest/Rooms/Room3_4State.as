@@ -6,6 +6,7 @@ package com.chameleonquest.Rooms
 	import com.chameleonquest.Objects.Grate;
 	import com.chameleonquest.Objects.StoneGate;
 	import com.chameleonquest.interactiveObj.WaterWheel;
+	import com.chameleonquest.Enemies.SpikedWoodBlock;
 	import org.flixel.*;
 	import com.chameleonquest.*;
 	import com.chameleonquest.Chameleons.Chameleon;
@@ -26,7 +27,10 @@ package com.chameleonquest.Rooms
 			Preloader.logger.logLevelStart(18, {"src": 17});
 			Preloader.tracker.trackPageview("/level-18");
 			Preloader.tracker.trackEvent("level-18", "level-enter", null, 17);
-			
+			elems.add(new TNT(27, 29, new Array(new FlxPoint(27 * 16 + 6, 3 * 16 + 6), new FlxPoint(23 * 16 + 6, 3 * 16 + 6))));
+			bgElems.add(new Torch(12, 28));
+			//elems.add(new StoneGate(25, 29));
+			enemies.add(new SpikedWoodBlock(25, 29));
 			Main.lastRoom = 18;
 			super.create();
 		}
