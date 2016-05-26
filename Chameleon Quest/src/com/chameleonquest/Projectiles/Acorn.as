@@ -24,7 +24,7 @@ package com.chameleonquest.Projectiles
 		
 		override public function getDamage(Target:FlxSprite):Number
 		{
-			return 0;
+			return 2;
 		}
 		
 	}

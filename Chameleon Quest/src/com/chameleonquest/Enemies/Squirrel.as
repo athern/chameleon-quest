@@ -47,12 +47,17 @@ package com.chameleonquest.Enemies
 		{
 			super.update();
 			var attack:Projectile;
+			if (cooldown >= SHOOT_DELAY / 2)
+			{
+				play("holdingAcorn");
+			}
 			if (cooldown > SHOOT_DELAY && (attack = ammoCache.getFirstAvailable() as Projectile)) 
 			{
 				var attackX:Number = this.facing == RIGHT ? this.x - attack.width : this.x + this.width;
 				var attackY:Number = this.y + this.height / 2;
 				attack.shoot(attackX, attackY, this.facing == RIGHT ? -100 : 100, 0);
 				cooldown = 0;
+				play("idle");
 			}
 			
 			cooldown += FlxG.elapsed;	// ammo cooldown

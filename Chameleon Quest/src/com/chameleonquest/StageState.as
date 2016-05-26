@@ -77,8 +77,8 @@ package com.chameleonquest
 			
 			addStage(2, 0, "3-1: You Have To Burn The Ropes\t");
 			addStage(2, 1, "3-2: Chameleona Jones\t\t\t\t");
-			addStage(2, 2, "3-3: Shifty Business\t\t\t\t");
-			addStage(2, 3, "3-4: TBD\t\t");
+			addStage(2, 2, "3-3: Shifty Business\t\t\t\t\t");
+			addStage(2, 3, "3-4: Light The Fuse\t\t\t\t\t");
 			addStage(2, 4, "3-7: The Earth Guardian\t\t");
 			
 		}

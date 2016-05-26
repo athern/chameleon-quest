@@ -32,10 +32,8 @@ package com.chameleonquest.Objects
 			else if (fire != null)
 			{
 				var currentSegment:FuseSegment = fuse[fuse.length - 1] as FuseSegment;
-				//trace(fire.angle);
 				if (currentSegment.variant == 1)
 				{
-					trace(fire.angle, currentSegment.angle);
 					if (currentSegment.angle == fire.angle) {
 						fire.angle = (fire.angle + 90) % 360;
 						if (fire.angle == 90)
