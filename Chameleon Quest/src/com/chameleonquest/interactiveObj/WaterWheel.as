@@ -16,7 +16,6 @@ package com.chameleonquest.interactiveObj
 			controlledObj = obj;
 			callback = fun;
 			immovable = true;
-			FlxG.visualDebug = true;
 			width = 22;
 			offset.x = 12;
 		}
