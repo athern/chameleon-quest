@@ -18,6 +18,8 @@ package com.chameleonquest
 		
 		private static var save:SaveGame;
 		
+		public static var storyMode:Boolean = true;
+		
 		private static var stages:Array = [
 			Room1_1State, 
 			Room1_2State,

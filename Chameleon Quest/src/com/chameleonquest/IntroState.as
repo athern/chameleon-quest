@@ -3,7 +3,7 @@ package com.chameleonquest
 	import org.flixel.*;
 	import com.chameleonquest.Rooms.*;
 	
-	public class MenuState extends FlxState
+	public class IntroState extends FlxState
 	{
 		
 		override public function create():void
@@ -13,15 +13,12 @@ package com.chameleonquest
 			add(new Background(0, 0, 1, true));
 			add(new Background(16, 0, 1, true));
 			
-			// Title
-			var title:FlxText;
-			title = new FlxText(0, (FlxG.width / 2) - 80, FlxG.width, "Chameleon Quest");
-			title.setFormat(null, 18, 0x000000, "center");
-			this.add(title);
 			
 			// Start Text
 			var startTxt:FlxText;
-			startTxt = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"SPACE\" to Start!");
+			startTxt = new FlxText(15, 40, FlxG.width-30, "The chameleon kingdom has fallen into the grasp of a tyrant. " +
+			"Legend speaks of a mighty hero who could vanquish the guardians of the elemental orbs, tame their powers, and restore peace to the kingdom. " +
+			"Armed with only your wits and your tongue, you set out upon your quest...\n\nPress \'SPACE\' To Venture Forth");
 			startTxt.setFormat(null, 12, 0x000000, "center");
 			this.add(startTxt);
 			
@@ -43,14 +40,7 @@ package com.chameleonquest
 		
 		private function onFade():void
 		{
-			//FlxG.switchState(new Room1_1State());
-			if (Main.storyMode && Main.bestRoom == 0)
-			{
-				FlxG.switchState(new IntroState());
-			}
-			else {
-				FlxG.switchState(new StageState());
-			}
+			FlxG.switchState(new Room1_1State());
 		}
 		
 	}
