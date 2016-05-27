@@ -117,7 +117,7 @@ package com.chameleonquest.Rooms
 				StoneGate.lift(leftgate);
 				StoneGate.lift(rightgate);
 				if (!fanfare) {
-					Preloader.logger.logAction(8, {"boss": "fire"});
+					Preloader.logger.logAction(8, {"boss": "earth"});
 					Preloader.tracker.trackEvent("level-14", "boss-kill", null);
 					enemies.kill();
 					add(new Fanfare(18, 14));
