@@ -152,6 +152,7 @@ package com.chameleonquest.Rooms
 			FlxG.overlap(boulders, tunnels, null, destroyBoulder);
 			FlxG.collide(boulders, map, destroyBoulder);
 			FlxG.collide(player, boss, hurtPlayer);
+			FlxG.collide(projectiles, boss);
 		}
 		
 		private function hurtBoss(boss:BossSandworm, boulder:Boulder):void 
