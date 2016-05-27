@@ -1,10 +1,7 @@
 package com.chameleonquest.Rooms 
 {
 	import com.chameleonquest.Chameleons.Chameleon;
-	import com.chameleonquest.Enemies.BossDragon;
-	import com.chameleonquest.Enemies.Dragonling;
-	import com.chameleonquest.Enemies.Enemy;
-	import com.chameleonquest.Enemies.Geyser;
+	import com.chameleonquest.Enemies.*;
 	import org.flixel.*;
 	import com.chameleonquest.Objects.*;
 	import com.chameleonquest.*;
@@ -35,27 +32,25 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			
 			Preloader.logger.logLevelStart(14, {"src": 13});
-			Preloader.tracker.trackPageview("/level-14");
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-14");
 			Preloader.tracker.trackEvent("level-14", "level-enter", null, 13);
 				
 			player = new Chameleon(0, 23);
 			player.facing = FlxObject.RIGHT;
 											
-			bgElems.add(new WaterFountain(2, 23));
-			
+			bgElems.add(new WaterFountain(11, 23));
 			leftgate = new StoneGate(7, 23, -1, 20);
 			rightgate = new StoneGate(42, 23, -1, 20);
 			elems.add(leftgate);
 			elems.add(rightgate);
 			StoneGate.lift(leftgate);
 			StoneGate.lift(rightgate);
-			
 			gate1 = new StoneGate(27, 27, 1200, 480, StoneGate.GREY, 270);
 			elems.add(gate1);
 			gate2 = new StoneGate(23, 24, 1200, 480, StoneGate.GREY, 90);
 			elems.add(gate2);
-			intrELems.add(new WaterWheel(10, 16, gate1, StoneGate.gradualLift));
-			intrELems.add(new WaterWheel(38, 16, gate2, StoneGate.gradualLift));
+			intrELems.add(new WaterWheel(12, 16, gate1, StoneGate.gradualLift));
+			intrELems.add(new WaterWheel(36, 16, gate2, StoneGate.gradualLift));
 			boss = new BossDragon(240, 480, 140);
 			enemies.add(boss);
 			
@@ -77,9 +72,9 @@ package com.chameleonquest.Rooms
 			
 			if (player.x > map.width - 16) {
 				Preloader.logger.logLevelEnd({"dest": 15, "time": playtime});
-				Preloader.tracker.trackPageview("/level-14-end");
+				Preloader.tracker.trackPageview(Preloader.flag + "/level-14-end");
 				Preloader.tracker.trackEvent("level-14", "level-end", null, int(Math.round(playtime)));
-				FlxG.switchState(new LevelCompleteState(playtime, 40, 100));
+				FlxG.switchState(new LevelCompleteState(playtime));
 				
 			}
 			
@@ -97,7 +92,7 @@ package com.chameleonquest.Rooms
 			{
 				if (geysers.countLiving() < 1)
 				{
-					Geyser.init(geysers, 16 * 25 - 8, 16 * 13, 30, 2);
+					Geyser.init(geysers, 16 * 25 - 8, 16 * 13, 30, 2, 200);
 				}
 			}
 			
@@ -108,7 +103,7 @@ package com.chameleonquest.Rooms
 				if (!fanfare) {
 					Preloader.logger.logAction(8, {"boss": "fire"});
 					Preloader.tracker.trackEvent("level-14", "boss-kill", null);
-
+					enemies.kill();
 					add(new Fanfare(18, 14));
 					fanfare = true;
 				}
@@ -132,12 +127,12 @@ package com.chameleonquest.Rooms
 						next.fade = true;
 					}
 				}
-				gate1.x += 24;
-				gate2.x -= 24;
+				//gate1.x += 24;
+				//gate2.x -= 24;
 				gate1.clock -= 300;
 				gate2.clock -= 300;
-				gate1.lifted = false;
-				gate2.lifted = false;
+				gate1.state = 3;
+				gate2.state = 3;
 			}
 		}
 		
@@ -158,7 +153,7 @@ package com.chameleonquest.Rooms
 				var next:Geyser = geysers.members[i] as Geyser;
 				if (next != null)
 				{
-					next.y = FlxG.camera.bounds.bottom + 16;
+					next.y = FlxG.camera.bounds.bottom + 100;
 				}
 			}
 		}

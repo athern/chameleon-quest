@@ -21,7 +21,7 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 
 			Preloader.logger.logLevelStart(12, {"src": 11});
-			Preloader.tracker.trackPageview("/level-12");
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-12");
 			Preloader.tracker.trackEvent("level-12", "level-enter", null, 13);
 				
 			player = new Chameleon(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
@@ -42,8 +42,7 @@ package com.chameleonquest.Rooms
 			enemies.add(new PoisonSnake(15 * 16, 19 * 16));
 			enemies.add(new Bird(2 * 16, 20 * 16, 2 * 16));
 			enemies.add(new Snake(20 * 16, 23 * 16, 16 * 15));
-			enemies.add(new Snake(4 * 16, 23 * 16, 16 * 11, FlxObject.LEFT));
-			enemies.add(new Snake(4 * 16, 23 * 16, 16 * 7, FlxObject.RIGHT));
+			enemies.add(new Snake(7 * 16, 12 * 16, 16 * 15, FlxObject.RIGHT));
 			intrELems.add(new WoodBlock(17, 9));
 			Main.lastRoom = 12;
 			super.create();
@@ -59,10 +58,10 @@ package com.chameleonquest.Rooms
 			
 			if (player.x > map.width - 16 && player.y < 100) {
 				Preloader.logger.logLevelEnd({"dest": 11, "time": playtime});
-				Preloader.tracker.trackPageview("/level-12-end");
+				Preloader.tracker.trackPageview(Preloader.flag + "/level-12-end");
 				Preloader.tracker.trackEvent("level-12", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new LevelCompleteState(playtime, 40, 120));
+				FlxG.switchState(new LevelCompleteState(playtime));
 			}
 		}
 		

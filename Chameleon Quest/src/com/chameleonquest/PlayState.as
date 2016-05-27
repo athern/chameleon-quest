@@ -4,13 +4,18 @@ package com.chameleonquest
 	import com.chameleonquest.Enemies.Enemy;
 	import com.chameleonquest.Enemies.Spikes;
 	import com.chameleonquest.Enemies.Turtle;
+	import com.chameleonquest.Objects.Boulder;
 	import com.chameleonquest.Objects.ChainSegment;
 	import com.chameleonquest.Objects.ElementSource;
+	import com.chameleonquest.Objects.FuseSegment;
 	import com.chameleonquest.Objects.Grate;
 	import com.chameleonquest.Objects.Pile;
 	import com.chameleonquest.Objects.PlatformOnChain;
 	import com.chameleonquest.Objects.Pulley;
+	import com.chameleonquest.Objects.RopeSegment;
+	import com.chameleonquest.Objects.StoneGate;
 	import com.chameleonquest.Objects.WaterFountain;
+	import com.chameleonquest.Projectiles.Fireball;
 	import com.chameleonquest.Projectiles.Projectile;
 	import com.chameleonquest.Projectiles.WaterStream;
 	import com.chameleonquest.interactiveObj.Button;
@@ -21,7 +26,6 @@ package com.chameleonquest
 	
     public class PlayState extends FlxState
     {
-		
 		[Embed(source = "../../../assets/tile-16.png")]
 		public var levelTiles:Class;
 		
@@ -31,9 +35,11 @@ package com.chameleonquest
 		public var map:FlxTilemap = new FlxTilemap;
 		public var player:Chameleon;
 		
+		public var preMap:FlxGroup = new FlxGroup();
 		public var projectiles:FlxGroup = new FlxGroup;
 		public var enemyProjectiles:FlxGroup = new FlxGroup;
 		public var enemies:FlxGroup = new FlxGroup;
+		public var particles:FlxGroup = new FlxGroup;
 		
 		public var elems:FlxGroup = new FlxGroup;
 		public var bgElems:FlxGroup = new FlxGroup;
@@ -66,15 +72,23 @@ package com.chameleonquest
 			{
 				Background.buildBackground(this, 2);
 			}
+			else if (Main.lastRoom >= 15 && Main.lastRoom <= 21)
+			{
+				Background.buildBackground(this, 3);
+			}
+			
+			add(preMap);
 			add(map);
-			add(elems);
 			add(bgElems);
+			add(elems);
+			
 			add(intrELems);
 			add(player.tongue);
 			add(player);
 			add(enemies);
 			add(projectiles);
 			add(enemyProjectiles);
+			add(particles);
 			FlxG.camera.setBounds(0, 0, 16*ROOM_WIDTH, 16*ROOM_HEIGHT, true);
 			FlxG.camera.follow(player, FlxCamera.STYLE_PLATFORMER);
 			FlxG.camera.deadzone.x = 160 - 16;
@@ -121,7 +135,7 @@ package com.chameleonquest
 				Preloader.logger.logAction(15, {"room": Main.lastRoom});
 				Preloader.tracker.trackEvent("action", "reset", "level-" + Main.lastRoom);
 				FlxG.flash(0x000000, 0.75);
-				FlxG.switchState(getStage(Main.lastRoom));
+				FlxG.switchState(Main.getStage(Main.lastRoom));
 				FlxG.paused = false;
 			}
 			// handle quit
@@ -150,15 +164,21 @@ package com.chameleonquest
 				FlxG.collide(player, map);
 				FlxG.collide(enemies, elems);
 				FlxG.overlap(enemies, bgElems, null, enemyBackgroundCheck);
-				
+				FlxG.overlap(projectiles, bgElems, null, projectileBackgroundCheck);
+				FlxG.collide(elems, intrELems, bigButtonCheck);
 				FlxG.collide(elems, map);
+				FlxG.collide(elems, elems);
 				FlxG.collide(player, elems, playerElemCollision);
 				// For Interactive game object collision
-				FlxG.collide(projectiles, intrELems, projectileHitCollision);
+				FlxG.overlap(projectiles, intrELems, null, projectileHitCollision);
 				FlxG.collide(projectiles, elems);
 				FlxG.collide(player, intrELems);
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
+				FlxG.collide(particles, map);
+				//FlxG.overlap(particles, elems, null, particleElemCollision);
+				FlxG.overlap(particles, intrELems, null, particleElemCollision);
+				FlxG.collide(particles, enemies);
 				
 				
 				if (FlxG.keys.justPressed("C")) {
@@ -172,7 +192,7 @@ package com.chameleonquest
 					Preloader.logger.logAction(15, null);
 					Preloader.tracker.trackEvent("action", "reset", "level-" + Main.lastRoom);
 					FlxG.flash(0x000000, 0.75);
-					FlxG.switchState(getStage(Main.lastRoom));
+					FlxG.switchState(Main.getStage(Main.lastRoom));
 				}
 				
 				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X") && !FlxG.overlap(player, grates)) {
@@ -208,8 +228,12 @@ package com.chameleonquest
 					FlxG.overlap(player.tongue, enemies, null, hurtPlayer);
 					FlxG.overlap(player.tongue, intrELems, null, grabItem);
 				}
-				
-				if (player is WaterChameleon)
+				if (player is FireChameleon)
+				{
+					ammoindicator.showFire();
+					ammoText.visible = false;
+				}
+				else if (player is WaterChameleon)
 				{
 					ammoindicator.showWater();
 					ammoText.visible = false;
@@ -227,7 +251,8 @@ package com.chameleonquest
 				}
 
 				// check for game over
-				if (heartbar.isEmpty()) {
+				if (heartbar.isEmpty() || player.x < -100 || player.x > FlxG.camera.bounds.right + 100 
+						|| player.y < -100 || player.y > FlxG.camera.bounds.bottom + 100) {
 					FlxG.flash(0x000000, 0.75);
 					FlxG.fade(0xff000000, 0.5, onFadeOver);
 				}
@@ -295,8 +320,9 @@ package com.chameleonquest
 				
 				if (player != me) {
 					if (me.tongue != null) {
-						me.tongue.kill()
+						me.tongue.cleanup()
 					}
+					
 					me.kill();
 				}
 				
@@ -310,6 +336,10 @@ package com.chameleonquest
 			if (player.isTouching(FlxObject.FLOOR)) {
 				player.velocityModifiers.x = elem.velocity.x;
 				player.velocityModifiers.y = elem.velocity.y;
+			}
+			if (elem is Boulder)
+			{
+				heartbar.hit(player.takeDamage(6));
 			}
 		}
 		
@@ -328,7 +358,7 @@ package com.chameleonquest
 		{
 			Preloader.logger.logAction(1, {"room": Main.lastRoom, "x": player.x, "y": player.y, "time": playtime});
 			Preloader.logger.logLevelEnd({"dest": -1});
-			Preloader.tracker.trackPageview("/game-over");
+			Preloader.tracker.trackPageview(Preloader.flag + "/game-over");
 			Preloader.tracker.trackEvent("game-over", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +")", int(Math.round(playtime)));
 			
 			FlxG.switchState(new GameOverState());
@@ -383,12 +413,8 @@ package com.chameleonquest
 		{
 			Preloader.logger.logAction(10, {"room": Main.lastRoom, "x": player.x, "y": player.y, "target": target.toString(), "bullet": bullet.toString()});
 			Preloader.tracker.trackEvent("shoot", "level-" + Main.lastRoom, "(" + player.x + ", " + player.y +"), target: " + target.toString() + ", bullet: " + bullet.toString(), int(Math.round(playtime)));
-			
-			if (target is Turtle && bullet is WaterStream)
-			{
-				target.velocity.x = 0;
-				target.velocity.y = 0;
-			}
+		
+		
 			if (target == player)
 			{
 				heartbar.hit(player.takeDamage(bullet.getDamage(player)));
@@ -406,17 +432,21 @@ package com.chameleonquest
 		// for interactive game object with projectile collision
 		private function projectileHitCollision(bullet:Projectile, target:InteractiveObj):void {
 			target.hit(bullet);
+			if (bullet is WaterStream || target is WoodBlock)
+			{
+				bullet.kill();
+			}
 		}
 		
 		private function enemyFriendlyFire(e1:Enemy, e2:Enemy):void
 		{
 			if (e2 is Spikes)
 			{
-				e1.hurt(1);
+				e1.hurt(e2.power);
 			}
 			if (e1 is Spikes)
 			{
-				e2.hurt(1);
+				e2.hurt(e1.power);
 			}
 		}
 		
@@ -425,6 +455,23 @@ package com.chameleonquest
 			if (background is ChainSegment && enemy.isTouching(FlxObject.FLOOR))
 			{
 				(background as ChainSegment).parentPlatform.pulley.addWeight(enemy);
+			}
+		}
+		
+		private function projectileBackgroundCheck(projectile:Projectile, background:FlxSprite):void
+		{
+			if (projectile is Fireball && background is RopeSegment)
+			{
+				(background as RopeSegment).triggerDrop();
+				background.kill();
+			}
+			if (projectile is Fireball && background is FuseSegment)
+			{
+				var fuse:FuseSegment = background as FuseSegment;
+				if (fuse.variant == 2)
+				{
+					fuse.source.startBurning(fuse);
+				}
 			}
 		}
 		
@@ -437,69 +484,21 @@ package com.chameleonquest
 			}
 		}
 		
-		public static function getStage(number:int):FlxState
+		private function particleElemCollision(particle:FlxParticle, elem:FlxSprite):void
 		{
-			if (number == 1)
+			elem.velocity.y += particle.velocity.y/10;
+			elem.velocity.x += particle.velocity.x/10;
+			particle.kill();
+		}
+		
+		private function bigButtonCheck(elem:FlxSprite, intrElem:FlxSprite):void
+		{
+			if (elem is Boulder && intrElem is Button && intrElem.width == 64)
 			{
-				return new Room1_1State();
-			}
-			else if (number == 2)
-			{
-				return new Room1_2State();
-			}
-			else if (number == 3)
-			{
-				return new Room1_3State();
-			}
-			else if (number == 4)
-			{
-				return new Room1_4State();
-			}
-			else if (number == 5)
-			{
-				return new Room1_5State();
-			}
-			else if (number == 6)
-			{
-				return new Room1_6State();
-			}
-			else if (number == 7)
-			{
-				return new Room1_7State();
-			}
-			else if (number == 8)
-			{
-				return new Room2_1State();
-			}
-			else if (number == 9)
-			{
-				return new Room2_2State();
-			}
-			else if (number == 10)
-			{
-				return new Room2_3State();
-			}
-			else if (number == 11)
-			{
-				return new Room2_4State();
-			}
-			else if (number == 12)
-			{
-				return new Room2_5State();
-			}
-			else if (number == 13)
-			{
-				return new Room2_6State();
-			}
-			else if (number >= 14)
-			{
-				return new Room2_7State();
-			}
-			else
-			{
-				return new MenuState();
+				(intrElem as Button).activate();
 			}
 		}
+	
     }
 
 }

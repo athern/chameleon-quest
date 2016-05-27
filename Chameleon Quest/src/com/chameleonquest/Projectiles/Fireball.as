@@ -14,14 +14,13 @@ package com.chameleonquest.Projectiles
 			loadGraphic(fireSprite, true, true, 32, 32);
 			addAnimation("shooting", [0, 1, 2], 4, true);
 			play("shooting");
-			scale.x = .5;
-			scale.y = .5;
+			scale.x = .4 + .002 * maxDistance;
+			scale.y = .4 + .002 * maxDistance;
 			width = 16;
-			height = 16;
+			height = 12;
 			offset.x = 8;
-			offset.y = 8;
+			offset.y = 10;
 			this.exists = false;
-			
 			this.maxDistance = maxDistance;
 		}
 		

@@ -24,7 +24,7 @@ package com.chameleonquest.Rooms
 			Spikes.addSpikeRow(27, ROOM_HEIGHT - 1, 4, enemies);
 			
 			Preloader.logger.logLevelStart(1, {"src": 0});
-			Preloader.tracker.trackPageview("/level-1");
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-1");
 			Preloader.tracker.trackEvent("level-1", "level-enter", null, 0);
 				
 			player = new Chameleon(0, ROOM_HEIGHT-1);
@@ -55,7 +55,7 @@ package com.chameleonquest.Rooms
 			this.add(spacehelp);
 			
 			var morehelp:FlxText;
-			morehelp = new FlxText(500, 200, 150, "GRAB BLOCKS WITH TONGUE");
+			morehelp = new FlxText(520, 200, 150, "GRAB BLOCKS WITH TONGUE");
 			morehelp.setFormat(null, 8, 0x555555, "center");
 			morehelp.alpha = .5;
 			add(morehelp);
@@ -74,10 +74,10 @@ package com.chameleonquest.Rooms
 			}
 			if (player.x > map.width - 16) {
 				Preloader.logger.logLevelEnd({"dest": 2, "time": playtime});
-				Preloader.tracker.trackPageview("/level-1-end");
+				Preloader.tracker.trackPageview(Preloader.flag + "/level-1-end");
 				Preloader.tracker.trackEvent("level-1", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new LevelCompleteState(playtime, 30, 8));
+				FlxG.switchState(new LevelCompleteState(playtime));
 			}
 		}
 		

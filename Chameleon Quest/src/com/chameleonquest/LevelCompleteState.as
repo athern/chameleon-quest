@@ -9,12 +9,10 @@ package com.chameleonquest
 		protected var par:Number;
 		protected var ace:Number;
 		
-		public function LevelCompleteState(time:Number=0, parTime:Number=0, aceTime:Number=0)
+		public function LevelCompleteState(time:Number=0)
 		{
 			super();
 			t = time;
-			par = parTime;
-			ace = aceTime;
 		}
 		
 		
@@ -29,6 +27,18 @@ package com.chameleonquest
 			timeText = new FlxText(0, 80, FlxG.width, "Time: " + t.toPrecision(5));
 			timeText.setFormat(null, 14, 0x000000, "center");
 			this.add(timeText);
+			var star:Star = new Star(132, 150, true);
+			star.scale.x = 2;
+			star.scale.y = 2;
+			add(star);
+			star = new Star(158, 150, t <= Main.parTimes[Main.lastRoom - 1]);
+			star.scale.x = 2;
+			star.scale.y = 2;
+			add(star);
+			star = new Star(184, 150, t <= Main.aceTimes[Main.lastRoom - 1]);
+			star.scale.x = 2;
+			star.scale.y = 2;
+			add(star);
 			if (Main.stars[Main.lastRoom] == 0)
 			{
 				Main.stars[Main.lastRoom] = 1;
@@ -41,14 +51,14 @@ package com.chameleonquest
 				recordText.setFormat(null, 14, 0x000000, "center");
 				add(recordText);
 			}
-			if (t <= ace)
+			if (t <= Main.aceTimes[Main.lastRoom-1])
 			{
 				var congratsText:FlxText = new FlxText(0, 120, FlxG.width, "You beat the ace time!");
 				congratsText.setFormat(null, 14, 0x000000, "center");
 				add(congratsText);
 				Main.stars[Main.lastRoom] = 3;
 			}
-			else if (t <= par)
+			else if (t <= Main.parTimes[Main.lastRoom-1])
 			{
 				var parText:FlxText = new FlxText(0, 120, FlxG.width, "You beat the par time!");
 				parText.setFormat(null, 14, 0x000000, "center");
@@ -63,12 +73,12 @@ package com.chameleonquest
 			
 			// continue Text
 			var continueTxt:FlxText;
-			continueTxt = new FlxText(0, 160, FlxG.width, "SPACE - Continue");
+			continueTxt = new FlxText(0, 170, FlxG.width, "SPACE - Continue");
 			continueTxt.setFormat(null, 12, 0x000000, "center");
 			this.add(continueTxt);
 			
 			var menuTxt:FlxText;
-			menuTxt = new FlxText(0, 180, FlxG.width, "ESCAPE - Level Select");
+			menuTxt = new FlxText(0, 190, FlxG.width, "ESCAPE - Level Select");
 			menuTxt.setFormat(null, 12, 0x000000, "center");
 			add(menuTxt);
 		}
@@ -91,7 +101,7 @@ package com.chameleonquest
 		
 		private function onFade():void
 		{
-			FlxG.switchState(PlayState.getStage(Main.lastRoom + 1));
+			FlxG.switchState(Main.getStage(Main.lastRoom + 1));
 		
 		}
 	}

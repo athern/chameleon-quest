@@ -44,7 +44,13 @@ package com.chameleonquest
 		private function onFade():void
 		{
 			//FlxG.switchState(new Room1_1State());
-			FlxG.switchState(new StageState());
+			if (Main.storyMode && Main.bestRoom == 0)
+			{
+				FlxG.switchState(new IntroState());
+			}
+			else {
+				FlxG.switchState(new StageState());
+			}
 		}
 		
 	}

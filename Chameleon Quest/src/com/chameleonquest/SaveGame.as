@@ -24,14 +24,15 @@ package com.chameleonquest
 		public function setupSaveFile():void
 		{
 			trace("SaveGame - setupSaveFile()");
-			bestRoom = 0;
-			bestTimes = new Array();
-			stars = new Array();
+			Main.bestRoom = 0;
+			Main.bestTimes = new Array();
+			Main.stars = new Array();
 			for (var i:int = 0; i < 35; i++)
 			{
-				bestTimes.push(Number.MAX_VALUE);
-				stars.push(0);
+				Main.bestTimes.push(Number.MAX_VALUE);
+				Main.stars.push(0);
 			}
+			saveGameProgress();
 		}
 		
 		// saves current progress

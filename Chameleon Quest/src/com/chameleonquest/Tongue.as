@@ -34,6 +34,7 @@ package com.chameleonquest
 			segments.push(this);
 			segmentCache = new FlxGroup();
 			height = 8;
+			offset.y = 4;
 			for (var i:int = 0; i < 50; i++)
 			{
 				segmentCache.add(new TongueSegment( -16, -16));
@@ -86,14 +87,14 @@ package com.chameleonquest
 					grabbedObject.velocity.y = 0;
 					if (player.facing == RIGHT)
 					{
-						if (grabbedObject.x >= x + 15 && !(this.extending))
+						if (grabbedObject.x >= player.x + 15 && !(this.extending))
 						{
 							grabbedObject.velocity.x = -SPEED;
 						}
 					}
 					else
 					{
-						if (grabbedObject.x + grabbedObject.width >= x && !(this.extending))
+						if (grabbedObject.x + grabbedObject.width <= player.x && !(this.extending))
 						{
 							grabbedObject.velocity.x = SPEED;
 						}
@@ -107,7 +108,7 @@ package com.chameleonquest
 		
 		public function alignWithPlayer():void
 		{
-			y = player.y;
+			y = player.y+4;
 			if (player.facing == RIGHT)
 			{
 				x = player.x + player.width + extended;

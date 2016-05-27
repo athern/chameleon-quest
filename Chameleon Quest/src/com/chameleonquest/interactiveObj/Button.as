@@ -10,11 +10,13 @@ package com.chameleonquest.interactiveObj
 		[Embed(source = "../../../../assets/button-blue.png")]public var blueImg:Class;
 		[Embed(source = "../../../../assets/button-green.png")]public var greenImg:Class;
 		[Embed(source = "../../../../assets/button-yellow.png")]public var yellowImg:Class;
+		[Embed(source = "../../../../assets/big-red-button.png")]public var bigRedImg:Class;
 		
 		static public const RED:uint = 0x00;
 		static public const BLUE:uint = 0x01;
 		static public const GREEN:uint = 0x02;
 		static public const YELLOW:uint = 0x03;
+		static public const BIGRED:uint = 0x04;
 		
 		private var isHit:Boolean;
 		private var timer:int;
@@ -27,23 +29,8 @@ package com.chameleonquest.interactiveObj
 			
 			super(Xindex * 16, Yindex * 16);
 			loadButtonSprite(type);
-			
-			scale.x = 0.125;
-			scale.y = 0.125;
-			width = 16;  
-			offset.x = 56;
-			height = 6;
-			offset.y = 62;
 			timer = t;
 			angle = r;
-			if (r == 0)
-			{
-				y -= 10;
-			}
-			else
-			{
-				y += 6;
-			}
 			immovable = true;
 			addAnimation("DOWN", [0]);
 			addAnimation("UP", [1]);
@@ -59,29 +46,38 @@ package com.chameleonquest.interactiveObj
 		
 		private function loadButtonSprite(type:uint):void {
 			if (type == RED) {
-				loadGraphic(redImg, true, true, 128, 128);
+				loadGraphic(redImg, true, true, 16, 16);
 			} else if (type == BLUE) {
-				loadGraphic(blueImg, true, true, 128, 128);
+				loadGraphic(blueImg, true, true, 16, 16);
 			} else if (type == GREEN) {
-				loadGraphic(greenImg, true, true, 128, 128);
+				loadGraphic(greenImg, true, true, 16, 16);
 			} else if (type == YELLOW) {
-				loadGraphic(yellowImg, true, true, 128, 128);
+				loadGraphic(yellowImg, true, true, 16, 16);
+			} else if (type == BIGRED) {
+				loadGraphic(bigRedImg, true, true, 128, 128);
+				scale.x = .5;
+				scale.y = .5;
+				width = 64;
+				height = 32;
+				offset.x = 32;
+				offset.y = 64;
 			}
 			
 		}
 		
 		// hit the button
 		override public function hit(bullet:Projectile):void {
-			if (!isHit) {
-				isHit = true;
-				//height = 4;
-				//offset.y = 66;
-				//this.y += 4;
-				play("DOWN");
-				count = timer;
-				callback(controlledObj);
+			if (!isHit && width == 16) {
+				activate();
 			}
 			
+		}
+		
+		public function activate():void {
+			isHit = true;
+			play("DOWN");
+			count = timer;
+			callback(controlledObj);
 		}
 		
 		override public function update():void {
@@ -90,8 +86,6 @@ package com.chameleonquest.interactiveObj
 			{
 				count--;
 				if (count == 0) {
-					//offset.y = 62;
-					//this.y -= 4;
 					play("UP");
 					isHit = false;
 				}

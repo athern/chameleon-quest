@@ -9,7 +9,7 @@ package com.chameleonquest.Objects
 		
 		public function Torch(Xindex:int, Yfloorindex:int) 
 		{
-			super(Xindex*16, Yfloorindex*16-16);
+			super(Xindex*16, Yfloorindex*16-32);
 			loadGraphic(torchImg, true, true, 128, 128);
 			scale.x = 0.25;
 			scale.y = 0.25;

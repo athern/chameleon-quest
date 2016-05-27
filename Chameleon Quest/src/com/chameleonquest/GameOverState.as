@@ -9,7 +9,7 @@ package com.chameleonquest
 		override public function create():void
 		{			
 			Preloader.logger.logLevelStart(99, {"src": Main.lastRoom});
-			Preloader.tracker.trackPageview("/go-screen");
+			Preloader.tracker.trackPageview(Preloader.flag + "/go-screen");
 			Preloader.tracker.trackEvent("game-over", "source", null, Main.lastRoom);
 				
 			// game over text
@@ -41,7 +41,7 @@ package com.chameleonquest
 			Preloader.logger.logAction(14, {"room": Main.lastRoom});
 			Preloader.logger.logLevelEnd(null);
 			Preloader.tracker.trackEvent("restart", "dest", null, Main.lastRoom);
-			FlxG.switchState(PlayState.getStage(Main.lastRoom));
+			FlxG.switchState(Main.getStage(Main.lastRoom));
 		
 		}
 	}

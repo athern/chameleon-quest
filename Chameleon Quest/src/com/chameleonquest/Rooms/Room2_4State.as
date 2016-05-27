@@ -20,7 +20,7 @@ package com.chameleonquest.Rooms
 			map.loadMap(new levelMap, levelTiles, 16, 16);
 			
 			Preloader.logger.logLevelStart(11, {"src": 10});
-			Preloader.tracker.trackPageview("/level-11");
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-11");
 			Preloader.tracker.trackEvent("level-11", "level-enter", null, 10);
 				
 			player = new Chameleon(ROOM_WIDTH - 1, 6);
@@ -30,6 +30,7 @@ package com.chameleonquest.Rooms
 			var gate:StoneGate = new StoneGate(11, 6, -1);
 			elems.add(gate);
 			enemies.add(new Boar(1 * 16, 26 * 16, 4 * 16, 1));
+			enemies.add(new Snake(4 * 16, 11 * 16, 8 * 16, FlxObject.RIGHT));
 			
 			intrELems.add(new WaterWheel(13, 7, gate, StoneGate.gradualLift));
 			
@@ -45,10 +46,10 @@ package com.chameleonquest.Rooms
 			
 			if (player.x < 0) {
 				Preloader.logger.logLevelEnd({"dest": 12, "time": playtime});
-				Preloader.tracker.trackPageview("/level-11-end");
+				Preloader.tracker.trackPageview(Preloader.flag + "/level-11-end");
 				Preloader.tracker.trackEvent("level-11", "level-end", null, int(Math.round(playtime)));
 				
-				FlxG.switchState(new LevelCompleteState(playtime, 40, 24));
+				FlxG.switchState(new LevelCompleteState(playtime));
 			}
 			
 			if (player.x > map.width - 16) {		

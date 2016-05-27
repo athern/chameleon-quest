@@ -25,8 +25,7 @@ package com.chameleonquest.Enemies
 			height = 24;
 			//offset.y = 6;
 			play("idle");
-			
-			
+			health = 2;
 			cooldown = CHARGE_DELAY;
 			isCharging = false;
 		}
@@ -51,7 +50,7 @@ package com.chameleonquest.Enemies
 			}
 			
 			if (isCharging) {
-				if (isTouching(RIGHT) || isTouching(LEFT)) {
+				if (hittingWall >= 5) {
 					play("idle");
 					isCharging = false;
 					cooldown = CHARGE_DELAY;

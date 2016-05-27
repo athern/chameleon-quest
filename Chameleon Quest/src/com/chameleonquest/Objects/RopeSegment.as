@@ -7,17 +7,20 @@ package com.chameleonquest.Objects
 		[Embed(source = "../../../../assets/rope.png")]
 		protected var img:Class;
 		
-		override public function RopeSegment(X:int, Y:int) 
+		protected var obj:FlxSprite;
+		
+		override public function RopeSegment(X:int, Y:int, hangingObj:FlxSprite) 
 		{
-			super(X, Y);
-			loadGraphic(img);
-			scale.x = .25;
-			scale.y = .25;
-			width = 16;
-			height = 16;
-			offset.x = 24;
-			offset.y = 24;
-			
+			super(X, Y, img);
+			obj = hangingObj;
+		}
+		
+		public function triggerDrop():void
+		{
+			if (obj is PlatformOnRope)
+			{
+				(obj as PlatformOnRope).drop(this);
+			}
 		}
 		
 	}

@@ -15,11 +15,14 @@ package com.chameleonquest
 		[Embed(source = "../../../assets/water-stream-head.png")]
 		public var waterimg:Class;
 		
+		[Embed(source = "../../../assets/fireball.png")]
+		public var fireimg:Class;
+		
 		public var currentindicator:FlxSprite;
 		
 		public function AmmoIndicator() 
 		{
-			super(8, 8, img);
+			super(4, 8, img);
 			scrollFactor.x = 0;
 			scrollFactor.y = 0;
 			currentindicator = new FlxSprite(x + 3, y + 9, tongueimg);
@@ -53,6 +56,15 @@ package com.chameleonquest
 			currentindicator.scale.y = .5;
 			currentindicator.x = x-4;
 			currentindicator.y = y;
+		}
+		
+		public function showFire():void
+		{
+			currentindicator.loadGraphic(fireimg, false, false, 32, 32);
+			currentindicator.scale.x = .5;
+			currentindicator.scale.y = .5;
+			currentindicator.x = x-4;
+			currentindicator.y = y+1;
 		}
 		
 	}

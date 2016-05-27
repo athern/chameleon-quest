@@ -13,12 +13,9 @@ package com.chameleonquest.Objects
 		{
 			super(X-16, Y);
 			loadGraphic(img);
-			scale.x = .125;
-			scale.y = .125;
 			width = 48;
 			height = 16;
-			offset.x = 40;
-			offset.y = 56;
+			offset.x = -16;
 			parentPlatform = platform;
 		}
 		

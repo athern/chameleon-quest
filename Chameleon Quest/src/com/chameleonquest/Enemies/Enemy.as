@@ -8,7 +8,7 @@ package com.chameleonquest.Enemies
 	{
 		public var power:int=1;
 		
-		protected static const DEATH_ANIMATION_LENGTH:int = 30;
+		protected static const DEATH_ANIMATION_LENGTH:int = 10;
 		
 		protected var dying:int = -1;
 		
@@ -41,11 +41,13 @@ package com.chameleonquest.Enemies
 			{
 				Preloader.logger.logAction(13, {"room": Main.lastRoom, "x": this.x, "y": this.y, "type": this.toString()});
 				Preloader.tracker.trackEvent("enemy", "level-" + Main.lastRoom, "(" + this.x + ", " + this.y +"), type: " + this.toString());
+				
 				play("death");
 				dying = DEATH_ANIMATION_LENGTH;
 				velocity.x = 0;
 				flicker(1);
 				power = 0;
+				angle = 180;
 			}
 		}
 		
