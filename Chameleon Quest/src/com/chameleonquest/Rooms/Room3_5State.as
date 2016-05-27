@@ -42,6 +42,7 @@ package com.chameleonquest.Rooms
 			Spikes.addSpikeRow(19, 15, 2, enemies, 6);
 			Spikes.addSpikeRow(21, 19, 2, enemies, 6);
 			Spikes.addSpikeRow(13, 3, 5, enemies, 6, 180);
+			Spikes.addSpikeRow(21, 9, 3, enemies, 6, 180);
 			
 			Main.lastRoom = 19;
 			super.create();
