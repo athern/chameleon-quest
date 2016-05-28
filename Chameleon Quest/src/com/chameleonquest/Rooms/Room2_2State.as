@@ -71,13 +71,13 @@ package com.chameleonquest.Rooms
 		{
 			super.update();
 			
-			if (player.x < 0 && player.y > ROOM_HEIGHT - 17) {
+			if (player.x < 0 && player.y/16 < ROOM_HEIGHT - 12) {
 				Preloader.logger.logLevelEnd({"dest": 10, "time": playtime});
 				Preloader.tracker.trackPageview(Preloader.flag + "/level-9-end");
 				Preloader.tracker.trackEvent("level-9", "level-end", null, int(Math.round(playtime)));
 				
 				FlxG.switchState(new LevelCompleteState(playtime));
-			} else if (player.x < 0 && player.y > ROOM_HEIGHT - 6) {
+			} else if (player.x < 0) {
 				player.x = 0;
 			}
 		}

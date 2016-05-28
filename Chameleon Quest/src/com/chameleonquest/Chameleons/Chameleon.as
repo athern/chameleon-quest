@@ -201,7 +201,7 @@ package com.chameleonquest.Chameleons
 				{
 					if (ammo > 0)
 					{
-						FlxG.play(shootSound);
+						//FlxG.play(shootSound);
 						Preloader.logger.logAction(7, {"tongue":0, "projectile": 1});
 						Preloader.tracker.trackEvent("action", "space", "projectile");
 						
