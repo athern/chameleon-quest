@@ -81,7 +81,7 @@ package com.chameleonquest
 			addStage(2, 3, "3-4: Light The Fuse\t\t\t\t\t");
 			addStage(2, 4, "3-5: We Have Liftoff\t\t\t\t\t");
 			addStage(2, 5, "3-6: Pinball Wizard\t\t\t\t\t");
-			addStage(2, 6, "3-7: The Earth Guardian\t\t");
+			addStage(2, 6, "3-7: The Earth Guardian\t\t\t");
 			
 		}
 		
