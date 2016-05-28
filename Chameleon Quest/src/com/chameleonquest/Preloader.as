@@ -14,7 +14,7 @@ package com.chameleonquest
 		public static var logger:Logger;
 		public static var flag:String;
 		
-		private static var DEVELOPMENT_FLAG:Boolean = true;	// FOR DEVELOPMENT, SET TO FALSE FOR RELEASE
+		private static var DEVELOPMENT_FLAG:Boolean = false;	// FOR DEVELOPMENT, SET TO FALSE FOR RELEASE
 		
 		public function Preloader():void
 		{
