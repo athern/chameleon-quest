@@ -25,30 +25,13 @@ package com.chameleonquest.Enemies
 			startX = X;		
 			this.facing = RIGHT;
 			drag.x = 10;
-			acceleration.y = 0;
+			acceleration.y = GRAVITY;
 		}
 		
 		public static function addTurtleStack(X:int, Y:int, count:int, group:FlxGroup):void
 		{
 			for (var i:int = 1; i <= count; i++) {
 				group.add(new Turtle(X, Y - (count - i )* 18));
-			}
-		}
-		
-		override public function update():void
-		{
-			super.update();
-			if (x != startX)
-			{
-				acceleration.y = GRAVITY;
-			}
-			else
-			{
-				acceleration.y = 0;
-			}
-			if (!isTouching(FLOOR))
-			{
-				y++;
 			}
 		}
 	}

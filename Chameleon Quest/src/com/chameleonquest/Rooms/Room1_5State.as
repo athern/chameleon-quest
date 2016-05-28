@@ -58,11 +58,11 @@ package com.chameleonquest.Rooms
 				if (cur.x != 16 * 15)
 				{
 					turtles.splice(i, 1);
-					var replacement:Turtle = new Turtle(16 * 15, 0);
+					var replacement:Turtle = new Turtle(16 * 15, -16);
 					turtles.push(replacement);
 					enemies.add(replacement);
 				}
-				if (cur.x == next.x && cur.y - next.y < 16)
+				if (cur.y - next.y < 16)
 				{
 					next.y = cur.y - 16;
 				}
