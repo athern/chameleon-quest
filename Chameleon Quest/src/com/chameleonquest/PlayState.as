@@ -188,7 +188,12 @@ package com.chameleonquest
 					FlxG.overlap(player, bgElems, null, changeElement);
 				}
 				
-				
+				if (FlxG.keys.justPressed("R")) {
+					Preloader.logger.logAction(15, null);
+					Preloader.tracker.trackEvent("action", "reset", "level-" + Main.lastRoom);
+					FlxG.flash(0x000000, 0.75);
+					FlxG.switchState(Main.getStage(Main.lastRoom));
+				}
 				
 				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X") && !FlxG.overlap(player, grates)) {
 					Preloader.logger.logAction(5, {"type": player.getType().toString()});
