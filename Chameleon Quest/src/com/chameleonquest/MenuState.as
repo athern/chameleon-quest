@@ -5,6 +5,7 @@ package com.chameleonquest
 	
 	public class MenuState extends FlxState
 	{
+		[Embed(source = "../../../assets/maintheme.mp3")]public var mainTheme:Class;
 		
 		override public function create():void
 		{	
@@ -27,6 +28,7 @@ package com.chameleonquest
 			
 			FlxG.bgColor = 0xFFFFFFFF;
 			
+			FlxG.playMusic(mainTheme, 1);
 			
 		}
 		

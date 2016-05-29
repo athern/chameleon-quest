@@ -21,7 +21,9 @@ package com.chameleonquest.Rooms
 	import org.flixel.FlxPoint;
 	
 	public class Room3_7State extends PlayState
-	{		
+	{
+		[Embed(source = "../../../../assets/bosstheme.mp3")]public var bossTheme:Class;
+		
 		[Embed(source = "../../../../assets/mapCSV_3-7_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
@@ -88,6 +90,7 @@ package com.chameleonquest.Rooms
 			
 			this.enteredBossChamber = false;
 			this.fanfare = false;
+			FlxG.playMusic(bossTheme);
 		}
 		
 		override public function update():void

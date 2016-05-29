@@ -11,6 +11,7 @@ package com.chameleonquest.Rooms
 	
 	public class Room1_7State extends PlayState
 	{
+		[Embed(source = "../../../../assets/bosstheme.mp3")]public var bossTheme:Class;
 		
 		[Embed(source = "../../../../assets/mapCSV_1-7_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
@@ -52,7 +53,7 @@ package com.chameleonquest.Rooms
 			Geyser.initCache();
 			super.create();
 			add(geysers);
-			
+			FlxG.playMusic(bossTheme);
 			// for the boss celebration
 			fanfare = false;
 		}
