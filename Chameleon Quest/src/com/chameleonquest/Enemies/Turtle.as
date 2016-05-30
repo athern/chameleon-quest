@@ -7,7 +7,6 @@ package com.chameleonquest.Enemies
 		[Embed(source = "../../../../assets/turtle.png")]public var simpleTurtle:Class;
 		
 		protected static const GRAVITY:int = 800;
-		protected var startX:int;
 		
 		public function Turtle(X:Number, Y:Number) 
 		{
@@ -15,14 +14,12 @@ package com.chameleonquest.Enemies
 			scale.x = 0.5;
 			scale.y = 0.5;
 			loadGraphic(simpleTurtle, true, true, 64, 36);
-			addAnimation("idle", [0]);
 			width = 32;
 			height = 18;
 			offset.x = 16;
 			offset.y = 9;
 			health = 1;
-			power = 1;
-			startX = X;		
+			power = 0;	
 			this.facing = RIGHT;
 			drag.x = 10;
 			acceleration.y = GRAVITY;

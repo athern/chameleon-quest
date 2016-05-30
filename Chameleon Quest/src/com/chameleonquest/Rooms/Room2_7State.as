@@ -31,24 +31,23 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 45;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			
-			Preloader.logger.logLevelStart(14, {"src": 13});
-			Preloader.tracker.trackPageview(Preloader.flag + "/level-14");
-			Preloader.tracker.trackEvent("level-14", "level-enter", null, 13);
 				
-			player = new Chameleon(0, 23);
+			player = new Chameleon(2, 23);
 			player.facing = FlxObject.RIGHT;
+			
+			bgElems.add(new Door(2, 23, false));
+			elems.add(new Door(42, 23, true));
 											
 			bgElems.add(new WaterFountain(11, 23));
 			leftgate = new StoneGate(7, 23, -1, 20);
-			rightgate = new StoneGate(42, 23, -1, 20);
+			rightgate = new StoneGate(40, 23, -1, 20);
 			elems.add(leftgate);
 			elems.add(rightgate);
 			StoneGate.lift(leftgate);
 			StoneGate.lift(rightgate);
-			gate1 = new StoneGate(27, 27, 1200, 480, StoneGate.GREY, 270);
+			gate1 = new StoneGate(27, 27, 600, 240, StoneGate.GREY, 270);
 			elems.add(gate1);
-			gate2 = new StoneGate(23, 24, 1200, 480, StoneGate.GREY, 90);
+			gate2 = new StoneGate(23, 24, 600, 240, StoneGate.GREY, 90);
 			elems.add(gate2);
 			intrELems.add(new WaterWheel(12, 16, gate1, StoneGate.gradualLift));
 			intrELems.add(new WaterWheel(36, 16, gate2, StoneGate.gradualLift));
@@ -68,18 +67,6 @@ package com.chameleonquest.Rooms
 		{
 			super.update();
 			
-			if (player.x < 0) {
-				player.x = 0;
-			}
-			
-			if (player.x > map.width - 16) {
-				Preloader.logger.logLevelEnd({"dest": 15, "time": playtime});
-				Preloader.tracker.trackPageview(Preloader.flag + "/level-14-end");
-				Preloader.tracker.trackEvent("level-14", "level-end", null, int(Math.round(playtime)));
-				FlxG.switchState(new LevelCompleteState(playtime));
-				
-			}
-			
 			if (player.x > 160 && !enteredBossChamber)
 			{
 				enteredBossChamber = true;
@@ -94,7 +81,7 @@ package com.chameleonquest.Rooms
 			{
 				if (geysers.countLiving() < 1)
 				{
-					Geyser.init(geysers, 16 * 25 - 8, 16 * 13, 30, 2, 200);
+					Geyser.init(geysers, 16 * 25 - 8, 16 * 28, 15, 6, 200);
 				}
 			}
 			
@@ -131,8 +118,8 @@ package com.chameleonquest.Rooms
 				}
 				//gate1.x += 24;
 				//gate2.x -= 24;
-				gate1.clock -= 300;
-				gate2.clock -= 300;
+				gate1.clock -= 150;
+				gate2.clock -= 150;
 				gate1.state = 3;
 				gate2.state = 3;
 			}

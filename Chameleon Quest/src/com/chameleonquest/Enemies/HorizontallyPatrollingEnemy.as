@@ -45,12 +45,12 @@ package com.chameleonquest.Enemies
 					velocity.x = facing == LEFT ? -speed : speed;
 				}
 			
-				if ((this.x <= this.minX) || (facing == LEFT && hittingWall >= 10))
+				if ((this.x <= this.minX) || (facing == LEFT && hittingWall >= 5))
 				{
 					this.facing = RIGHT;
 					velocity.x = speed;
 				}
-				else if ((this.x >= this.maxX) || (facing == RIGHT && hittingWall >= 10))
+				else if ((this.x >= this.maxX) || (facing == RIGHT && hittingWall >= 5))
 				{
 					this.facing = LEFT;
 					velocity.x = -speed;

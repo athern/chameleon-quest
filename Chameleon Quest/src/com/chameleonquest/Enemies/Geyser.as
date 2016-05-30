@@ -23,7 +23,7 @@ package com.chameleonquest.Enemies
 		
 		public var group:FlxGroup;
 		
-		public function Geyser(X:int, Y:int, t:int = 100, s:int = 2, h:int = 50) 
+		public function Geyser(X:int, Y:int, t:int = 50, s:int = 4, h:int = 25) 
 		{
 			super(X, Y);
 			loadGraphic(img, true, false, 32, 32, false);
@@ -93,7 +93,7 @@ package com.chameleonquest.Enemies
 			return result;
 		}
 		
-		public static function init(g:FlxGroup, X:int, Y:int, t:int=100, s:int=2, h:int=50):Geyser
+		public static function init(g:FlxGroup, X:int, Y:int, t:int=50, s:int=4, h:int=25):Geyser
 		{
 			var result:Geyser = Geyser.cache.getFirstAvailable() as Geyser;
 			while (result == null)
@@ -108,6 +108,7 @@ package com.chameleonquest.Enemies
 			result.chargetime = t;
 			result.speed = s;
 			result.hangtime = h;
+			result.fade = false;
 			for (var i:int = Y+32; i < FlxG.camera.bounds.bottom; i += 32) {
 				var next:GeyserSegment = Geyser.grabSegment();
 				next.reset(result.x, i);

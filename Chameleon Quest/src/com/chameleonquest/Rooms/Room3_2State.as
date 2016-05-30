@@ -2,6 +2,7 @@ package com.chameleonquest.Rooms
 {
 	import com.chameleonquest.Chameleons.Chameleon;
 	import com.chameleonquest.Objects.Boulder;
+	import com.chameleonquest.Objects.Door;
 	import com.chameleonquest.Objects.Platform;
 	import com.chameleonquest.Objects.PlatformOnRope;
 	import com.chameleonquest.Objects.Torch;
@@ -22,10 +23,9 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 45;
 			ROOM_HEIGHT = 45;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Chameleon(0, 3);
-			Preloader.logger.logLevelStart(16, {"src": 15});
-			Preloader.tracker.trackPageview(Preloader.flag + "/level-16");
-			Preloader.tracker.trackEvent("level-16", "level-enter", null, 15);
+			player = new Chameleon(2, 4);
+			bgElems.add(new Door(2, 4, false));
+			elems.add(new Door(42, 43, true));
 			// add spikes
 			Spikes.addSpikeRow(15, ROOM_HEIGHT - 3, 5, enemies, 6);
 			Spikes.addSpikeRow(23, ROOM_HEIGHT - 3, 3, enemies, 6);
@@ -44,22 +44,10 @@ package com.chameleonquest.Rooms
 		override public function update():void
 		{
 			super.update();
-			
-			if (player.x < 0) {
-				player.x = 0;
-			}
-			
 			if (player.y > 12 * 16 && !boulderDropped)
 			{
 				elems.add(new Boulder(22 * 16, -64));
 				boulderDropped = true;
-			}
-			
-			if (player.x > map.width - 16) {
-				Preloader.logger.logLevelEnd({"dest": 17, "time": playtime});
-				Preloader.tracker.trackPageview(Preloader.flag + "/level-16-end");
-				Preloader.tracker.trackEvent("level-16", "level-end", null, int(Math.round(playtime)));
-				FlxG.switchState(new LevelCompleteState(playtime));
 			}
 		}
 		

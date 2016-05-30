@@ -20,19 +20,19 @@ package com.chameleonquest.Chameleons
 		static public const WIND:uint = 0x04;
 		static public const ELECTRICITY:uint = 0x05;
 		
-		protected static const RUN_SPEED:int = 120;
+		protected static const RUN_SPEED:int = 150;
 		protected static const GRAVITY:int =800;
 		protected static const JUMP_SPEED:int = 200;
 		protected static const SHOOT_DELAY:Number = .2;
 		protected static const RUN_ACCELERATION:int = 1000;
-		protected static const INVULNERABILITY_TIMER:int = 60;
+		protected static const INVULNERABILITY_TIMER:int = 30;
 		
 		public var tongue:Tongue;
 		public var jumpPhase:int;
 		protected var invulnerability:int = 0;
 		public var ammo:int;
 		protected var cooldown:Number;
-		protected static const MAX_JUMP_HOLD:int = 15;
+		protected static const MAX_JUMP_HOLD:int = 8;
 		
 		protected var rockCache:FlxGroup = new FlxGroup();
 		
@@ -44,8 +44,8 @@ package com.chameleonquest.Chameleons
         {
 			if (indexedPoint)
 			{
-				Xindex *= 16;
-				Yfloorindex = Yfloorindex * 16 - 16;
+				Xindex = Xindex * 16 + 8;
+				Yfloorindex = Yfloorindex * 16 - 14;
 			}
 			
 			super(Xindex, Yfloorindex);
@@ -155,7 +155,7 @@ package com.chameleonquest.Chameleons
 					play("basic");
 				}
 				if(velocityModifiers.x != 0) {
-					velocity.x = velocityModifiers.x;
+					x += velocityModifiers.x;
 				}
 				acceleration.x = 0;
 			}
@@ -255,7 +255,7 @@ package com.chameleonquest.Chameleons
 		}
 		
 		public function takeDamage(damage:int):int {
-			if (invulnerability > 0) {
+			if (invulnerability > 0 || damage == 0) {
 				return 0;
 			}
 			invulnerability = INVULNERABILITY_TIMER;

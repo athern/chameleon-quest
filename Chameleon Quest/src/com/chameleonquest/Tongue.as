@@ -8,7 +8,7 @@ package com.chameleonquest
 	public class Tongue extends FlxSprite
 	{
 		[Embed(source = "../../../assets/tongueend.png")]public var tongue:Class;
-		public static const SPEED:int = 120;
+		public static const SPEED:int = 180;
 		public static const OFFSET:int = 5;
 		protected static const GRAVITY:int =800;
 		
@@ -75,11 +75,11 @@ package com.chameleonquest
 				}
 				if (this.extending)
 				{
-					extended += 2;
+					extended += 6;
 				}
 				else
 				{
-					extended -= 2;
+					extended -= 6;
 				}
 				if (grabbedObject != null)
 				{

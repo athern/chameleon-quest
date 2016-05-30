@@ -34,11 +34,11 @@ package com.chameleonquest
 			this.add(levelTitle);
 			
 			var controlText:FlxText;
-			controlText = new FlxText(0, 25, FlxG.width, "UP and DOWN to scroll\t\tSPACE to select");
+			controlText = new FlxText(0, 25, FlxG.width, "UP and DOWN to scroll\t\tSPACE to select\nM to toggle sound\t\tR+S+ENTER to reset save data");
 			controlText.setFormat(null, 8, 0x000000, "center");
 			add(controlText);
 			
-			headings = new FlxText(30, 40, FlxG.width, "LEVEL\t\t\t\t\t\t\tBEST TIME\t  RATING");
+			headings = new FlxText(30, 46, FlxG.width, "LEVEL\t\t\t\t\t\t\tBEST TIME\t  RATING");
 			headings.setFormat(null, 8, 0x000000, "left");
 			this.add(headings);
 			headings.visible = false;
@@ -87,6 +87,11 @@ package com.chameleonquest
 		
 		override public function update():void
 		{
+			
+			if (FlxG.keys.justPressed("M"))
+			{
+				FlxG.mute = !FlxG.mute;
+			}
 			// Start the play state
 			if (FlxG.keys.justPressed("UP"))
 			{
@@ -139,6 +144,7 @@ package com.chameleonquest
 			{
 				Main.resetSaveData();
 				Main.saveGame();
+				FlxG.switchState(new MenuState());
 			}
 			
 			

@@ -29,6 +29,7 @@ package com.chameleonquest
 			FlxG.bgColor = 0xFFFFFFFF;
 			
 			FlxG.playMusic(mainTheme, 1);
+			FlxG.mute = true;
 			
 		}
 		
@@ -39,7 +40,11 @@ package com.chameleonquest
 			{
 				FlxG.flash(0x000000, 0.75);
 				FlxG.fade(0xff000000, 0.5, onFade);
-			}            
+			}
+            if (FlxG.keys.justPressed("M"))
+			{
+				FlxG.mute = !FlxG.mute;
+			}
 			super.update();
 		}
 		

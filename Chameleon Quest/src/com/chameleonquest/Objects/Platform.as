@@ -17,7 +17,7 @@ package com.chameleonquest.Objects
 		private var waitleft:int = -1;
 		private var speed:int = 60;
 		
-		public function Platform(p:Array, s:int=60, height:int=1, w:int=60) 
+		public function Platform(p:Array, s:int=60, height:int=1, w:int=30) 
 		{
 			super(p[0].x, p[0].y);
 			if (height == 1)
@@ -44,11 +44,11 @@ package com.chameleonquest.Objects
 			}
 			if (points[(i + 1) % points.length].x > points[i].x && points[(i + 1) % points.length].x > x)
 			{
-				velocity.x = speed;
+				x += speed/30;
 			}
 			else if (points[(i + 1) % points.length].x < points[i].x && points[(i + 1) % points.length].x < x)
 			{
-				velocity.x = -speed;
+				x -= speed/30;
 			}
 			else if (points[(i + 1) % points.length].y > points[i].y && points[(i + 1) % points.length].y > y)
 			{
