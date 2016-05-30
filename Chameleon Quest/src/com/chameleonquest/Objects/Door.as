@@ -21,7 +21,6 @@ package com.chameleonquest.Objects
 				offset.y = 27;
 				x += 7;
 				y += 27;
-				FlxG.visualDebug = true;
 			}
 			else
 			{
