@@ -38,19 +38,19 @@ package com.chameleonquest.Objects
 						fire.angle = (fire.angle + 90) % 360;
 						if (fire.angle == 90)
 						{
-							fire.x += 5;
+							fire.x += 4;
 						}
 						if (fire.angle == 180)
 						{
-							fire.y += 5;
+							fire.y += 4;
 						}
 						if (fire.angle == 270)
 						{
-							fire.x -= 5;
+							fire.x -= 4;
 						}
 						if (fire.angle == 0)
 						{
-							fire.y -= 5;
+							fire.y -= 4;
 						}
 					}
 					if (currentSegment.angle == ((fire.angle + 90) % 360))
@@ -58,25 +58,25 @@ package com.chameleonquest.Objects
 						fire.angle = (fire.angle + 270) % 360;
 						if (fire.angle == 90)
 						{
-							fire.x -= 5;
+							fire.x -= 4;
 						}
 						if (fire.angle == 180)
 						{
-							fire.y -= 5;
+							fire.y -= 4;
 						}
 						if (fire.angle == 270)
 						{
-							fire.x += 5;
+							fire.x += 4;
 						}
 						if (fire.angle == 0)
 						{
-							fire.y += 5;
+							fire.y += 4;
 						}
 					}
 				}
 				if (fire.angle == 0)
 				{
-					fire.x++;
+					fire.x+= 2;
 					if (fire.x + fire.width > currentSegment.x + currentSegment.width)
 					{
 						currentSegment.kill();
@@ -85,7 +85,7 @@ package com.chameleonquest.Objects
 				}
 				if (fire.angle == 90)
 				{
-					fire.y++;
+					fire.y+= 2;
 					if (fire.y + fire.height > currentSegment.y + currentSegment.height)
 					{
 						currentSegment.kill();
@@ -94,7 +94,7 @@ package com.chameleonquest.Objects
 				}
 				if (fire.angle == 180)
 				{
-					fire.x--;
+					fire.x -= 2;
 					if (fire.x < currentSegment.x)
 					{
 						currentSegment.kill();
@@ -103,7 +103,7 @@ package com.chameleonquest.Objects
 				}
 				if (fire.angle == 270)
 				{
-					fire.y--;
+					fire.y -= 2;
 					if (fire.y < currentSegment.y)
 					{
 						currentSegment.kill();

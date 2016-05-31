@@ -18,12 +18,10 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 15;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			
-			Preloader.logger.logLevelStart(8, {"src": 7});
-			Preloader.tracker.trackPageview(Preloader.flag + "/level-8");
-			Preloader.tracker.trackEvent("level-8", "level-enter", null, 7);
 				
-			player = new Chameleon(ROOM_WIDTH - 1, ROOM_HEIGHT - 1);
+			player = new Chameleon(26, ROOM_HEIGHT - 1);
+			bgElems.add(new Door(26, 14, false));
+			elems.add(new Door(27, 4, true));
 			
 			player.facing = FlxObject.LEFT;
 			
@@ -40,8 +38,9 @@ package com.chameleonquest.Rooms
 			
 			bgElems.add(new WaterFountain(ROOM_WIDTH - 9, ROOM_HEIGHT - 1));
 			
-			grates.add(new Grate(ROOM_WIDTH - 3, 2));
-			grates.add(new Grate(ROOM_WIDTH - 3, 3));
+			grates.add(new Grate(ROOM_WIDTH - 5, 2));
+			grates.add(new Grate(ROOM_WIDTH - 5, 3));
+			grates.add(new Grate(ROOM_WIDTH - 5, 4));
 			
 			bgElems.add(grates);
 			
@@ -54,23 +53,6 @@ package com.chameleonquest.Rooms
 			hint.setFormat(null, 14, 0x555555, "center");
 			hint.alpha = .5;
 			this.add(hint);
-		}
-		
-		override public function update():void
-		{
-			super.update();
-			
-			if (player.x > ROOM_WIDTH * 16 - 16 && player.y <= 4 * 16) {
-				Preloader.logger.logLevelEnd({"dest": 9, "time": playtime});
-				Preloader.tracker.trackPageview(Preloader.flag + "/level-8-end");
-				Preloader.tracker.trackEvent("level-8", "level-end", null, int(Math.round(playtime)));
-				
-				FlxG.switchState(new LevelCompleteState(playtime));
-			}
-			
-			if (player.x > ROOM_WIDTH * 16 - 16 && player.y > (ROOM_HEIGHT - 2) * 16) {
-				player.x = ROOM_WIDTH * 16 - 16;		
-			}
 		}
 		
 	}

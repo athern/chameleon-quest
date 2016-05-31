@@ -6,6 +6,7 @@ package com.chameleonquest.Rooms
 	import com.chameleonquest.LevelCompleteState;
 	import com.chameleonquest.Main;
 	import com.chameleonquest.Objects.Boulder;
+	import com.chameleonquest.Objects.Door;
 	import com.chameleonquest.Objects.Fanfare;
 	import com.chameleonquest.Objects.Platform;
 	import com.chameleonquest.Objects.StoneGate;
@@ -21,7 +22,9 @@ package com.chameleonquest.Rooms
 	import org.flixel.FlxPoint;
 	
 	public class Room3_7State extends PlayState
-	{		
+	{
+		[Embed(source = "../../../../assets/bosstheme.mp3")]public var bossTheme:Class;
+		
 		[Embed(source = "../../../../assets/mapCSV_3-7_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
@@ -45,10 +48,9 @@ package com.chameleonquest.Rooms
 			ROOM_HEIGHT = 36;
 			
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			player = new Chameleon(0, 35);
-			Preloader.logger.logLevelStart(21, {"src": 20});
-			Preloader.tracker.trackPageview(Preloader.flag + "/level-21");
-			Preloader.tracker.trackEvent("level-21", "level-enter", null, 20);
+			player = new Chameleon(1, 35);
+			bgElems.add(new Door(1, 35, false));
+			elems.add(new Door(ROOM_WIDTH - 3, 35, true));
 			
 			boss = new BossSandworm(0, 0);
 			preMap.add(boss);
@@ -57,7 +59,7 @@ package com.chameleonquest.Rooms
 			elems.add(new Platform(new Array(new FlxPoint(15 * 16, 24 * 16), new FlxPoint(25 * 16, 24 * 16)), 50));
 			
 			bgElems.add(new Torch(7, 35));
-			leftgate = new StoneGate(0, 35, -1, 20);
+			leftgate = new StoneGate(3, 35, -1, 20);
 			rightgate = new StoneGate(31, 35, -1, 20);
 			elems.add(leftgate);
 			elems.add(rightgate);
@@ -88,22 +90,13 @@ package com.chameleonquest.Rooms
 			
 			this.enteredBossChamber = false;
 			this.fanfare = false;
+			FlxG.playMusic(bossTheme);
 		}
 		
 		override public function update():void
 		{
 			super.update();
 			
-			if (player.x < 0) {
-				player.x = 0;
-			}
-			
-			if (player.x > map.width - 16) {
-				Preloader.logger.logLevelEnd({"dest": 22, "time": playtime});
-				Preloader.tracker.trackPageview(Preloader.flag + "/level-21-end");
-				Preloader.tracker.trackEvent("level-21", "level-end", null, int(Math.round(playtime)));
-				FlxG.switchState(new LevelCompleteState(playtime));
-			}
 			
 			if (player.x > (7 * 16) && !enteredBossChamber)
 			{

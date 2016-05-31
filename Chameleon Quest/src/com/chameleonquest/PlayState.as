@@ -6,6 +6,7 @@ package com.chameleonquest
 	import com.chameleonquest.Enemies.Turtle;
 	import com.chameleonquest.Objects.Boulder;
 	import com.chameleonquest.Objects.ChainSegment;
+	import com.chameleonquest.Objects.Door;
 	import com.chameleonquest.Objects.ElementSource;
 	import com.chameleonquest.Objects.FuseSegment;
 	import com.chameleonquest.Objects.Grate;
@@ -77,6 +78,10 @@ package com.chameleonquest
 				Background.buildBackground(this, 3);
 			}
 			
+			Preloader.logger.logLevelStart(Main.lastRoom, {"src": Main.lastRoom - 1});
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-" + Main.lastRoom);
+			Preloader.tracker.trackEvent("level-" + Main.lastRoom, "level-enter", null, Main.lastRoom - 1);
+			
 			add(preMap);
 			add(map);
 			add(bgElems);
@@ -112,6 +117,10 @@ package com.chameleonquest
 		
 		override public function update():void
 		{
+			if (FlxG.keys.justPressed("M"))
+			{
+				FlxG.mute = !FlxG.mute;
+			}
 			if (!FlxG.paused) {
 				playtime += FlxG.elapsed;
 				
@@ -176,7 +185,6 @@ package com.chameleonquest
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
 				FlxG.collide(particles, map);
-				//FlxG.overlap(particles, elems, null, particleElemCollision);
 				FlxG.overlap(particles, intrELems, null, particleElemCollision);
 				FlxG.collide(particles, enemies);
 				
@@ -260,6 +268,14 @@ package com.chameleonquest
 
 		}
 		
+		private function completeLevel():void {
+			Preloader.logger.logLevelEnd({"dest": Main.lastRoom + 1, "time": playtime});
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-" + Main.lastRoom + "-end");
+			Preloader.tracker.trackEvent("level-" + Main.lastRoom, "level-end", null, int(Math.round(playtime)));
+				
+			FlxG.switchState(new LevelCompleteState(playtime));
+		}
+		
 		private function passGrate(player:Chameleon, elem:FlxSprite):void {
 			if (elem is Grate) {
 				FlxG.collide(player, elem);
@@ -334,12 +350,16 @@ package com.chameleonquest
 		
 		public function playerElemCollision(player:Chameleon, elem:FlxObject):void {
 			if (player.isTouching(FlxObject.FLOOR)) {
-				player.velocityModifiers.x = elem.velocity.x;
+				player.velocityModifiers.x = elem.x - elem.last.x;
 				player.velocityModifiers.y = elem.velocity.y;
 			}
 			if (elem is Boulder)
 			{
 				heartbar.hit(player.takeDamage(6));
+			}
+			if (elem is Door)
+			{
+				completeLevel();
 			}
 		}
 		

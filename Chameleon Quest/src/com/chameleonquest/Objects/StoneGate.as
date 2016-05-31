@@ -27,7 +27,7 @@ package com.chameleonquest.Objects
 		
 		protected var speed:int;
 		
-		public function StoneGate(Xindex:int, Yfloorindex:int, dropclock:int=-1, droptime:int=480, type:uint=GREY, r:int = 0) 
+		public function StoneGate(Xindex:int, Yfloorindex:int, dropclock:int=-1, droptime:int=240, type:uint=GREY, r:int = 0) 
 		{
 			if (r == 0)
 			{
@@ -99,7 +99,7 @@ package com.chameleonquest.Objects
 		{
 			if (gate.y > gate.startY - 48 && gate.angle == 0)
 			{
-				gate.y--;
+				gate.y -= 2;
 				if (gate.y <= gate.startY - 48)
 				{
 					gate.state = 2;
@@ -107,7 +107,7 @@ package com.chameleonquest.Objects
 			}
 			if (gate.x - gate.offset.x > gate.startX - 48 && gate.angle == 270)
 			{
-				gate.x--;
+				gate.x -= 2;
 				if (gate.x - gate.offset.x <= gate.startX - 48)
 				{
 					gate.state = 2;
@@ -115,7 +115,7 @@ package com.chameleonquest.Objects
 			}
 			if (gate.x - gate.offset.x < gate.startX + 48 && gate.angle == 90)
 			{
-				gate.x++;
+				gate.x += 2;
 				if (gate.x - gate.offset.x >= gate.startX + 48)
 				{
 					gate.state = 2;

@@ -5,6 +5,8 @@ package com.chameleonquest
 
 	public class LevelCompleteState extends FlxState
 	{
+		[Embed(source = "../../../assets/maintheme.mp3")]public var mainTheme:Class;
+		
 		protected var t:Number;
 		protected var par:Number;
 		protected var ace:Number;
@@ -81,6 +83,7 @@ package com.chameleonquest
 			menuTxt = new FlxText(0, 190, FlxG.width, "ESCAPE - Level Select");
 			menuTxt.setFormat(null, 12, 0x000000, "center");
 			add(menuTxt);
+			FlxG.playMusic(mainTheme);
 		}
 		
 		override public function update():void
