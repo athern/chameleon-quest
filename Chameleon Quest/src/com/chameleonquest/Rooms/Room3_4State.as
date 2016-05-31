@@ -25,7 +25,7 @@ package com.chameleonquest.Rooms
 			bgElems.add(new Door(2, 29, false));
 			elems.add(new Door(31, 29, true));
 			elems.add(new TNT(27, 29, new Array(new FlxPoint(27 * 16 + 6, 3 * 16 + 6), new FlxPoint(23 * 16 + 6, 3 * 16 + 6))));
-			bgElems.add(new Torch(12, 28));
+			bgElems.add(new Torch(12, 29));
 			enemies.add(new SpikedWoodBlock(25, 29));
 			enemies.add(new Squirrel(21 * 16, 19 * 16));
 			enemies.add(new PoisonSnake(13 * 16, 4 * 16));

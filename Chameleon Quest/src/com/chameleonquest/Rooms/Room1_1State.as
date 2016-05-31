@@ -35,13 +35,13 @@ package com.chameleonquest.Rooms
 			super.create();
 			
 			var lefthelp:FlxText;
-			lefthelp = new FlxText(20, 177, 70, "<- ->");
+			lefthelp = new FlxText(52, 177, 70, "<- ->");
 			lefthelp.setFormat(null, 14, 0x555555, "center");
 			lefthelp.alpha = .5;
 			this.add(lefthelp);
 			
 			var jumphelp:FlxText;
-			jumphelp = new FlxText(75, 197, 50, "<-");
+			jumphelp = new FlxText(72, 170, 50, "<-");
 			jumphelp.setFormat(null, 14, 0x555555, "center");
 			jumphelp.alpha = .5;
 			jumphelp.angle = 90;

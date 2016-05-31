@@ -30,7 +30,7 @@ package com.chameleonquest.Rooms
 			elems.add(new PlatformOnRope(16 * 9, 16 * 18, 2));
 			elems.add(new PlatformOnRope(16 * 22, 16 * 19));
 			elems.add(new PlatformOnRope(16 * 28, 16 * 19));
-			enemies.add(new Snake(17 * 16, 18 * 16, 10 * 16));
+			enemies.add(new Snake(16 * 16, 16.8 * 16, 10 * 16));
 			enemies.add(new Snake(14 * 16, 15.2 * 16, 14 * 16));
 						
 			// add torch
