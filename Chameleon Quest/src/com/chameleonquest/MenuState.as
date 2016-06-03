@@ -29,7 +29,7 @@ package com.chameleonquest
 			FlxG.bgColor = 0xFFFFFFFF;
 			
 			FlxG.playMusic(mainTheme, 1);
-			FlxG.mute = true;
+			//FlxG.mute = true;
 			
 		}
 		

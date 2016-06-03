@@ -9,7 +9,6 @@ package com.chameleonquest.Rooms
 	
 	public class Room2_7State extends PlayState
 	{
-		[Embed(source = "../../../../assets/bosstheme.mp3")]public var bossTheme:Class;
 		
 		[Embed(source = "../../../../assets/mapCSV_2-7_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
@@ -60,7 +59,6 @@ package com.chameleonquest.Rooms
 			geysers = new FlxGroup();
 			Geyser.initCache();
 			add(geysers);
-			FlxG.playMusic(bossTheme);
 		}
 		
 		override public function update():void
@@ -116,8 +114,6 @@ package com.chameleonquest.Rooms
 						next.fade = true;
 					}
 				}
-				//gate1.x += 24;
-				//gate2.x -= 24;
 				gate1.clock -= 150;
 				gate2.clock -= 150;
 				gate1.state = 3;
