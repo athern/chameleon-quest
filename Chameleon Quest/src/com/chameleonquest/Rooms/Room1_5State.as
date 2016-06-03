@@ -1,6 +1,7 @@
 package com.chameleonquest.Rooms 
 {
 	import com.chameleonquest.Chameleons.Chameleon;
+	import com.chameleonquest.interactiveObj.Button;
 	import org.flixel.*;
 	import com.chameleonquest.*;
 	import com.chameleonquest.Objects.*;
@@ -23,8 +24,12 @@ package com.chameleonquest.Rooms
 				
 			player = new Chameleon(5, 12);
 			bgElems.add(new Pile(25, 7));
+			bgElems.add(new Pile(16, 21));
 			bgElems.add(new Door(5, 12, false));
 			elems.add(new Door(4, 19, true));
+			var gate:StoneGate = new StoneGate(12, 21, -1, 240, StoneGate.RED);
+			elems.add(gate);
+			intrELems.add(new Button(21, 20, gate, StoneGate.lift, 100, 270));
 			new Pulley(elems, 16 * 18, 16 * 17, 16 * 31, 16 * 9, 2);
 			for (var i:int = 0; i < 24; i++)
 			{
@@ -53,6 +58,7 @@ package com.chameleonquest.Rooms
 				else if (next != null && cur.y - next.y < 16)
 				{
 					next.y = cur.y - 16;
+					next.velocity.y = 0;
 				}
 			}
 		}

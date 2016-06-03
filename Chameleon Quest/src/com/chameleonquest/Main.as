@@ -81,7 +81,6 @@ package com.chameleonquest
 		
 		public static function getStage(number:int):FlxState
 		{
-			trace(number);
 			if(number <= stages.length)
 				return (new stages[number-1] as FlxState);
 			else

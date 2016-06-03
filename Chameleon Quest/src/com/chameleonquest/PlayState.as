@@ -30,6 +30,18 @@ package com.chameleonquest
 		[Embed(source = "../../../assets/tile-16.png")]
 		public var levelTiles:Class;
 		
+		[Embed(source = "../../../assets/area1theme.mp3")]
+		public var area1Theme:Class;
+		
+		[Embed(source = "../../../assets/area2theme.mp3")]
+		public var area2Theme:Class;
+		
+		[Embed(source = "../../../assets/area3theme.mp3")]
+		public var area3Theme:Class;
+		
+		[Embed(source = "../../../assets/bosstheme.mp3")]
+		public var bossTheme:Class;
+		
 		public var ROOM_WIDTH:int;
 		public var ROOM_HEIGHT:int;
 		
@@ -69,13 +81,21 @@ package com.chameleonquest
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
 				Background.buildBackground(this, 1);
+				FlxG.playMusic(area1Theme, .5);
 			} else if (Main.lastRoom >= 8 && Main.lastRoom <= 14)
 			{
 				Background.buildBackground(this, 2);
+				FlxG.playMusic(area2Theme, .5);
 			}
 			else if (Main.lastRoom >= 15 && Main.lastRoom <= 21)
 			{
 				Background.buildBackground(this, 3);
+				FlxG.playMusic(area3Theme, .5);
+			}
+			
+			if (Main.lastRoom % 7 == 0)
+			{
+				FlxG.playMusic(bossTheme, .5);
 			}
 			
 			Preloader.logger.logLevelStart(Main.lastRoom, {"src": Main.lastRoom - 1});

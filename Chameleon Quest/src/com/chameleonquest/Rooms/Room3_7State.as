@@ -23,7 +23,6 @@ package com.chameleonquest.Rooms
 	
 	public class Room3_7State extends PlayState
 	{
-		[Embed(source = "../../../../assets/bosstheme.mp3")]public var bossTheme:Class;
 		
 		[Embed(source = "../../../../assets/mapCSV_3-7_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
@@ -90,7 +89,6 @@ package com.chameleonquest.Rooms
 			
 			this.enteredBossChamber = false;
 			this.fanfare = false;
-			FlxG.playMusic(bossTheme);
 		}
 		
 		override public function update():void
@@ -111,7 +109,7 @@ package com.chameleonquest.Rooms
 				StoneGate.lift(rightgate);
 				if (!fanfare) {
 					Preloader.logger.logAction(8, {"boss": "earth"});
-					Preloader.tracker.trackEvent("level-14", "boss-kill", null);
+					Preloader.tracker.trackEvent("level-21", "boss-kill", null);
 					enemies.kill();
 					add(new Fanfare(18, 14));
 					fanfare = true;
