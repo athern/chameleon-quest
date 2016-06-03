@@ -63,21 +63,21 @@ package com.chameleonquest.Rooms
 			{
 				if (enteredBossChamber && Math.random() < .004)
 				{
-					Geyser.init(geysers, Math.random() * 16 * 12 + 8 * 16, 16 * 13);
+					Geyser.init(geysers, Math.random() * 16 * 12 + 9 * 16, 16 * 13);
 				}
 			}
 			if (boss.health == 2)
 			{
 				if (enteredBossChamber && Math.random() < .006)
 				{
-					Geyser.init(geysers, Math.random() * 16 * 12 + 8 * 16, 16 * 13, 40, 6);
+					Geyser.init(geysers, Math.random() * 16 * 12 + 9 * 16, 16 * 13, 40, 6);
 				}
 			}
 			if (boss.health == 1)
 			{
 				if (enteredBossChamber && Math.random() < .009)
 				{
-					Geyser.init(geysers, Math.random() * 16 * 12 + 8 * 16, 16 * 13, 20, 8);
+					Geyser.init(geysers, Math.random() * 16 * 12 + 9 * 16, 16 * 13, 20, 8);
 				}
 			}
 			
