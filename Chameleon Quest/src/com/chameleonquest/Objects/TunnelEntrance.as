@@ -74,6 +74,8 @@ package com.chameleonquest.Objects
 			for (var i:int = 0; i < dirt.length; i++)
 			{
 				var dirtPile:TunnelDirt = dirt.members[i] as TunnelDirt;
+				dirtPile.shake(false);
+				
 				if (this.sideways)
 				{
 					dirtPile.angle = 90;

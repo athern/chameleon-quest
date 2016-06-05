@@ -94,9 +94,9 @@ package com.chameleonquest.Enemies
 		{
 			if (emerged)
 			{
+				currentTunnel.collapse();
 				velocity.y = angle == 0 ? SPEED * 2 : 0;
 				velocity.x = angle == 0 ? 0 : SPEED * 2;
-				currentTunnel.collapse();
 				hurt(1);
 			}
 		}

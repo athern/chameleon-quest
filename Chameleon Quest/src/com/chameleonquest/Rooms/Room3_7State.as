@@ -42,6 +42,8 @@ package com.chameleonquest.Rooms
 		private var enteredBossChamber:Boolean;
 		private var fanfare:Boolean;
 		
+		private var rebuild:Boolean;
+		
 		private var nextTunnel:TunnelEntrance;
 		
 		override public function create():void 
@@ -90,6 +92,7 @@ package com.chameleonquest.Rooms
 			
 			this.enteredBossChamber = false;
 			this.fanfare = false;
+			this.rebuild = false;
 		}
 		
 		override public function update():void
@@ -105,11 +108,15 @@ package com.chameleonquest.Rooms
 			
 			if (boss.health <= 0)
 			{
-				bossTimer = EMERGENCE_TIME;
-				nextTunnel = tunnels.getRandom as TunnelEntrance;
 				StoneGate.lift(leftgate);
 				StoneGate.lift(rightgate);
 				if (!fanfare) {
+					for (var i:int = 0; i < tunnels.length; i++)
+					{
+						var tunnel:TunnelEntrance = tunnels.members[i] as TunnelEntrance;
+						tunnel.collapse();
+					}
+					
 					Preloader.logger.logAction(8, {"boss": "earth"});
 					Preloader.tracker.trackEvent("level-21", "boss-kill", null);
 					enemies.kill();
@@ -118,7 +125,19 @@ package com.chameleonquest.Rooms
 				}
 			}
 			
-			if (bossTimer > HINT_TIME && nextTunnel == null)
+			if (this.bossTimer < EMERGENCE_TIME - 2)
+			{
+				var rebuildCount:int = rebuildList.length;
+				for (i = 0; i < rebuildCount; i++)
+				{
+					var tunnelID:int = rebuildList.pop() as int;
+					this.createTNT(tunnelID);
+				}
+				
+				//this.rebuild = false;
+			}
+			
+			if (this.boss.health > 0 && bossTimer > HINT_TIME && nextTunnel == null)
 			{
 				do
 				{
@@ -127,15 +146,9 @@ package com.chameleonquest.Rooms
 				while (!nextTunnel.isOpen);
 				
 				nextTunnel.shake(true);
-				
-				for (var i:int = 0; i < rebuildList.length; i++)
-				{
-					var tunnelID:int = rebuildList.pop() as int;
-					this.createTNT(tunnelID);
-				}
 			}
 			
-			if (bossTimer > EMERGENCE_TIME)
+			if (this.boss.health > 0 && bossTimer > EMERGENCE_TIME)
 			{
 				// emerge!
 				
@@ -145,6 +158,8 @@ package com.chameleonquest.Rooms
 				bossTimer = 0;
 				
 				nextTunnel = null;
+				
+				this.rebuild = true;
 			}
 			
 			bossTimer += FlxG.elapsed;
