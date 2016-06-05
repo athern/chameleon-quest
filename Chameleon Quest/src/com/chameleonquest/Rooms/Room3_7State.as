@@ -83,8 +83,6 @@ package com.chameleonquest.Rooms
 			
 			elems.add(boulders);
 			
-			FlxG.visualDebug = true;
-			
 			bossTimer = EMERGENCE_TIME / 3;
 			
 			Main.lastRoom = 21;
