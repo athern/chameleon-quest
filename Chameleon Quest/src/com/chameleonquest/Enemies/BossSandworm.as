@@ -10,7 +10,7 @@ package com.chameleonquest.Enemies
 		[Embed(source = "../../../../assets/worm.png")] protected var sandworm:Class;
 		private static const SPEED:Number = 100;
 		private static const OFFSET:Number = 5;
-		private var SURFACE_TIME:Number = 2;
+		private var SURFACE_TIME:Number = 4;
 		private var surfaceCooldown:Number;
 		private var currentTunnel:TunnelEntrance;
 		private var emerged:Boolean;
@@ -48,35 +48,38 @@ package com.chameleonquest.Enemies
 			var currentState:PlayState = FlxG.state as PlayState;
 			this.facing = (angle == 0 && currentState.player.x < this.x) || (angle != 0 && this.y < currentState.player.y) ? RIGHT : LEFT;
 			
-			// handle moving up and down
-			if (emerged && surfaceCooldown < SURFACE_TIME && 
-				((this.angle == 0 && velocity.y < 0 && (currentTunnel.y - this.y) > (this.height - 2 * OFFSET)) ||
-				(this.angle != 0 && velocity.x < 0 && (currentTunnel.x - this.x) > (this.height - OFFSET))))
+			if (this.health > 0)
 			{
-				// stop moving up!
-				velocity.y = 0;
-				velocity.x = 0;
-			}
-			else if (emerged && surfaceCooldown > SURFACE_TIME && ((this.angle == 0 && velocity.y == 0) || (this.angle != 0 && velocity.x == 0)))
-			{
-				if (angle == 0)
+				// handle moving up and down
+				if (emerged && surfaceCooldown < SURFACE_TIME && 
+					((this.angle == 0 && velocity.y < 0 && (currentTunnel.y - this.y) > (this.height - 2 * OFFSET)) ||
+					(this.angle != 0 && velocity.x < 0 && (currentTunnel.x - this.x) > (this.height - OFFSET))))
 				{
-					velocity.y = SPEED;
+					// stop moving up!
+					velocity.y = 0;
+					velocity.x = 0;
 				}
-				else
+				else if (emerged && surfaceCooldown > SURFACE_TIME && ((this.angle == 0 && velocity.y == 0) || (this.angle != 0 && velocity.x == 0)))
 				{
-					velocity.x = SPEED;
+					if (angle == 0)
+					{
+						velocity.y = SPEED;
+					}
+					else
+					{
+						velocity.x = SPEED;
+					}
 				}
-			}
-			else if (emerged && surfaceCooldown > SURFACE_TIME && 
-					((angle == 0 && velocity.y > 0 && (this.y - OFFSET) > currentTunnel.y) || (angle != 0 && velocity.x > 0 && currentTunnel.x < (this.x - OFFSET))))
-			{
-				// stop moving down!
-				velocity.y = 0;
-				velocity.x = 0;
-				exists = false;
-				currentTunnel = null;
-				emerged = false;
+				else if (emerged && surfaceCooldown > SURFACE_TIME && 
+						((angle == 0 && velocity.y > 0 && (this.y - OFFSET) > currentTunnel.y) || (angle != 0 && velocity.x > 0 && currentTunnel.x < (this.x - OFFSET))))
+				{
+					// stop moving down!
+					velocity.y = 0;
+					velocity.x = 0;
+					exists = false;
+					currentTunnel = null;
+					emerged = false;
+				}
 			}
 			
 			surfaceCooldown += FlxG.elapsed;
@@ -91,10 +94,10 @@ package com.chameleonquest.Enemies
 		{
 			if (emerged)
 			{
-				hurt(1);
 				velocity.y = angle == 0 ? SPEED * 2 : 0;
 				velocity.x = angle == 0 ? 0 : SPEED * 2;
 				currentTunnel.collapse();
+				hurt(1);
 			}
 		}
 		

@@ -23,13 +23,12 @@ package com.chameleonquest.Rooms
 	
 	public class Room3_7State extends PlayState
 	{
-		[Embed(source = "../../../../assets/bosstheme.mp3")]public var bossTheme:Class;
 		
 		[Embed(source = "../../../../assets/mapCSV_3-7_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
 		
-		private const EMERGENCE_TIME:Number = 5;
-		private const HINT_TIME:Number = 3;
+		private const EMERGENCE_TIME:Number = 8;
+		private const HINT_TIME:Number = 4;
 		private var bossTimer:Number;
 		private var tunnels:FlxGroup;
 		private var boss:BossSandworm;
@@ -86,14 +85,13 @@ package com.chameleonquest.Rooms
 			
 			FlxG.visualDebug = true;
 			
-			bossTimer = 0;
+			bossTimer = EMERGENCE_TIME / 3;
 			
 			Main.lastRoom = 21;
 			super.create();
 			
 			this.enteredBossChamber = false;
 			this.fanfare = false;
-			FlxG.playMusic(bossTheme);
 		}
 		
 		override public function update():void
@@ -109,11 +107,13 @@ package com.chameleonquest.Rooms
 			
 			if (boss.health <= 0)
 			{
+				bossTimer = EMERGENCE_TIME;
+				nextTunnel = tunnels.getRandom as TunnelEntrance;
 				StoneGate.lift(leftgate);
 				StoneGate.lift(rightgate);
 				if (!fanfare) {
 					Preloader.logger.logAction(8, {"boss": "earth"});
-					Preloader.tracker.trackEvent("level-14", "boss-kill", null);
+					Preloader.tracker.trackEvent("level-21", "boss-kill", null);
 					enemies.kill();
 					add(new Fanfare(18, 14));
 					fanfare = true;
@@ -129,6 +129,12 @@ package com.chameleonquest.Rooms
 				while (!nextTunnel.isOpen);
 				
 				nextTunnel.shake(true);
+				
+				for (var i:int = 0; i < rebuildList.length; i++)
+				{
+					var tunnelID:int = rebuildList.pop() as int;
+					this.createTNT(tunnelID);
+				}
 			}
 			
 			if (bossTimer > EMERGENCE_TIME)
@@ -141,12 +147,6 @@ package com.chameleonquest.Rooms
 				bossTimer = 0;
 				
 				nextTunnel = null;
-				
-				for (var i:int = 0; i < rebuildList.length; i++)
-				{
-					var tunnelID:int = rebuildList.pop() as int;
-					this.createTNT(tunnelID);
-				}
 			}
 			
 			bossTimer += FlxG.elapsed;
@@ -181,20 +181,20 @@ package com.chameleonquest.Rooms
 			switch(tunnelID)
 			{
 				case 0:
-					boulder = new Boulder(13 * 16, 9 * 16);
-					tnt = new TNT(13, 16, new Array(new FlxPoint(11 * 16 + 6, 14 * 16 + 6), new FlxPoint(7 * 16 + 6, 14 * 16 + 6), new FlxPoint(7 * 16 + 6, 20 * 16 + 6), new FlxPoint(11 * 16 + 6, 20 * 16 + 6)));
+					boulder = new Boulder(16 * 16, 9 * 16);
+					tnt = new TNT(13, 16, new Array(new FlxPoint(11 * 16 + 6, 14 * 16 + 6), new FlxPoint(7 * 16 + 6, 14 * 16 + 6), new FlxPoint(7 * 16 + 6, 21 * 16 + 6), new FlxPoint(11 * 16 + 6, 21 * 16 + 6)));
 					break;
 				case 1: 
-					//boulder = new Boulder(8 * 16, 0 * 16);
-					//tnt = new TNT(8, 7, new Array(new FlxPoint(7 * 16 + 6, 5 * 16 + 6), new FlxPoint(1 * 16 + 6, 5 * 16 + 6), new FlxPoint(1 * 16 + 6, 9 * 16 + 6), new FlxPoint(3 * 16 + 6, 9 * 16 + 6)));
+					boulder = new Boulder(20 * 16, 9 * 16);
+					tnt = new TNT(18, 16, new Array(new FlxPoint(16 * 16 + 6, 14 * 16 + 6), new FlxPoint(7 * 16 + 6, 14 * 16 + 6), new FlxPoint(7 * 16 + 6, 19 * 16 + 6), new FlxPoint(11 * 16 + 6, 19 * 16 + 6)));
 					break;
 				case 2: 
-					//boulder = new Boulder(15 * 16, 2 * 16);
-					//tnt = new TNT(16, 7, new Array(new FlxPoint(19 * 16 + 6, 5 * 16 + 6), new FlxPoint(22 * 16 + 6, 5 * 16 + 6), new FlxPoint(22 * 16 + 6, 15 * 16 + 6), new FlxPoint(12 * 16 + 6, 15 * 16 + 6)));
+					boulder = new Boulder(26 * 16, 9 * 16);
+					tnt = new TNT(25, 16, new Array(new FlxPoint(28 * 16 + 6, 14 * 16 + 6), new FlxPoint(37 * 16 + 6, 14 * 16 + 6), new FlxPoint(37 * 16 + 6, 21 * 16 + 6), new FlxPoint(35 * 16 + 6, 21 * 16 + 6)));
 					break;
 				case 3:
-					//boulder = new Boulder(41 * 16, 7 * 16);
-					//tnt = new TNT(41, 13, new Array(new FlxPoint(44 * 16 + 6, 11 * 16 + 6), new FlxPoint(46 * 16 + 6, 11 * 16 + 6), new FlxPoint(46 * 16 + 6, 13 * 16 + 6), new FlxPoint(44 * 16 + 6, 13 * 16 + 6)));
+					boulder = new Boulder(32 * 16, 9 * 16);
+					tnt = new TNT(31, 16, new Array(new FlxPoint(35 * 16 + 6, 14 * 16 + 6), new FlxPoint(37 * 16 + 6, 14 * 16 + 6), new FlxPoint(37 * 16 + 6, 19 * 16 + 6), new FlxPoint(35 * 16 + 6, 19 * 16 + 6)));
 					break;
 				default:
 					return;

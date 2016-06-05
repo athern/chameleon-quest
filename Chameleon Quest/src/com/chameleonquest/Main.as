@@ -44,8 +44,8 @@ package com.chameleonquest
 			Room3_7State
 			];
 			
-		public static var parTimes:Array = [30, 60, 60, 45, 50, 90, 90, 30, 50, 80, 40, 80, 80, 100, 50, 30, 70, 55, 50, 90, 200];
-		public static var aceTimes:Array = [ 8, 22, 20, 14, 16, 20, 40, 12, 20, 40, 24, 35, 30,  50, 15, 15, 30, 30, 25, 40,  80];
+		public static var parTimes:Array = [30, 60, 60, 45, 50, 90, 90, 30, 50, 80, 40, 80, 80, 100, 50, 30, 70, 55, 50, 90, 90];
+		public static var aceTimes:Array = [ 8, 22, 20, 14, 16, 20, 40, 12, 20, 40, 24, 35, 30,  50, 15, 15, 30, 30, 25, 40,  50];
 		
         public function Main()
         {
@@ -81,7 +81,6 @@ package com.chameleonquest
 		
 		public static function getStage(number:int):FlxState
 		{
-			trace(number);
 			if(number <= stages.length)
 				return (new stages[number-1] as FlxState);
 			else
