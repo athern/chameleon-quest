@@ -6,6 +6,7 @@ package com.chameleonquest
 	import com.chameleonquest.Enemies.Turtle;
 	import com.chameleonquest.Objects.Boulder;
 	import com.chameleonquest.Objects.ChainSegment;
+	import com.chameleonquest.Objects.Door;
 	import com.chameleonquest.Objects.ElementSource;
 	import com.chameleonquest.Objects.FuseSegment;
 	import com.chameleonquest.Objects.Grate;
@@ -28,6 +29,18 @@ package com.chameleonquest
     {
 		[Embed(source = "../../../assets/tile-16.png")]
 		public var levelTiles:Class;
+		
+		[Embed(source = "../../../assets/area1theme.mp3")]
+		public var area1Theme:Class;
+		
+		[Embed(source = "../../../assets/area2theme.mp3")]
+		public var area2Theme:Class;
+		
+		[Embed(source = "../../../assets/area3theme.mp3")]
+		public var area3Theme:Class;
+		
+		[Embed(source = "../../../assets/bosstheme.mp3")]
+		public var bossTheme:Class;
 		
 		public var ROOM_WIDTH:int;
 		public var ROOM_HEIGHT:int;
@@ -68,14 +81,26 @@ package com.chameleonquest
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
 				Background.buildBackground(this, 1);
+				FlxG.playMusic(area1Theme, .5);
 			} else if (Main.lastRoom >= 8 && Main.lastRoom <= 14)
 			{
 				Background.buildBackground(this, 2);
+				FlxG.playMusic(area2Theme, .5);
 			}
 			else if (Main.lastRoom >= 15 && Main.lastRoom <= 21)
 			{
 				Background.buildBackground(this, 3);
+				FlxG.playMusic(area3Theme, .5);
 			}
+			
+			if (Main.lastRoom % 7 == 0)
+			{
+				FlxG.playMusic(bossTheme, .5);
+			}
+			
+			Preloader.logger.logLevelStart(Main.lastRoom, {"src": Main.lastRoom - 1});
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-" + Main.lastRoom);
+			Preloader.tracker.trackEvent("level-" + Main.lastRoom, "level-enter", null, Main.lastRoom - 1);
 			
 			add(preMap);
 			add(map);
@@ -112,6 +137,10 @@ package com.chameleonquest
 		
 		override public function update():void
 		{
+			if (FlxG.keys.justPressed("M"))
+			{
+				FlxG.mute = !FlxG.mute;
+			}
 			if (!FlxG.paused) {
 				playtime += FlxG.elapsed;
 				
@@ -176,7 +205,6 @@ package com.chameleonquest
 				FlxG.collide(intrELems, map);
 				FlxG.collide(intrELems, intrELems);
 				FlxG.collide(particles, map);
-				//FlxG.overlap(particles, elems, null, particleElemCollision);
 				FlxG.overlap(particles, intrELems, null, particleElemCollision);
 				FlxG.collide(particles, enemies);
 				
@@ -260,6 +288,14 @@ package com.chameleonquest
 
 		}
 		
+		private function completeLevel():void {
+			Preloader.logger.logLevelEnd({"dest": Main.lastRoom + 1, "time": playtime});
+			Preloader.tracker.trackPageview(Preloader.flag + "/level-" + Main.lastRoom + "-end");
+			Preloader.tracker.trackEvent("level-" + Main.lastRoom, "level-end", null, int(Math.round(playtime)));
+				
+			FlxG.switchState(new LevelCompleteState(playtime));
+		}
+		
 		private function passGrate(player:Chameleon, elem:FlxSprite):void {
 			if (elem is Grate) {
 				FlxG.collide(player, elem);
@@ -334,12 +370,16 @@ package com.chameleonquest
 		
 		public function playerElemCollision(player:Chameleon, elem:FlxObject):void {
 			if (player.isTouching(FlxObject.FLOOR)) {
-				player.velocityModifiers.x = elem.velocity.x;
+				player.velocityModifiers.x = elem.x - elem.last.x;
 				player.velocityModifiers.y = elem.velocity.y;
 			}
 			if (elem is Boulder)
 			{
 				heartbar.hit(player.takeDamage(6));
+			}
+			if (elem is Door)
+			{
+				completeLevel();
 			}
 		}
 		

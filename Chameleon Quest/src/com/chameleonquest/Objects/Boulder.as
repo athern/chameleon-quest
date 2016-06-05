@@ -28,7 +28,7 @@ package com.chameleonquest.Objects
 			}
 			if (isTouching(FLOOR))
 			{
-				velocity.y -= 80;
+				velocity.y = -80;
 			}
 			if (isTouching(FLOOR) && Math.abs(velocity.x) == 0)
 			{

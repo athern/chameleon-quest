@@ -19,11 +19,10 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 15;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			Preloader.logger.logLevelStart(4, {"src": 3});
-			Preloader.tracker.trackPageview(Preloader.flag + "/level-4");
-			Preloader.tracker.trackEvent("level-4", "level-enter", null, 3);
 				
-			player = new Chameleon(0, ROOM_HEIGHT - 1);
+			player = new Chameleon(2, ROOM_HEIGHT - 1);
+			bgElems.add(new Door(2, ROOM_HEIGHT - 1, false));
+			elems.add(new Door(27, ROOM_HEIGHT - 1, true));
 			
 			// add rock pile
 			bgElems.add(new Pile(13, ROOM_HEIGHT - 1));
@@ -32,27 +31,9 @@ package com.chameleonquest.Rooms
 			// add enemies
 			enemies.add(new Bird(20 * 16, 26 * 16, (ROOM_HEIGHT - 10) * 16));
 			enemies.add(new PoisonSnake(13 * 16, 16 * 2));
-			//enemies.add(new PoisonSnake(new Array(new FlxPoint(13 * 16, 16 * 3))));
 			
 			Main.lastRoom = 4;
 			super.create();
-		}
-		
-		override public function update():void
-		{
-			super.update();
-			
-			if (player.x < 0) {
-				player.x = 0;
-			}
-			
-			if (player.x > map.width - 16) {
-				Preloader.logger.logLevelEnd({"dest": 5, "time": playtime});
-				Preloader.tracker.trackPageview(Preloader.flag + "/level-4-end");
-				Preloader.tracker.trackEvent("level-4", "level-end", null, int(Math.round(playtime)));
-				
-				FlxG.switchState(new LevelCompleteState(playtime));
-			}
 		}
 		
 	}

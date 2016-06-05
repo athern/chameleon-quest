@@ -24,7 +24,7 @@ package com.chameleonquest.Objects
 			}
 			else
 			{
-				width = TunnelDirt.SPRITE_WIDTH * 2;  
+				width = TunnelDirt.SPRITE_WIDTH * 4;  
 				height = TunnelDirt.SPRITE_HEIGHT;
 			}
 			
@@ -56,6 +56,15 @@ package com.chameleonquest.Objects
 			return this.id;
 		}
 		
+		public function shake(turnOn:Boolean):void
+		{
+			for (var i:int = 0; i < dirt.length; i++)
+			{
+				var dirtPile:TunnelDirt = dirt.members[i] as TunnelDirt;
+				dirtPile.shake(turnOn);
+			}
+		}
+		
 		public function collapse():void
 		{
 			// no longer allow the sandworm to emerge from here
@@ -65,6 +74,8 @@ package com.chameleonquest.Objects
 			for (var i:int = 0; i < dirt.length; i++)
 			{
 				var dirtPile:TunnelDirt = dirt.members[i] as TunnelDirt;
+				dirtPile.shake(false);
+				
 				if (this.sideways)
 				{
 					dirtPile.angle = 90;
@@ -82,7 +93,7 @@ package com.chameleonquest.Objects
 		{
 			dirt = new FlxGroup();
 			
-			for (var i:int = 0; i < 3; i++)
+			for (var i:int = 0; i < 4; i++)
 			{
 				var dirtX:Number = this.sideways ? this.x : this.x + (i * TunnelDirt.SPRITE_WIDTH / 2);
 				var dirtY:Number = this.sideways ? this.y + (i * TunnelDirt.SPRITE_HEIGHT / 2) : this.y;

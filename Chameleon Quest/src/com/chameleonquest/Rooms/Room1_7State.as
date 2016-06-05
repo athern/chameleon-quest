@@ -11,7 +11,6 @@ package com.chameleonquest.Rooms
 	
 	public class Room1_7State extends PlayState
 	{
-		[Embed(source = "../../../../assets/bosstheme.mp3")]public var bossTheme:Class;
 		
 		[Embed(source = "../../../../assets/mapCSV_1-7_Map.csv", mimeType = "application/octet-stream")]
 		public var levelMap:Class;
@@ -29,31 +28,29 @@ package com.chameleonquest.Rooms
 		
 		override public function create():void
 		{	
-			ROOM_WIDTH = 30;
+			ROOM_WIDTH = 36;
 			ROOM_HEIGHT = 15;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			boss = new BossTurtle(7 * 16, 16 * 16, 16 * (ROOM_HEIGHT - 5));
+			boss = new BossTurtle(10 * 16, 19 * 16, 16 * (ROOM_HEIGHT - 5));
 			enemies.add(boss);
-			elems.add(new Platform(new Array(new FlxPoint(9 * 16, 4 * 16), new FlxPoint(9 * 16, 9 * 16)), 50));
-			bgElems.add(new Pile(24, 11));
-			intrELems.add(new Button(5, 1, boss, BossTurtle.flipBoss, 250, 90, Button.RED));
-			intrELems.add(new AngleBlock(15, 7, 90));
-			leftgate = new StoneGate(2, 14, -1, 20);
-			rightgate = new StoneGate(26, 14, -1, 20);
+			elems.add(new Platform(new Array(new FlxPoint(12 * 16, 4 * 16), new FlxPoint(12 * 16, 9 * 16)), 50));
+			bgElems.add(new Pile(27, 11));
+			intrELems.add(new Button(8, 1, boss, BossTurtle.flipBoss, 125, 90, Button.RED));
+			intrELems.add(new AngleBlock(18, 7, 90));
+			leftgate = new StoneGate(5, 14, -1, 10);
+			rightgate = new StoneGate(29, 14, -1, 10);
 			elems.add(leftgate);
 			elems.add(rightgate);
 			StoneGate.lift(leftgate);
 			StoneGate.lift(rightgate);
-			Preloader.logger.logLevelStart(7, {"src": 6});
-			Preloader.tracker.trackPageview(Preloader.flag + "/level-7");
-			Preloader.tracker.trackEvent("level-7", "level-enter", null, 6);
-			player = new Chameleon(ROOM_WIDTH - 2, ROOM_HEIGHT - 1);
+			player = new Chameleon(ROOM_WIDTH - 4, ROOM_HEIGHT - 1);
 			player.facing = FlxObject.LEFT;
+			bgElems.add(new Door(32, 14, false));
+			elems.add(new Door(2, 14, true));
 			Main.lastRoom = 7;
 			Geyser.initCache();
 			super.create();
 			add(geysers);
-			FlxG.playMusic(bossTheme);
 			// for the boss celebration
 			fanfare = false;
 		}
@@ -64,40 +61,31 @@ package com.chameleonquest.Rooms
 			FlxG.collide(player, geysers, hurtPlayer);
 			if (boss.health == 3)
 			{
-				if (enteredBossChamber && Math.random() < .002)
+				if (enteredBossChamber && Math.random() < .004)
 				{
-					Geyser.init(geysers, Math.random() * 16 * 12 + 8 * 16, 16 * 13);
+					Geyser.init(geysers, Math.random() * 16 * 12 + 9 * 16, 16 * 13);
 				}
 			}
 			if (boss.health == 2)
 			{
-				if (enteredBossChamber && Math.random() < .004)
+				if (enteredBossChamber && Math.random() < .006)
 				{
-					Geyser.init(geysers, Math.random() * 16 * 12 + 8 * 16, 16 * 13, 75, 3);
+					Geyser.init(geysers, Math.random() * 16 * 12 + 9 * 16, 16 * 13, 40, 6);
 				}
 			}
 			if (boss.health == 1)
 			{
-				if (enteredBossChamber && Math.random() < .008)
+				if (enteredBossChamber && Math.random() < .009)
 				{
-					Geyser.init(geysers, Math.random() * 16 * 12 + 8 * 16, 16 * 13, 50, 4);
+					Geyser.init(geysers, Math.random() * 16 * 12 + 9 * 16, 16 * 13, 20, 8);
 				}
 			}
 			
-			if (player.x < 370 && !enteredBossChamber)
+			if (player.x < 27*16 && !enteredBossChamber)
 			{
 				enteredBossChamber = true;
 				StoneGate.drop(leftgate);
 				StoneGate.drop(rightgate);
-			}
-			if (player.x < 0) {
-				Preloader.logger.logLevelEnd({"dest": 8, "time": playtime});
-				Preloader.tracker.trackPageview(Preloader.flag + "/level-7-end");
-				Preloader.tracker.trackEvent("level-7", "level-end", null, int(Math.round(playtime)));
-				
-				FlxG.switchState(new LevelCompleteState(playtime));
-			} else if (player.x > map.width - 16) {
-				player.x = map.width - 16;
 			}
 			if (boss.health <= 0)
 			{

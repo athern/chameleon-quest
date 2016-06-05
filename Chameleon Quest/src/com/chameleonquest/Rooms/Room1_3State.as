@@ -18,11 +18,10 @@ package com.chameleonquest.Rooms
 			ROOM_WIDTH = 30;
 			ROOM_HEIGHT = 30;
 			map.loadMap(new levelMap, levelTiles, 16, 16);
-			Preloader.logger.logLevelStart(3, {"src": 2});
-			Preloader.tracker.trackPageview(Preloader.flag + "/level-3");
-			Preloader.tracker.trackEvent("level-3", "level-enter", null, 2);
 				
-			player = new Chameleon(0, 5);
+			player = new Chameleon(2, 5);
+			bgElems.add(new Door(2, 5, false));
+			elems.add(new Door(26, 29, true));
 			
 			// add rock pile
 			bgElems.add(new Pile(5, 5));
@@ -32,7 +31,7 @@ package com.chameleonquest.Rooms
 			
 			// add spikes
 			Spikes.addSpikeRow(18, 13, 4, enemies);
-			Spikes.addSpikeRow(12, ROOM_HEIGHT - 2, 13, enemies);
+			Spikes.addSpikeRow(12, ROOM_HEIGHT - 2, 12, enemies);
 			
 			intrELems.add(new WoodBlock(7, 10));
 			intrELems.add(new WoodBlock(10, 10));
@@ -42,27 +41,10 @@ package com.chameleonquest.Rooms
 			enemies.add(new Snake(23 * 16, 27 * 16, 10 * 16));
 			enemies.add(new Snake(8 * 16, 13 * 16, 3 * 16));
 			
-			Turtle.addTurtleStack(16 * 16, 16 * 3, 2, enemies),
+			Turtle.addTurtleStack(16 * 16, 16 * 3, 2, enemies);
 			
 			Main.lastRoom = 3;
 			super.create();
-		}
-		
-		override public function update():void
-		{
-			super.update();
-			
-			if (player.x < 0) {
-				player.x = 0;
-			}
-			
-			if (player.x > map.width - 16) {
-				Preloader.logger.logLevelEnd({"dest": 4, "time": playtime});
-				Preloader.tracker.trackPageview(Preloader.flag + "/level-3-end");
-				Preloader.tracker.trackEvent("level-3", "level-end", null, int(Math.round(playtime)));
-				
-				FlxG.switchState(new LevelCompleteState(playtime));
-			}
 		}
 		
 	}
