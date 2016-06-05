@@ -9,16 +9,16 @@ package com.chameleonquest.Enemies
 	{
 		[Embed(source = "../../../../assets/worm.png")] protected var sandworm:Class;
 		private static const SPEED:Number = 100;
-		private static const OFFSET:Number = 25;
-		private var SURFACE_TIME:Number = 5;
+		private static const OFFSET:Number = 5;
+		private var SURFACE_TIME:Number = 2;
 		private var surfaceCooldown:Number;
 		private var currentTunnel:TunnelEntrance;
 		private var emerged:Boolean;
 		
-		private static const SPRITE_WIDTH:Number = 128;
-		private static const SPRITE_HEIGHT:Number = 135;
-		private static const X_OFFSET:Number = 64;
-		private static const Y_OFFSET:Number = 73;
+		private static const SPRITE_WIDTH:Number = 64;
+		private static const SPRITE_HEIGHT:Number = 72.5;
+		private static const X_OFFSET:Number = 95;
+		private static const Y_OFFSET:Number = 100;
 		
 		public function BossSandworm(X:Number, Y:Number) 
 		{
@@ -26,8 +26,8 @@ package com.chameleonquest.Enemies
 			loadGraphic(sandworm, true, true, 256, 282);
 			addAnimation("basic", [0, 1, 3, 6, 7], 10, true);
 			play("basic");
-			scale.x = 0.5;
-			scale.y = 0.5;
+			scale.x = 0.25;
+			scale.y = 0.25;
 			width = SPRITE_WIDTH;
 			height = SPRITE_HEIGHT;
 			offset.x = X_OFFSET;
@@ -50,7 +50,7 @@ package com.chameleonquest.Enemies
 			
 			// handle moving up and down
 			if (emerged && surfaceCooldown < SURFACE_TIME && 
-				((this.angle == 0 && velocity.y < 0 && (currentTunnel.y - this.y) > (this.height - OFFSET)) ||
+				((this.angle == 0 && velocity.y < 0 && (currentTunnel.y - this.y) > (this.height - 2 * OFFSET)) ||
 				(this.angle != 0 && velocity.x < 0 && (currentTunnel.x - this.x) > (this.height - OFFSET))))
 			{
 				// stop moving up!
@@ -101,7 +101,7 @@ package com.chameleonquest.Enemies
 		public function emergeFrom(tunnel:TunnelEntrance):void
 		{
 			// TODO
-			var newX:Number = tunnel.x;//tunnel.isSideways ? tunnel.x - (tunnel.height / 2) : tunnel.x;
+			var newX:Number = tunnel.x + OFFSET;//tunnel.isSideways ? tunnel.x - (tunnel.height / 2) : tunnel.x;
 			var newY:Number = tunnel.isSideways ? tunnel.y - (tunnel.width - this.width / 4) : tunnel.y;
 			reset(newX, newY);
 			
