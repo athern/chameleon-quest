@@ -20,6 +20,9 @@ package com.chameleonquest
 		
 		override public function create():void
 		{			
+			Preloader.goCnt = 0;
+			
+			
 			var goText:FlxText;
 			goText = new FlxText(0, 40, FlxG.width, "Level complete!");
 			goText.setFormat(null, 18, 0x000000, "center");
