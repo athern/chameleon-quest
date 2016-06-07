@@ -128,6 +128,16 @@ def get_game_over_data(dct):
 			go.append([room, xLoc, yLoc, time])
 	return go
 
+def get_retry_data(dct):
+	go = []
+	for (k, v) in dct.iteritems():
+		for a in v:
+			if a[0] != 15:
+				continue
+			go.append([a[1]])
+
+	return go
+
 def get_damage_data(dct):
 	damage = []
 	for (k, v) in dct.iteritems():
@@ -266,6 +276,8 @@ def get_table_count(lst):
 	ret = []
 	for (k, v) in dt.iteritems():
 		ret.append((k, v))
+
+	print dt.keys()
 	return ret
 
 def get_level_data(data):
@@ -429,6 +441,7 @@ def main():
 	action_data = get_action_in_qid(data)
 	game_over_data = get_game_over_data(action_data)
 	damage_data = get_damage_data(action_data)
+	retry_data = get_retry_data(action_data)
 
 	# QID/level data
 	#print_qid_data(qid_data)
@@ -448,6 +461,10 @@ def main():
 
 	#for x in get_table_count(game_over_data):
 	#	print x[1]
+
+	# # of retry / level
+	#print_table(get_table_count(retry_data), "Room\t\t\t# of retry")
+	#print
 
 	# Damage/Hit data (by enemy)
 	#print_table(damage_data, "Room\t\t\tx-loc\t\t\ty-loc\t\t\tenemy")
@@ -482,15 +499,27 @@ def main():
 	#print
 
 	# get heat map coordinate
-	#show_heat_map(16, action_data, game_over_data, damage_data)
-	#show_heat_map(17, action_data, game_over_data, damage_data)
-	#show_heat_map(18, action_data, game_over_data, damage_data)
-	#show_heat_map(19, action_data, game_over_data, damage_data)
+	show_heat_map(1, action_data, game_over_data, damage_data)
+	show_heat_map(2, action_data, game_over_data, damage_data)
+	show_heat_map(3, action_data, game_over_data, damage_data)
+	show_heat_map(4, action_data, game_over_data, damage_data)
+	show_heat_map(5, action_data, game_over_data, damage_data)
+	show_heat_map(6, action_data, game_over_data, damage_data)
+	show_heat_map(7, action_data, game_over_data, damage_data)
+	show_heat_map(8, action_data, game_over_data, damage_data)
+	show_heat_map(9, action_data, game_over_data, damage_data)
+	show_heat_map(10, action_data, game_over_data, damage_data)
+	show_heat_map(11, action_data, game_over_data, damage_data)
+	show_heat_map(12, action_data, game_over_data, damage_data)
+	show_heat_map(13, action_data, game_over_data, damage_data)
+	show_heat_map(14, action_data, game_over_data, damage_data)
+	show_heat_map(15, action_data, game_over_data, damage_data)
+	show_heat_map(16, action_data, game_over_data, damage_data)
+	show_heat_map(17, action_data, game_over_data, damage_data)
+	show_heat_map(18, action_data, game_over_data, damage_data)
+	show_heat_map(19, action_data, game_over_data, damage_data)
+	show_heat_map(20, action_data, game_over_data, damage_data)
 	show_heat_map(21, action_data, game_over_data, damage_data)
-
-	#print data[0]["levels"][0]["log_q_ts"]
-	#print data[0]["levels"][0]["actions"][0]["ts"]
-
 
 	return
 
