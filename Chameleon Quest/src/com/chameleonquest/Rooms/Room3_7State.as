@@ -137,6 +137,12 @@ package com.chameleonquest.Rooms
 				//this.rebuild = false;
 			}
 			
+			if (nextTunnel != null && !nextTunnel.isOpen)
+			{
+				nextTunnel = null;
+				bossTimer = 0;
+			}
+			
 			if (this.boss.health > 0 && bossTimer > HINT_TIME && nextTunnel == null)
 			{
 				do
