@@ -38,7 +38,7 @@ package com.chameleonquest
 				// Google analytics
 				tracker = new GATracker(this, "UA-77647600-1", "AS3", false);
 				//category id; treat this like a "version id" or "release number" to help differentiate data from different versions
-				cid = 6;
+				cid = 7;
 			}
 			
 			logger = Logger.initialize(gid, gname, skey, cid, null); //automatically logs a page load; don't need any parameters
