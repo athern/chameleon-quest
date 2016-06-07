@@ -389,6 +389,8 @@ package com.chameleonquest
 			Preloader.logger.logLevelEnd({"quit": Main.lastRoom, "time": playtime});
 			Preloader.tracker.trackEvent("quit", "level-" + Main.lastRoom, null, int(Math.round(playtime)));
 			
+			// reset gameover count
+			Preloader.goCnt = 0;
 			FlxG.paused = !FlxG.paused;
 			FlxG.switchState(new MenuState());
 		}

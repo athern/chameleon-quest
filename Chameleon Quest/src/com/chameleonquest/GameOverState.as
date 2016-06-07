@@ -49,7 +49,7 @@ package com.chameleonquest
 			this.add(continueTxt);
 			
 			if (Preloader.goCnt >= 2) {
-				Preloader.logger.logAction(50, {"room": Main.lastRoom});
+				Preloader.logger.logAction(50, {"room": Main.lastRoom, "goCount" : Preloader.goCnt});
 				Preloader.tracker.trackEvent("hint", "source", "level-" + Main.lastRoom, Main.lastRoom);
 				
 				var hintHead:FlxText;
