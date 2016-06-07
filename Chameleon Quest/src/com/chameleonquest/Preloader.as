@@ -13,6 +13,7 @@ package com.chameleonquest
 		public static var tracker:GATracker;
 		public static var logger:Logger;
 		public static var flag:String;
+		public static var goCnt:int;
 		
 		private static var DEVELOPMENT_FLAG:Boolean = true;	// FOR DEVELOPMENT, SET TO FALSE FOR RELEASE
 		
@@ -37,12 +38,15 @@ package com.chameleonquest
 				// Google analytics
 				tracker = new GATracker(this, "UA-77647600-1", "AS3", false);
 				//category id; treat this like a "version id" or "release number" to help differentiate data from different versions
-				cid = 6;
+				cid = 7;
 			}
 			
 			logger = Logger.initialize(gid, gname, skey, cid, null); //automatically logs a page load; don't need any parameters
 			trace("Logging with CID: " + cid);
 			className = "com.chameleonquest.Main";
+			
+			// Game over count
+			goCnt = 0;
 			super();
 		}
 		

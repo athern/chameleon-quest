@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 #	13	-	Enemy kill
 #	15	-	Retry
 
-CID = 5
+CID = 6
 LEVEL_LIMIT = 50
 
 INACTIVITY_LIMIT = 30000 #time in milliseconds that we consider inactve (i.e. 30 seconds)
@@ -163,11 +163,12 @@ def get_damage_per_enemy(tbl):
 		for kk in lvl[k]:
 			e = kk
 			val = lvl[k][kk]
-			if val > max_cnt:
-				max_cnt = val
-				enemy = e
+			#if val > max_cnt:
+			#	max_cnt = val
+			#	enemy = e
+			lvl[k][e] = float(val) / total
 
-		lvl[k] = (enemy, float(max_cnt) / total)
+		#lvl[k] = (enemy, float(max_cnt) / total)
 
 	return lvl
 
@@ -208,7 +209,7 @@ def print_table(lst, header):
 	for x in lst:
 		row = ""
 		for r in x:
-			row += str(r) + "\t\t\t"
+			row += str(r) + "\t"
 		print row
 
 
@@ -452,8 +453,9 @@ def main():
 	#print_table(damage_data, "Room\t\t\tx-loc\t\t\ty-loc\t\t\tenemy")
 	#print
 
-	#get_damage_per_enemy(damage_data)
-	#print
+	#for (k, v) in get_damage_per_enemy(damage_data).iteritems():
+	#	for x in sorted(v):
+	#		print k, "\t", x, "\t", v[x]
 
 	# # of damage / level
 	#print_table(get_table_count(damage_data), "Room\t\t\t# of damage")
@@ -475,32 +477,16 @@ def main():
 	#print_table(get_level_data(data), "Room\t\t\t# of enter\t\t\t# of exit\t\t\tavg time\t\t\tmax time\t\t\tmin time")
 	#print
 
-	# median
-	#for x in get_level_data(data):
-	#	print x[6]
-
-	#print
-
-	# total enter
-	#for x in get_level_data(data):
-	#	print x[1]
-
-	#print
-
-	# average
-	#for x in get_level_data(data):
-	#	print x[3]
-
 	# of unique player per level
 	#print_table(get_unique_player_per_level(data), "Room\t\t\t# of unique enter\t\t\t# of unique exit")
 	#print
 
 	# get heat map coordinate
-	show_heat_map(6, action_data, game_over_data, damage_data)
-	show_heat_map(7, action_data, game_over_data, damage_data)
-	show_heat_map(8, action_data, game_over_data, damage_data)
-	show_heat_map(9, action_data, game_over_data, damage_data)
-	show_heat_map(10, action_data, game_over_data, damage_data)
+	#show_heat_map(16, action_data, game_over_data, damage_data)
+	#show_heat_map(17, action_data, game_over_data, damage_data)
+	#show_heat_map(18, action_data, game_over_data, damage_data)
+	#show_heat_map(19, action_data, game_over_data, damage_data)
+	show_heat_map(21, action_data, game_over_data, damage_data)
 
 	#print data[0]["levels"][0]["log_q_ts"]
 	#print data[0]["levels"][0]["actions"][0]["ts"]
