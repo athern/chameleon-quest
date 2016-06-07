@@ -22,13 +22,13 @@ package com.chameleonquest
 			
 			// Start Text
 			var startTxt:FlxText;
-			startTxt = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"SPACE\" to Start!");
+			startTxt = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"SPACE\" to Start!\n\nPress \"M\" to start muted");
 			startTxt.setFormat(null, 12, 0x000000, "center");
 			this.add(startTxt);
 			
 			FlxG.bgColor = 0xFFFFFFFF;
 			
-			FlxG.playMusic(mainTheme, 1);
+			//FlxG.playMusic(mainTheme, .6);
 			//FlxG.mute = true;
 			
 		}
@@ -40,10 +40,13 @@ package com.chameleonquest
 			{
 				FlxG.flash(0x000000, 0.75);
 				FlxG.fade(0xff000000, 0.5, onFade);
+				FlxG.mute = false;
 			}
             if (FlxG.keys.justPressed("M"))
 			{
-				FlxG.mute = !FlxG.mute;
+				FlxG.flash(0x000000, 0.75);
+				FlxG.fade(0xff000000, 0.5, onFade);
+				FlxG.mute = true;
 			}
 			super.update();
 		}

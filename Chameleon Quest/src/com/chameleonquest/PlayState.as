@@ -68,6 +68,7 @@ package com.chameleonquest
 		// pause state
 		public var pauseText:FlxText;
 		public var quitText:FlxText;
+		public var pauseOverlay:FlxTileblock;
 		
 		// Logging variable
 		public var playtime:Number;
@@ -81,21 +82,21 @@ package com.chameleonquest
 			if (Main.lastRoom >= 1 && Main.lastRoom <= 7)
 			{
 				Background.buildBackground(this, 1);
-				FlxG.playMusic(area1Theme, .5);
+				FlxG.playMusic(area1Theme, .3);
 			} else if (Main.lastRoom >= 8 && Main.lastRoom <= 14)
 			{
 				Background.buildBackground(this, 2);
-				FlxG.playMusic(area2Theme, .5);
+				FlxG.playMusic(area2Theme, .3);
 			}
 			else if (Main.lastRoom >= 15 && Main.lastRoom <= 21)
 			{
 				Background.buildBackground(this, 3);
-				FlxG.playMusic(area3Theme, .5);
+				FlxG.playMusic(area3Theme, .3);
 			}
 			
 			if (Main.lastRoom % 7 == 0)
 			{
-				FlxG.playMusic(bossTheme, .5);
+				FlxG.playMusic(bossTheme, .3);
 			}
 			
 			Preloader.logger.logLevelStart(Main.lastRoom, {"src": Main.lastRoom - 1});
@@ -164,7 +165,7 @@ package com.chameleonquest
 				Preloader.logger.logAction(15, {"room": Main.lastRoom});
 				Preloader.tracker.trackEvent("action", "reset", "level-" + Main.lastRoom);
 				FlxG.flash(0x000000, 0.75);
-				FlxG.switchState(Main.getStage(Main.lastRoom));
+				FlxG.switchState(new GameOverState());
 				FlxG.paused = false;
 			}
 			// handle quit
@@ -214,13 +215,6 @@ package com.chameleonquest
 					Preloader.tracker.trackEvent("action", "c", null);
 					
 					FlxG.overlap(player, bgElems, null, changeElement);
-				}
-				
-				if (FlxG.keys.justPressed("R")) {
-					Preloader.logger.logAction(15, null);
-					Preloader.tracker.trackEvent("action", "reset", "level-" + Main.lastRoom);
-					FlxG.flash(0x000000, 0.75);
-					FlxG.switchState(Main.getStage(Main.lastRoom));
 				}
 				
 				if (player.getType() != Chameleon.NORMAL && FlxG.keys.justPressed("X") && !FlxG.overlap(player, grates)) {
@@ -409,12 +403,21 @@ package com.chameleonquest
 		// Sets up the Pause Menu
 		private function setupPauseHUD():void {
 			// Pause HUD
+			pauseOverlay = new FlxTileblock(0, 0, 320, 240);
+			pauseOverlay.makeGraphic(320, 240, 0xffcccccc);
+			pauseOverlay.scrollFactor.x = 0;
+			pauseOverlay.scrollFactor.y = 0;
+			pauseOverlay.alpha = .5;
+			pauseOverlay.visible = true;
+			pauseOverlay.exists = true;
+			pauseOverlay.active = true;
+			
 			pauseText = new FlxText(0, (FlxG.width / 2) - 90, FlxG.width, "Game Paused");
 			pauseText.setFormat(null, 18, 0x000000, "center");
 			pauseText.scrollFactor.x = 0;
 			pauseText.scrollFactor.y = 0;
 			
-			quitText = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"q\" to quit\n\nPress \"r\" to reset level\n\nPress ESC to resume");
+			quitText = new FlxText(0, (FlxG.width / 2) - 50, FlxG.width, "Press \"q\" to quit\n\nPress \"r\" to reset level\n\nPress \"m\" to toggle sound\n\nPress ESC to resume");
 			quitText.setFormat(null, 12, 0x000000, "center");
 			quitText.scrollFactor.x = 0;
 			quitText.scrollFactor.y = 0;
@@ -422,11 +425,14 @@ package com.chameleonquest
 		
 		private function togglePauseMenu():void {
 			if (FlxG.paused) {
+				this.add(pauseOverlay);
 				this.add(pauseText);
 				this.add(quitText);
+				
 			} else {
 				this.remove(pauseText);
 				this.remove(quitText);
+				this.remove(pauseOverlay);
 			}
 		}
 		

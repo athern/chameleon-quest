@@ -6,26 +6,27 @@ package com.chameleonquest
 	public class GameOverState extends FlxState
 	{
 		
-		private var hint:Array = ["Drag wooden block with your tongue",
-									"Pick up rock with your tongue",
-									"Birds and spikes are baaaddd",
-									"Careful with that venom",
+		private var hint:Array = ["Hold SPACE while facing a block and you can pull it to you",
+									"Firing rocks with SPACE can kill snakes and knock turtles out of the way",
+									"Killing one bird with one stone is still a pretty good deal",
+									"Not only do purple snakes shoot poison, they also take two rocks to kill",
 									"Turtles make good counter-weight",
-									"Rock bounces off triangle block",
+									"Rocks bounce off angled blocks",
 									"Turtles have soft under bellies",
-									"Fountain = water element",
+									"You can change into water form when near a fountain",
 									"To pass the grate, be the water!",
 									"Going up!",
-									"Gates are waterwheel-operated",
-									"Gates are also timed",
+									"Gates can be waterwheel-operated",
+									"Some gates are also timed",
 									"Make your own stairway to heaven",
 									"Open both gates to unleash the geyser",
-									"Black spikes are instant-kill",
-									"Big boulder are bad for chameleon",
-									"Charged fireball travel longer",
-									"Use fire to light fuse",
-									"Going up with the explosion!",
-									"Careful stacking the blocks"];
+									"Black spikes are made of... obsidian? The point is, they kill you",
+									"You might have to pre-charge a jump shot to avoid getting squashed",
+									"Charged fireballs travel faster and further",
+									"Use fire to light fuses",
+									"The box will shoot up with the explosion",
+									"A wood block is sturdy enough to support a boulder if you place it right",
+									"Dirt shakes around the tunnel the worm will emerge from next!"];
 		
 		override public function create():void
 		{			
@@ -38,13 +39,13 @@ package com.chameleonquest
 				
 			// game over text
 			var goText:FlxText;
-			goText = new FlxText(0, (FlxG.width / 2) - 80, FlxG.width, "Game Over");
+			goText = new FlxText(0, (FlxG.width / 2) - 100, FlxG.width, "You Have Been Slain");
 			goText.setFormat(null, 18, 0x000000, "center");
 			this.add(goText);
 			
 			// continue Text
 			var continueTxt:FlxText;
-			continueTxt = new FlxText(0, (FlxG.width / 2) - 40, FlxG.width, "Press \"SPACE\" to Continue!");
+			continueTxt = new FlxText(0, (FlxG.width / 2) - 60, FlxG.width, "Press \"SPACE\" to Try Again!\n\nPress \"ESC\" to return to Level Select");
 			continueTxt.setFormat(null, 12, 0x000000, "center");
 			this.add(continueTxt);
 			
@@ -71,7 +72,12 @@ package com.chameleonquest
 			{
 				FlxG.flash(0x000000, 0.75);
 				FlxG.fade(0xff000000, 0.5, onFade);
-			}            
+			}
+            if (FlxG.keys.justPressed("ESCAPE"))
+			{
+				FlxG.flash(0x000000, 0.5);
+				FlxG.switchState(new StageState());
+			}
 			super.update();
 		}
 		

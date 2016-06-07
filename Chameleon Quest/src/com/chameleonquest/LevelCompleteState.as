@@ -24,7 +24,7 @@ package com.chameleonquest
 			
 			
 			var goText:FlxText;
-			goText = new FlxText(0, 40, FlxG.width, "Level complete!");
+			goText = new FlxText(0, 40, FlxG.width, "Level Complete!");
 			goText.setFormat(null, 18, 0x000000, "center");
 			this.add(goText);
 			
@@ -86,7 +86,7 @@ package com.chameleonquest
 			menuTxt = new FlxText(0, 190, FlxG.width, "ESCAPE - Level Select");
 			menuTxt.setFormat(null, 12, 0x000000, "center");
 			add(menuTxt);
-			FlxG.playMusic(mainTheme);
+			FlxG.playMusic(mainTheme, .6);
 		}
 		
 		override public function update():void
